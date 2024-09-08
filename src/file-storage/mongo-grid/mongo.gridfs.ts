@@ -1,5 +1,6 @@
 import { GridFSBucket, MongoClient } from 'mongodb';
-import configuration from "../../config/configuration";
+import {ConfigService} from "@nestjs/config";
+import {apiEnv} from "../../config/app.const";
 
 
 export class MongoGridConnection {
@@ -9,19 +10,19 @@ export class MongoGridConnection {
   private db: any;
   private client: MongoClient;
 
-  private constructor() {
-    this.connectToMongo();
+  private constructor(private readonly configService: ConfigService) {
+    this.connectToMongo().then();
   }
 
-  public static getInstance(): MongoGridConnection {
+  public static getInstance(configService: ConfigService): MongoGridConnection {
     if (!this.instance) {
-      this.instance = new MongoGridConnection();
+      this.instance = new MongoGridConnection(configService);
     }
     return this.instance;
   }
 
   private async connectToMongo(): Promise<void> {
-    this.client = await MongoClient.connect(configuration().database.uri, {});
+    this.client = await MongoClient.connect(this.configService.get<string>(apiEnv.database.uri), {});
     this.db = this.client.db();
     this.gridFSBucket = new GridFSBucket(this.db);
   }

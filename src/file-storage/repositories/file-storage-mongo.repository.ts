@@ -8,11 +8,7 @@ import { FileMetadataModel } from '../model/file-metadata.model';
 import { MediaFileMetadata } from "../dto/media-file-metadata";
 
 export class FileStorageMongoRepository implements FileStorageRepositoryModel {
-  private mongoGridConnection: MongoGridConnection;
-
-  constructor() {
-    this.mongoGridConnection = MongoGridConnection.getInstance();
-  }
+  constructor(private readonly mongoGridConnectionService: MongoGridConnection) {}
 
   uploadFile(
     file: Express.Multer.File,
@@ -26,7 +22,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
       },
     });
 
-    const uploadStream = this.mongoGridConnection
+    const uploadStream = this.mongoGridConnectionService
       .getGridFSBucket()
       .openUploadStream(filename, {
         metadata: {
@@ -52,7 +48,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
 
   async getFileMetadataById(id: string): Promise<FileMetadataModel> {
     const fileId = new ObjectId(id);
-    return await this.mongoGridConnection
+    return await this.mongoGridConnectionService
       .getDb()
       .collection('fs.files')
       .findOne({ _id: fileId });
@@ -60,12 +56,12 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
 
   async deleteFile(fileId: string): Promise<void> {
     const objectId = new ObjectId(fileId);
-    return await this.mongoGridConnection.getGridFSBucket().delete(objectId);
+    return await this.mongoGridConnectionService.getGridFSBucket().delete(objectId);
   }
 
   async getFileStream(fileId: string): Promise<Readable> {
     const objectId = new ObjectId(fileId);
-    return this.mongoGridConnection
+    return this.mongoGridConnectionService
       .getGridFSBucket()
       .openDownloadStream(objectId);
   }
