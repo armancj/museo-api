@@ -4,12 +4,20 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ConfigModule } from "./config/config.module";
 import { CoreModule } from "./core/core.module";
 import { LoggerInterceptor } from "./common/interceptors/logger.interceptor";
+import {SharedModule} from "./shared/shared.module";
+import {FileStorageModule} from "./file-storage/file-storage.module";
+import {AuthModule} from "./auth/auth.module";
+import {UsersModule} from "./users/users.module";
 
 @Module({
   imports: [
     EventEmitterModule.forRoot({ verboseMemoryLeak: true }),
     ConfigModule,
+    AuthModule,
+    UsersModule,
     CoreModule,
+    SharedModule,
+    FileStorageModule
   ],
   controllers: [AppController],
   providers: [LoggerInterceptor],

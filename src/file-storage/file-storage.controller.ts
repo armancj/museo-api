@@ -11,17 +11,16 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 
-import { FileStorageServiceModel } from './model/file-storage-service.model';
 import { MediaFileMetadata } from "./dto/media-file-metadata";
+import {FileStorageService} from "./file-storage.service";
 
 @ApiTags('file-storage')
 @Controller('file-storage')
 export class FileStorageController {
   constructor(
-    private readonly storageService: FileStorageServiceModel,
+    private readonly storageService: FileStorageService,
   ) {}
   @Post('upload')
   @UseInterceptors()

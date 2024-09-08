@@ -1,15 +1,15 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Readable } from 'stream';
 import { FileMetadataModel } from './model/file-metadata.model';
 import { FileStorageServiceModel } from './model/file-storage-service.model';
 import { FileStorageModel } from './model/file-storage.model';
-import { FileStorageRepositoryModel } from './model/file-storage-repository.model';
 import { MediaFileMetadata } from "./dto/media-file-metadata";
+import {FileStorageMongoRepository} from "./repositories/file-storage-mongo.repository";
 
 @Injectable()
 export class FileStorageService implements FileStorageServiceModel {
   constructor(
-    private readonly fileStorageRepository: FileStorageRepositoryModel,
+    private readonly fileStorageRepository: FileStorageMongoRepository,
   ) {}
 
   uploadFile = async (

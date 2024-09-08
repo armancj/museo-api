@@ -6,6 +6,6 @@ import { FileStorageMongoRepository } from "./repositories/file-storage-mongo.re
 @Module({
   providers: [FileStorageService, FileStorageMongoRepository],
   controllers: [FileStorageController],
-  exports: [FileStorageService],
+  exports: [ FileStorageService, FileStorageMongoRepository],
 })
 export class FileStorageModule {}

@@ -5,6 +5,7 @@ import { UserNameEntity, UserSchema } from './schema/users.schema';
 import { HandledErrorModule } from "../shared/handled-error/handled-error.module";
 import { FileStorageModule } from "../file-storage/file-storage.module";
 import { SharedModule } from "../shared/shared.module";
+import {UsersService} from "./users.service";
 
 
 @Module({
@@ -15,8 +16,7 @@ import { SharedModule } from "../shared/shared.module";
     SharedModule,
   ],
   controllers: [UsersController],
-  providers: [
-  ],
+  providers: [ UsersService],
   exports: [],
 })
 export class UsersModule {}

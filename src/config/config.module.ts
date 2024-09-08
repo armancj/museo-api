@@ -15,6 +15,6 @@ import {MongooseConfigService} from "./mongoose-config.service";
       useClass:  MongooseConfigService,
     }),
   ],
-  providers: [MongooseConfigService],
+  providers: [],
 })
 export class ConfigModule {}
