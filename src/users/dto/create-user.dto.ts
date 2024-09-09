@@ -1,15 +1,10 @@
 import {
   IsEmail,
   IsString,
-  IsDate,
   IsOptional,
   IsMobilePhone,
-  IsBoolean,
   IsNotEmpty,
-
 } from 'class-validator';
-
-import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import {  UserPropertiesModel } from "../models/user.model";
 import { UserRoles } from "../enum/user-roles.enum";
@@ -17,7 +12,7 @@ import { UserRoles } from "../enum/user-roles.enum";
 
 export class CreateUserDto
   implements
-    Omit<UserPropertiesModel, 'passwordHashed' | '_id'>
+    Omit<UserPropertiesModel, 'passwordHashed'| 'uuid'>
 {
   @IsEmail()
   @IsString()
@@ -50,16 +45,6 @@ export class CreateUserDto
     example: 'YourAddressHere',
   })
   address: string;
-
-
-  @Type(() => Date)
-  @IsDate()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: '1990-01-01',
-  })
-  dateOfBirth: Date;
 
   @IsString()
   @IsNotEmpty()
@@ -98,11 +83,6 @@ export class CreateUserDto
     example: 'Jobabo',
   })
   municipal: string;
-
-  @ApiProperty({ type: 'string', enum: ['true', 'false'], required: false })
-  @IsBoolean()
-  @IsOptional()
-  active?: boolean;
 
   @IsString()
   @IsOptional()

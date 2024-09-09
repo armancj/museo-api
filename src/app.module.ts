@@ -8,6 +8,8 @@ import {SharedModule} from "./shared/shared.module";
 import {FileStorageModule} from "./file-storage/file-storage.module";
 import {AuthModule} from "./auth/auth.module";
 import {UsersModule} from "./users/users.module";
+import {APP_INTERCEPTOR} from "@nestjs/core";
+import {ErrorInterceptor} from "./common/interceptors/error.Interceptor";
 
 @Module({
     imports: [
@@ -20,7 +22,11 @@ import {UsersModule} from "./users/users.module";
         FileStorageModule
     ],
     controllers: [AppController],
-    providers: [LoggerInterceptor],
+    providers: [
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: ErrorInterceptor,
+        },LoggerInterceptor],
 })
 export class AppModule {
 }

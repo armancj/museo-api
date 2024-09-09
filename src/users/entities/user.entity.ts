@@ -4,8 +4,8 @@ import {
   UserPropertiesModel,
 } from '../models/user.model';
 
-export class User implements UserModel {
-  _id: string;
+export class User {
+  uuid: string;
   mobile: string;
   municipal: string;
   readonly email: string;

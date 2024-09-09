@@ -11,6 +11,7 @@ import {User} from "./entities/user.entity";
 import {FindAllDto} from "../common/dto/find-all.dto";
 import {UpdateUserDto} from "./dto/update-user.dto";
 import {FilterUserDto} from "./dto/filter-user.dto";
+import {ActivatedUserDto} from "./dto/activated-user.dto";
 
 
 
@@ -29,22 +30,32 @@ export class UsersController {
 
   @Post('/all')
   async findAll(@Query() query: FindAllDto, @Body() filterUserDto: FilterUserDto) {
-    return this.userService.findAll(query, filterUserDto);
+    return this.userService.findAll(query, {...filterUserDto, deleted: false});
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
-    return this.userService.findOne({_id: id});
+  async findOne(@Param('uuid') uuid: string): Promise<User> {
+    return this.userService.findOne({uuid, deleted: false});
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<boolean> {
-    return this.userService.update({_id: id}, updateUserDto);
+  async update(@Param('uuid') uuid: string, @Body() updateUserDto: UpdateUserDto): Promise<boolean> {
+    return this.userService.update({uuid, deleted: false}, updateUserDto);
+  }
+
+  @Patch(':id/change-activate')
+  async updateChangeActivate(@Param('uuid') uuid: string, @Body() activatedUserDto: ActivatedUserDto): Promise<boolean> {
+    return this.userService.update({uuid, deleted: false}, activatedUserDto);
+  }
+
+  @Delete('/:uuid/soft')
+  async removeSoft(@Param('uuid') uuid: string): Promise<boolean> {
+    return this.userService.softDelete({uuid});
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean> {
-    return this.userService.remove({_id: id});
+  async remove(@Param('uuid') uuid: string): Promise<boolean> {
+    return this.userService.remove({uuid});
   }
 
 }

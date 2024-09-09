@@ -1,4 +1,3 @@
-import {UsersModel} from '../models/users.model';
 import {InjectModel} from '@nestjs/mongoose';
 import {
     UserMongoModel,
@@ -16,7 +15,8 @@ import {
 } from "mongoose";
 import {Users} from "../entities/users.entity";
 import {UserModel} from "../models/user.model";
-import {CreateUserDto} from "../dto/create-user.dto";
+
+export type createUserModel= Omit<UserModel, 'active'| 'deleted'>
 
 
 @Injectable()
@@ -28,7 +28,7 @@ export class UserMongoRepository {
     ) {
     }
 
-    async create(createUserDto: CreateUserDto): Promise<User> {
+    async create(createUserDto: createUserModel): Promise<User> {
         const createdUser = await this.userMongoModel.create(createUserDto);
         return User.create(createdUser);
     }
@@ -36,12 +36,12 @@ export class UserMongoRepository {
     async findAll(
         filter: Partial<UserModel> = {},
         projection: ProjectionType<UserModel> = {},
-        {page = 1, perPage = 10}: FindAllDto,
-        options: QueryOptions<UserModel> & { lean: true },
+        page: FindAllDto,
+        perPage: QueryOptions<UserModel> & { lean: true },
     ): Promise<{ users: Users; totalElement: number }> {
         const filterMongo: RootFilterQuery<UserModel> = {...filter}
         const usersMongo = await this.userMongoModel
-            .find(filterMongo, projection, options)
+            .find(filterMongo, projection, perPage)
             .skip(Number(page))
             .limit(Number(perPage))
             .exec();

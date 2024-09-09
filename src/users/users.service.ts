@@ -5,7 +5,7 @@ import {User} from "./entities/user.entity";
 import {FindAllDto} from "../common/dto/find-all.dto";
 import {UserModel} from "./models/user.model";
 import {Paginator} from "../common/lib/paginator.lib";
-import {UpdateUserDto} from "./dto/update-user.dto";
+import {hashedPassword} from "../common/utils/hashed-password";
 
 
 @Injectable()
@@ -16,10 +16,14 @@ export class UsersService {
 
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    return this.userMongoRepository.create(createUserDto);
+    const { password, ...rest } = createUserDto;
+    const passwordHashed = await hashedPassword(password);
+    const uuid = crypto.randomUUID();
+
+    return this.userMongoRepository.create({ ...rest, passwordHashed, uuid });
   }
 
-  async findAll(query: FindAllDto, filter?: Partial<UserModel>) {
+  async findAll(query: FindAllDto, filter: Partial<UserModel>) {
     let paginator: Paginator;
     if (query?.perPage) paginator = new Paginator({ page: +query.page, perPage: +query.perPage });
     const {users, totalElement}=await this.userMongoRepository.findAll(filter, {}, query, { lean: true });
@@ -39,7 +43,7 @@ export class UsersService {
     return user;
   }
 
-  async update(filter: Partial<UserModel>, updateUserDto: UpdateUserDto): Promise<boolean> {
+  async update(filter: Partial<UserModel>, updateUserDto:  Partial<UserModel>): Promise<boolean> {
     await this.findOne(filter);
     return this.userMongoRepository.updatedOne(filter, updateUserDto);
   }
@@ -48,4 +52,16 @@ export class UsersService {
     await this.findOne(filter);
     return this.userMongoRepository.deleteOne(filter);
   }
+
+  async softDelete(param: { uuid: string }) {
+    const user = await this.findOne({ ...param, deleted: false});
+
+    await this.userMongoRepository.updatedOne({
+      deleted: true,
+      active: false,
+      email: `${user.uuid}: ${user.email}`,
+      mobile: `${user.uuid}: ${user.mobile}`,
+    });
+    return false;
   }
+}

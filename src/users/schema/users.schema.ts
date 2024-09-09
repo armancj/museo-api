@@ -10,8 +10,6 @@ type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User implements UserPropertiesModel {
-  @Prop()
-  _id: string;
 
   @Prop({ unique: true })
   uuid: string;
@@ -59,6 +57,6 @@ export class User implements UserPropertiesModel {
 const UserSchema = SchemaFactory.createForClass(User);
 
 const UserNameEntity = 'User';
-type UserMongoModel = Model<User>;
+type UserMongoModel = Model<UserDocument>;
 
 export { UserSchema, UserNameEntity, UserMongoModel, UserDocument };
