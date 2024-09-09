@@ -27,11 +27,8 @@ export class UsersService {
     }
 
     async findOne(filter: Partial<UserModel>): Promise<User> {
-        console.log(filter)
         const user = await this.userMongoRepository.findOne(filter, {}, {lean: true});
-
         if (!user) throw new NotFoundException('User not found')
-
         return user;
     }
 
