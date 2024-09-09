@@ -9,29 +9,19 @@ export interface UploadedFile {
 
 
 export interface UserModel {
-  uuid?: string;
   name: string;
   lastName: string;
   email: string;
-  dni?: string;
-  avatar?: UploadedFile;
-  dateOfBirth?: Date;
-  accountNumber?: string;
-  socialSecurity?: string;
-  nationality?: string;
-  address?: string;
-  province?: string;
-  mobile?: string;
-  zipCode?: string;
-  observations?: string;
+  mobile: string;
   passwordHashed: string;
+  avatar?: UploadedFile;
+  address?: string;
+  nationality?: string;
+  province?: string;
+  municipal?: string;
   roles?: string;
   active?: boolean;
   deleted?: boolean;
-  forgotUid?: string;
-  isEmailValid?: boolean;
-  approvalStatus?: string;
-  referralSource?: string;
 }
 
 

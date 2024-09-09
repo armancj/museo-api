@@ -6,6 +6,7 @@ import { HandledErrorModule } from "../shared/handled-error/handled-error.module
 import { FileStorageModule } from "../file-storage/file-storage.module";
 import { SharedModule } from "../shared/shared.module";
 import {UsersService} from "./users.service";
+import {UserMongoRepository} from "./repositories/user-mongo.repository";
 
 
 @Module({
@@ -16,7 +17,7 @@ import {UsersService} from "./users.service";
     SharedModule,
   ],
   controllers: [UsersController],
-  providers: [ UsersService],
+  providers: [ UsersService, UserMongoRepository],
   exports: [],
 })
 export class UsersModule {}

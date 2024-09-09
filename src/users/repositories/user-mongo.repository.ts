@@ -1,54 +1,69 @@
+import {UsersModel} from '../models/users.model';
+import {InjectModel} from '@nestjs/mongoose';
 import {
-  UserModel,
-} from '../models/user.model';
-import { UsersModel } from '../models/users.model';
-import { UserModelOptions,
-} from "../models/users.repository.model";
-import { InjectModel } from '@nestjs/mongoose';
-import {
-  UserMongoModel,
-  UserNameEntity,
+    UserDocument,
+    UserMongoModel,
+    UserNameEntity,
 } from '../schema/users.schema';
+import {FindAllDto} from "../../common/dto/find-all.dto";
+import {Injectable} from "@nestjs/common";
+import {User} from "../entities/user.entity";
+import {ProjectionType, QueryOptions, RootFilterQuery, UpdateQuery, UpdateWithAggregationPipeline} from "mongoose";
+import {Users} from "../entities/users.entity";
 
-import { Maybe } from "../../common/lib/maybe.lib";
-import { FindAllDto } from "../../common/dto/find-all.dto";
 
-
-
+@Injectable()
 export class UserMongoRepository {
 
-  constructor(
-    @InjectModel(UserNameEntity)
-    private readonly userMongoModel: UserMongoModel,
-  ) {}
+    constructor(
+        @InjectModel(UserNameEntity)
+        private readonly userMongoModel: UserMongoModel,
+    ) {
+    }
 
 
-  async create(createUserDto: UserModelOptions): Promise<Maybe<UserModel>> {
-    const createdUser = await this.userMongoModel.create(createUserDto);
+    async create(createUserDto: UserDocument): Promise<User> {
+        const createdUser = await this.userMongoModel.create(createUserDto);
+        return User.create(createdUser);
+    }
 
-    return createdUser as any;
-  }
+    async findAll(
+        filter: RootFilterQuery<UserDocument> = {},
+        projection: ProjectionType<UserDocument> = {},
+        {page = 1, perPage = 10}: FindAllDto,
+        options: QueryOptions<UserDocument> & { lean: true },
+    ): Promise<{ users: UsersModel; totalElement: number }> {
+        const usersMongo = await this.userMongoModel
+            .find(filter, projection, options)
+            .skip(Number(page))
+            .limit(Number(perPage))
+            .exec();
 
-  async findAll(
-    filter: UserModelOptions = {},
-    { page = '1', perPage }: FindAllDto,
-  ): Promise<{ users: UsersModel; totalPage: number; totalElement: number }> {
+        const totalElement = (await this.userMongoModel
+            .find(filter, projection, options).exec())?.length || 0;
+        return {users: Users.create(usersMongo), totalElement};
+    }
 
-      const users = await this.userMongoModel
-        .find(filter)
-        .exec();
+    async findOne(filter: RootFilterQuery<UserDocument> = {},
+                  projection: ProjectionType<UserDocument> = {},
+                  options: QueryOptions<UserDocument> & { lean: true },): Promise<User> {
+        const user = await this.userMongoModel
+            .findOne(filter, projection, options)
+            .exec();
+        if (!user) return null;
+        return User.create(user);
+    }
 
-    const totalPage = await this.userMongoModel.find().countDocuments();
 
-    return { users, totalPage } as any;
-  }
+    async updatedOne(filter?: RootFilterQuery<UserDocument>,
+                     update?: UpdateQuery<UserDocument> | UpdateWithAggregationPipeline): Promise<boolean> {
+        const user = await this.userMongoModel.updateOne(filter, update).exec()
+        return user.modifiedCount > 0;
+    }
 
-  async findOne(filter: Partial<UserModelOptions> = {}): Promise<Maybe<UserModel>> {
-    const user = await this.userMongoModel
-      .findOne({ ...filter }, {}, { lean: true, projection: undefined })
-      .exec();
-    if (!user) return Maybe.none();
-    return user as any;
-  }
+    async deleteOne(filter?: RootFilterQuery<UserDocument>): Promise<boolean> {
+        const user = await this.userMongoModel.deleteOne(filter).exec()
+        return user.deletedCount > 0;
+    }
 
 }

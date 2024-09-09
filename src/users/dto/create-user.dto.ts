@@ -10,36 +10,15 @@ import {
 } from 'class-validator';
 
 import { Type } from 'class-transformer';
-import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { UploadedFile, UserPropertiesModel } from "../models/user.model";
+import { ApiProperty } from '@nestjs/swagger';
+import {  UserPropertiesModel } from "../models/user.model";
 import { UserRoles } from "../enum/user-roles.enum";
 
 
 export class CreateUserDto
   implements
-    UserPropertiesModel
+    Omit<UserPropertiesModel, 'passwordHashed'>
 {
-  approvalStatus: string;
-  avatar: UploadedFile;
-  deleted: boolean;
-  forgotUid: string;
-  isEmailValid: boolean;
-  passwordHashed: string;
-  uuid: string;
-
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: '12345678z',
-  })
-  socialSecurity: string;
-
-  @IsString()
-  @ApiProperty({
-    type: String,
-    example: '57655929N',
-  })
-  dni: string;
 
   @IsEmail()
   @IsString()
@@ -50,28 +29,13 @@ export class CreateUserDto
   })
   email: string;
 
-  @IsMobilePhone('es-ES')
+  @IsMobilePhone()
   @IsNotEmpty()
   @ApiProperty({
     type: String,
     example: '+34612345678',
   })
   mobile: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: '43434',
-  })
-  zipCode: string;
-
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: 'ES76207700240031025758',
-  })
-  accountNumber: string;
 
   @IsString()
   @IsNotEmpty()
