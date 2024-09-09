@@ -4,6 +4,7 @@ import {
   UserPropertiesModel,
 } from '../models/user.model';
 import { UploadedFileEmbed } from './uploaded-file.embed';
+import {UserRoles} from "../enum/user-roles.enum";
 
 
 type UserDocument = HydratedDocument<User>;
@@ -47,7 +48,7 @@ export class User implements UserPropertiesModel {
   @Prop({ type: UploadedFileEmbed })
   avatar?: UploadedFileEmbed;
 
-  @Prop({ default: 'Employee' })
+  @Prop({ default: UserRoles.employee })
   roles?: string;
 
   @Prop()

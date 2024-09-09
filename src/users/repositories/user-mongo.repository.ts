@@ -15,6 +15,7 @@ import {
 } from "mongoose";
 import {Users} from "../entities/users.entity";
 import {UserModel} from "../models/user.model";
+import {Paginator} from "../../common/lib/paginator.lib";
 
 export type createUserModel= Omit<UserModel, 'active'| 'deleted'>
 
@@ -36,20 +37,23 @@ export class UserMongoRepository {
     async findAll(
         filter: Partial<UserModel> = {},
         projection: ProjectionType<UserModel> = {},
-        page: FindAllDto,
-        perPage: QueryOptions<UserModel> & { lean: true },
-    ): Promise<{ users: Users; totalElement: number }> {
+        {page= 1, perPage= 10}: FindAllDto,
+    ): Promise<{ users: Users; totalElement: number; totalPage: number }> {
+        let paginator: Paginator;
+        if (perPage) paginator = new Paginator({ page: +page, perPage: +perPage });
         const filterMongo: RootFilterQuery<UserModel> = {...filter}
         const usersMongo = await this.userMongoModel
-            .find(filterMongo, projection, perPage)
-            .skip(Number(page))
-            .limit(Number(perPage))
+            .find(filterMongo)
+            .skip(paginator.skip)
+            .limit(paginator.limit)
             .exec();
 
         const totalElement = await this.userMongoModel
             .countDocuments(filterMongo).exec();
 
-        return {users: Users.create(usersMongo), totalElement};
+        const totalPage = paginator.getTotalPage(totalElement);
+
+        return {users: Users.create(usersMongo), totalElement, totalPage};
     }
 
     async findOne(filter: Partial<UserModel> = {},

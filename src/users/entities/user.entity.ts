@@ -3,22 +3,50 @@ import {
   UserModel,
   UserPropertiesModel,
 } from '../models/user.model';
+import {Expose, plainToClass} from "class-transformer";
 
-export class User {
+export class User implements UserModel {
+  @Expose()
   uuid: string;
+
+  @Expose()
   mobile: string;
+
+  @Expose()
   municipal: string;
+
+  @Expose()
   readonly email: string;
+
+  @Expose()
   readonly address?: string;
+
+  @Expose()
   readonly lastName: string;
+
+  @Expose()
   readonly name: string;
+
+  @Expose()
   readonly nationality?: string;
+
+  @Expose()
   readonly province?: string;
+
+  @Expose()
   readonly avatar?: UploadedFile;
+
+  @Expose()
   readonly roles?: string;
+
   readonly passwordHashed: string;
+
+  @Expose()
   readonly active?: boolean;
+
+  @Expose()
   readonly deleted?: boolean;
+
 
   constructor(options: UserPropertiesModel) {
     Object.assign(this as UserModel, options);
@@ -38,7 +66,7 @@ export class User {
   }
 
   static create(options: UserPropertiesModel): User {
-    return new User(options);
+    return plainToClass(User, options, { excludeExtraneousValues: true });
   }
 }
 

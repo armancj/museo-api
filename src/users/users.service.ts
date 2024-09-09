@@ -4,7 +4,6 @@ import {CreateUserDto} from "./dto/create-user.dto";
 import {User} from "./entities/user.entity";
 import {FindAllDto} from "../common/dto/find-all.dto";
 import {UserModel} from "./models/user.model";
-import {Paginator} from "../common/lib/paginator.lib";
 import {hashedPassword} from "../common/utils/hashed-password";
 
 
@@ -24,15 +23,7 @@ export class UsersService {
   }
 
   async findAll(query: FindAllDto, filter: Partial<UserModel>) {
-    let paginator: Paginator;
-    if (query?.perPage) paginator = new Paginator({ page: +query.page, perPage: +query.perPage });
-    const {users, totalElement}=await this.userMongoRepository.findAll(filter, {}, query, { lean: true });
-    const totalPage = query?.perPage ? paginator.getTotalPage(totalElement) : 1;
-    return {
-      users,
-      totalPage,
-      totalElement,
-    }
+    return await this.userMongoRepository.findAll(filter, {}, query,);
   }
 
   async findOne(filter: Partial<UserModel>): Promise<User> {
