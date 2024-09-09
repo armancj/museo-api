@@ -5,6 +5,7 @@ import {
 } from '../models/user.model';
 
 export class User implements UserModel {
+  _id: string;
   mobile: string;
   municipal: string;
   readonly email: string;

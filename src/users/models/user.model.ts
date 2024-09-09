@@ -9,6 +9,7 @@ export interface UploadedFile {
 
 
 export interface UserModel {
+  _id: string;
   name: string;
   lastName: string;
   email: string;

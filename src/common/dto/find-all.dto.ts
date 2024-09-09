@@ -5,10 +5,10 @@ export class FindAllDto {
   @IsNumberString()
   @IsOptional()
   @ApiProperty({ type: 'number', default: 1 })
-  page?: string;
+  page?: number;
 
   @IsNumberString()
   @IsOptional()
   @ApiProperty({ type: 'number', default: 10 })
-  perPage?: string;
+  perPage?: number;
 }

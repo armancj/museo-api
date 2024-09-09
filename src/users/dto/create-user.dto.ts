@@ -17,9 +17,8 @@ import { UserRoles } from "../enum/user-roles.enum";
 
 export class CreateUserDto
   implements
-    Omit<UserPropertiesModel, 'passwordHashed'>
+    Omit<UserPropertiesModel, 'passwordHashed' | '_id'>
 {
-
   @IsEmail()
   @IsString()
   @IsNotEmpty()
@@ -82,28 +81,23 @@ export class CreateUserDto
   @IsNotEmpty()
   @ApiProperty({
     type: String,
-    example: 'YourNationality',
+    example: 'Cuba',
   })
   nationality: string;
 
   @IsString()
-  @IsOptional()
-  observations?: string;
-
-  @IsString()
   @ApiProperty({
     type: String,
-    example: 'Melilla',
+    example: 'Las Tunas',
   })
   province: string;
 
   @IsString()
-  @IsOptional()
   @ApiProperty({
     type: String,
-    example: 'YourReferralSource',
+    example: 'Jobabo',
   })
-  referralSource?: string;
+  municipal: string;
 
   @ApiProperty({ type: 'string', enum: ['true', 'false'], required: false })
   @IsBoolean()

@@ -10,6 +10,9 @@ type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User implements UserPropertiesModel {
+  @Prop()
+  _id: string;
+
   @Prop({ unique: true })
   uuid: string;
 

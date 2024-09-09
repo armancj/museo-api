@@ -13,10 +13,6 @@ export class Users {
     );
   }
 
-  addUser(user: User): void {
-    this.value.push(user);
-  }
-
   getAllUsers(): Users {
     return new Users(this.value);
   }

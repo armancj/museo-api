@@ -1,15 +1,22 @@
 import {UsersModel} from '../models/users.model';
 import {InjectModel} from '@nestjs/mongoose';
 import {
-    UserDocument,
     UserMongoModel,
     UserNameEntity,
 } from '../schema/users.schema';
 import {FindAllDto} from "../../common/dto/find-all.dto";
 import {Injectable} from "@nestjs/common";
 import {User} from "../entities/user.entity";
-import {ProjectionType, QueryOptions, RootFilterQuery, UpdateQuery, UpdateWithAggregationPipeline} from "mongoose";
+import {
+    ProjectionType,
+    QueryOptions,
+    RootFilterQuery,
+    UpdateQuery,
+    UpdateWithAggregationPipeline
+} from "mongoose";
 import {Users} from "../entities/users.entity";
+import {UserModel} from "../models/user.model";
+import {CreateUserDto} from "../dto/create-user.dto";
 
 
 @Injectable()
@@ -21,48 +28,60 @@ export class UserMongoRepository {
     ) {
     }
 
-
-    async create(createUserDto: UserDocument): Promise<User> {
+    async create(createUserDto: CreateUserDto): Promise<User> {
         const createdUser = await this.userMongoModel.create(createUserDto);
         return User.create(createdUser);
     }
 
     async findAll(
-        filter: RootFilterQuery<UserDocument> = {},
-        projection: ProjectionType<UserDocument> = {},
+        filter: Partial<UserModel> = {},
+        projection: ProjectionType<UserModel> = {},
         {page = 1, perPage = 10}: FindAllDto,
-        options: QueryOptions<UserDocument> & { lean: true },
-    ): Promise<{ users: UsersModel; totalElement: number }> {
+        options: QueryOptions<UserModel> & { lean: true },
+    ): Promise<{ users: Users; totalElement: number }> {
+        const filterMongo: RootFilterQuery<UserModel> = {...filter}
         const usersMongo = await this.userMongoModel
-            .find(filter, projection, options)
+            .find(filterMongo, projection, options)
             .skip(Number(page))
             .limit(Number(perPage))
             .exec();
 
-        const totalElement = (await this.userMongoModel
-            .find(filter, projection, options).exec())?.length || 0;
+        const totalElement = await this.userMongoModel
+            .countDocuments(filterMongo).exec();
+
         return {users: Users.create(usersMongo), totalElement};
     }
 
-    async findOne(filter: RootFilterQuery<UserDocument> = {},
-                  projection: ProjectionType<UserDocument> = {},
-                  options: QueryOptions<UserDocument> & { lean: true },): Promise<User> {
+    async findOne(filter: Partial<UserModel> = {},
+                  projection: ProjectionType<UserModel> = {},
+                  options: QueryOptions<UserModel> & { lean: true },): Promise<User> {
+        const filterMongo: RootFilterQuery<UserModel> = {...filter}
+
         const user = await this.userMongoModel
-            .findOne(filter, projection, options)
+            .findOne(filterMongo, projection, options)
             .exec();
         if (!user) return null;
+
         return User.create(user);
     }
 
 
-    async updatedOne(filter?: RootFilterQuery<UserDocument>,
-                     update?: UpdateQuery<UserDocument> | UpdateWithAggregationPipeline): Promise<boolean> {
-        const user = await this.userMongoModel.updateOne(filter, update).exec()
+    async updatedOne(filter: Partial<UserModel> = {},
+                     update?: UpdateQuery<UserModel> | UpdateWithAggregationPipeline): Promise<boolean> {
+        const filterMongo: RootFilterQuery<UserModel> = {...filter}
+        const user = await this.userMongoModel.updateOne(filterMongo, update).exec()
         return user.modifiedCount > 0;
     }
 
-    async deleteOne(filter?: RootFilterQuery<UserDocument>): Promise<boolean> {
-        const user = await this.userMongoModel.deleteOne(filter).exec()
+    async deleteOne(filter: Partial<UserModel> = {}): Promise<boolean> {
+        const filterMongo: RootFilterQuery<UserModel> = {...filter}
+        const user = await this.userMongoModel.deleteOne(filterMongo).exec()
+        return user.deletedCount > 0;
+    }
+
+    async deleteMany(filter: Partial<UserModel> = {}): Promise<boolean> {
+        const filterMongo: RootFilterQuery<UserModel> = {...filter}
+        const user = await this.userMongoModel.deleteMany(filterMongo).exec()
         return user.deletedCount > 0;
     }
 
