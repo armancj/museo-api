@@ -4,6 +4,7 @@ import {
   UserPropertiesModel,
 } from '../models/user.model';
 import {Expose, plainToClass} from "class-transformer";
+import {UserRoles} from "../enum/user-roles.enum";
 
 export class User implements UserModel {
   @Expose()
@@ -37,7 +38,7 @@ export class User implements UserModel {
   readonly avatar?: UploadedFile;
 
   @Expose()
-  readonly roles?: string;
+  readonly roles?: UserRoles;
 
   readonly passwordHashed: string;
 

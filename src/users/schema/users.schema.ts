@@ -49,7 +49,7 @@ export class User implements UserPropertiesModel {
   avatar?: UploadedFileEmbed;
 
   @Prop({ default: UserRoles.employee })
-  roles?: string;
+  roles?: UserRoles;
 
   @Prop()
   municipal: string;

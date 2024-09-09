@@ -3,7 +3,7 @@ import {
   IsString,
   IsOptional,
   IsMobilePhone,
-  IsNotEmpty,
+  IsNotEmpty, IsEnum,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import {  UserPropertiesModel } from "../models/user.model";
@@ -86,6 +86,7 @@ export class CreateUserDto
 
   @IsString()
   @IsOptional()
+  @IsEnum(UserRoles)
   roles?: UserRoles;
 }
 

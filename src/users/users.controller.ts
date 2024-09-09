@@ -30,30 +30,31 @@ export class UsersController {
 
   @Post('/all')
   async findAll(@Query() query: FindAllDto, @Body() filterUserDto: FilterUserDto) {
-    return this.userService.findAll(query, {...filterUserDto, deleted: false});
+    const {users, totalPage, totalElement} = await this.userService.findAll(query, { ...filterUserDto,  deleted: false});
+    return {usersData: users.value, totalPage, totalElement}
   }
 
-  @Get(':id')
+  @Get(':uuid')
   async findOne(@Param('uuid') uuid: string): Promise<User> {
     return this.userService.findOne({uuid, deleted: false});
   }
 
-  @Patch(':id')
+  @Patch(':uuid')
   async update(@Param('uuid') uuid: string, @Body() updateUserDto: UpdateUserDto): Promise<boolean> {
     return this.userService.update({uuid, deleted: false}, updateUserDto);
   }
 
-  @Patch(':id/change-activate')
+  @Patch(':uuid/change-activate')
   async updateChangeActivate(@Param('uuid') uuid: string, @Body() activatedUserDto: ActivatedUserDto): Promise<boolean> {
     return this.userService.update({uuid, deleted: false}, activatedUserDto);
   }
 
-  @Delete('/:uuid/soft')
+  @Delete(':uuid/soft')
   async removeSoft(@Param('uuid') uuid: string): Promise<boolean> {
     return this.userService.softDelete({uuid});
   }
 
-  @Delete(':id')
+  @Delete(':uuid')
   async remove(@Param('uuid') uuid: string): Promise<boolean> {
     return this.userService.remove({uuid});
   }
