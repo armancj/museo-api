@@ -18,6 +18,6 @@ import {UserMongoRepository} from "./repositories/user-mongo.repository";
   ],
   controllers: [UsersController],
   providers: [ UsersService, UserMongoRepository],
-  exports: [],
+  exports: [UsersService],
 })
 export class UsersModule {}

@@ -1,13 +1,23 @@
 
-import { Exclude } from 'class-transformer';
+import {plainToClass} from 'class-transformer';
+import {AuthModel, AuthPropertiesModel} from "../repositories/auth.model";
 
-export class Auth {
+export class Auth implements AuthModel{
+
   readonly uuid: string;
-  @Exclude()
   readonly currentHashedRefreshToken: string;
 
-  constructor(options: any) {
-    this.currentHashedRefreshToken = options.currentHashedRefreshToken;
-    this.uuid = options.uuid;
+  readonly code: number;
+
+  readonly email: string;
+
+
+
+  constructor(options: AuthPropertiesModel) {
+    Object.assign(this as AuthModel, options);
+  }
+
+  static create(options: AuthPropertiesModel): Auth {
+    return plainToClass(Auth, options, { excludeExtraneousValues: true });
   }
 }

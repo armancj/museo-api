@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { HttpException } from '@nestjs/common/exceptions/http.exception';
-import { Maybe } from "../../common/lib/maybe.lib";
+import {Maybe} from "../../common/lib/maybe.lib";
 
 type ExceptionConstructor<T extends HttpException> = new (...args: any[]) => T;
 @Injectable()

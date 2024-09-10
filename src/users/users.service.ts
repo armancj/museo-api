@@ -5,6 +5,8 @@ import {User} from "./entities/user.entity";
 import {FindAllDto} from "../common/dto/find-all.dto";
 import {UserModel, UserPropertiesModel} from "./models/user.model";
 import {hashedPassword} from "../common/utils/hashed-password";
+import {OnEvent} from "@nestjs/event-emitter";
+import {EventEmitter} from "../shared/event-emitter/event-emitter.const";
 
 
 @Injectable()
@@ -26,6 +28,7 @@ export class UsersService {
         return await this.userMongoRepository.findAll(filter, {}, query,);
     }
 
+    @OnEvent(EventEmitter.userFound)
     async findOne(filter: Partial<UserModel>): Promise<User> {
         const user = await this.userMongoRepository.findOne(filter, {}, {lean: true});
         if (!user) throw new NotFoundException('User not found')

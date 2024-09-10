@@ -12,11 +12,13 @@ import { AuthJwtModuleConfig } from "./config/auth-jwt-module.config";
 import { HandledErrorModule } from "../shared/handled-error/handled-error.module";
 import { AuthService } from "./auth.service";
 import { JwtRefreshTokenStrategy } from "./strategies/jwt-refresh-token.strategy";
+import {AuthMongoRepository} from "./repositories/auth-mongo.repository";
+import {SharedModule} from "../shared/shared.module";
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: AuthNameEntity, schema: AuthSchema }]),
-    UsersModule,
+    SharedModule,
     PassportModule,
     EmailModule,
     JwtModule.registerAsync({
@@ -28,6 +30,7 @@ import { JwtRefreshTokenStrategy } from "./strategies/jwt-refresh-token.strategy
   controllers: [AuthController],
   providers: [
     AuthService,
+    AuthMongoRepository,
     LocalStrategy,
     JwtStrategy,
     JwtRefreshTokenStrategy,
