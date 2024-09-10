@@ -12,10 +12,10 @@ export class EventEmitter2Adapter {
     return this.eventEmitter.emit(event, ...values) as T;
   }
 
-  async emitAsync<T, R = T>(
+  async emitAsync<T, R= T>(
     event: string | string[],
     exception: ExceptionConstructor<HttpException>,
-    ...values: Partial<R>[]
+    ...values: Partial<T>[]
   ): Promise<R> {
     const result = await this.eventEmitter.emitAsync(event, ...values);
 

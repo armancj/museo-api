@@ -16,6 +16,8 @@ import {
 import {Users} from "../entities/users.entity";
 import {UserModel} from "../models/user.model";
 import {Paginator} from "../../common/lib/paginator.lib";
+import {OnEvent} from "@nestjs/event-emitter";
+import {EventEmitter} from "../../shared/event-emitter/event-emitter.const";
 
 export type createUserModel= Omit<UserModel, 'active'| 'deleted'>
 
@@ -56,9 +58,10 @@ export class UserMongoRepository {
         return {users: Users.create(usersMongo), totalElement, totalPage};
     }
 
+    @OnEvent(EventEmitter.userFound)
     async findOne(filter: Partial<UserModel> = {},
                   projection: ProjectionType<UserModel> = {},
-                  options: QueryOptions<UserModel> & { lean: true },): Promise<User> {
+                  options: QueryOptions<UserModel> & { lean: true },): Promise<UserModel> {
         const filterMongo: RootFilterQuery<UserModel> = {...filter}
 
         const user = await this.userMongoModel
@@ -66,7 +69,7 @@ export class UserMongoRepository {
             .exec();
         if (!user) return null;
 
-        return User.create(user);
+        return user;
     }
 
 

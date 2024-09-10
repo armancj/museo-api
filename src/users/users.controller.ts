@@ -41,12 +41,12 @@ export class UsersController {
 
   @Patch(':uuid')
   async update(@Param('uuid') uuid: string, @Body() updateUserDto: UpdateUserDto): Promise<boolean> {
-    return this.userService.update({uuid, deleted: false}, updateUserDto);
+    return this.userService.update({filter: {uuid, deleted: false}, updateUserDto});
   }
 
   @Patch(':uuid/change-activate')
   async updateChangeActivate(@Param('uuid') uuid: string, @Body() activatedUserDto: ActivatedUserDto): Promise<boolean> {
-    return this.userService.update({uuid, deleted: false}, activatedUserDto);
+    return this.userService.update({filter:{uuid, deleted: false}, updateUserDto:activatedUserDto });
   }
 
   @Delete(':uuid/soft')

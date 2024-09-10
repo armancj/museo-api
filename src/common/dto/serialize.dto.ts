@@ -18,7 +18,10 @@ export class SerializeDto<TData> {
   data?: TData;
 }
 
-export const ApiSerializeResponse = <TModel extends Type<any>>(
+type ClassType<T> = {
+  new (...args: any[]): T;
+};
+export const ApiSerializeResponse =  <TModel extends ClassType<unknown>>(
   model?: TModel,
   status = 200,
 ) => {

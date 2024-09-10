@@ -1,3 +1,4 @@
 export const EventEmitter = {
-  userFound: 'user.found',
+  userFound: 'user.found', userUpdated: 'user.updated'
+
 };
