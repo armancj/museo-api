@@ -1,24 +1,26 @@
-import {BadRequestException, Injectable} from '@nestjs/common';
+import {BadGatewayException, Injectable} from '@nestjs/common';
 import {EmailServiceModel, SendOptions} from './model/email.service.model';
 import {ConfigService} from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
-import Handlebars from 'handlebars';
+import * as Handlebars from 'handlebars';
 import {OnEvent} from "@nestjs/event-emitter";
 import {EventEmitter} from "../event-emitter/event-emitter.const";
+import {apiEnv} from "../../config/app.const";
 
-export type SendCodeBody = { email: string; code: number}
+export type SendCodeBody = { email: string; code: number }
+
 @Injectable()
 export class EmailNodemailerService implements EmailServiceModel {
     private transporter: nodemailer.Transporter;
 
     constructor(private readonly configService: ConfigService) {
         this.transporter = nodemailer.createTransport({
-            host: this.configService.get('email.host'),
-            port: this.configService.get('email.port'),
-            secure: this.configService.get('email.secure'), // true for 465, false for other ports
+            host: this.configService.get<string>(apiEnv.email.host),
+            port: this.configService.get<number>(apiEnv.email.port),
+            secure: this.configService.get<boolean>(apiEnv.email.secure), // true for 465, false for other ports
             auth: {
-                user: this.configService.get('email.user'),
-                pass: this.configService.get('email.pass'),
+                user: this.configService.get<string>(apiEnv.email.user),
+                pass: this.configService.get<string>(apiEnv.email.pass),
             },
         });
     }
@@ -43,12 +45,15 @@ export class EmailNodemailerService implements EmailServiceModel {
 
 
     @OnEvent(EventEmitter.sendEmailCode)
-    async sendCodeEmail({ email, code}: SendCodeBody){
+    async sendCodeEmail({email, code}: SendCodeBody) {
         const subject = 'Recuperación de Contraseña';
         const html = `<p>Introdusca el siguente numero en código para cambiar contraseña: ${code}<p>`
-        await this.sendEmail({to: email,html, subject }).catch(err => {
-            console.log({err})
-            throw new BadRequestException('Failed send email')
+        await this.sendEmail({
+            to: email, html, subject,
+            context: {},
+        }).catch(err => {
+            console.log({err, messageError: (err as Error).message, nameError: (err as Error).name})
+            throw new BadGatewayException('Failed send email', (err as Error).message)
         });
         return true
 

@@ -17,7 +17,8 @@ import {EditProfileDto} from "./dto/edit-profile.dto";
 import {UpdatedUser} from "../users/users.service";
 import {ForgotPasswordDto} from "./dto/forgot-password.dto";
 import {SendCodeBody} from "../shared/email/email-nodemailer.service";
-
+import {firstValueFrom} from "rxjs";
+import {SendEmailAuthException} from "./exceptions/send-email-auth.exception";
 
 @Injectable()
 export class AuthService {
@@ -29,19 +30,24 @@ export class AuthService {
     ) {
     }
 
-
-    async getAuthenticatedUser({email, password}: LoginDto) {
-        const filter = isEmail(email)? {email}: {mobile: email};
+    async getAuthenticatedUser({email, password}: LoginDto): Promise<User> {
+        const filter = isEmail(email) ? {email} : {mobile: email};
         const user = await this.getOneUserRepo(filter);
+
 
         if (!user || !(await bcrypt.compare(password, user?.passwordHashed)))
             throw new UnauthorizedException('Invalid credentials');
         return User.create(user);
     }
 
-    private async getOneUserRepo(filter: Partial<UserModel>) {
-        return await this.eventEmitter
-            .emitAsync<UserModel, UserModel>(EventEmitter.userFound, UnauthorizedAuthException, {...filter, deleted: false, active: true});
+    private async getOneUserRepo(filter: Partial<UserModel>): Promise<UserModel> {
+        const userObservable = await this.eventEmitter
+            .emitAsync<UserModel, UserModel>({
+                event: EventEmitter.userFound,
+                exception: UnauthorizedAuthException,
+                values: {...filter, deleted: false, active: true}
+            });
+        return firstValueFrom(userObservable);
     }
 
     async login(user: User): Promise<LoginResponseDto> {
@@ -79,22 +85,25 @@ export class AuthService {
         );
     }
 
-    async getUserById(uuid: string) {
+    async getUserById(uuid: string): Promise<User> {
         const user = await this.getOneUserRepo({uuid});
         if (!user)
             throw new NotFoundException('User not found');
         return User.create(user);
     }
 
-    async editProfile(uuid: string, editProfileDto: EditProfileDto) {
-        const isUserUpdated = await this.eventEmitter
-            .emitAsync<UpdatedUser, boolean >(EventEmitter.userUpdated, UnauthorizedAuthException, { filter: {uuid}, updateUserDto:editProfileDto });
-        if (!isUserUpdated) throw new BadRequestException('cannot updated profile');
-        return true;
+    async editProfile(uuid: string, editProfileDto: EditProfileDto): Promise<boolean> {
+        const userObservable = await this.eventEmitter
+            .emitAsync<UpdatedUser, boolean>({
+                event: EventEmitter.userUpdated,
+                exception: UnauthorizedAuthException,
+                values: {filter: {uuid}, updateUserDto: editProfileDto}
+            });
+        return firstValueFrom(userObservable);
     }
 
-    async getTokenAuthRefreshById({ uuid }: JwtPayload) {
-        const auth = await this.authRepository.findOneAuth({ uuid });
+    async getTokenAuthRefreshById({uuid}: JwtPayload) {
+        const auth = await this.authRepository.findOneAuth({uuid});
         if (auth) return auth;
         return null;
     }
@@ -105,26 +114,24 @@ export class AuthService {
         return array[0] % 100000;
     }
 
-    async forgotPassword({ email }: ForgotPasswordDto): Promise<boolean> {
-        const user = await this.getOneUserRepo({ email, active: true, deleted: false });
+    async forgotPassword({email}: ForgotPasswordDto): Promise<boolean> {
+        const user = await this.getOneUserRepo({email, active: true, deleted: false}).catch(err => null)
         if (!user) throw new NotFoundException('Email not found');
 
         const code = this.generateRandomFiveDigitNumber();
         const expireCodeDate = Date.now();
 
-        const isSend = await this.eventEmitter.emitAsync<SendCodeBody, boolean>(
-            EventEmitter.sendEmailCode,
-            UnauthorizedAuthException,
-            { code, email }
+        const sendEmailObservable = await this.eventEmitter.emitAsync<SendCodeBody, unknown>({
+                event: EventEmitter.sendEmailCode, exception: SendEmailAuthException, values: {code, email}
+            }
         );
-        if (!isSend) throw new BadRequestException('Failed to send email');
+        await firstValueFrom(sendEmailObservable);
 
         const auth = await this.authRepository.updateOneAuth(
-            { uuid: user.uuid },
-            { uuid: user.uuid, code, email, expireCodeDate }
+            {uuid: user.uuid},
+            {uuid: user.uuid, code, email, expireCodeDate}
         );
         if (!auth) throw new BadRequestException('Failed to update user in auth repo');
-
         return true;
     }
 

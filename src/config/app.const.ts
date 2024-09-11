@@ -10,7 +10,8 @@ export const apiEnv={
         from: 'EMAIL_FROM',
         host: 'EMAIL_HOST',
         port: 'EMAIL_PORT',
+        secure: 'EMAIL_SECURE',
         user: 'EMAIL_USER',
-        pass:' EMAIL_PASS',
+        pass:'EMAIL_PASS',
     }
 };

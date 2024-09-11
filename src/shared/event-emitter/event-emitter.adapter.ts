@@ -1,36 +1,56 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, InternalServerErrorException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { HttpException } from '@nestjs/common/exceptions/http.exception';
-import {Maybe} from "../../common/lib/maybe.lib";
+import { Observable, from } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 type ExceptionConstructor<T extends HttpException> = new (...args: any[]) => T;
+interface EmitParams<T> {
+    event: string | string[];
+    values: Partial<T>;
+}
+
+interface EmitAsyncParams<T> {
+    event: string | string[];
+    exception: ExceptionConstructor<HttpException>;
+    values: Partial<T>;
+}
+
+
 @Injectable()
 export class EventEmitter2Adapter {
-  constructor(private eventEmitter: EventEmitter2) {}
+  constructor(private readonly eventEmitter: EventEmitter2) {}
 
-  emit<T>(event: string | string[], ...values: any[]): T {
-    return this.eventEmitter.emit(event, ...values) as T;
+  emit<T>({event, values}: EmitParams<T>): boolean {
+    try {
+      return this.eventEmitter.emit(event, values);
+    } catch (error) {
+      console.error('Error al emitir el evento:', error);
+      return false;
+    }
   }
 
-  async emitAsync<T, R= T>(
-    event: string | string[],
-    exception: ExceptionConstructor<HttpException>,
-    ...values: Partial<T>[]
-  ): Promise<R> {
-    const result = await this.eventEmitter.emitAsync(event, ...values);
-
-    if (
-      !result ||
-      result.every((item) => item === null || item === undefined) ||
-      (result[0] instanceof Maybe && result[0].isEmpty())
-    ) {
-      if (exception) throw new exception();
+    emitAsync<T, R = T>({ event, exception, values }: EmitAsyncParams<T>): Observable<R> {
+        return from(this.eventEmitter.emitAsync(event, values)).pipe(
+            map((result: unknown) => {
+                if (
+                    !result ||
+                    (Array.isArray(result) && result.every((item) => item === null || item === undefined))
+                ) {
+                    throw new exception();
+                }
+                return (Array.isArray(result) && result.length === 1) ? result[0] as R : result as R;
+            }),
+            catchError((err): never => {
+                if (err instanceof HttpException) {
+                    throw err;
+                }
+                throw new InternalServerErrorException('An unexpected error occurred', err);
+            })
+        );
     }
 
-    return result.length === 1 ? result[0] : (result as unknown as R);
-  }
 
-  on(event: string | string[], listener: (...values: any[]) => void) {
+    on(event: string | string[], listener: (...values: any[]) => void): void {
     this.eventEmitter.on(event, listener);
   }
 }

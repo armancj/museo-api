@@ -44,7 +44,7 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
 
 
     if (!user) throw new UnauthorizedException('User not found');
-    if (!user.isActive() || user.isDeleted()) throw new UnauthorizedException('User not active or  is deleting');
+    if (!user.isActive() || user.isDeleted()) throw new UnauthorizedException('User not active or is deleting');
     return user;
   }
 }
