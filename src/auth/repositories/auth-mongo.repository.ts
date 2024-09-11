@@ -16,7 +16,7 @@ export class AuthMongoRepository implements AuthRepositoryModel {
 
     async createAuth(authModel: AuthModel): Promise<AuthModel> {
         const userAuth = await this.authMongoModel.create(authModel);
-        return Auth.create(userAuth.toObject());
+        return Auth.create(userAuth);
     }
 
     async findOneAuth(filter: Partial<AuthModel>): Promise<Auth> {

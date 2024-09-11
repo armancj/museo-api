@@ -15,6 +15,10 @@ import {ApiSerializeResponse} from "../common/dto/serialize.dto";
 import {JwtPayload} from "./strategies/jwt.payload";
 import {SerializerResponse} from "../common/lib/response.lib";
 import {EditProfileDto} from "./dto/edit-profile.dto";
+import {JwtRefreshGuard} from "./guard/jwt-refresh.guard";
+import {LoginResponseDto} from "./dto/login-response.dto";
+import {RefreshAuthTokenDto} from "./dto/refresh-auth-token.dto";
+import {ForgotPasswordDto} from "./dto/forgot-password.dto";
 
 
 @ApiTags(`Auth`)
@@ -46,5 +50,19 @@ export class AuthController {
       @Body() editProfileDto: EditProfileDto,
   ) {
     return await this.authService.editProfile(uuid, editProfileDto);
+  }
+
+  @UseGuards(JwtRefreshGuard)
+  @Post('refresh')
+  @ApiSerializeResponse(LoginResponseDto)
+  @ApiBody({ type: RefreshAuthTokenDto })
+  async refresh(@CurrentUser() user: User) {
+    return await this.authService.login(user);
+  }
+
+
+  @Post('recover')
+  async recoverPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+    return await this.authService.forgotPassword(forgotPasswordDto);
   }
 }

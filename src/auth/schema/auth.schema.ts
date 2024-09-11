@@ -18,6 +18,9 @@ class Auth implements AuthPropertiesModel {
 
   @Prop()
   email?: string;
+
+  @Prop()
+  expireCodeDate?: number;
 }
 
 export const AuthSchema = SchemaFactory.createForClass(Auth);

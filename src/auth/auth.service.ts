@@ -15,6 +15,8 @@ import {UnauthorizedAuthException} from "./exceptions/unauthorized-auth.exceptio
 import {isEmail} from "class-validator";
 import {EditProfileDto} from "./dto/edit-profile.dto";
 import {UpdatedUser} from "../users/users.service";
+import {ForgotPasswordDto} from "./dto/forgot-password.dto";
+import {SendCodeBody} from "../shared/email/email-nodemailer.service";
 
 
 @Injectable()
@@ -85,10 +87,45 @@ export class AuthService {
     }
 
     async editProfile(uuid: string, editProfileDto: EditProfileDto) {
-        const user = await this.eventEmitter
-            .emitAsync<UpdatedUser, UserModel >(EventEmitter.userUpdated, UnauthorizedAuthException, { filter: {uuid}, updateUserDto:editProfileDto });
-        const updatedUser = User.create(user)
-        if (updatedUser.isActive() || updatedUser.isDeleted()) throw new BadRequestException('cannot updated profile');
-        return updatedUser;
+        const isUserUpdated = await this.eventEmitter
+            .emitAsync<UpdatedUser, boolean >(EventEmitter.userUpdated, UnauthorizedAuthException, { filter: {uuid}, updateUserDto:editProfileDto });
+        if (!isUserUpdated) throw new BadRequestException('cannot updated profile');
+        return true;
     }
+
+    async getTokenAuthRefreshById({ uuid }: JwtPayload) {
+        const auth = await this.authRepository.findOneAuth({ uuid });
+        if (auth) return auth;
+        return null;
+    }
+
+    private generateRandomFiveDigitNumber(): number {
+        const array = new Uint32Array(1);
+        crypto.getRandomValues(array);
+        return array[0] % 100000;
+    }
+
+    async forgotPassword({ email }: ForgotPasswordDto): Promise<boolean> {
+        const user = await this.getOneUserRepo({ email, active: true, deleted: false });
+        if (!user) throw new NotFoundException('Email not found');
+
+        const code = this.generateRandomFiveDigitNumber();
+        const expireCodeDate = Date.now();
+
+        const isSend = await this.eventEmitter.emitAsync<SendCodeBody, boolean>(
+            EventEmitter.sendEmailCode,
+            UnauthorizedAuthException,
+            { code, email }
+        );
+        if (!isSend) throw new BadRequestException('Failed to send email');
+
+        const auth = await this.authRepository.updateOneAuth(
+            { uuid: user.uuid },
+            { uuid: user.uuid, code, email, expireCodeDate }
+        );
+        if (!auth) throw new BadRequestException('Failed to update user in auth repo');
+
+        return true;
+    }
+
 }

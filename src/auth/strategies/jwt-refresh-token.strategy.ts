@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtPayload } from './jwt.payload';
 import { jwtConstants } from "../config/auth.config";
 import { Strategy, ExtractJwt } from "passport-jwt";
+import {AuthService} from "../auth.service";
 
 
 @Injectable()
@@ -15,6 +16,7 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
   constructor(
 
     private readonly configService: ConfigService,
+    private readonly authService: AuthService,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromBodyField('refreshAuthToken'),
@@ -26,15 +28,23 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
 
   async validate(req: Request, payload: JwtPayload) {
     const { refreshAuthToken } = req?.body as any;
-
     if (!refreshAuthToken) return null;
 
-    if (refreshAuthToken) {
+    const auth = await this.authService.getTokenAuthRefreshById(payload);
+
+    if (!auth)
+      throw new UnauthorizedException('Token invalid');
+
+
+    if (refreshAuthToken != auth.currentHashedRefreshToken) {
       throw new UnauthorizedException('Token invalid');
     }
 
-    const user =payload;
+    const user = await this.authService.getUserById(auth.uuid);
+
+
     if (!user) throw new UnauthorizedException('User not found');
+    if (!user.isActive() || user.isDeleted()) throw new UnauthorizedException('User not active or  is deleting');
     return user;
   }
 }

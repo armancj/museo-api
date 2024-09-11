@@ -4,12 +4,15 @@ import {AuthModel, AuthPropertiesModel} from "../repositories/auth.model";
 
 export class Auth implements AuthModel{
 
-  readonly uuid: string;
-  readonly currentHashedRefreshToken: string;
+  uuid: string;
 
-  readonly code: number;
+  currentHashedRefreshToken: string;
 
-  readonly email: string;
+  code: number;
+
+  email?: string;
+  expireCodeDate: number;
+
 
 
 

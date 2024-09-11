@@ -5,6 +5,8 @@ import {User} from "./entities/user.entity";
 import {FindAllDto} from "../common/dto/find-all.dto";
 import {UserModel} from "./models/user.model";
 import {hashedPassword} from "../common/utils/hashed-password";
+import {OnEvent} from "@nestjs/event-emitter";
+import {EventEmitter} from "../shared/event-emitter/event-emitter.const";
 
 export type UpdatedUser = {
     filter: Partial<UserModel>, updateUserDto: Partial<UserModel> & {password?: string;}
@@ -34,6 +36,7 @@ export class UsersService {
         return User.create(user);
     }
 
+    @OnEvent(EventEmitter.userUpdated)
     async update({filter, updateUserDto }: UpdatedUser): Promise<boolean> {
         await this.findOne(filter);
         const {password, ...rest} = updateUserDto;

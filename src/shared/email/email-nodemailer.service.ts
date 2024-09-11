@@ -1,9 +1,12 @@
-import {Injectable} from '@nestjs/common';
+import {BadRequestException, Injectable} from '@nestjs/common';
 import {EmailServiceModel, SendOptions} from './model/email.service.model';
 import {ConfigService} from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 import Handlebars from 'handlebars';
+import {OnEvent} from "@nestjs/event-emitter";
+import {EventEmitter} from "../event-emitter/event-emitter.const";
 
+export type SendCodeBody = { email: string; code: number}
 @Injectable()
 export class EmailNodemailerService implements EmailServiceModel {
     private transporter: nodemailer.Transporter;
@@ -36,5 +39,18 @@ export class EmailNodemailerService implements EmailServiceModel {
             subject,
             html: htmlTemplate,
         });
+    }
+
+
+    @OnEvent(EventEmitter.sendEmailCode)
+    async sendCodeEmail({ email, code}: SendCodeBody){
+        const subject = 'Recuperación de Contraseña';
+        const html = `<p>Introdusca el siguente numero en código para cambiar contraseña: ${code}<p>`
+        await this.sendEmail({to: email,html, subject }).catch(err => {
+            console.log({err})
+            throw new BadRequestException('Failed send email')
+        });
+        return true
+
     }
 }

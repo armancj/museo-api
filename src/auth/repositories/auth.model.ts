@@ -6,6 +6,7 @@ export interface AuthModel {
   currentHashedRefreshToken?: string;
   email?: string;
   code?: number;
+  expireCodeDate?: number;
 }
 
 export type AuthPropertiesModel = NonFunctionProperties<AuthModel>;
