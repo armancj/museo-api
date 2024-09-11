@@ -52,7 +52,7 @@ export class EmailNodemailerService implements EmailServiceModel {
             to: email, html, subject,
             context: {},
         }).catch(err => {
-            console.log({err, messageError: (err as Error).message, nameError: (err as Error).name})
+            console.log({messageError: (err as Error).message, nameError: (err as Error).name})
             throw new BadGatewayException('Failed send email', (err as Error).message)
         });
         return true
