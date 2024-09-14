@@ -64,4 +64,9 @@ export class AuthController {
   async recoverPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
     return await this.authService.forgotPassword(forgotPasswordDto);
   }
+
+  @Post('verify-code')
+  async verifyCode(@Body() forgotPasswordDto: ForgotPasswordDto) {
+    return await this.authService.forgotPassword(forgotPasswordDto);
+  }
 }

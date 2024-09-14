@@ -16,8 +16,8 @@ export class EmailNodemailerService implements EmailServiceModel {
     constructor(private readonly configService: ConfigService) {
         this.transporter = nodemailer.createTransport({
             host: this.configService.get<string>(apiEnv.email.host),
-            port: this.configService.get<number>(apiEnv.email.port),
-            secure: this.configService.get<boolean>(apiEnv.email.secure), // true for 465, false for other ports
+            port: +this.configService.get<number>(apiEnv.email.port),
+            secure: true, // true for 465, false for other ports
             auth: {
                 user: this.configService.get<string>(apiEnv.email.user),
                 pass: this.configService.get<string>(apiEnv.email.pass),
@@ -27,7 +27,7 @@ export class EmailNodemailerService implements EmailServiceModel {
 
     async sendEmail({
                         to,
-                        from = this.configService.get('email.from'),
+                        from = this.configService.get(apiEnv.email.from),
                         subject,
                         context,
                         html,
@@ -46,14 +46,15 @@ export class EmailNodemailerService implements EmailServiceModel {
 
     @OnEvent(EventEmitter.sendEmailCode)
     async sendCodeEmail({email, code}: SendCodeBody) {
+        console.log({code, email})
         const subject = 'Recuperación de Contraseña';
-        const html = `<p>Introdusca el siguente numero en código para cambiar contraseña: ${code}<p>`
+        const html = `<a>Introdusca el siguente numero en código para cambiar contraseña: ${code}<a>`
         await this.sendEmail({
             to: email, html, subject,
             context: {},
         }).catch(err => {
-            console.log({messageError: (err as Error).message, nameError: (err as Error).name})
-            throw new BadGatewayException('Failed send email', (err as Error).message)
+            console.log({messageError: (err as Error)?.message, nameError: (err as Error)?.name})
+            throw new BadGatewayException('Failed send email', (err as Error)?.message)
         });
         return true
 
