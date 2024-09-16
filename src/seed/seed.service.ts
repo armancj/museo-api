@@ -20,8 +20,9 @@ export class SeedService implements OnModuleInit {
     const { provinces, country } = DataApiDefaultConst;
 
     for (const name of provinces) {
+      const uuid = crypto.randomUUID();
       await this.provinceModel
-        .updateOne({ name, country }, { name, country }, { upsert: true })
+        .updateOne({ name, country }, { uuid, country }, { upsert: true })
         .exec();
     }
   }

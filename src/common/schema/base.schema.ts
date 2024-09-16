@@ -3,7 +3,7 @@ import { BaseModel } from '../interfaces/base.model';
 
 @Schema()
 export class BaseSchema implements BaseModel {
-  @Prop({ default: crypto.randomUUID() })
+  @Prop()
   uuid: string;
 
   @Prop({ default: Date.now })
@@ -17,3 +17,10 @@ export class BaseSchema implements BaseModel {
 }
 
 export const BaseSchemaFactory = SchemaFactory.createForClass(BaseSchema);
+
+BaseSchemaFactory.pre('save', function (next) {
+  if (!this.uuid) {
+    this.uuid = crypto.randomUUID();
+  }
+  next();
+});

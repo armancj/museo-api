@@ -44,6 +44,6 @@ export class ProvinceService {
 
   async remove(uuid: string): Promise<void> {
     await this.findOne(uuid);
-    await this.provinceModel.updateOne({ uuid }, { deleted: true });
+    await this.provinceModel.updateOne({ uuid, deleted: false }, { deleted: true }).exec();
   }
 }
