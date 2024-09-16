@@ -12,6 +12,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { ProvinceModule } from './province/province.module';
 import { SeedModule } from './seed/seed.module';
+import { CountryModule } from './country/country.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { SeedModule } from './seed/seed.module';
     FileStorageModule,
     ProvinceModule,
     SeedModule,
+    CountryModule,
   ],
   controllers: [AppController],
   providers: [
