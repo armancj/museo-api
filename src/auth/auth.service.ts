@@ -172,7 +172,7 @@ export class AuthService {
   async changePassword(
     authChangePasswordDto: AuthChangePasswordDto,
   ): Promise<void> {
-    const { code, email, newPassword: passwordHashed } = authChangePasswordDto;
+    const { code, email, newPassword: password } = authChangePasswordDto;
 
     const userAuth = await this.authRepository.findOneAuth({ code, email });
 
@@ -182,7 +182,7 @@ export class AuthService {
 
     this.eventEmitter.emit<UpdatedUser>({
       event: EventEmitter.userUpdated,
-      values: { filter: { email }, updateUserDto: { passwordHashed } },
+      values: { filter: { email }, updateUserDto: { password } },
     });
   }
 }
