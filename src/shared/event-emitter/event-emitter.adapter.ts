@@ -50,7 +50,7 @@ export class EventEmitter2Adapter {
           ? (result[0] as R)
           : (result as R);
       }),
-      catchError((err): never => {
+      catchError((err: unknown): never => {
         if (err instanceof HttpException) {
           throw err;
         }
