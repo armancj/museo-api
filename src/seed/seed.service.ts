@@ -5,11 +5,13 @@ import {
   ProvinceMongoModel,
   ProvinceNameEntity,
 } from '../province/schema/province.schema';
+import {CountryMongoModel, CountryNameEntity} from "../country/schema/country.schema";
 
 @Injectable()
 export class SeedService implements OnModuleInit {
   constructor(
     @InjectModel(ProvinceNameEntity) private provinceModel: ProvinceMongoModel,
+    @InjectModel(CountryNameEntity) private countryDocumentModel: CountryMongoModel,
   ) {}
 
   async onModuleInit() {
@@ -18,6 +20,8 @@ export class SeedService implements OnModuleInit {
 
   async seedProvinces(): Promise<void> {
     const { provinces, country } = DataApiDefaultConst;
+
+    await this.countryDocumentModel.updateOne({name: country},{ uuid: crypto.randomUUID(), name: country}, { upsert: true }).exec();
 
     for (const name of provinces) {
       const uuid = crypto.randomUUID();

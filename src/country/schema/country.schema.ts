@@ -6,7 +6,7 @@ import {CountryPropertiesModel} from "../entities/country.model";
 export type CountryDocument = HydratedDocument<Country>;
 @Schema()
 export class Country extends BaseSchema implements CountryPropertiesModel {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true})
   name: string;
 }
 

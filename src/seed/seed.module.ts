@@ -5,11 +5,13 @@ import {
   ProvinceNameEntity,
   ProvinceSchema,
 } from '../province/schema/province.schema';
+import {CountryNameEntity, CountrySchema} from "../country/schema/country.schema";
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: ProvinceNameEntity, schema: ProvinceSchema },
+      { name: CountryNameEntity, schema: CountrySchema },
     ]),
   ],
   providers: [SeedService],
