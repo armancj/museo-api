@@ -3,8 +3,8 @@ import { Readable } from 'stream';
 import { FileMetadataModel } from './model/file-metadata.model';
 import { FileStorageServiceModel } from './model/file-storage-service.model';
 import { FileStorageModel } from './model/file-storage.model';
-import { MediaFileMetadata } from "./dto/media-file-metadata";
-import {FileStorageMongoRepository} from "./repositories/file-storage-mongo.repository";
+import { MediaFileMetadata } from './dto/media-file-metadata';
+import { FileStorageMongoRepository } from './repositories/file-storage-mongo.repository';
 
 @Injectable()
 export class FileStorageService implements FileStorageServiceModel {

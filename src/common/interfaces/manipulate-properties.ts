@@ -1,13 +1,11 @@
 export type FunctionPropertyNames<T> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  [K in keyof T]: T[K] extends Function ? K : never;
+  [K in keyof T]: T[K] extends (...args: any[]) => any ? K : never;
 }[keyof T];
 
 export type FunctionProperties<T> = Pick<T, FunctionPropertyNames<T>>;
 
 export type NonFunctionPropertyNames<T> = {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  [K in keyof T]: T[K] extends Function ? never : K;
+  [K in keyof T]: T[K] extends (...args: any[]) => any ? never : K;
 }[keyof T];
 
 export type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;

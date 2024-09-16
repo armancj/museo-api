@@ -14,7 +14,9 @@ export class Either<L, R> {
   }
 
   fold<T>(leftFn: (left: L) => T, rightFn: (right: R) => T): T {
-    return this.value.kind === 'left' ? leftFn(this.value.leftValue) : rightFn(this.value.rightValue);
+    return this.value.kind === 'left'
+      ? leftFn(this.value.leftValue)
+      : rightFn(this.value.rightValue);
   }
 
   map<T>(fn: (r: R) => T): Either<L, T> {
@@ -31,12 +33,15 @@ export class Either<L, R> {
   getOrThrow(errorMessage?: string): R {
     let result: R;
     this.fold(
-      () => { throw new Error(errorMessage || 'An error has occurred: ' + this.value); },
-      (rightValue) => { result = rightValue; }
+      () => {
+        throw new Error(errorMessage || 'An error has occurred: ' + this.value);
+      },
+      (rightValue) => {
+        result = rightValue;
+      },
     );
     return result!;
   }
-
 
   getOrElse(defaultValue: R): R {
     return this.fold(

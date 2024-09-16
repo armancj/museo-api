@@ -1,3 +1,1 @@
-export const fileConfig = [
-  { name: 'avatar', maxCount: 1 },
-];
+export const fileConfig = [{ name: 'avatar', maxCount: 1 }];

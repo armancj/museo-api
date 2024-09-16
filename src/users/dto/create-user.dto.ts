@@ -3,16 +3,15 @@ import {
   IsString,
   IsOptional,
   IsMobilePhone,
-  IsNotEmpty, IsEnum,
+  IsNotEmpty,
+  IsEnum,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import {  UserPropertiesModel } from "../models/user.model";
-import { UserRoles } from "../enum/user-roles.enum";
-
+import { UserPropertiesModel } from '../models/user.model';
+import { UserRoles } from '../enum/user-roles.enum';
 
 export class CreateUserDto
-  implements
-    Omit<UserPropertiesModel, 'passwordHashed'| 'uuid'>
+  implements Omit<UserPropertiesModel, 'passwordHashed' | 'uuid'>
 {
   @IsEmail()
   @IsString()
@@ -89,5 +88,3 @@ export class CreateUserDto
   @IsEnum(UserRoles)
   roles?: UserRoles;
 }
-
-

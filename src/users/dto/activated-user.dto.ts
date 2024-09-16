@@ -1,7 +1,6 @@
-import {IsBoolean, IsOptional} from "class-validator";
+import { IsBoolean } from 'class-validator';
 
-
-export class ActivatedUserDto{
-    @IsBoolean()
-    active: boolean;
+export class ActivatedUserDto {
+  @IsBoolean()
+  active: boolean;
 }

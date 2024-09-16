@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsNumber, IsOptional, IsPositive} from 'class-validator';
+import { IsNumber, IsOptional, IsPositive } from 'class-validator';
 
 export class FindAllDto {
   @IsNumber()

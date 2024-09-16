@@ -13,15 +13,13 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { MediaFileMetadata } from "./dto/media-file-metadata";
-import {FileStorageService} from "./file-storage.service";
+import { MediaFileMetadata } from './dto/media-file-metadata';
+import { FileStorageService } from './file-storage.service';
 
 @ApiTags('file-storage')
 @Controller('file-storage')
 export class FileStorageController {
-  constructor(
-    private readonly storageService: FileStorageService,
-  ) {}
+  constructor(private readonly storageService: FileStorageService) {}
   @Post('upload')
   @UseInterceptors()
   async uploadFile(
@@ -36,7 +34,7 @@ export class FileStorageController {
       );
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
-      throw new NotFoundException('File not found.');
+      throw new NotFoundException('File not found.', err);
     }
   }
 
@@ -46,7 +44,7 @@ export class FileStorageController {
       await this.storageService.deleteFile(fileId);
       return { message: 'File successfully deleted.' };
     } catch (err) {
-      throw new NotFoundException('File not found.');
+      throw new NotFoundException('File not found.', err);
     }
   }
 
@@ -87,7 +85,7 @@ export class FileStorageController {
 
       fileStream.pipe(res);
     } catch (err) {
-      throw new NotFoundException('File not found.');
+      throw new NotFoundException('File not found.', err);
     }
   }
 }

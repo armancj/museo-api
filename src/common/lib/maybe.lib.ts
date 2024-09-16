@@ -50,7 +50,6 @@ export class Maybe<Data> {
     return (this.value as Some<Data>).someValue;
   }
 
-
   static some<Data>(value: Data): Maybe<Data> {
     if (value === undefined || value === null) {
       throw new Error('Provided value must not be empty');
@@ -63,6 +62,8 @@ export class Maybe<Data> {
   }
 
   static fromValue<Data>(value: Data | undefined | null): Maybe<Data> {
-    return value === undefined || value === null ? Maybe.none() : Maybe.some(value);
+    return value === undefined || value === null
+      ? Maybe.none()
+      : Maybe.some(value);
   }
 }

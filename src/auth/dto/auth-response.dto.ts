@@ -1,4 +1,3 @@
-
 export class AuthResponseDto {
   access_token: string;
   email: string;
@@ -7,5 +6,4 @@ export class AuthResponseDto {
   refresh_token: string;
   roles: string;
   uuid: string;
-
 }

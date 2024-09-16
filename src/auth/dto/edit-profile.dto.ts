@@ -1,4 +1,3 @@
-import { UpdateUserDto } from "../../users/dto/update-user.dto";
-
+import { UpdateUserDto } from '../../users/dto/update-user.dto';
 
 export class EditProfileDto extends UpdateUserDto {}

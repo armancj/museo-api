@@ -3,8 +3,8 @@ import {
   UserModel,
   UserPropertiesModel,
 } from '../models/user.model';
-import {Expose, plainToClass} from "class-transformer";
-import {UserRoles} from "../enum/user-roles.enum";
+import { Expose, plainToClass } from 'class-transformer';
+import { UserRoles } from '../enum/user-roles.enum';
 
 export class User implements UserModel {
   @Expose()
@@ -48,7 +48,6 @@ export class User implements UserModel {
   @Expose()
   readonly deleted?: boolean;
 
-
   constructor(options: UserPropertiesModel) {
     Object.assign(this as UserModel, options);
   }
@@ -61,7 +60,6 @@ export class User implements UserModel {
     return this.active ?? false;
   }
 
-
   isDeleted(): boolean {
     return this.deleted ?? false;
   }
@@ -70,6 +68,3 @@ export class User implements UserModel {
     return plainToClass(User, options, { excludeExtraneousValues: true });
   }
 }
-
-
-

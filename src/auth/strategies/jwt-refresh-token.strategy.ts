@@ -1,12 +1,10 @@
-
 import { PassportStrategy } from '@nestjs/passport';
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtPayload } from './jwt.payload';
-import { jwtConstants } from "../config/auth.config";
-import { Strategy, ExtractJwt } from "passport-jwt";
-import {AuthService} from "../auth.service";
-
+import { jwtConstants } from '../config/auth.config';
+import { Strategy, ExtractJwt } from 'passport-jwt';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class JwtRefreshTokenStrategy extends PassportStrategy(
@@ -14,7 +12,6 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
   'jwt-refresh-token',
 ) {
   constructor(
-
     private readonly configService: ConfigService,
     private readonly authService: AuthService,
   ) {
@@ -32,9 +29,7 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
 
     const auth = await this.authService.getTokenAuthRefreshById(payload);
 
-    if (!auth)
-      throw new UnauthorizedException('Token invalid');
-
+    if (!auth) throw new UnauthorizedException('Token invalid');
 
     if (refreshAuthToken != auth.currentHashedRefreshToken) {
       throw new UnauthorizedException('Token invalid');
@@ -42,9 +37,9 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
 
     const user = await this.authService.getUserById(auth.uuid);
 
-
     if (!user) throw new UnauthorizedException('User not found');
-    if (!user.isActive() || user.isDeleted()) throw new UnauthorizedException('User not active or is deleting');
+    if (!user.isActive() || user.isDeleted())
+      throw new UnauthorizedException('User not active or is deleting');
     return user;
   }
 }

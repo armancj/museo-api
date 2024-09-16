@@ -1,4 +1,3 @@
-
 export type SendOptions = {
   to: string;
   from?: string;

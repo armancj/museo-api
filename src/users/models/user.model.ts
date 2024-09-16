@@ -1,13 +1,11 @@
-import { NonFunctionProperties } from "../../common/interfaces/manipulate-properties";
-import {UserRoles} from "../enum/user-roles.enum";
-
+import { NonFunctionProperties } from '../../common/interfaces/manipulate-properties';
+import { UserRoles } from '../enum/user-roles.enum';
 
 export interface UploadedFile {
   id: string;
   nameFile: string;
   file?: string;
 }
-
 
 export interface UserModel {
   uuid: string;
@@ -26,6 +24,4 @@ export interface UserModel {
   deleted?: boolean;
 }
 
-
 export type UserPropertiesModel = NonFunctionProperties<UserModel>;
-

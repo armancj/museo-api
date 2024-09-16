@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule as ConfigEnvironmentModule,  } from '@nestjs/config';
+import { ConfigModule as ConfigEnvironmentModule } from '@nestjs/config';
 import { validationSchema } from './env-validation.schema';
-import {MongooseConfigService} from "./mongoose-config.service";
+import { MongooseConfigService } from './mongoose-config.service';
 
 @Module({
   imports: [
@@ -11,8 +11,8 @@ import {MongooseConfigService} from "./mongoose-config.service";
       validationSchema,
     }),
     MongooseModule.forRootAsync({
-      imports:[ConfigModule],
-      useClass:  MongooseConfigService,
+      imports: [ConfigModule],
+      useClass: MongooseConfigService,
     }),
   ],
   providers: [],

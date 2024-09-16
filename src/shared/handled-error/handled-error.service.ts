@@ -4,8 +4,8 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { mongo } from 'mongoose';
-import { HandlerErrorServiceModel } from "./model/handler-error.service.model";
-import { ErrorCode } from "./config/error-code";
+import { HandlerErrorServiceModel } from './model/handler-error.service.model';
+import { ErrorCode } from './config/error-code';
 
 @Injectable()
 export class HandledErrorService implements HandlerErrorServiceModel {
@@ -19,6 +19,9 @@ export class HandledErrorService implements HandlerErrorServiceModel {
       }
     }
     console.error(error);
-    throw new InternalServerErrorException('Internal server error', error as any);
+    throw new InternalServerErrorException(
+      'Internal server error',
+      error as any,
+    );
   }
 }

@@ -1,15 +1,13 @@
-
 import { UserModel, UserPropertiesModel } from '../models/user.model';
-import {User} from "./user.entity";
-
+import { User } from './user.entity';
 
 export class Users {
-  private constructor(public value: UserModel[]) {  }
+  private constructor(public value: UserModel[]) {}
 
   public static create(value: UserPropertiesModel[]): Users {
     if (!Array.isArray(value)) throw new TypeError('Users is not an array');
     return new Users(
-        value.filter((data) => data).map((data) => User.create(data)),
+      value.filter((data) => data).map((data) => User.create(data)),
     );
   }
 
@@ -18,13 +16,11 @@ export class Users {
   }
 
   findUserByEmail(email: string): User {
-    const user = this.value.find(user => user.email === email);
+    const user = this.value.find((user) => user.email === email);
     return User.create(user);
   }
 
   deleteUserByEmail(email: string): void {
-    this.value = this.value.filter(user => user.email !== email);
+    this.value = this.value.filter((user) => user.email !== email);
   }
-
-
 }

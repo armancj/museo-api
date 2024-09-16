@@ -2,7 +2,10 @@ export class FileControl {
   readonly extension: string;
   readonly sizeMb: number;
 
-  constructor(readonly name: string, readonly value: Express.Multer.File) {
+  constructor(
+    readonly name: string,
+    readonly value: Express.Multer.File,
+  ) {
     this.extension = this.value.originalname.slice(
       ((this.value.originalname.lastIndexOf('.') - 1) >>> 0) + 2,
     );

@@ -1,5 +1,5 @@
 export const EventEmitter = {
-  userFound: 'user.found', userUpdated: 'user.updated',
-    sendEmailCode: 'send.email.code'
-
+  userFound: 'user.found',
+  userUpdated: 'user.updated',
+  sendEmailCode: 'send.email.code',
 };

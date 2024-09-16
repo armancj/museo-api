@@ -1,5 +1,4 @@
-import {AuthModel} from "./auth.model";
-
+import { AuthModel } from './auth.model';
 
 export type UpdateOptions = {
   currentHashedRefreshToken?: string;

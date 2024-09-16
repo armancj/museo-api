@@ -1,12 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
-import {AuthPropertiesModel} from "../repositories/auth.model";
+import { AuthPropertiesModel } from '../repositories/auth.model';
 
 export type AuthDocument = HydratedDocument<Auth>;
 
 @Schema()
 class Auth implements AuthPropertiesModel {
-
   @Prop({ unique: true })
   uuid: string;
 

@@ -5,7 +5,7 @@ import {
   getSchemaPath,
   OmitType,
 } from '@nestjs/swagger';
-import { applyDecorators, Type } from '@nestjs/common';
+import { applyDecorators } from '@nestjs/common';
 
 export class SerializeDto<TData> {
   @ApiProperty()
@@ -21,7 +21,7 @@ export class SerializeDto<TData> {
 type ClassType<T> = {
   new (...args: any[]): T;
 };
-export const ApiSerializeResponse =  <TModel extends ClassType<unknown>>(
+export const ApiSerializeResponse = <TModel extends ClassType<unknown>>(
   model?: TModel,
   status = 200,
 ) => {

@@ -1,17 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {HydratedDocument, Model} from 'mongoose';
-import {
-  UserPropertiesModel,
-} from '../models/user.model';
+import { HydratedDocument, Model } from 'mongoose';
+import { UserPropertiesModel } from '../models/user.model';
 import { UploadedFileEmbed } from './uploaded-file.embed';
-import {UserRoles} from "../enum/user-roles.enum";
-
+import { UserRoles } from '../enum/user-roles.enum';
 
 type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User implements UserPropertiesModel {
-
   @Prop({ unique: true })
   uuid: string;
 

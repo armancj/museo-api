@@ -5,10 +5,12 @@ import { MongoGridConnection } from '../mongo-grid/mongo.gridfs';
 import { FileStorage } from '../entities/file-storage';
 import { ObjectId } from 'mongodb';
 import { FileMetadataModel } from '../model/file-metadata.model';
-import { MediaFileMetadata } from "../dto/media-file-metadata";
+import { MediaFileMetadata } from '../dto/media-file-metadata';
 
 export class FileStorageMongoRepository implements FileStorageRepositoryModel {
-  constructor(private readonly mongoGridConnectionService: MongoGridConnection) {}
+  constructor(
+    private readonly mongoGridConnectionService: MongoGridConnection,
+  ) {}
 
   uploadFile(
     file: Express.Multer.File,
@@ -56,7 +58,9 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
 
   async deleteFile(fileId: string): Promise<void> {
     const objectId = new ObjectId(fileId);
-    return await this.mongoGridConnectionService.getGridFSBucket().delete(objectId);
+    return await this.mongoGridConnectionService
+      .getGridFSBucket()
+      .delete(objectId);
   }
 
   async getFileStream(fileId: string): Promise<Readable> {
