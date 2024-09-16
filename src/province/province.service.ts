@@ -20,13 +20,15 @@ export class ProvinceService {
     return Province.create(createdProvince);
   }
 
-  async findAll(): Promise<Provinces> {
-    const provinces = await this.provinceModel.find().exec();
-    return Provinces.create(provinces);
+  async findAll(): Promise<Province[]> {
+    const provinces = await this.provinceModel.find({ deleted: false }).exec();
+    return Provinces.create(provinces).value;
   }
 
   async findOne(uuid: string): Promise<Province> {
-    const province = await this.provinceModel.findOne({ uuid }).exec();
+    const province = await this.provinceModel
+      .findOne({ uuid, deleted: false })
+      .exec();
 
     if (!province) throw new NotFoundException('Not found Province');
 
@@ -42,6 +44,6 @@ export class ProvinceService {
 
   async remove(uuid: string): Promise<void> {
     await this.findOne(uuid);
-    await this.provinceModel.findOneAndDelete({ uuid });
+    await this.provinceModel.updateOne({ uuid }, { deleted: true });
   }
 }
