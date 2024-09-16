@@ -8,7 +8,6 @@ import {
 } from './schema/province.schema';
 import { Province } from './entities/province.entity';
 import { Provinces } from './entities/provinces.entity';
-import { DataApiDefaultConst } from '../common/data/data-api-default.const';
 
 @Injectable()
 export class ProvinceService {

@@ -16,5 +16,5 @@ export class Province extends BaseSchema implements ProvincePropertiesModel {
 export const ProvinceSchema = SchemaFactory.createForClass(Province);
 ProvinceSchema.add(BaseSchemaFactory);
 
-export const ProvinceNameEntity = 'Auth';
+export const ProvinceNameEntity = 'Province';
 export type ProvinceMongoModel = Model<ProvinceDocument>;
