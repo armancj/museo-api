@@ -40,7 +40,6 @@ export class UsersService {
 
   @OnEvent(EventEmitter.userUpdated)
   async update({ filter, updateUserDto }: UpdatedUser): Promise<boolean> {
-    console.log({ filter, updateUserDto });
     await this.findOne(filter);
     const { password, ...rest } = updateUserDto;
     const updateUser: Partial<UserModel> = { ...rest } as UserModel;

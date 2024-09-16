@@ -10,6 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
+import { ProvinceModule } from './province/province.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
     CoreModule,
     SharedModule,
     FileStorageModule,
+    ProvinceModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [
