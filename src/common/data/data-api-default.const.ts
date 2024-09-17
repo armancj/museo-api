@@ -242,9 +242,7 @@ export const DataApiDefaultConst = {
     },
     {
       name: 'Isla de la Juventud',
-      municipalities: [
-        'Isla de la Juventud',
-      ],
+      municipalities: ['Isla de la Juventud'],
     },
   ],
 };

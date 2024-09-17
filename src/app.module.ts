@@ -13,6 +13,7 @@ import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { ProvinceModule } from './province/province.module';
 import { SeedModule } from './seed/seed.module';
 import { CountryModule } from './country/country.module';
+import { MunicipalityModule } from './municipality/municipality.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CountryModule } from './country/country.module';
     ProvinceModule,
     SeedModule,
     CountryModule,
+    MunicipalityModule,
   ],
   controllers: [AppController],
   providers: [
