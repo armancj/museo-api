@@ -20,14 +20,14 @@ export class ProvinceService {
     return Province.create(createdProvince);
   }
 
-  async findAll(): Promise<Province[]> {
-    const provinces = await this.provinceModel.find({ deleted: false }).exec();
+  async findAll(filter: UpdateProvinceDto): Promise<Province[]> {
+    const provinces = await this.provinceModel.find({ ...filter, deleted: false }).exec();
     return Provinces.create(provinces).value;
   }
 
-  async findOne(uuid: string): Promise<Province> {
+  async findOne(uuid: string, filter?: UpdateProvinceDto): Promise<Province> {
     const province = await this.provinceModel
-      .findOne({ uuid, deleted: false })
+      .findOne({ uuid, deleted: false, ...filter })
       .exec();
 
     if (!province) throw new NotFoundException('Not found Province');

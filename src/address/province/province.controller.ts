@@ -5,7 +5,7 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Delete, Query,
 } from '@nestjs/common';
 import { ProvinceService } from './province.service';
 import { CreateProvinceDto } from './dto/create-province.dto';
@@ -23,13 +23,13 @@ export class ProvinceController {
   }
 
   @Get()
-  findAll() {
-    return this.provinceService.findAll();
+  findAll(@Query() filter: UpdateProvinceDto) {
+    return this.provinceService.findAll(filter);
   }
 
   @Get(':uuid')
-  findOne(@Param('uuid') uuid: string) {
-    return this.provinceService.findOne(uuid);
+  findOne(@Param('uuid') uuid: string, @Query() filter: UpdateProvinceDto) {
+    return this.provinceService.findOne(uuid, filter);
   }
 
   @Patch(':uuid')

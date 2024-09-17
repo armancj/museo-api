@@ -23,16 +23,16 @@ export class MunicipalityService {
     return Municipality.create(createMunicipality);
   }
 
-  async findAll() {
+  async findAll(filter: UpdateMunicipalityDto) {
     const municipalities = await this.municipalitiesMongoModel
-      .find({ deleted: false })
+      .find({ ...filter, deleted: false })
       .exec();
     return Municipalities.create(municipalities).value;
   }
 
-  async findOne(uuid: string) {
+  async findOne(uuid: string, filter?: UpdateMunicipalityDto ) {
     const municipality = await this.municipalitiesMongoModel
-      .findOne({ uuid, deleted: false })
+      .findOne({ uuid, deleted: false, ...filter })
       .exec();
 
     if (!municipality) throw new NotFoundException('Not found municipality');
