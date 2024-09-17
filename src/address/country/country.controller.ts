@@ -1,8 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CountryService } from './country.service';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
-import {ApiTags} from "@nestjs/swagger";
+import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Country')
 @Controller('country')
@@ -25,7 +33,10 @@ export class CountryController {
   }
 
   @Patch(':uuid')
-  update(@Param('uuid') uuid: string, @Body() updateCountryDto: UpdateCountryDto) {
+  update(
+    @Param('uuid') uuid: string,
+    @Body() updateCountryDto: UpdateCountryDto,
+  ) {
     return this.countryService.update(uuid, updateCountryDto);
   }
 

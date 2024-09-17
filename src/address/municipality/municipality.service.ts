@@ -8,7 +8,6 @@ import {
 } from './schema/municipalities.schema';
 import { Municipality } from './entities/municipality.entity';
 import { Municipalities } from './entities/municipalities.entity';
-import { Province } from '../province/entities/province.entity';
 
 @Injectable()
 export class MunicipalityService {

@@ -47,9 +47,6 @@ importers:
       handlebars:
         specifier: ^4.7.8
         version: 4.7.8
-      i:
-        specifier: ^0.3.7
-        version: 0.3.7
       joi:
         specifier: ^17.13.3
         version: 17.13.3
@@ -2609,10 +2606,6 @@ packages:
 
   i18next@23.15.1:
     resolution: {integrity: sha512-wB4abZ3uK7EWodYisHl/asf8UYEhrI/vj/8aoSsrj/ZDxj4/UXPOa1KvFt1Fq5hkUHquNqwFlDprmjZ8iySgYA==}
-
-  i@0.3.7:
-    resolution: {integrity: sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==}
-    engines: {node: '>=0.4'}
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -7556,8 +7549,6 @@ snapshots:
   i18next@23.15.1:
     dependencies:
       '@babel/runtime': 7.25.6
-
-  i@0.3.7: {}
 
   iconv-lite@0.4.24:
     dependencies:

@@ -7,7 +7,9 @@ export class Provinces {
   public static create(value: ProvincePropertiesModel[]): Provinces {
     if (!Array.isArray(value)) throw new TypeError('Provinces is not an array');
     return new Provinces(
-      value.filter((data) => data).map((data) => Province.create(data) as Province ),
+      value
+        .filter((data) => data)
+        .map((data) => Province.create(data) as Province),
     );
   }
 }

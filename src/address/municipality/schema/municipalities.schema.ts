@@ -1,7 +1,10 @@
 import { MunicipalityPropertiesModel } from '../entities/municipality.model';
 import { HydratedDocument, Model } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { BaseSchema, BaseSchemaFactory } from "../../../common/schema/base.schema";
+import {
+  BaseSchema,
+  BaseSchemaFactory,
+} from '../../../common/schema/base.schema';
 
 export type MunicipalitiesDocument = HydratedDocument<Municipalities>;
 @Schema()

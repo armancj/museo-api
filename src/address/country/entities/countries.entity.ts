@@ -1,5 +1,5 @@
-import {CountryModel, CountryPropertiesModel} from './country.model';
-import {Country} from "./country.entity";
+import { CountryModel, CountryPropertiesModel } from './country.model';
+import { Country } from './country.entity';
 
 export class Countries {
   private constructor(public value: CountryModel[]) {}

@@ -1,26 +1,26 @@
-import {Expose, plainToClass} from "class-transformer";
-import {CountryModel, CountryPropertiesModel} from "./country.model";
+import { Expose, plainToClass } from 'class-transformer';
+import { CountryModel, CountryPropertiesModel } from './country.model';
 
 export class Country implements CountryModel {
-    @Expose()
-    createdAt: Date;
+  @Expose()
+  createdAt: Date;
 
-    deleted: boolean;
+  deleted: boolean;
 
-    @Expose()
-    updatedAt: Date;
+  @Expose()
+  updatedAt: Date;
 
-    @Expose()
-    uuid: string;
+  @Expose()
+  uuid: string;
 
-    @Expose()
-    name: string;
+  @Expose()
+  name: string;
 
-    constructor(options:CountryPropertiesModel ) {
-        Object.assign(this as CountryModel, options);
-    }
+  constructor(options: CountryPropertiesModel) {
+    Object.assign(this as CountryModel, options);
+  }
 
-    static create(options: CountryPropertiesModel): Country {
-        return plainToClass(Country, options, { excludeExtraneousValues: true });
-    }
+  static create(options: CountryPropertiesModel): Country {
+    return plainToClass(Country, options, { excludeExtraneousValues: true });
+  }
 }
