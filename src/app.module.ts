@@ -10,10 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
-import { ProvinceModule } from './province/province.module';
 import { SeedModule } from './seed/seed.module';
-import { CountryModule } from './country/country.module';
-import { MunicipalityModule } from './municipality/municipality.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -24,10 +22,8 @@ import { MunicipalityModule } from './municipality/municipality.module';
     CoreModule,
     SharedModule,
     FileStorageModule,
-    ProvinceModule,
+    AddressModule,
     SeedModule,
-    CountryModule,
-    MunicipalityModule,
   ],
   controllers: [AppController],
   providers: [

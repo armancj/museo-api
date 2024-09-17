@@ -2,8 +2,8 @@ import {
   MunicipalityModel,
   MunicipalityPropertiesModel,
 } from './municipality.model';
-import { BaseEntity } from '../../common/entity/base.entity';
 import { Expose, plainToClass } from 'class-transformer';
+import { BaseEntity } from "../../../common/entity/base.entity";
 
 export class Municipality extends BaseEntity implements MunicipalityModel {
   @Expose()

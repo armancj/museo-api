@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
-import { BaseSchema, BaseSchemaFactory } from '../../common/schema/base.schema';
 import {CountryPropertiesModel} from "../entities/country.model";
+import { BaseSchema, BaseSchemaFactory } from "../../../common/schema/base.schema";
 
 export type CountryDocument = HydratedDocument<Country>;
 @Schema()
