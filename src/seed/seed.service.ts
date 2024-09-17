@@ -4,11 +4,11 @@ import { DataApiDefaultConst } from '../common/data/data-api-default.const';
 import {
   ProvinceMongoModel,
   ProvinceNameEntity,
-} from '../province/schema/province.schema';
+} from '../address/province/schema/province.schema';
 import {
   CountryMongoModel,
   CountryNameEntity,
-} from '../country/schema/country.schema';
+} from '../address/country/schema/country.schema';
 
 @Injectable()
 export class SeedService implements OnModuleInit {

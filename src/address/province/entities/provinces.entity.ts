@@ -5,9 +5,9 @@ export class Provinces {
   private constructor(public value: ProvinceModel[]) {}
 
   public static create(value: ProvincePropertiesModel[]): Provinces {
-    if (!Array.isArray(value)) throw new TypeError('Users is not an array');
+    if (!Array.isArray(value)) throw new TypeError('Provinces is not an array');
     return new Provinces(
-      value.filter((data) => data).map((data) => Province.create(data)),
+      value.filter((data) => data).map((data) => Province.create(data) as Province ),
     );
   }
 }
