@@ -8,12 +8,14 @@ import {
 } from './schema/municipalities.schema';
 import { Municipality } from './entities/municipality.entity';
 import { Municipalities } from './entities/municipalities.entity';
+import {EventEmitter2Adapter} from "../../shared/event-emitter/event-emitter.adapter";
 
 @Injectable()
 export class MunicipalityService {
   constructor(
     @InjectModel(MunicipalitiesNameEntity)
     private readonly municipalitiesMongoModel: MunicipalitiesMongoModel,
+    private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
 
   async create(createMunicipalityDto: CreateMunicipalityDto) {

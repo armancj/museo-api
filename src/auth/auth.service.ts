@@ -77,7 +77,9 @@ export class AuthService {
   async getJwtRefreshToken(payload: JwtPayload): Promise<string> {
     return this.jwtService.sign(payload, {
       secret: this.configService.get<string>(jwtConstants.refreshSecret),
-      expiresIn: this.configService.get(jwtConstants.refreshExpirationTime),
+        signOptions: {
+      expiresIn: this.configService.get<string>(jwtConstants.refreshExpirationTime),
+    },
     });
   }
 
