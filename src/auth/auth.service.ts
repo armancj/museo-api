@@ -26,6 +26,7 @@ import { firstValueFrom } from 'rxjs';
 import { SendEmailAuthException } from './exceptions/send-email-auth.exception';
 import { AuthVerifyCodeDto } from './dto/auth-verify-code.dto';
 import { AuthChangePasswordDto } from './dto/auth-change-password.dto';
+import {JwtSignOptions} from "@nestjs/jwt/dist/interfaces";
 
 @Injectable()
 export class AuthService {
@@ -77,10 +78,8 @@ export class AuthService {
   async getJwtRefreshToken(payload: JwtPayload): Promise<string> {
     return this.jwtService.sign(payload, {
       secret: this.configService.get<string>(jwtConstants.refreshSecret),
-      signOptions: {
-        expiresIn: this.configService.get<string>(jwtConstants.refreshExpirationTime),
-      },
-    });
+      expiresIn: this.configService.get<string>(jwtConstants.refreshExpirationTime),
+    } as JwtSignOptions);
   }
 
   private async setCurrentRefreshToken(
