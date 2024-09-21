@@ -1,5 +1,7 @@
+import {CombinedMetadata} from "../dto/media-file-metadata";
+
 export interface FileMetadataModel {
-  metadata: { mimetype: string };
+  metadata: CombinedMetadata;
   filename: string;
   length: number;
 }

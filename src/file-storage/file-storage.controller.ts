@@ -67,7 +67,7 @@ export class FileStorageController {
       const file = await this.storageService.getFileMetadataById(fileId);
       const fileStream = await this.storageService.getFileStream(fileId);
 
-      const mime = file.metadata.mimetype;
+      const mime = file.metadata.mimeType;
       const filename = file.filename;
       const range = req.headers.range;
 

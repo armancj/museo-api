@@ -9,6 +9,10 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 import { EventEmitter2Adapter } from '../shared/event-emitter/event-emitter.adapter';
 import {FileStorageModel} from "../file-storage/model/file-storage.model";
+import {UnauthorizedAuthException} from "../auth/exceptions/unauthorized-auth.exception";
+import {firstValueFrom} from "rxjs";
+import {FileMetadataModel} from "../file-storage/model/file-metadata.model";
+import {concatenateUint8Arrays} from "../common/utils/concatenate-uint8-arrays.function";
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -129,5 +133,42 @@ export class UsersService {
       event: EventEmitter.fileDelete,
       values: fileId,
     });
+  }
+
+  async streamFile(uuid: string) {
+    const user = await this.findOne({uuid});
+
+    if(!user?.avatar?.id) throw new NotFoundException('User not have upload file');
+
+    const metadata = (await this.getFileMetadata(user.avatar.id)).metadata;
+    const chunks = await this.getFileChunksUintArray(user.avatar.id);
+    const file = concatenateUint8Arrays(chunks);
+
+    return {file, metadata};
+  }
+
+  private async getFileMetadata(id: string): Promise<FileMetadataModel> {
+    const fileObservable = await this.eventEmitter.emitAsync<
+        string,
+        FileMetadataModel
+    >({
+      event: EventEmitter.fileMetadata,
+      exception: UnauthorizedAuthException,
+      values: id,
+    });
+    return firstValueFrom(fileObservable);
+  }
+
+  private async getFileChunksUintArray(id: string): Promise<Uint8Array[]> {
+    const fileObservable = await this.eventEmitter.emitAsync<
+        string,
+        Uint8Array[]
+    >({
+      event: EventEmitter.fileChunksUintArray,
+      exception: UnauthorizedAuthException,
+      values: id,
+    });
+
+    return firstValueFrom(fileObservable);
   }
 }

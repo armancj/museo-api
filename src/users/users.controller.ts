@@ -7,7 +7,7 @@ import {
   Param, ParseFilePipeBuilder,
   Patch,
   Post,
-  Query, UploadedFile,
+  Query, StreamableFile, UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import {ApiBody, ApiConsumes, ApiTags} from '@nestjs/swagger';
@@ -88,6 +88,16 @@ export class UsersController {
   ) {
     await this.userService.uploadFiled(uuid, file)
     return { message: `File successfully uploaded` }
+  }
+
+  @Get(':uuid/avatar')
+  async getFile(@Param('uuid') uuid: string,): Promise<StreamableFile> {
+    const {file, metadata} = await this.userService.streamFile(uuid);
+    return new StreamableFile(file,{
+      type: metadata.mimeType,
+      disposition: `attachment; filename=${metadata.originalName}`,
+      length: file.length,
+    } );
   }
 
   @Delete(':uuid')

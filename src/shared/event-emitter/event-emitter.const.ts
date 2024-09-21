@@ -6,5 +6,6 @@ export const EventEmitter = {
   countryFound: 'country.found',
   municipalityFound: 'municipality.found',
   fileDelete: 'file.delete',
-
+  fileChunksUintArray: 'file.chunks.uint.array',
+  fileMetadata: 'file.metadata'
 };

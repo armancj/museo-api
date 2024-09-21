@@ -52,11 +52,16 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
   }
 
   async getFileMetadataById(id: string): Promise<FileMetadataModel> {
-    const fileId = new ObjectId(id);
-    return await this.mongoGridConnection
-        .getDb()
-        .collection('fs.files')
-        .findOne({ _id: fileId });
+    try {
+      const fileId = new ObjectId(id);
+      return await this.mongoGridConnection
+          .getDb()
+          .collection('fs.files')
+          .findOne({ _id: fileId });
+    } catch (error) {
+      console.error('Error fetching file metadata:', error);
+      throw new Error('Could not fetch file metadata');
+    }
   }
 
   async deleteFile(fileId: string): Promise<void> {
