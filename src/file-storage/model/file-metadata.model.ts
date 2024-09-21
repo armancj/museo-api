@@ -1,4 +1,4 @@
-import {CombinedMetadata} from "../dto/media-file-metadata";
+import { CombinedMetadata } from '../dto/media-file-metadata';
 
 export interface FileMetadataModel {
   metadata: CombinedMetadata;

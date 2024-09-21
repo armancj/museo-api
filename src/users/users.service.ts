@@ -3,16 +3,16 @@ import { UserMongoRepository } from './repositories/user-mongo.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { FindAllDto } from '../common/dto/find-all.dto';
-import {UploadedFile, UserModel} from './models/user.model';
+import { UploadedFile, UserModel } from './models/user.model';
 import { hashedPassword } from '../common/utils/hashed-password';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 import { EventEmitter2Adapter } from '../shared/event-emitter/event-emitter.adapter';
-import {FileStorageModel} from "../file-storage/model/file-storage.model";
-import {UnauthorizedAuthException} from "../auth/exceptions/unauthorized-auth.exception";
-import {firstValueFrom} from "rxjs";
-import {FileMetadataModel} from "../file-storage/model/file-metadata.model";
-import {concatenateUint8Arrays} from "../common/utils/concatenate-uint8-arrays.function";
+import { FileStorageModel } from '../file-storage/model/file-storage.model';
+import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.exception';
+import { firstValueFrom } from 'rxjs';
+import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
+import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -103,22 +103,21 @@ export class UsersService {
 
   async uploadFiled(uuid: string, file: FileStorageModel) {
     try {
-      const user = await this.findOne({uuid});
+      const user = await this.findOne({ uuid });
 
       // If the user has a previous avatar, delete it
-      if (user?.avatar?.id){
+      if (user?.avatar?.id) {
         await this.handleFileDeletion(user.avatar.id);
       }
 
       // Create new avatar
       const avatar: UploadedFile = {
         id: file.id,
-        nameFile: file.filename
-      }
+        nameFile: file.filename,
+      };
 
       await this.updateUserAvatar(uuid, avatar);
-
-    }catch (e) {
+    } catch (e) {
       await this.handleFileDeletion(file.id);
       throw e;
     }
@@ -142,13 +141,13 @@ export class UsersService {
     const chunks = await this.getFileChunksUintArray(fileId);
     const file = concatenateUint8Arrays(chunks);
 
-    return {file, metadata};
+    return { file, metadata };
   }
 
   private async getFileMetadata(id: string): Promise<FileMetadataModel> {
     const fileObservable = await this.eventEmitter.emitAsync<
-        string,
-        FileMetadataModel
+      string,
+      FileMetadataModel
     >({
       event: EventEmitter.fileMetadata,
       exception: UnauthorizedAuthException,
@@ -159,8 +158,8 @@ export class UsersService {
 
   private async getFileChunksUintArray(id: string): Promise<Uint8Array[]> {
     const fileObservable = await this.eventEmitter.emitAsync<
-        string,
-        Uint8Array[]
+      string,
+      Uint8Array[]
     >({
       event: EventEmitter.fileChunksUintArray,
       exception: UnauthorizedAuthException,
@@ -180,14 +179,14 @@ export class UsersService {
       this.handleFileDeletion(fileId),
     ]);
 
-    return {message: `File successfully remove`};
-
+    return { message: `File successfully remove` };
   }
 
   private async checkIfAvatarId(uuid: string) {
-    const user = await this.findOne({uuid});
+    const user = await this.findOne({ uuid });
 
-    if (!user?.avatar?.id) throw new NotFoundException('User not have upload file');
+    if (!user?.avatar?.id)
+      throw new NotFoundException('User not have upload file');
     return user?.avatar?.id;
   }
 }

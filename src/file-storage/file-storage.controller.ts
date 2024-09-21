@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
@@ -13,13 +12,12 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import {ApiBody, ApiConsumes, ApiTags} from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FILE_STORAGE_SERVICE_TOKEN } from './providers/file-storage-service.provider';
 import { FileStorageServiceModel } from './model/file-storage-service.model';
-import {FileUploadDto} from "./dto/media-file-metadata";
-import {OnEvent} from "@nestjs/event-emitter";
-import {EventEmitter} from "../shared/event-emitter/event-emitter.const";
-
+import { FileUploadDto } from './dto/media-file-metadata';
+import { OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 
 @ApiTags('file-storage')
 @Controller('file-storage')
@@ -35,10 +33,7 @@ export class FileStorageController {
     description: 'List of cats',
     type: FileUploadDto,
   })
-  async uploadFile(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() body: FileUploadDto,
-  ) {
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
     try {
       const fileStorage = await this.storageService.uploadFile(
         file,
@@ -46,7 +41,7 @@ export class FileStorageController {
       );
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
-      throw new NotFoundException('File not found.');
+      throw new NotFoundException('File not found. ' + err);
     }
   }
 
@@ -57,7 +52,7 @@ export class FileStorageController {
       await this.storageService.deleteFile(fileId);
       return { message: 'File successfully deleted.' };
     } catch (err) {
-      console.log(err)
+      console.log(err);
       throw new NotFoundException('File not found.');
     }
   }
@@ -99,7 +94,7 @@ export class FileStorageController {
 
       fileStream.pipe(res);
     } catch (err) {
-      throw new NotFoundException('File not found.');
+      throw new NotFoundException('File not found. ' + err);
     }
   }
 }

@@ -1,6 +1,6 @@
-import {ArgumentMetadata, Paramtype} from '@nestjs/common';
-import {ApiProperty} from "@nestjs/swagger";
-import {Type} from "@nestjs/common/interfaces/type.interface";
+import { ArgumentMetadata, Paramtype } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from '@nestjs/common/interfaces/type.interface';
 
 export enum MediaType {
   MEDIA_PROFILE = 'MEDIA_PROFILE',

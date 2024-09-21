@@ -1,24 +1,24 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Readable } from 'stream';
 import { ObjectId } from 'mongodb';
-import {MongoGridConnection} from "../mongo-grid/mongo.gridfs";
-import {FileStorageRepositoryModel} from "../model/file-storage-repository.model";
-import {MediaFileMetadata} from "../dto/media-file-metadata";
-import {FileStorageModel} from "../model/file-storage.model";
-import {FileMetadataModel} from "../model/file-metadata.model";
-import {FileStorage} from "../entities/file-storage";
+import { MongoGridConnection } from '../mongo-grid/mongo.gridfs';
+import { FileStorageRepositoryModel } from '../model/file-storage-repository.model';
+import { MediaFileMetadata } from '../dto/media-file-metadata';
+import { FileStorageModel } from '../model/file-storage.model';
+import { FileMetadataModel } from '../model/file-metadata.model';
+import { FileStorage } from '../entities/file-storage';
 
 @Injectable()
 export class FileStorageMongoRepository implements FileStorageRepositoryModel {
   constructor(
-      @Inject(MongoGridConnection)
-      private readonly mongoGridConnection: MongoGridConnection,
+    @Inject(MongoGridConnection)
+    private readonly mongoGridConnection: MongoGridConnection,
   ) {}
 
   uploadFile(
-      file: Express.Multer.File,
-      filename: string,
-      metadata: MediaFileMetadata,
+    file: Express.Multer.File,
+    filename: string,
+    metadata: MediaFileMetadata,
   ): Promise<FileStorageModel> {
     const readableStream = new Readable({
       read() {
@@ -28,20 +28,23 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
     });
 
     const uploadStream = this.mongoGridConnection
-        .getGridFSBucket()
-        .openUploadStream(filename, {
-          metadata: {
-            ...metadata,
-            mimetype: file.mimetype,
-          },
-        });
+      .getGridFSBucket()
+      .openUploadStream(filename, {
+        metadata: {
+          ...metadata,
+          mimetype: file.mimetype,
+        },
+      });
 
     readableStream.pipe(uploadStream);
 
     return new Promise<FileStorage>((resolve, reject) => {
       uploadStream.on('finish', () => {
         uploadStream.end();
-        const fileStorage = new FileStorage({ id: uploadStream.id.toString(), filename: uploadStream.filename.toString() });
+        const fileStorage = new FileStorage({
+          id: uploadStream.id.toString(),
+          filename: uploadStream.filename.toString(),
+        });
         resolve(fileStorage);
       });
       uploadStream.on('error', (err) => {
@@ -55,9 +58,9 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
     try {
       const fileId = new ObjectId(id);
       return await this.mongoGridConnection
-          .getDb()
-          .collection('fs.files')
-          .findOne({ _id: fileId });
+        .getDb()
+        .collection('fs.files')
+        .findOne({ _id: fileId });
     } catch (error) {
       console.error('Error fetching file metadata:', error);
       throw new Error('Could not fetch file metadata');
@@ -72,7 +75,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
   async getFileStream(fileId: string): Promise<Readable> {
     const objectId = new ObjectId(fileId);
     return this.mongoGridConnection
-        .getGridFSBucket()
-        .openDownloadStream(objectId);
+      .getGridFSBucket()
+      .openDownloadStream(objectId);
   }
 }

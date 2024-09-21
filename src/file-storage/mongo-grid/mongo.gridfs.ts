@@ -1,7 +1,7 @@
 import { GridFSBucket, MongoClient } from 'mongodb';
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import {apiEnv} from "../../config/app.const";
+import { apiEnv } from '../../config/app.const';
 
 @Injectable()
 export class MongoGridConnection implements OnModuleInit, OnModuleDestroy {

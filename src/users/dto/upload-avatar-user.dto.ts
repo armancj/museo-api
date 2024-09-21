@@ -1,4 +1,3 @@
-import {FileUploadDto} from "../../file-storage/dto/media-file-metadata";
+import { FileUploadDto } from '../../file-storage/dto/media-file-metadata';
 
-export class UploadAvatarUserDto extends FileUploadDto{
-}
+export class UploadAvatarUserDto extends FileUploadDto {}

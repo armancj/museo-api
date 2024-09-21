@@ -7,5 +7,5 @@ export const EventEmitter = {
   municipalityFound: 'municipality.found',
   fileDelete: 'file.delete',
   fileChunksUintArray: 'file.chunks.uint.array',
-  fileMetadata: 'file.metadata'
+  fileMetadata: 'file.metadata',
 };
