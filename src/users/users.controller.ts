@@ -78,7 +78,7 @@ export class UsersController {
     return this.userService.softDelete({ uuid });
   }
 
-  @Post(':uuid/upload-avatar')
+  @Post(':uuid/avatar')
   @UseInterceptors(FileInterceptor('file') as any)
   @ApiConsumes('multipart/form-data')
   async uploadFileAvatarImage(
@@ -98,6 +98,11 @@ export class UsersController {
       disposition: `attachment; filename=${metadata.originalName}`,
       length: file.length,
     } );
+  }
+
+  @Delete(':uuid/avatar')
+  removeFile(@Param('uuid') uuid: string,) {
+   return this.userService.removeFile(uuid);
   }
 
   @Delete(':uuid')

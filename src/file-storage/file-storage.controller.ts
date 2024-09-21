@@ -57,6 +57,7 @@ export class FileStorageController {
       await this.storageService.deleteFile(fileId);
       return { message: 'File successfully deleted.' };
     } catch (err) {
+      console.log(err)
       throw new NotFoundException('File not found.');
     }
   }

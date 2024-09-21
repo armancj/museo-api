@@ -136,12 +136,10 @@ export class UsersService {
   }
 
   async streamFile(uuid: string) {
-    const user = await this.findOne({uuid});
+    const fileId = await this.checkIfAvatarId(uuid);
 
-    if(!user?.avatar?.id) throw new NotFoundException('User not have upload file');
-
-    const metadata = (await this.getFileMetadata(user.avatar.id)).metadata;
-    const chunks = await this.getFileChunksUintArray(user.avatar.id);
+    const metadata = (await this.getFileMetadata(fileId)).metadata;
+    const chunks = await this.getFileChunksUintArray(fileId);
     const file = concatenateUint8Arrays(chunks);
 
     return {file, metadata};
@@ -170,5 +168,26 @@ export class UsersService {
     });
 
     return firstValueFrom(fileObservable);
+  }
+
+  async removeFile(uuid: string) {
+    const fileId = await this.checkIfAvatarId(uuid);
+
+    const avatar: UploadedFile = null!;
+
+    await Promise.all([
+      this.updateUserAvatar(uuid, avatar),
+      this.handleFileDeletion(fileId),
+    ]);
+
+    return {message: `File successfully remove`};
+
+  }
+
+  private async checkIfAvatarId(uuid: string) {
+    const user = await this.findOne({uuid});
+
+    if (!user?.avatar?.id) throw new NotFoundException('User not have upload file');
+    return user?.avatar?.id;
   }
 }
