@@ -1,5 +1,6 @@
-import { IsString } from 'class-validator';
+import {ArgumentMetadata, Paramtype} from '@nestjs/common';
 import {ApiProperty} from "@nestjs/swagger";
+import {Type} from "@nestjs/common/interfaces/type.interface";
 
 export enum MediaType {
   MEDIA_PROFILE = 'MEDIA_PROFILE',
@@ -7,9 +8,21 @@ export enum MediaType {
   MEDIA_DNI_REV = 'MEDIA_DNI_REV',
 }
 
-export class MediaFileMetadata {
-  @IsString()
-  user?: string;
+interface FileMetadata {
+  originalName: string;
+  mimeType: string;
+  size: number;
+  uploadDate: Date;
+}
+export interface CombinedMetadata extends FileMetadata, ArgumentMetadata {}
+export class MediaFileMetadata implements CombinedMetadata {
+  data: string | undefined;
+  metatype: Type<any> | undefined;
+  mimeType: string;
+  originalName: string;
+  size: number;
+  type: Paramtype;
+  uploadDate: Date;
 }
 
 export class FileUploadDto {

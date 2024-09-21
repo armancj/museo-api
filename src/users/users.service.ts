@@ -3,11 +3,12 @@ import { UserMongoRepository } from './repositories/user-mongo.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { FindAllDto } from '../common/dto/find-all.dto';
-import { UserModel } from './models/user.model';
+import {UploadedFile, UserModel} from './models/user.model';
 import { hashedPassword } from '../common/utils/hashed-password';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 import { EventEmitter2Adapter } from '../shared/event-emitter/event-emitter.adapter';
+import {FileStorageModel} from "../file-storage/model/file-storage.model";
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -94,5 +95,39 @@ export class UsersService {
     }
 
     await Promise.all(validationPromises);
+  }
+
+  async uploadFiled(uuid: string, file: FileStorageModel) {
+    try {
+      const user = await this.findOne({uuid});
+
+      // If the user has a previous avatar, delete it
+      if (user?.avatar?.id){
+        await this.handleFileDeletion(user.avatar.id);
+      }
+
+      // Create new avatar
+      const avatar: UploadedFile = {
+        id: file.id,
+        nameFile: file.filename
+      }
+
+      await this.updateUserAvatar(uuid, avatar);
+
+    }catch (e) {
+      await this.handleFileDeletion(file.id);
+      throw e;
+    }
+  }
+
+  private async updateUserAvatar(uuid: string, avatar: UploadedFile) {
+    await this.userMongoRepository.updatedOne({ uuid }, { avatar });
+  }
+
+  private async handleFileDeletion(fileId: string) {
+    this.eventEmitter.emit<string>({
+      event: EventEmitter.fileDelete,
+      values: fileId,
+    });
   }
 }

@@ -3,10 +3,10 @@ import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserNameEntity, UserSchema } from './schema/users.schema';
 import { HandledErrorModule } from '../shared/handled-error/handled-error.module';
-import { FileStorageModule } from '../file-storage/file-storage.module';
 import { SharedModule } from '../shared/shared.module';
 import { UsersService } from './users.service';
 import { UserMongoRepository } from './repositories/user-mongo.repository';
+import {FileStorageModule} from "../file-storage/file-storage.module";
 
 @Module({
   imports: [

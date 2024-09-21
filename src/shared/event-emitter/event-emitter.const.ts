@@ -5,4 +5,6 @@ export const EventEmitter = {
   provinceFound: 'province.found',
   countryFound: 'country.found',
   municipalityFound: 'municipality.found',
+  fileDelete: 'file.delete',
+
 };

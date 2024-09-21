@@ -4,7 +4,7 @@ import { FileStorageModel } from '../model/file-storage.model';
 
 export class FileStorageMockService {
   uploadFile(): Promise<FileStorageModel> {
-    return Promise.resolve({ id: 'avatar' });
+    return Promise.resolve({ id: 'avatar', filename: 'aa' });
   }
   getFileMetadataById(): Promise<FileMetadataModel> {
     return Promise.resolve({

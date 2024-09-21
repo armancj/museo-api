@@ -3,6 +3,7 @@ import {NonFunctionProperties} from "../../common/interfaces/manipulate-properti
 
 export interface FileStorageModel {
   id: string;
+  filename: string;
 }
 
 export type FileStoragePropertiesModel =

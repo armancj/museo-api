@@ -4,13 +4,13 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
+  Param, ParseFilePipeBuilder,
   Patch,
   Post,
-  Query,
+  Query, UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {ApiBody, ApiConsumes, ApiTags} from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -19,7 +19,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { FilterUserDto } from './dto/filter-user.dto';
 import { ActivatedUserDto } from './dto/activated-user.dto';
 import { UserModel } from './models/user.model';
-
+import {FileInterceptor} from "@nestjs/platform-express";
+import {UploadAvatarUserDto} from "./dto/upload-avatar-user.dto";
+import {ImageProcessingPipe} from "../file-storage/pipe/image-processing.pipe";
+import {FileStorageModel} from "../file-storage/model/file-storage.model";
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
@@ -73,6 +76,18 @@ export class UsersController {
   @Delete(':uuid/soft')
   async removeSoft(@Param('uuid') uuid: string): Promise<boolean> {
     return this.userService.softDelete({ uuid });
+  }
+
+  @Post(':uuid/upload-avatar')
+  @UseInterceptors(FileInterceptor('file') as any)
+  @ApiConsumes('multipart/form-data')
+  async uploadFileAvatarImage(
+      @Param('uuid') uuid: string,
+      @Body() body: UploadAvatarUserDto,
+      @UploadedFile(ImageProcessingPipe) file: FileStorageModel,
+  ) {
+    await this.userService.uploadFiled(uuid, file)
+    return { message: `File successfully uploaded` }
   }
 
   @Delete(':uuid')

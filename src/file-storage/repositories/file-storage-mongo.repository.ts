@@ -41,7 +41,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
     return new Promise<FileStorage>((resolve, reject) => {
       uploadStream.on('finish', () => {
         uploadStream.end();
-        const fileStorage = new FileStorage({ id: uploadStream.id.toString() });
+        const fileStorage = new FileStorage({ id: uploadStream.id.toString(), filename: uploadStream.filename.toString() });
         resolve(fileStorage);
       });
       uploadStream.on('error', (err) => {

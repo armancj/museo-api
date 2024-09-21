@@ -6,6 +6,8 @@ import { FileStorageModel } from './model/file-storage.model';
 import { FILE_STORAGE_REPOSITORY_TOKEN } from './providers/file-storage-repository.provider';
 import { FileStorageRepositoryModel } from './model/file-storage-repository.model';
 import {MediaFileMetadata} from "./dto/media-file-metadata";
+import {OnEvent} from "@nestjs/event-emitter";
+import {EventEmitter} from "../shared/event-emitter/event-emitter.const";
 
 @Injectable()
 export class FileStorageService implements FileStorageServiceModel {
@@ -17,7 +19,7 @@ export class FileStorageService implements FileStorageServiceModel {
   uploadFile = async (
     file: Express.Multer.File,
     filename: string,
-    metadata: MediaFileMetadata,
+    metadata?: MediaFileMetadata,
   ): Promise<FileStorageModel> => {
     return await this.fileStorageRepository.uploadFile(
       file,
@@ -29,6 +31,7 @@ export class FileStorageService implements FileStorageServiceModel {
   getFileMetadataById = async (id: string): Promise<FileMetadataModel> => {
     return await this.fileStorageRepository.getFileMetadataById(id);
   };
+
 
   deleteFile = async (fileId: string): Promise<void> => {
     return await this.fileStorageRepository.deleteFile(fileId);

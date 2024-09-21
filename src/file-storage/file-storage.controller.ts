@@ -16,7 +16,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import {ApiBody, ApiConsumes, ApiTags} from '@nestjs/swagger';
 import { FILE_STORAGE_SERVICE_TOKEN } from './providers/file-storage-service.provider';
 import { FileStorageServiceModel } from './model/file-storage-service.model';
-import {FileUploadDto, MediaFileMetadata} from "./dto/media-file-metadata";
+import {FileUploadDto} from "./dto/media-file-metadata";
+import {OnEvent} from "@nestjs/event-emitter";
+import {EventEmitter} from "../shared/event-emitter/event-emitter.const";
 
 
 @ApiTags('file-storage')
@@ -41,7 +43,6 @@ export class FileStorageController {
       const fileStorage = await this.storageService.uploadFile(
         file,
         file.originalname,
-          {user: file.originalname },
       );
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
@@ -49,6 +50,7 @@ export class FileStorageController {
     }
   }
 
+  @OnEvent(EventEmitter.fileDelete)
   @Delete(':id')
   async deleteFile(@Param('id') fileId: string) {
     try {
