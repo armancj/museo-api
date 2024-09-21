@@ -1,17 +1,16 @@
 import { GridFSBucket, MongoClient } from 'mongodb';
+import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { apiEnv } from '../../config/app.const';
+import {apiEnv} from "../../config/app.const";
 
-export class MongoGridConnection {
+@Injectable()
+export class MongoGridConnection implements OnModuleInit, OnModuleDestroy {
   private static instance: MongoGridConnection;
-
   private gridFSBucket: GridFSBucket;
   private db: any;
   private client: MongoClient;
 
-  private constructor(private readonly configService: ConfigService) {
-    this.connectToMongo().then();
-  }
+  constructor(private readonly configService: ConfigService) {}
 
   public static getInstance(configService: ConfigService): MongoGridConnection {
     if (!this.instance) {
@@ -20,11 +19,17 @@ export class MongoGridConnection {
     return this.instance;
   }
 
+  async onModuleInit() {
+    await this.connectToMongo();
+  }
+
+  async onModuleDestroy() {
+    await this.client.close();
+  }
+
   private async connectToMongo(): Promise<void> {
-    this.client = await MongoClient.connect(
-      this.configService.get<string>(apiEnv.database.uri),
-      {},
-    );
+    const uri = this.configService.get<string>(apiEnv.database.uri);
+    this.client = await MongoClient.connect(uri, {});
     this.db = this.client.db();
     this.gridFSBucket = new GridFSBucket(this.db);
   }

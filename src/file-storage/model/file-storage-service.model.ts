@@ -1,7 +1,7 @@
 import { Readable } from 'stream';
 import { FileStorageModel } from './file-storage.model';
 import { FileMetadataModel } from './file-metadata.model';
-import { MediaFileMetadata } from '../dto/media-file-metadata';
+import {MediaFileMetadata} from "../dto/media-file-metadata";
 
 export interface FileStorageServiceModel {
   uploadFile(

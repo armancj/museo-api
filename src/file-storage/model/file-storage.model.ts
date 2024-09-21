@@ -1,4 +1,5 @@
-import { NonFunctionProperties } from '../../common/interfaces/manipulate-properties';
+import {NonFunctionProperties} from "../../common/interfaces/manipulate-properties";
+
 
 export interface FileStorageModel {
   id: string;

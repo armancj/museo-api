@@ -1,11 +1,22 @@
-import { Module } from '@nestjs/common';
-import { FileStorageController } from './file-storage.controller';
-import { FileStorageService } from './file-storage.service';
-import { FileStorageMongoRepository } from './repositories/file-storage-mongo.repository';
+import {Module} from '@nestjs/common';
+import {FileStorageController} from './file-storage.controller';
+import {FileStorageRepositoryProvider} from './providers/file-storage-repository.provider';
+import {FileStorageServiceProvider} from './providers/file-storage-service.provider';
+
+import {ConfigService} from "@nestjs/config";
+import {MongoGridConnection} from "./mongo-grid/mongo.gridfs";
 
 @Module({
-  providers: [FileStorageService, FileStorageMongoRepository],
-  controllers: [FileStorageController],
-  exports: [FileStorageService, FileStorageMongoRepository],
+    providers: [
+        {
+            provide: MongoGridConnection,
+            useFactory: (configService: ConfigService) => MongoGridConnection.getInstance(configService),
+            inject: [ConfigService],
+        },
+        FileStorageServiceProvider,
+        FileStorageRepositoryProvider],
+    controllers: [FileStorageController],
+    exports: [FileStorageServiceProvider],
 })
-export class FileStorageModule {}
+export class FileStorageModule {
+}

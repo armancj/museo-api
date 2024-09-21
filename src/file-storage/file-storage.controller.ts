@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   NotFoundException,
   Param,
   Post,
@@ -11,20 +12,20 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import {ApiBody, ApiConsumes, ApiProperty, ApiTags} from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {ApiBody, ApiConsumes, ApiTags} from '@nestjs/swagger';
+import { FILE_STORAGE_SERVICE_TOKEN } from './providers/file-storage-service.provider';
+import { FileStorageServiceModel } from './model/file-storage-service.model';
+import {FileUploadDto, MediaFileMetadata} from "./dto/media-file-metadata";
 
-import { MediaFileMetadata } from './dto/media-file-metadata';
-import { FileStorageService } from './file-storage.service';
-import {FileInterceptor} from "@nestjs/platform-express";
 
-class FileUploadDto {
-  @ApiProperty({ type: 'string', format: 'binary' })
-  file: any;
-}
 @ApiTags('file-storage')
 @Controller('file-storage')
 export class FileStorageController {
-  constructor(private readonly storageService: FileStorageService) {}
+  constructor(
+    @Inject(FILE_STORAGE_SERVICE_TOKEN)
+    private readonly storageService: FileStorageServiceModel,
+  ) {}
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
@@ -44,7 +45,7 @@ export class FileStorageController {
       );
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
-      throw new NotFoundException('File not found.', err);
+      throw new NotFoundException('File not found.');
     }
   }
 
@@ -54,7 +55,7 @@ export class FileStorageController {
       await this.storageService.deleteFile(fileId);
       return { message: 'File successfully deleted.' };
     } catch (err) {
-      throw new NotFoundException('File not found.', err);
+      throw new NotFoundException('File not found.');
     }
   }
 
@@ -95,7 +96,7 @@ export class FileStorageController {
 
       fileStream.pipe(res);
     } catch (err) {
-      throw new NotFoundException('File not found.', err);
+      throw new NotFoundException('File not found.');
     }
   }
 }
