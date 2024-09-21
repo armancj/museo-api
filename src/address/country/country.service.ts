@@ -5,6 +5,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CountryMongoModel, CountryNameEntity } from './schema/country.schema';
 import { Country } from './entities/country.entity';
 import { Countries } from './entities/countries.entity';
+import { OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter } from '../../shared/event-emitter/event-emitter.const';
+import { CountryModel } from './entities/country.model';
 
 @Injectable()
 export class CountryService {
@@ -26,13 +29,17 @@ export class CountryService {
   }
 
   async findOne(uuid: string) {
-    const country = await this.countryDocumentModel
-      .findOne({ uuid, deleted: false })
-      .exec();
-
-    if (!country) throw new NotFoundException('Not found country');
+    const country = await this.getCountryRepo({ uuid, deleted: false });
 
     return Country.create(country);
+  }
+
+  @OnEvent(EventEmitter.countryFound)
+  private async getCountryRepo(filter: Partial<CountryModel>) {
+    const country = await this.countryDocumentModel.findOne(filter).exec();
+
+    if (!country) throw new NotFoundException('Not found country');
+    return country;
   }
 
   async update(uuid: string, updateCountryDto: UpdateCountryDto) {

@@ -18,6 +18,7 @@ import { FindAllDto } from '../common/dto/find-all.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FilterUserDto } from './dto/filter-user.dto';
 import { ActivatedUserDto } from './dto/activated-user.dto';
+import { UserModel } from './models/user.model';
 
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -37,7 +38,7 @@ export class UsersController {
   ) {
     const { users, totalPage, totalElement } = await this.userService.findAll(
       query,
-      { ...filterUserDto, deleted: false },
+      { ...filterUserDto, deleted: false } as UserModel,
     );
     return { usersData: users.value, totalPage, totalElement };
   }

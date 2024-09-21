@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { EmailModule } from './email/email.module';
 import { HandledErrorModule } from './handled-error/handled-error.module';
 import { EventEmitter2Adapter } from './event-emitter/event-emitter.adapter';
 
+@Global()
 @Module({
   imports: [EmailModule, HandledErrorModule],
   providers: [EventEmitter2Adapter],

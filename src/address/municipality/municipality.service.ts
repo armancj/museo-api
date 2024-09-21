@@ -8,7 +8,10 @@ import {
 } from './schema/municipalities.schema';
 import { Municipality } from './entities/municipality.entity';
 import { Municipalities } from './entities/municipalities.entity';
-import {EventEmitter2Adapter} from "../../shared/event-emitter/event-emitter.adapter";
+import { EventEmitter2Adapter } from '../../shared/event-emitter/event-emitter.adapter';
+import { OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter } from '../../shared/event-emitter/event-emitter.const';
+import { MunicipalityModel } from './entities/municipality.model';
 
 @Injectable()
 export class MunicipalityService {
@@ -19,9 +22,14 @@ export class MunicipalityService {
   ) {}
 
   async create(createMunicipalityDto: CreateMunicipalityDto) {
+    const { province } = createMunicipalityDto;
+
+    await this.eventEmitter.checkProvinceExists(province);
+
     const createMunicipality = await this.municipalitiesMongoModel.create(
       createMunicipalityDto,
     );
+
     return Municipality.create(createMunicipality);
   }
 
@@ -32,13 +40,12 @@ export class MunicipalityService {
     return Municipalities.create(municipalities).value;
   }
 
-  async findOne(uuid: string, filter?: UpdateMunicipalityDto ) {
-    const municipality = await this.municipalitiesMongoModel
-      .findOne({ uuid, deleted: false, ...filter })
-      .exec();
-
-    if (!municipality) throw new NotFoundException('Not found municipality');
-
+  async findOne(uuid: string, filter?: UpdateMunicipalityDto) {
+    const municipality = await this.getMunicipalityRepo({
+      uuid,
+      deleted: false,
+      ...filter,
+    });
     return Municipality.create(municipality);
   }
 
@@ -47,6 +54,12 @@ export class MunicipalityService {
     updateMunicipalityDto: UpdateMunicipalityDto,
   ): Promise<void> {
     await this.findOne(uuid);
+
+    if (updateMunicipalityDto?.province)
+      await this.eventEmitter.checkProvinceExists(
+        updateMunicipalityDto.province,
+      );
+
     await this.municipalitiesMongoModel
       .updateOne({ uuid }, updateMunicipalityDto)
       .exec();
@@ -57,5 +70,16 @@ export class MunicipalityService {
     await this.municipalitiesMongoModel
       .updateOne({ uuid, deleted: false }, { deleted: true })
       .exec();
+  }
+
+  @OnEvent(EventEmitter.municipalityFound)
+  private async getMunicipalityRepo(filter: Partial<MunicipalityModel>) {
+    const municipality = await this.municipalitiesMongoModel
+      .findOne(filter)
+      .exec();
+
+    if (!municipality) throw new NotFoundException('Not found municipality');
+
+    return Municipality.create(municipality);
   }
 }

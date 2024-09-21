@@ -1,16 +1,27 @@
-import {Injectable, OnModuleInit} from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
-import {DataApiDefaultConst} from '../common/data/data-api-default.const';
-import {ProvinceMongoModel, ProvinceNameEntity,} from '../address/province/schema/province.schema';
-import {CountryMongoModel, CountryNameEntity,} from '../address/country/schema/country.schema';
-import {MunicipalitiesMongoModel, MunicipalitiesNameEntity} from "../address/municipality/schema/municipalities.schema";
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { DataApiDefaultConst } from '../common/data/data-api-default.const';
+import {
+  ProvinceMongoModel,
+  ProvinceNameEntity,
+} from '../address/province/schema/province.schema';
+import {
+  CountryMongoModel,
+  CountryNameEntity,
+} from '../address/country/schema/country.schema';
+import {
+  MunicipalitiesMongoModel,
+  MunicipalitiesNameEntity,
+} from '../address/municipality/schema/municipalities.schema';
 
 @Injectable()
 export class SeedService implements OnModuleInit {
   constructor(
     @InjectModel(ProvinceNameEntity) private provinceModel: ProvinceMongoModel,
-    @InjectModel(CountryNameEntity) private countryDocumentModel: CountryMongoModel,
-    @InjectModel(MunicipalitiesNameEntity) private municipalitiesMongoModel: MunicipalitiesMongoModel,
+    @InjectModel(CountryNameEntity)
+    private countryDocumentModel: CountryMongoModel,
+    @InjectModel(MunicipalitiesNameEntity)
+    private municipalitiesMongoModel: MunicipalitiesMongoModel,
   ) {}
 
   async onModuleInit() {
@@ -31,13 +42,23 @@ export class SeedService implements OnModuleInit {
     for (const province of provinces) {
       const name = province.name;
       await this.provinceModel
-        .updateOne({ name, country }, { uuid: crypto.randomUUID(), country, name }, { upsert: true })
+        .updateOne(
+          { name, country },
+          { uuid: crypto.randomUUID(), country, name },
+          { upsert: true },
+        )
         .exec();
 
-      const municipalities =province.municipalities;
+      const municipalities = province.municipalities;
 
       for (const municipality of municipalities) {
-        await this.municipalitiesMongoModel.updateOne({name:municipality, province:name }, {uuid: crypto.randomUUID(), name:municipality, province:name}, { upsert: true }).exec()
+        await this.municipalitiesMongoModel
+          .updateOne(
+            { name: municipality, province: name },
+            { uuid: crypto.randomUUID(), name: municipality, province: name },
+            { upsert: true },
+          )
+          .exec();
       }
     }
   }

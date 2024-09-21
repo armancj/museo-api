@@ -7,6 +7,7 @@ import { UserModel } from './models/user.model';
 import { hashedPassword } from '../common/utils/hashed-password';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
+import { EventEmitter2Adapter } from '../shared/event-emitter/event-emitter.adapter';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -14,10 +15,16 @@ export type UpdatedUser = {
 };
 @Injectable()
 export class UsersService {
-  constructor(private readonly userMongoRepository: UserMongoRepository) {}
+  constructor(
+    private readonly userMongoRepository: UserMongoRepository,
+    private readonly eventEmitter: EventEmitter2Adapter,
+  ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const { password, ...rest } = createUserDto;
+
+    await this.validationData(rest);
+
     const passwordHashed = await hashedPassword(password);
 
     const uuid = crypto.randomUUID();
@@ -41,9 +48,13 @@ export class UsersService {
   @OnEvent(EventEmitter.userUpdated)
   async update({ filter, updateUserDto }: UpdatedUser): Promise<boolean> {
     await this.findOne(filter);
+
     const { password, ...rest } = updateUserDto;
+    await this.validationData(rest);
+
     const updateUser: Partial<UserModel> = { ...rest } as UserModel;
     if (password) updateUser.passwordHashed = await hashedPassword(password);
+
     return this.userMongoRepository.updatedOne(filter, updateUser);
   }
 
@@ -61,5 +72,27 @@ export class UsersService {
       email: `${user.uuid}: ${user.email}`,
       mobile: `${user.uuid}: ${user.mobile}`,
     });
+  }
+
+  private async validationData(userDto: Partial<UserModel>) {
+    const validationPromises = [];
+
+    if (userDto.nationality) {
+      validationPromises.push(
+        this.eventEmitter.checkCountryExists(userDto.nationality),
+      );
+    }
+    if (userDto.province) {
+      validationPromises.push(
+        this.eventEmitter.checkProvinceExists(userDto.province),
+      );
+    }
+    if (userDto.municipal) {
+      validationPromises.push(
+        this.eventEmitter.checkMunicipalityExists(userDto.municipal),
+      );
+    }
+
+    await Promise.all(validationPromises);
   }
 }

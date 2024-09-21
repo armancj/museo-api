@@ -14,6 +14,7 @@ interface UseGuardOptions {
 }
 
 export function Auth({ ...roles }: UseGuardOptions = {}) {
+  const rolesDescription = roles?.roles ? roles.roles.join(', ') : 'All';
   const decorators = [
     UseGuards(JwtAuthGuard),
     SetMetadata('roles', roles.roles),
@@ -24,7 +25,7 @@ export function Auth({ ...roles }: UseGuardOptions = {}) {
       type: Unauthorized,
     }),
     ApiForbiddenResponse({
-      description: 'Forbidden',
+      description: `Forbidden for users without roles: ${rolesDescription}`,
       type: Forbidden,
     }),
   ];
