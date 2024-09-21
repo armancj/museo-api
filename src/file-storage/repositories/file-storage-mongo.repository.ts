@@ -28,7 +28,6 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
       .getGridFSBucket()
       .openUploadStream(filename, {
         metadata: {
-          ...metadata,
           mimetype: file.mimetype,
         },
       });

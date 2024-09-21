@@ -11,26 +11,36 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import {ApiBody, ApiConsumes, ApiProperty, ApiTags} from '@nestjs/swagger';
 
 import { MediaFileMetadata } from './dto/media-file-metadata';
 import { FileStorageService } from './file-storage.service';
+import {FileInterceptor} from "@nestjs/platform-express";
 
+class FileUploadDto {
+  @ApiProperty({ type: 'string', format: 'binary' })
+  file: any;
+}
 @ApiTags('file-storage')
 @Controller('file-storage')
 export class FileStorageController {
   constructor(private readonly storageService: FileStorageService) {}
   @Post('upload')
-  @UseInterceptors()
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'List of cats',
+    type: FileUploadDto,
+  })
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: MediaFileMetadata,
+    @Body() body: FileUploadDto,
   ) {
     try {
       const fileStorage = await this.storageService.uploadFile(
         file,
         file.originalname,
-        body,
+          {user: file.originalname },
       );
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
