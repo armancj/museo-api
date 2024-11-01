@@ -10,14 +10,18 @@ import {
 import { Institution } from './entities/institution.entity';
 import { Institutions } from './entities/institutions.entity';
 import { RootFilterQuery } from 'mongoose';
+import { InstitutionModel } from "./entities/institution.model";
+import { EventEmitter2Adapter } from '../../shared/event-emitter/event-emitter.adapter';
 
 @Injectable()
 export class InstitutionsService {
   constructor(
     @InjectModel(InstitutionNameEntity)
     private institutionDocumentModel: InstitutionMongoModel,
+    private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
   async create(createInstitutionDto: CreateInstitutionDto) {
+    await this.validationData(createInstitutionDto);
     const institution =
       await this.institutionDocumentModel.create(createInstitutionDto);
     return Institution.create(institution);
@@ -38,6 +42,7 @@ export class InstitutionsService {
 
   async update(uuid: string, updateInstitutionDto: UpdateInstitutionDto) {
     await this.findOne(uuid);
+    await this.validationData(updateInstitutionDto);
     await this.institutionDocumentModel
       .updateOne(
         { uuid },
@@ -59,5 +64,27 @@ export class InstitutionsService {
       .exec();
     if (!institution) return null;
     return institution;
+  }
+
+  private async validationData(institutionDto: Partial<InstitutionModel>) {
+    const validationPromises = [];
+
+    if (institutionDto.country) {
+      validationPromises.push(
+        this.eventEmitter.checkCountryExists(institutionDto.country),
+      );
+    }
+    if (institutionDto.province) {
+      validationPromises.push(
+        this.eventEmitter.checkProvinceExists(institutionDto.province),
+      );
+    }
+    if (institutionDto.municipality) {
+      validationPromises.push(
+        this.eventEmitter.checkMunicipalityExists(institutionDto.municipality),
+      );
+    }
+
+    await Promise.all(validationPromises);
   }
 }
