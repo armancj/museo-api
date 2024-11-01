@@ -60,7 +60,7 @@ export class ProvinceService {
     if (updateProvinceDto?.country)
       await this.eventEmitter.checkCountryExists(updateProvinceDto.country);
 
-    await this.provinceModel.updateOne({ uuid }, updateProvinceDto).exec();
+    await this.provinceModel.updateOne({ uuid }, { ...updateProvinceDto, updatedAt: new Date(Date.now())  }).exec();
   }
 
   async remove(uuid: string): Promise<void> {

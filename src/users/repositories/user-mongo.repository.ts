@@ -75,7 +75,7 @@ export class UserMongoRepository {
   ): Promise<boolean> {
     const filterMongo: RootFilterQuery<UserModel> = { ...filter };
     const user = await this.userMongoModel
-      .updateOne(filterMongo, update)
+      .updateOne(filterMongo, { ...update, updatedAt: new Date(Date.now()) })
       .exec();
     return user.modifiedCount > 0;
   }

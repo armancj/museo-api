@@ -45,7 +45,10 @@ export class CountryService {
   async update(uuid: string, updateCountryDto: UpdateCountryDto) {
     await this.findOne(uuid);
     await this.countryDocumentModel
-      .updateOne({ uuid }, updateCountryDto)
+      .updateOne(
+        { uuid },
+        { ...updateCountryDto, updatedAt: new Date(Date.now()) },
+      )
       .exec();
   }
 

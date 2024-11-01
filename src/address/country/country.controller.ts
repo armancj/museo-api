@@ -37,7 +37,7 @@ export class CountryController {
     return this.countryService.findOne(uuid);
   }
 
-  @Auth({ roles: [UserRoles.administrator, UserRoles.superAdmin] })
+  //@Auth({ roles: [UserRoles.administrator, UserRoles.superAdmin] })
   @Patch(':uuid')
   update(
     @Param('uuid') uuid: string,
