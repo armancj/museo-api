@@ -10,7 +10,7 @@ import {
 import { Institution } from './entities/institution.entity';
 import { Institutions } from './entities/institutions.entity';
 import { RootFilterQuery } from 'mongoose';
-import { InstitutionModel } from "./entities/institution.model";
+import { InstitutionModel } from './entities/institution.model';
 import { EventEmitter2Adapter } from '../../shared/event-emitter/event-emitter.adapter';
 
 @Injectable()
