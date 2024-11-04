@@ -13,10 +13,12 @@ import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.
 import { firstValueFrom } from 'rxjs';
 import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
 import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
+import { UserRoles } from './enum/user-roles.enum';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
   updateUserDto: Partial<UserModel> & { password?: string };
+  user?: User;
 };
 @Injectable()
 export class UsersService {
@@ -25,8 +27,10 @@ export class UsersService {
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto, user?: User): Promise<User> {
     const { password, ...rest } = createUserDto;
+
+    this.getFieldOfUserData(user, rest);
 
     await this.validationData(rest);
 
@@ -36,7 +40,9 @@ export class UsersService {
     return this.userMongoRepository.create({ ...rest, passwordHashed, uuid });
   }
 
-  async findAll(query: FindAllDto, filter: Partial<UserModel>) {
+  async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
+    this.getFieldOfUserData(user, filter);
+
     return await this.userMongoRepository.findAll(filter, {}, query);
   }
 
@@ -51,10 +57,12 @@ export class UsersService {
   }
 
   @OnEvent(EventEmitter.userUpdated)
-  async update({ filter, updateUserDto }: UpdatedUser): Promise<boolean> {
+  async update({ filter, updateUserDto, user }: UpdatedUser): Promise<boolean> {
     await this.findOne(filter);
-
     const { password, ...rest } = updateUserDto;
+
+    this.getFieldOfUserData(user, rest);
+
     await this.validationData(rest);
 
     const updateUser: Partial<UserModel> = { ...rest } as UserModel;
@@ -188,5 +196,18 @@ export class UsersService {
     if (!user?.avatar?.id)
       throw new NotFoundException('User not have upload file');
     return user?.avatar?.id;
+  }
+
+  private getFieldOfUserData(user: User, rest: Partial<UserModel>) {
+    if (user?.roles === UserRoles.administrator) {
+      rest.nationality = user.nationality;
+      rest.province = user.province;
+    }
+
+    if (user?.roles === UserRoles.manager) {
+      rest.nationality = user.nationality;
+      rest.province = user.province;
+      rest.municipal = user.municipal;
+    }
   }
 }

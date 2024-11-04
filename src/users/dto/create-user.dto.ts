@@ -5,6 +5,7 @@ import {
   IsMobilePhone,
   IsNotEmpty,
   IsEnum,
+  ValidateIf,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserPropertiesModel } from '../models/user.model';
@@ -61,6 +62,7 @@ export class CreateUserDto
   })
   name: string;
 
+  @ValidateIf((dto) => dto.roles !== UserRoles.superAdmin)
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -69,6 +71,7 @@ export class CreateUserDto
   })
   nationality: string;
 
+  @ValidateIf((dto) => dto.roles !== UserRoles.superAdmin)
   @IsString()
   @ApiProperty({
     type: String,
@@ -76,6 +79,11 @@ export class CreateUserDto
   })
   province: string;
 
+  @ValidateIf(
+    (dto) =>
+      dto.roles !== UserRoles.superAdmin ||
+      dto.roles !== UserRoles.administrator,
+  )
   @IsString()
   @ApiProperty({
     type: String,

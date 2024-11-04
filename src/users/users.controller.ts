@@ -25,25 +25,39 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarUserDto } from './dto/upload-avatar-user.dto';
 import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe';
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
+import { Auth, CurrentUser } from '../auth/decorator';
+import { UserRoles } from './enum/user-roles.enum';
+
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.userService.create(createUserDto);
+  async create(
+    @Body() createUserDto: CreateUserDto,
+    @CurrentUser() user: User,
+  ): Promise<User> {
+    return this.userService.create(createUserDto, user);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Post('/all')
   async findAll(
     @Query() query: FindAllDto,
     @Body() filterUserDto: FilterUserDto,
+    @CurrentUser() user: User,
   ) {
     const { users, totalPage, totalElement } = await this.userService.findAll(
       query,
       { ...filterUserDto, deleted: false } as UserModel,
+      user,
     );
     return { usersData: users.value, totalPage, totalElement };
   }
@@ -57,10 +71,12 @@ export class UsersController {
   async update(
     @Param('uuid') uuid: string,
     @Body() updateUserDto: UpdateUserDto,
+    @CurrentUser() user: User,
   ): Promise<boolean> {
     return this.userService.update({
       filter: { uuid, deleted: false },
       updateUserDto,
+      user,
     });
   }
 
