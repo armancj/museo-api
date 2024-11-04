@@ -46,7 +46,8 @@ export class UsersService {
     return await this.userMongoRepository.findAll(filter, {}, query);
   }
 
-  async findOne(filter: Partial<UserModel>): Promise<User> {
+  async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
+    this.getFieldOfUserData(currentUser, filter);
     const user = await this.userMongoRepository.findOne(
       filter,
       {},
@@ -58,7 +59,7 @@ export class UsersService {
 
   @OnEvent(EventEmitter.userUpdated)
   async update({ filter, updateUserDto, user }: UpdatedUser): Promise<boolean> {
-    await this.findOne(filter);
+    await this.findOne(filter, user);
     const { password, ...rest } = updateUserDto;
 
     this.getFieldOfUserData(user, rest);

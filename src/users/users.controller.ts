@@ -62,11 +62,20 @@ export class UsersController {
     return { usersData: users.value, totalPage, totalElement };
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Get(':uuid')
-  async findOne(@Param('uuid') uuid: string): Promise<User> {
-    return this.userService.findOne({ uuid, deleted: false });
+  async findOne(
+    @Param('uuid') uuid: string,
+    @CurrentUser() user: User,
+  ): Promise<User> {
+    return this.userService.findOne({ uuid, deleted: false }, user);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Patch(':uuid')
   async update(
     @Param('uuid') uuid: string,
