@@ -12,6 +12,8 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
+import { EntryAndLocationRecordModule } from './entry-and-location-record/entry-and-location-record.module';
+import { ProducerAuthorRecordModule } from './producer-author-record/producer-author-record.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { AddressModule } from './address/address.module';
     FileStorageModule,
     AddressModule,
     SeedModule,
+    EntryAndLocationRecordModule,
+    ProducerAuthorRecordModule,
   ],
   controllers: [AppController],
   providers: [
