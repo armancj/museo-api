@@ -4,9 +4,11 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  ValidateIf,
 } from 'class-validator';
 import { Classification, InstitutionType } from '../enum/institutions.enum';
 import { InstitutionDtoPropertiesModel } from '../entities/institution.model';
+import { validateIsMuseum } from '../utilities/validate-is-museum/validate-is-museum';
 
 export class CreateInstitutionDto implements InstitutionDtoPropertiesModel {
   @IsString()
@@ -73,14 +75,17 @@ export class CreateInstitutionDto implements InstitutionDtoPropertiesModel {
   @IsNotEmpty()
   institutionType: InstitutionType;
 
+  @ValidateIf((dto) => validateIsMuseum(dto.institutionType))
   @IsOptional()
   @IsEnum(Classification)
   classification?: Classification;
 
+  @ValidateIf((dto) => validateIsMuseum(dto.institutionType))
   @IsOptional()
   @IsString()
   typology?: string;
 
+  @ValidateIf((dto) => validateIsMuseum(dto.institutionType))
   @IsOptional()
   @IsString()
   category?: string;
