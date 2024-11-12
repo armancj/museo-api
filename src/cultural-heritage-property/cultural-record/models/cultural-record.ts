@@ -1,6 +1,7 @@
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
+import { NonFunctionProperties } from "../../../common/interfaces/manipulate-properties";
 
-interface VolumeQuantities {
+export interface VolumeQuantities {
   file?: number;
   pages?: number;
   books?: number;
@@ -12,7 +13,7 @@ interface VolumeQuantities {
   mapsPlansSketches?: number;
 }
 
-interface Dimensions {
+export interface Dimensions {
   heightCms?: number;
   widthCms?: number;
   lengthCms?: number;
@@ -21,24 +22,24 @@ interface Dimensions {
   weightKg?: number;
 }
 
-interface AccessAndUseConditions {
+export interface AccessAndUseConditions {
   accessConditions: string[];
   reproductionConditions: string[];
   technicalRequirements: string;
 }
 
-interface AssociatedDocumentation {
+export interface AssociatedDocumentation {
   originalsExistenceAndLocation?: string;
   copiesExistenceAndLocation: string;
   relatedDescriptionUnits?: string;
   relatedPublicationsInformation?: string;
 }
 
-interface Notes {
+export interface Notes {
   notes?: string;
 }
 
-interface DescriptionControl {
+export interface DescriptionControl {
   descriptionMadeBy: string;
   descriptionDateTime: Date;
   reviewedBy: string;
@@ -72,3 +73,5 @@ export interface CulturalRecordModel {
   calculateSquareMeters: () => number;
   calculateCubicMeters: () => number;
 }
+
+export type CulturalPropertiesModel = NonFunctionProperties<CulturalRecordModel>;
