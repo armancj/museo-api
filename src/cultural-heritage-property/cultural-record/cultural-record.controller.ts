@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CulturalRecordService } from './cultural-record.service';
 import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto';
 import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto';
+import {ApiTags} from "@nestjs/swagger";
 
+@ApiTags('CulturalRecord')
 @Controller('cultural-record')
 export class CulturalRecordController {
   constructor(private readonly culturalRecordService: CulturalRecordService) {}
