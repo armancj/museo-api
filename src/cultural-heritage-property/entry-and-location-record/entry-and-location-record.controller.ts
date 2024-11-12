@@ -10,7 +10,9 @@ import {
 import { EntryAndLocationRecordService } from './entry-and-location-record.service';
 import { CreateEntryAndLocationRecordDto } from './dto/create-entry-and-location-record.dto';
 import { UpdateEntryAndLocationRecordDto } from './dto/update-entry-and-location-record.dto';
+import {ApiTags} from "@nestjs/swagger";
 
+@ApiTags('EntryLocationRecord')
 @Controller('entry-and-location-record')
 export class EntryAndLocationRecordController {
   constructor(

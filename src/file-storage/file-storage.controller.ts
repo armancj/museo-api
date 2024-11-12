@@ -19,7 +19,7 @@ import { FileUploadDto } from './dto/media-file-metadata';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 
-@ApiTags('file-storage')
+@ApiTags('FileStorage')
 @Controller('file-storage')
 export class FileStorageController {
   constructor(
