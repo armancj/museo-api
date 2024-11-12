@@ -3,7 +3,7 @@ import { EntryAndLocationRecordModule } from './entry-and-location-record/entry-
 import { ProducerAuthorRecordModule } from './producer-author-record/producer-author-record.module';
 import { CulturalRecordModule } from './cultural-record/cultural-record.module';
 import {MongooseModule} from "@nestjs/mongoose";
-import {CulturalHeritagePropertyEntity, CulturalHeritagePropertySchema} from "./cultural-record/Schema/cultural-heritage-property";
+import {CulturalHeritagePropertyEntity, CulturalHeritagePropertySchema} from "./Schema/cultural-heritage-property";
 import { CulturalHeritagePropertyController } from './cultural-heritage-property.controller';
 import { CulturalHeritagePropertyService } from './cultural-heritage-property.service';
 

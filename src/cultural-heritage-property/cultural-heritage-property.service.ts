@@ -1,6 +1,6 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
-import {CulturalHeritagePropertyEntity, CulturalHeritagePropertyModel} from "./cultural-record/Schema/cultural-heritage-property";
+import {CulturalHeritagePropertyEntity, CulturalHeritagePropertyModel} from "./Schema/cultural-heritage-property";
 import {CreateCulturalPropertyDto} from "./dto/create-cultural-property.dto";
 
 @Injectable()
