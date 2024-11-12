@@ -22,30 +22,6 @@ export interface Dimensions {
   weightKg?: number;
 }
 
-export interface AccessAndUseConditions {
-  accessConditions: string[];
-  reproductionConditions: string[];
-  technicalRequirements: string;
-}
-
-export interface AssociatedDocumentation {
-  originalsExistenceAndLocation?: string;
-  copiesExistenceAndLocation: string;
-  relatedDescriptionUnits?: string;
-  relatedPublicationsInformation?: string;
-}
-
-export interface Notes {
-  notes?: string;
-}
-
-export interface DescriptionControl {
-  descriptionMadeBy: string;
-  descriptionDateTime: Date;
-  reviewedBy: string;
-  reviewDateTime: Date;
-}
-
 export interface CulturalRecordModel {
   backgroundTitle?: string;
   sectionTitle?: string;
@@ -66,10 +42,6 @@ export interface CulturalRecordModel {
   letters: string[];
   descriptionInstrument: string[];
   conservationState: string[];
-  accessAndUseConditions: AccessAndUseConditions;
-  associatedDocumentation: AssociatedDocumentation;
-  notes: Notes;
-  descriptionControl: DescriptionControl;
   calculateSquareMeters: () => number;
   calculateCubicMeters: () => number;
 }

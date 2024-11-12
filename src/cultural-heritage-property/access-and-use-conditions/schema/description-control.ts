@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { DescriptionControlModel } from "../models/access-and-use-conditions";
 
 @Schema()
-class DescriptionControl {
+class DescriptionControl implements DescriptionControlModel{
 
   @Prop()
   descriptionMadeBy: string;

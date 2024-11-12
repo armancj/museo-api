@@ -6,6 +6,7 @@ import {MongooseModule} from "@nestjs/mongoose";
 import {CulturalHeritagePropertyEntity, CulturalHeritagePropertySchema} from "./Schema/cultural-heritage-property";
 import { CulturalHeritagePropertyController } from './cultural-heritage-property.controller';
 import { CulturalHeritagePropertyService } from './cultural-heritage-property.service';
+import { AccessAndUseConditionsModule } from './access-and-use-conditions/access-and-use-conditions.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CulturalHeritagePropertyService } from './cultural-heritage-property.se
     EntryAndLocationRecordModule,
     ProducerAuthorRecordModule,
     CulturalRecordModule,
+    AccessAndUseConditionsModule,
   ],
   controllers: [CulturalHeritagePropertyController],
   providers: [CulturalHeritagePropertyService],

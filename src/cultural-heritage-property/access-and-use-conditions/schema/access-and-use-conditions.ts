@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-
+import {AccessAndUseConditionsModel} from '../models/access-and-use-conditions.ts'
 @Schema()
-class AccessAndUseConditions implements AccessAndUseConditions{
+class AccessAndUseConditions implements AccessAndUseConditionsModel{
 
   @Prop()
   accessConditions: string[];
