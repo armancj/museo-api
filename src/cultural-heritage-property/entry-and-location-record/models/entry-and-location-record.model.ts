@@ -17,15 +17,15 @@ export interface Location {
 
 export interface EntryAndLocationRecordPart1 {
   heritageType: HeritageType;
-  declarationType: string; // assuming this is a selectable list
-  inventoryNumber: string; // alphanumeric value
+  declarationType: string;
+  inventoryNumber: string;
   genericClassification: GenericClassification;
   pieceInventory: boolean;
   auxiliaryInventory: boolean;
-  objectName: string; // name of the object, piece, building or intangible manifestation
-  initialDescription: string; // text field
-  entryMethod: string; // method of entry into the institution
-  entryDate: Date; // date of entry
+  objectName: string;
+  initialDescription: string;
+  entryMethod: string;
+  entryDate: Date;
   objectLocation: Location;
   institutionType: InstitutionType;
 }

@@ -6,9 +6,17 @@ import { VolumeQuantitiesSchema } from "./volume-quantities";
 
 @Schema()
 export class CulturalRecord implements CulturalPropertiesModel {
+
+  @Prop()
   backgroundTitle: string;
+
+  @Prop()
   conservationState: string[];
+
+  @Prop()
   descriptionInstrument: string[];
+
+  @Prop({ required: true, enum: DescriptionLevel })
   descriptionLevel: DescriptionLevel;
 
   @Prop({ type: DimensionsSchema })
@@ -16,18 +24,44 @@ export class CulturalRecord implements CulturalPropertiesModel {
 
   @Prop({ type: VolumeQuantitiesSchema })
   volumesQuantities: VolumeQuantities;
+
+  @Prop()
   extremeDates: { start: Date; end: Date };
+
+  @Prop()
   geographicDescriptors: string;
+
+  @Prop()
   institutionalDescriptors: string;
+
+  @Prop()
   languages: string[];
+
+  @Prop()
   letters: string[];
+
+  @Prop()
   objectDescription: string;
+
+  @Prop()
   objectTitle: string;
+
+  @Prop()
   onomasticDescriptors: string;
+
+  @Prop()
   sectionTitle: string;
+
+  @Prop()
   subjectDescriptors: string;
+
+  @Prop()
   supports: string[];
+
+  @Prop()
   valuation: number;
+
+  @Prop({ required: true, enum: ValueGrade })
   valueGrade: ValueGrade;
 }
 
