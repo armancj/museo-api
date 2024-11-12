@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post} from '@nestjs/common';
 import {ApiTags} from "@nestjs/swagger";
 import {CulturalHeritagePropertyService} from "./cultural-heritage-property.service";
 import {CreateCulturalPropertyDto} from "./dto/create-cultural-property.dto";
@@ -19,17 +19,18 @@ export class CulturalHeritagePropertyController {
 
     @Get()
     async find() {
-        return []
+        return this.culturalHeritagePropertyService.find();
     }
 
     @Get(':uuid')
     async findOne(
         @Param('uuid') uuid: string) {
-        return uuid
+        return this.culturalHeritagePropertyService.findOne(uuid);
     }
 
+    @HttpCode(HttpStatus.NO_CONTENT)
     @Delete(':uuid')
-    async remove(@Param('uuid') uuid: string): Promise<boolean> {
-        return true;
+    async remove(@Param('uuid') uuid: string) {
+        return this.culturalHeritagePropertyService.remove(uuid);
     }
 }

@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
 import {ProducerAuthorRecord} from "../producer-author-record/models/producer-author-record.models";
 import {ProducerAuthorRecordSchema} from "../producer-author-record/schema/producer-author-record";
-import {BaseSchema} from "../../common/schema/base.schema";
+import {BaseSchema, BaseSchemaFactory} from "../../common/schema/base.schema";
 
 export type CulturalHeritagePropertyDocument = HydratedDocument<CulturalHeritageProperty>;
 
@@ -15,6 +15,7 @@ export class CulturalHeritageProperty extends BaseSchema {
 
 
 export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(CulturalHeritageProperty);
+CulturalHeritagePropertySchema.add(BaseSchemaFactory);
 
 
 export const CulturalHeritagePropertyEntity = 'CulturalHeritageProperty';
