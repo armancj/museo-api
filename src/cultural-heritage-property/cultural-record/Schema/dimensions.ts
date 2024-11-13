@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { DimensionsModel } from "../models/cultural-record";
 
 @Schema()
-class Dimensions {
+class Dimensions implements DimensionsModel {
   @Prop()
   heightCms?: number;
 

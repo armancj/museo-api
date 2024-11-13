@@ -5,7 +5,7 @@ import {
 import { InstitutionType } from "../../../address/institutions/enum/institutions.enum";
 
 
-export interface Location {
+export interface LocationModel {
   floor: string;
   exhibitionRoom: string;
   storage: string;
@@ -15,7 +15,7 @@ export interface Location {
   fileFolder: string;
 }
 
-export interface EntryAndLocationRecordPart1 {
+export interface EntryAndLocationRecordModel {
   heritageType: HeritageType;
   declarationType: string;
   inventoryNumber: string;

@@ -1,7 +1,7 @@
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { NonFunctionProperties } from "../../../common/interfaces/manipulate-properties";
 
-export interface VolumeQuantities {
+export interface VolumeQuantitiesModel {
   file?: number;
   pages?: number;
   books?: number;
@@ -13,7 +13,7 @@ export interface VolumeQuantities {
   mapsPlansSketches?: number;
 }
 
-export interface Dimensions {
+export interface DimensionsModel {
   heightCms?: number;
   widthCms?: number;
   lengthCms?: number;
@@ -35,8 +35,8 @@ export interface CulturalRecordModel {
   valueGrade: ValueGrade;
   descriptionLevel: DescriptionLevel;
   valuation?: number;
-  volumesQuantities: VolumeQuantities;
-  dimensions: Dimensions;
+  volumesQuantities: VolumeQuantitiesModel;
+  dimensions: DimensionsModel;
   languages: string[];
   supports: string[];
   letters: string[];

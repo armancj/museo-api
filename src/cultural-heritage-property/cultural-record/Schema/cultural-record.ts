@@ -1,12 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { CulturalPropertiesModel, Dimensions, VolumeQuantities } from "../models/cultural-record";
+import {
+  CulturalPropertiesModel,
+  DimensionsModel,
+  VolumeQuantitiesModel,
+} from '../models/cultural-record';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
-import { DimensionsSchema } from "./dimensions";
-import { VolumeQuantitiesSchema } from "./volume-quantities";
+import { DimensionsSchema } from './dimensions';
+import { VolumeQuantitiesSchema } from './volume-quantities';
+import { ExtremeDatesSchema } from './extreme-dates.schema';
 
 @Schema()
 export class CulturalRecord implements CulturalPropertiesModel {
-
   @Prop()
   backgroundTitle: string;
 
@@ -20,12 +24,12 @@ export class CulturalRecord implements CulturalPropertiesModel {
   descriptionLevel: DescriptionLevel;
 
   @Prop({ type: DimensionsSchema })
-  dimensions: Dimensions;
+  dimensions: DimensionsModel;
 
   @Prop({ type: VolumeQuantitiesSchema })
-  volumesQuantities: VolumeQuantities;
+  volumesQuantities: VolumeQuantitiesModel;
 
-  @Prop()
+  @Prop({ type: ExtremeDatesSchema })
   extremeDates: { start: Date; end: Date };
 
   @Prop()
@@ -65,5 +69,5 @@ export class CulturalRecord implements CulturalPropertiesModel {
   valueGrade: ValueGrade;
 }
 
-
-export const CulturalRecordSchema = SchemaFactory.createForClass(CulturalRecord);
+export const CulturalRecordSchema =
+  SchemaFactory.createForClass(CulturalRecord);
