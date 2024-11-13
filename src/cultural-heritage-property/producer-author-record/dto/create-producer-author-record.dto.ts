@@ -1,48 +1,48 @@
 import { ProducerAuthorRecord } from '../models/producer-author-record.models';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty,  IsString} from 'class-validator';
 
 export class CreateProducerAuthorRecordDto implements ProducerAuthorRecord {
-  @String()
+  @IsString()
   @IsNotEmpty()
   betweenStreet1: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   betweenStreet2: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   district: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   institutionalHistory: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   locality: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   municipality: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   number: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   objectEntryHistory: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   producerAuthorNames: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   province: string;
 
-  @String()
+  @IsString()
   @IsNotEmpty()
   street: string;
 }
