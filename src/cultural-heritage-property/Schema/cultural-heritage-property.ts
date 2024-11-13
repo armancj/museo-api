@@ -19,11 +19,21 @@ import { CulturalRecordSchema } from '../cultural-record/Schema';
 import { CulturalRecordModel } from '../cultural-record/models/cultural-record';
 import { EntryAndLocationRecordSchema } from '../entry-and-location-record/schema/entry-and-location-record.schema';
 import { EntryAndLocationRecordModel } from '../entry-and-location-record/models/entry-and-location-record.model';
+import { Type } from 'class-transformer';
+import {
+  Institution,
+  InstitutionNameEntity,
+} from '../../address/institutions/schema/institution.schema';
 
 export type CulturalHeritagePropertyDocument =
   HydratedDocument<CulturalHeritageProperty>;
 
-@Schema()
+@Schema({
+  toJSON: {
+    getters: true,
+    virtuals: true,
+  },
+})
 export class CulturalHeritageProperty extends BaseSchema {
   @Prop({ type: EntryAndLocationRecordSchema })
   entryAndLocation: EntryAndLocationRecordModel;
@@ -45,11 +55,25 @@ export class CulturalHeritageProperty extends BaseSchema {
 
   @Prop({ type: NotesSchema })
   notes: NotesModel;
+
+  @Prop()
+  InstitutionId: string;
+
+  @Type(() => Institution)
+  institution: Institution;
 }
 
 export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(
   CulturalHeritageProperty,
 );
+
+CulturalHeritagePropertySchema.virtual('institution', {
+  ref: InstitutionNameEntity,
+  localField: 'InstitutionId',
+  foreignField: 'uuid',
+  justOne: true,
+});
+
 CulturalHeritagePropertySchema.add(BaseSchemaFactory);
 
 export const CulturalHeritagePropertyEntity = 'CulturalHeritageProperty';
