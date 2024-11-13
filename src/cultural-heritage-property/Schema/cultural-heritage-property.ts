@@ -3,20 +3,22 @@ import { HydratedDocument, Model } from 'mongoose';
 import { ProducerAuthorRecord } from '../producer-author-record/models/producer-author-record.models';
 import { ProducerAuthorRecordSchema } from '../producer-author-record/schema/producer-author-record';
 import { BaseSchema, BaseSchemaFactory } from '../../common/schema/base.schema';
-import { AccessAndUseConditionsSchema } from '../access-and-use-conditions/schema/access-and-use-conditions';
-import { AssociatedDocumentationSchema } from '../access-and-use-conditions/schema/associated-documentation';
+import {
+  AccessAndUseConditionsSchema,
+  NotesSchema,
+  AssociatedDocumentationSchema,
+  DescriptionControlSchema,
+} from '../access-and-use-conditions/schema';
 import {
   AccessAndUseConditionsModel,
   AssociatedDocumentationModel,
   DescriptionControlModel,
   NotesModel,
 } from '../access-and-use-conditions/models/access-and-use-conditions';
-import { DescriptionControlSchema } from '../access-and-use-conditions/schema/description-control';
-import { NotesSchema } from '../access-and-use-conditions/schema/notes';
-import { CulturalRecordSchema } from "../cultural-record/Schema/cultural-record";
-import { CulturalRecordModel } from "../cultural-record/models/cultural-record";
-import { EntryAndLocationRecordSchema } from "../entry-and-location-record/schema/entry-and-location-record.schema";
-import { EntryAndLocationRecordModel } from "../entry-and-location-record/models/entry-and-location-record.model";
+import { CulturalRecordSchema } from '../cultural-record/Schema';
+import { CulturalRecordModel } from '../cultural-record/models/cultural-record';
+import { EntryAndLocationRecordSchema } from '../entry-and-location-record/schema/entry-and-location-record.schema';
+import { EntryAndLocationRecordModel } from '../entry-and-location-record/models/entry-and-location-record.model';
 
 export type CulturalHeritagePropertyDocument =
   HydratedDocument<CulturalHeritageProperty>;

@@ -1,9 +1,8 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { DescriptionControlModel } from "../models/access-and-use-conditions";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { DescriptionControlModel } from '../models/access-and-use-conditions';
 
 @Schema()
-class DescriptionControl implements DescriptionControlModel{
-
+class DescriptionControl implements DescriptionControlModel {
   @Prop()
   descriptionMadeBy: string;
 
@@ -16,4 +15,5 @@ class DescriptionControl implements DescriptionControlModel{
   @Prop()
   reviewDateTime: Date;
 }
-export const DescriptionControlSchema = SchemaFactory.createForClass(DescriptionControl);
+export const DescriptionControlSchema =
+  SchemaFactory.createForClass(DescriptionControl);
