@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { ProducerAuthorRecordModel } from '../models/producer-author-record.models';
 @Schema()
-class ProducerAuthorRecord {
+class ProducerAuthorRecord implements ProducerAuthorRecordModel {
   @Prop()
   producerAuthorNames: string;
 

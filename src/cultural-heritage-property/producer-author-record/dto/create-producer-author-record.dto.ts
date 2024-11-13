@@ -1,7 +1,9 @@
-import { ProducerAuthorRecord } from '../models/producer-author-record.models';
-import { IsNotEmpty,  IsString} from 'class-validator';
+import { ProducerAuthorRecordModel } from '../models/producer-author-record.models';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateProducerAuthorRecordDto implements ProducerAuthorRecord {
+export class CreateProducerAuthorRecordDto
+  implements ProducerAuthorRecordModel
+{
   @IsString()
   @IsNotEmpty()
   betweenStreet1: string;

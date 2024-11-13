@@ -1,11 +1,11 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { ProducerAuthorRecordService } from './producer-author-record.service';
 import { CreateProducerAuthorRecordDto } from './dto/create-producer-author-record.dto';
@@ -19,7 +19,7 @@ export class ProducerAuthorRecordController {
     private readonly producerAuthorRecordService: ProducerAuthorRecordService,
   ) {}
 
-  @Post(':uuid')
+  @Put(':uuid')
   create(
     @Param('uuid') uuid: string,
     @Body() createProducerAuthorRecordDto: CreateProducerAuthorRecordDto,
@@ -35,24 +35,24 @@ export class ProducerAuthorRecordController {
     return this.producerAuthorRecordService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.producerAuthorRecordService.findOne(+id);
+  @Get(':uuuui')
+  findOne(@Param('uuid') uuid: string) {
+    return this.producerAuthorRecordService.findOne(uuid);
   }
 
-  @Patch(':id')
+  @Patch(':uuid')
   update(
-    @Param('id') id: string,
+    @Param('uuid') uuid: string,
     @Body() updateProducerAuthorRecordDto: UpdateProducerAuthorRecordDto,
   ) {
     return this.producerAuthorRecordService.update(
-      +id,
+      uuid,
       updateProducerAuthorRecordDto,
     );
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.producerAuthorRecordService.remove(+id);
+  @Delete(':uuid')
+  remove(@Param('uuid') uuid: string) {
+    return this.producerAuthorRecordService.remove(uuid);
   }
 }

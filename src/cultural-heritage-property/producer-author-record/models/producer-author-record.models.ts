@@ -1,4 +1,4 @@
-export interface ProducerAuthorRecord {
+export interface ProducerAuthorRecordModel {
   producerAuthorNames: string;
   street: string;
   number: string;

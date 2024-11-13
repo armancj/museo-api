@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
-import { ProducerAuthorRecord } from '../producer-author-record/models/producer-author-record.models';
+import { ProducerAuthorRecordModel } from '../producer-author-record/models/producer-author-record.models';
 import { ProducerAuthorRecordSchema } from '../producer-author-record/schema/producer-author-record';
 import { BaseSchema, BaseSchemaFactory } from '../../common/schema/base.schema';
 import {
@@ -39,7 +39,7 @@ export class CulturalHeritageProperty extends BaseSchema {
   entryAndLocation: EntryAndLocationRecordModel;
 
   @Prop({ type: ProducerAuthorRecordSchema })
-  producerAuthor: ProducerAuthorRecord;
+  producerAuthor: ProducerAuthorRecordModel;
 
   @Prop({ type: CulturalRecordSchema })
   culturalRecord: CulturalRecordModel;
