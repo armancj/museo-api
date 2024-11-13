@@ -16,7 +16,10 @@ export class AccessAndUseConditionsService {
     return `This action returns a #${id} accessAndUseCondition`;
   }
 
-  update(id: number, updateAccessAndUseConditionDto: UpdateAccessAndUseConditionDto) {
+  update(
+    id: number,
+    updateAccessAndUseConditionDto: UpdateAccessAndUseConditionDto,
+  ) {
     return `This action updates a #${id} accessAndUseCondition`;
   }
 

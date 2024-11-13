@@ -22,7 +22,7 @@ import { EditProfileDto } from './dto/edit-profile.dto';
 import { UpdatedUser } from '../users/users.service';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { SendCodeBody } from '../shared/email/email-nodemailer.service';
-import { firstValueFrom, from } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { SendEmailAuthException } from './exceptions/send-email-auth.exception';
 import { AuthVerifyCodeDto } from './dto/auth-verify-code.dto';
 import { AuthChangePasswordDto } from './dto/auth-change-password.dto';

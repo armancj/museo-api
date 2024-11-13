@@ -9,7 +9,9 @@ describe('AccessAndUseConditionsService', () => {
       providers: [AccessAndUseConditionsService],
     }).compile();
 
-    service = module.get<AccessAndUseConditionsService>(AccessAndUseConditionsService);
+    service = module.get<AccessAndUseConditionsService>(
+      AccessAndUseConditionsService,
+    );
   });
 
   it('should be defined', () => {

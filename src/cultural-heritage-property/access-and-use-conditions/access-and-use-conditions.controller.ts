@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AccessAndUseConditionsService } from './access-and-use-conditions.service';
 import { CreateAccessAndUseConditionDto } from './dto/create-access-and-use-condition.dto';
 import { UpdateAccessAndUseConditionDto } from './dto/update-access-and-use-condition.dto';
 
 @Controller('access-and-use-conditions')
 export class AccessAndUseConditionsController {
-  constructor(private readonly accessAndUseConditionsService: AccessAndUseConditionsService) {}
+  constructor(
+    private readonly accessAndUseConditionsService: AccessAndUseConditionsService,
+  ) {}
 
   @Post()
-  create(@Body() createAccessAndUseConditionDto: CreateAccessAndUseConditionDto) {
-    return this.accessAndUseConditionsService.create(createAccessAndUseConditionDto);
+  create(
+    @Body() createAccessAndUseConditionDto: CreateAccessAndUseConditionDto,
+  ) {
+    return this.accessAndUseConditionsService.create(
+      createAccessAndUseConditionDto,
+    );
   }
 
   @Get()
@@ -23,8 +37,14 @@ export class AccessAndUseConditionsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccessAndUseConditionDto: UpdateAccessAndUseConditionDto) {
-    return this.accessAndUseConditionsService.update(+id, updateAccessAndUseConditionDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateAccessAndUseConditionDto: UpdateAccessAndUseConditionDto,
+  ) {
+    return this.accessAndUseConditionsService.update(
+      +id,
+      updateAccessAndUseConditionDto,
+    );
   }
 
   @Delete(':id')

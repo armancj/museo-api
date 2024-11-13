@@ -9,7 +9,9 @@ describe('CulturalHeritagePropertyController', () => {
       controllers: [CulturalHeritagePropertyController],
     }).compile();
 
-    controller = module.get<CulturalHeritagePropertyController>(CulturalHeritagePropertyController);
+    controller = module.get<CulturalHeritagePropertyController>(
+      CulturalHeritagePropertyController,
+    );
   });
 
   it('should be defined', () => {

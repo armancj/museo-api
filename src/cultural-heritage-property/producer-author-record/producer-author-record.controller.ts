@@ -1,17 +1,33 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ProducerAuthorRecordService } from './producer-author-record.service';
 import { CreateProducerAuthorRecordDto } from './dto/create-producer-author-record.dto';
 import { UpdateProducerAuthorRecordDto } from './dto/update-producer-author-record.dto';
-import {ApiTags} from "@nestjs/swagger";
+import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('ProducerAuthorRecord')
 @Controller('producer-author-record')
 export class ProducerAuthorRecordController {
-  constructor(private readonly producerAuthorRecordService: ProducerAuthorRecordService) {}
+  constructor(
+    private readonly producerAuthorRecordService: ProducerAuthorRecordService,
+  ) {}
 
-  @Post()
-  create(@Body() createProducerAuthorRecordDto: CreateProducerAuthorRecordDto) {
-    return this.producerAuthorRecordService.create(createProducerAuthorRecordDto);
+  @Post(':uuid')
+  create(
+    @Param('uuid') uuid: string,
+    @Body() createProducerAuthorRecordDto: CreateProducerAuthorRecordDto,
+  ) {
+    return this.producerAuthorRecordService.create(
+      uuid,
+      createProducerAuthorRecordDto,
+    );
   }
 
   @Get()
@@ -25,8 +41,14 @@ export class ProducerAuthorRecordController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProducerAuthorRecordDto: UpdateProducerAuthorRecordDto) {
-    return this.producerAuthorRecordService.update(+id, updateProducerAuthorRecordDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateProducerAuthorRecordDto: UpdateProducerAuthorRecordDto,
+  ) {
+    return this.producerAuthorRecordService.update(
+      +id,
+      updateProducerAuthorRecordDto,
+    );
   }
 
   @Delete(':id')

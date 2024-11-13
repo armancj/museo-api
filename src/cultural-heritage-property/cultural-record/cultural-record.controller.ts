@@ -1,8 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CulturalRecordService } from './cultural-record.service';
 import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto';
 import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto';
-import {ApiTags} from "@nestjs/swagger";
+import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('CulturalRecord')
 @Controller('cultural-record')
@@ -25,7 +33,10 @@ export class CulturalRecordController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCulturalRecordDto: UpdateCulturalRecordDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCulturalRecordDto: UpdateCulturalRecordDto,
+  ) {
     return this.culturalRecordService.update(+id, updateCulturalRecordDto);
   }
 

@@ -11,7 +11,9 @@ describe('ProducerAuthorRecordController', () => {
       providers: [ProducerAuthorRecordService],
     }).compile();
 
-    controller = module.get<ProducerAuthorRecordController>(ProducerAuthorRecordController);
+    controller = module.get<ProducerAuthorRecordController>(
+      ProducerAuthorRecordController,
+    );
   });
 
   it('should be defined', () => {

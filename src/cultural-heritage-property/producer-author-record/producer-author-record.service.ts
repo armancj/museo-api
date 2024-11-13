@@ -4,7 +4,10 @@ import { UpdateProducerAuthorRecordDto } from './dto/update-producer-author-reco
 
 @Injectable()
 export class ProducerAuthorRecordService {
-  create(createProducerAuthorRecordDto: CreateProducerAuthorRecordDto) {
+  create(
+    uuid: string,
+    createProducerAuthorRecordDto: CreateProducerAuthorRecordDto,
+  ) {
     return 'This action adds a new producerAuthorRecord';
   }
 
@@ -16,7 +19,10 @@ export class ProducerAuthorRecordService {
     return `This action returns a #${id} producerAuthorRecord`;
   }
 
-  update(id: number, updateProducerAuthorRecordDto: UpdateProducerAuthorRecordDto) {
+  update(
+    id: number,
+    updateProducerAuthorRecordDto: UpdateProducerAuthorRecordDto,
+  ) {
     return `This action updates a #${id} producerAuthorRecord`;
   }
 

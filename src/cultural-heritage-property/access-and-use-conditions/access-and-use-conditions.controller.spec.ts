@@ -11,7 +11,9 @@ describe('AccessAndUseConditionsController', () => {
       providers: [AccessAndUseConditionsService],
     }).compile();
 
-    controller = module.get<AccessAndUseConditionsController>(AccessAndUseConditionsController);
+    controller = module.get<AccessAndUseConditionsController>(
+      AccessAndUseConditionsController,
+    );
   });
 
   it('should be defined', () => {

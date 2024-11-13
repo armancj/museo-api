@@ -9,7 +9,9 @@ describe('CulturalHeritagePropertyService', () => {
       providers: [CulturalHeritagePropertyService],
     }).compile();
 
-    service = module.get<CulturalHeritagePropertyService>(CulturalHeritagePropertyService);
+    service = module.get<CulturalHeritagePropertyService>(
+      CulturalHeritagePropertyService,
+    );
   });
 
   it('should be defined', () => {
