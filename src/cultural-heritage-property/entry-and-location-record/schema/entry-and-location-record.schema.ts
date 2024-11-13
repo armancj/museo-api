@@ -4,12 +4,11 @@ import {
   HeritageType,
 } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
-import { LocationSchema } from "./location.schema";
-import { LocationModel } from "../models/entry-and-location-record.model";
+import { LocationSchema } from './location.schema';
+import { LocationModel } from '../models/entry-and-location-record.model';
 
 @Schema()
 class EntryAndLocationRecord {
-
   @Prop({ required: true, enum: HeritageType })
   heritageType: HeritageType;
 
@@ -47,4 +46,6 @@ class EntryAndLocationRecord {
   institutionType: InstitutionType;
 }
 
-export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(EntryAndLocationRecord);
+export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(
+  EntryAndLocationRecord,
+);

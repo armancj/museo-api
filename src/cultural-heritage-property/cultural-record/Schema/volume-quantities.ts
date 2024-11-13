@@ -1,9 +1,8 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { VolumeQuantitiesModel } from "../models/cultural-record";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { VolumeQuantitiesModel } from '../models/cultural-record';
 
 @Schema()
-class VolumeQuantities implements  VolumeQuantitiesModel{
-
+class VolumeQuantities implements VolumeQuantitiesModel {
   @Prop()
   file?: number;
 
@@ -31,4 +30,5 @@ class VolumeQuantities implements  VolumeQuantitiesModel{
   @Prop()
   mapsPlansSketches?: number;
 }
-export const VolumeQuantitiesSchema = SchemaFactory.createForClass(VolumeQuantities);
+export const VolumeQuantitiesSchema =
+  SchemaFactory.createForClass(VolumeQuantities);

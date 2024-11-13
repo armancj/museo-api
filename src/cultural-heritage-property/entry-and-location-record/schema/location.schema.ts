@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { LocationModel } from "../models/entry-and-location-record.model";
+import { LocationModel } from '../models/entry-and-location-record.model';
 
 @Schema()
-class Location implements LocationModel{
-
+class Location implements LocationModel {
   @Prop()
   floor: string;
 

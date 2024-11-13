@@ -1,5 +1,5 @@
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
-import { NonFunctionProperties } from "../../../common/interfaces/manipulate-properties";
+import { NonFunctionProperties } from '../../../common/interfaces/manipulate-properties';
 
 export interface VolumeQuantitiesModel {
   file?: number;
@@ -46,4 +46,5 @@ export interface CulturalRecordModel {
   calculateCubicMeters: () => number;
 }
 
-export type CulturalPropertiesModel = NonFunctionProperties<CulturalRecordModel>;
+export type CulturalPropertiesModel =
+  NonFunctionProperties<CulturalRecordModel>;

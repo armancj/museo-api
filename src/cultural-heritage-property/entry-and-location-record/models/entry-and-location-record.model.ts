@@ -2,8 +2,7 @@ import {
   GenericClassification,
   HeritageType,
 } from '../enum/entry-and-location-record.enum';
-import { InstitutionType } from "../../../address/institutions/enum/institutions.enum";
-
+import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 
 export interface LocationModel {
   floor: string;

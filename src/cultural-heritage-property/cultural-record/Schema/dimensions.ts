@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { DimensionsModel } from "../models/cultural-record";
+import { DimensionsModel } from '../models/cultural-record';
 
 @Schema()
 class Dimensions implements DimensionsModel {
