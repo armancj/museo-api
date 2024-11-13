@@ -38,7 +38,7 @@ export class CulturalHeritageProperty extends BaseSchema {
   @Prop({ type: EntryAndLocationRecordSchema })
   entryAndLocation: EntryAndLocationRecordModel;
 
-  @Prop({ type: ProducerAuthorRecordSchema })
+  @Prop({ type: ProducerAuthorRecordSchema, default: undefined })
   producerAuthor: ProducerAuthorRecordModel;
 
   @Prop({ type: CulturalRecordSchema })

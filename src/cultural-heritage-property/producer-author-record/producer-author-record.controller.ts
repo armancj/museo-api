@@ -5,8 +5,8 @@ import {
   Patch,
   Param,
   Delete,
-  Put,
-} from '@nestjs/common';
+  Put, HttpCode, HttpStatus
+} from "@nestjs/common";
 import { ProducerAuthorRecordService } from './producer-author-record.service';
 import { CreateProducerAuthorRecordDto } from './dto/create-producer-author-record.dto';
 import { UpdateProducerAuthorRecordDto } from './dto/update-producer-author-record.dto';
@@ -35,7 +35,7 @@ export class ProducerAuthorRecordController {
     return this.producerAuthorRecordService.findAll();
   }
 
-  @Get(':uuuui')
+  @Get(':uuid')
   findOne(@Param('uuid') uuid: string) {
     return this.producerAuthorRecordService.findOne(uuid);
   }
@@ -51,6 +51,7 @@ export class ProducerAuthorRecordController {
     );
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':uuid')
   remove(@Param('uuid') uuid: string) {
     return this.producerAuthorRecordService.remove(uuid);

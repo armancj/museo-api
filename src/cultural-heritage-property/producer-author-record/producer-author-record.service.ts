@@ -33,6 +33,7 @@ export class ProducerAuthorRecordService {
         uuid,
         deleted: false,
       })
+      .lean()
       .exec();
 
     if (!culturalProperty)
@@ -54,6 +55,7 @@ export class ProducerAuthorRecordService {
         { producerAuthor },
         { new: true },
       )
+      .lean()
       .exec();
 
     if (!culturalProperty)
@@ -64,6 +66,6 @@ export class ProducerAuthorRecordService {
 
   async remove(uuid: string) {
     await this.findOne(uuid);
-    return `This action removes a #${uuid} producerAuthorRecord`;
+    await this.update(uuid, undefined);
   }
 }
