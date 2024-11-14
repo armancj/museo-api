@@ -1,1 +1,3 @@
-export class CreateCulturalNoteDto {}
+import { NotesModel } from '../models/cultural-notes-model';
+
+export class CreateCulturalNoteDto implements NotesModel {}
