@@ -1,9 +1,7 @@
 import { CulturalPropertyModel } from '../models/cultural-property.model';
 import { ProducerAuthorRecord } from '../../producer-author-record/entities/producer-author-record.entity';
-import { AccessAndUseConditionsModel } from '../../access-and-use-conditions/models/access-and-use-conditions';
 import { AccessAndUseCondition } from '../../access-and-use-conditions/entities/access-and-use-condition.entity';
-import { AssociatedDocumentationModel } from '../../associated-documentation/models/associated-documentation-model';
-import { AssociatedDocumentationEntity } from "../../associated-documentation/entities/associated-documentation.entity";
+import { AssociatedDocumentationEntity } from '../../associated-documentation/entities/associated-documentation.entity';
 
 export class CulturalHeritageProperty implements CulturalPropertyModel {
   createdAt: Date;
@@ -12,9 +10,9 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
   producerAuthor: ProducerAuthorRecord;
 
-  accessAndUseConditions: AccessAndUseConditionsModel;
+  accessAndUseConditions: AccessAndUseCondition;
 
-  associatedDocumentation: AssociatedDocumentationModel;
+  associatedDocumentation: AssociatedDocumentationEntity;
 
   updatedAt: Date;
 

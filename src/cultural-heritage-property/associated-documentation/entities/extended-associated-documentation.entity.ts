@@ -1,13 +1,18 @@
-import {ProducerAuthorRecord} from "./producer-author-record.entity";
-import {ProducerAuthorRecordModel} from "../models/producer-author-record.models";
+import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
+import { AssociatedDocumentationEntity } from './associated-documentation.entity';
 
-export class ExtendedProducerAuthorRecord extends ProducerAuthorRecord {
-    uuid: string;
+export class ExtendedAssociatedDocumentationEntity extends AssociatedDocumentationEntity {
+  uuid: string;
 
-    constructor(option: Partial<ProducerAuthorRecordModel & {uuid: string}>) {
-        super(option);
-    }
-    static create(option: Partial<ProducerAuthorRecordModel & {uuid: string}>): ExtendedProducerAuthorRecord {
-        return new ExtendedProducerAuthorRecord(option);
-    }
+  constructor(
+    option: Partial<AssociatedDocumentationModel & { uuid: string }>,
+  ) {
+    super(option);
+    this.uuid = option.uuid;
+  }
+  static create(
+    option: Partial<AssociatedDocumentationModel & { uuid: string }>,
+  ): ExtendedAssociatedDocumentationEntity {
+    return new ExtendedAssociatedDocumentationEntity(option);
+  }
 }

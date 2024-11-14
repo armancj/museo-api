@@ -1,22 +1,27 @@
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
-import { ProducerAuthorRecord } from './producer-author-record.entity';
-import {ExtendedProducerAuthorRecord} from "./extended-producer-author-record.entity";
+import { ExtendedAssociatedDocumentationEntity } from './extended-associated-documentation.entity';
+import { AssociatedDocumentationEntity } from './associated-documentation.entity';
+import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
 
-
-export class ProducerAuthorRecords {
-  private constructor(public value: CulturalPropertyModel[]) {}
+export class AssociatedDocumentationsEntity {
+  private constructor(
+    public value: Partial<AssociatedDocumentationModel & { uuid: string }>,
+  ) {}
 
   public static create(
     value: CulturalPropertyModel[],
-  ): ExtendedProducerAuthorRecord [] {
+  ): ExtendedAssociatedDocumentationEntity[] {
     if (!Array.isArray(value))
-      throw new TypeError('Input in producer author is not an array');
+      throw new TypeError('Input in associatedDocumentation is not an array');
 
     return value
-        .filter((data) => data.producerAuthor)
-        .map((data) => {
-          const {uuid, producerAuthor} = data;
-          return {uuid, ...ProducerAuthorRecord.create(producerAuthor)};
-        });
+      .filter((data) => data.associatedDocumentation)
+      .map((data) => {
+        const { uuid, associatedDocumentation } = data;
+        return {
+          uuid,
+          ...AssociatedDocumentationEntity.create(associatedDocumentation),
+        };
+      });
   }
 }
