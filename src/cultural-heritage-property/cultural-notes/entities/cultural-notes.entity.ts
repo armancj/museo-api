@@ -3,7 +3,7 @@ import { ExtendedCulturalNoteEntity } from './extended-cultural-note.entity';
 import { CulturalNoteEntity } from './cultural-note.entity';
 
 export class CulturalNotesEntity {
-  private constructor(public value: CulturalPropertyModel[]) {}
+  public constructor(public value: CulturalPropertyModel[]) {}
 
   public static create(
     value: CulturalPropertyModel[],

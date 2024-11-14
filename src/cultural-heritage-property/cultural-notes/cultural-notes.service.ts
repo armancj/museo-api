@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { CreateCulturalNoteDto } from './dto/create-cultural-note.dto';
 import { UpdateCulturalNoteDto } from './dto/update-cultural-note.dto';
-import { AssociatedDocumentationEntity } from '../associated-documentation/entities/associated-documentation.entity';
-import { AssociatedDocumentationsEntity } from '../associated-documentation/entities/associated-documentations.entity';
+import { CulturalNoteEntity } from './entities/cultural-note.entity';
+import { CulturalNotesEntity } from './entities/cultural-notes.entity';
 
 @Injectable()
 export class CulturalNotesService {
@@ -12,8 +12,8 @@ export class CulturalNotesService {
     private readonly commonRecordService: CommonRecordService<
       any,
       CreateCulturalNoteDto,
-      AssociatedDocumentationEntity,
-      AssociatedDocumentationsEntity
+      CulturalNoteEntity,
+      CulturalNotesEntity
     >,
   ) {}
   create(uuid: string, commonDto: CreateCulturalNoteDto) {

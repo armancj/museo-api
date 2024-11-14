@@ -1,0 +1,1298 @@
+'use strict';
+
+customElements.define('compodoc-menu', class extends HTMLElement {
+    constructor() {
+        super();
+        this.isNormalMode = this.getAttribute('mode') === 'normal';
+    }
+
+    connectedCallback() {
+        this.render(this.isNormalMode);
+    }
+
+    render(isNormalMode) {
+        let tp = lithtml.html(`
+        <nav>
+            <ul class="list">
+                <li class="title">
+                    <a href="index.html" data-type="index-link">museo-api documentation</a>
+                </li>
+
+                <li class="divider"></li>
+                ${ isNormalMode ? `<div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>` : '' }
+                <li class="chapter">
+                    <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>
+                    <ul class="links">
+                        <li class="link">
+                            <a href="overview.html" data-type="chapter-link">
+                                <span class="icon ion-ios-keypad"></span>Overview
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="index.html" data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>README
+                            </a>
+                        </li>
+                                <li class="link">
+                                    <a href="dependencies.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-list"></span>Dependencies
+                                    </a>
+                                </li>
+                                <li class="link">
+                                    <a href="properties.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-apps"></span>Properties
+                                    </a>
+                                </li>
+                    </ul>
+                </li>
+                    <li class="chapter modules">
+                        <a data-type="chapter-link" href="modules.html">
+                            <div class="menu-toggler linked" data-bs-toggle="collapse" ${ isNormalMode ?
+                                'data-bs-target="#modules-links"' : 'data-bs-target="#xs-modules-links"' }>
+                                <span class="icon ion-ios-archive"></span>
+                                <span class="link-name">Modules</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                        </a>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
+                            <li class="link">
+                                <a href="modules/AccessAndUseConditionsModule.html" data-type="entity-link" >AccessAndUseConditionsModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-AccessAndUseConditionsModule-f694b8b0cb0c5f5e5ca38fd527faba9c481ac5c545b5134a25c4e10fb5ee26ca6f314c20c71e57ef15374e90b524dd1675d3c1a95533beb8aaf0d0d381730f2f"' : 'data-bs-target="#xs-controllers-links-module-AccessAndUseConditionsModule-f694b8b0cb0c5f5e5ca38fd527faba9c481ac5c545b5134a25c4e10fb5ee26ca6f314c20c71e57ef15374e90b524dd1675d3c1a95533beb8aaf0d0d381730f2f"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-AccessAndUseConditionsModule-f694b8b0cb0c5f5e5ca38fd527faba9c481ac5c545b5134a25c4e10fb5ee26ca6f314c20c71e57ef15374e90b524dd1675d3c1a95533beb8aaf0d0d381730f2f"' :
+                                            'id="xs-controllers-links-module-AccessAndUseConditionsModule-f694b8b0cb0c5f5e5ca38fd527faba9c481ac5c545b5134a25c4e10fb5ee26ca6f314c20c71e57ef15374e90b524dd1675d3c1a95533beb8aaf0d0d381730f2f"' }>
+                                            <li class="link">
+                                                <a href="controllers/AccessAndUseConditionsController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AccessAndUseConditionsController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/AddressModule.html" data-type="entity-link" >AddressModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/AppModule.html" data-type="entity-link" >AppModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' : 'data-bs-target="#xs-controllers-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' :
+                                            'id="xs-controllers-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' }>
+                                            <li class="link">
+                                                <a href="controllers/AppController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' : 'data-bs-target="#xs-injectables-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' :
+                                        'id="xs-injectables-links-module-AppModule-371e51ad1932292860f6a13f506badac05923f6c2a26d1d8744d99b4859d4af7680a8bff0b80bef4f12d21c86141830e4b46f1312d92f2bda1f6e32d8ccd67f1"' }>
+                                        <li class="link">
+                                            <a href="injectables/LoggerInterceptor.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >LoggerInterceptor</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/AssociatedDocumentationModule.html" data-type="entity-link" >AssociatedDocumentationModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' : 'data-bs-target="#xs-controllers-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' :
+                                            'id="xs-controllers-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' }>
+                                            <li class="link">
+                                                <a href="controllers/AssociatedDocumentationController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AssociatedDocumentationController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' : 'data-bs-target="#xs-injectables-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' :
+                                        'id="xs-injectables-links-module-AssociatedDocumentationModule-252d2e1c81fb7c245941eb28b9d2d9680a447cc86d28a5f2e8c92fe8bb0954b69db10979ae94062e1f89db2a7cd392d31cbcd88daaee9e29541f802d5088bb14"' }>
+                                        <li class="link">
+                                            <a href="injectables/AssociatedDocumentationService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AssociatedDocumentationService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/AuthModule.html" data-type="entity-link" >AuthModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' : 'data-bs-target="#xs-controllers-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' :
+                                            'id="xs-controllers-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' }>
+                                            <li class="link">
+                                                <a href="controllers/AuthController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AuthController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' : 'data-bs-target="#xs-injectables-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' :
+                                        'id="xs-injectables-links-module-AuthModule-ceed8dde68b7f89f14ac3b51ff39c672a81ceb508662822a743b0b21cc1d810463c384189e7a15f23462c2a35b41a998e321e1c1a42ea725563873a4af90d395"' }>
+                                        <li class="link">
+                                            <a href="injectables/AuthMongoRepository.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AuthMongoRepository</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/AuthService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AuthService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/JwtRefreshTokenStrategy.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >JwtRefreshTokenStrategy</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/JwtStrategy.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >JwtStrategy</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/LocalStrategy.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >LocalStrategy</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/ConfigModule.html" data-type="entity-link" >ConfigModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/CoreModule.html" data-type="entity-link" >CoreModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/CountryModule.html" data-type="entity-link" >CountryModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' : 'data-bs-target="#xs-controllers-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' :
+                                            'id="xs-controllers-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' }>
+                                            <li class="link">
+                                                <a href="controllers/CountryController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CountryController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' : 'data-bs-target="#xs-injectables-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' :
+                                        'id="xs-injectables-links-module-CountryModule-ae90233e43fd9fe98b23e9450dac6b93ce3777b296ba76bb7f93af1a562960a2f50a1345bb239586930f3b7ce89a53a5f70d9dea756cc1b4e744539ac7e4d447"' }>
+                                        <li class="link">
+                                            <a href="injectables/CountryService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CountryService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/CulturalHeritagePropertyModule.html" data-type="entity-link" >CulturalHeritagePropertyModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' : 'data-bs-target="#xs-controllers-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' :
+                                            'id="xs-controllers-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' }>
+                                            <li class="link">
+                                                <a href="controllers/CulturalHeritagePropertyController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CulturalHeritagePropertyController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' : 'data-bs-target="#xs-injectables-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' :
+                                        'id="xs-injectables-links-module-CulturalHeritagePropertyModule-4c883918b3e5ba0d2ca85658d46d18eec46e3c8d52315a841d7d9d9a5fb643c6275994a5ea5b8e15a81d3eb5d3d9faf91b1e430f37047da2e22b45e9f0c7716a"' }>
+                                        <li class="link">
+                                            <a href="injectables/CulturalHeritagePropertyService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CulturalHeritagePropertyService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/CulturalNotesModule.html" data-type="entity-link" >CulturalNotesModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' : 'data-bs-target="#xs-controllers-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' :
+                                            'id="xs-controllers-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' }>
+                                            <li class="link">
+                                                <a href="controllers/CulturalNotesController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CulturalNotesController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' : 'data-bs-target="#xs-injectables-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' :
+                                        'id="xs-injectables-links-module-CulturalNotesModule-c8654f4d401c2a0a915818c31f3812dec83289b59bf21500d55e96d08ec8ecddcfa7edca3a5bef0a5189616a409647c6ae47f47e5efaa7ded1ca29fb0dc2914e"' }>
+                                        <li class="link">
+                                            <a href="injectables/CulturalNotesService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CulturalNotesService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/CulturalRecordModule.html" data-type="entity-link" >CulturalRecordModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' : 'data-bs-target="#xs-controllers-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' :
+                                            'id="xs-controllers-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' }>
+                                            <li class="link">
+                                                <a href="controllers/CulturalRecordController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CulturalRecordController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' : 'data-bs-target="#xs-injectables-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' :
+                                        'id="xs-injectables-links-module-CulturalRecordModule-db12df5c830393e9401dba4df99296532e7014a662a462f8c28a0ee7223c78295f1ee898388531d68f051adb8af8f9fad2d4c53d5abea3fd1ab99468385104a1"' }>
+                                        <li class="link">
+                                            <a href="injectables/CulturalRecordService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CulturalRecordService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/DescriptionControlModule.html" data-type="entity-link" >DescriptionControlModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' : 'data-bs-target="#xs-controllers-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' :
+                                            'id="xs-controllers-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' }>
+                                            <li class="link">
+                                                <a href="controllers/DescriptionControlController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >DescriptionControlController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' : 'data-bs-target="#xs-injectables-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' :
+                                        'id="xs-injectables-links-module-DescriptionControlModule-3f4619488297cf82667f7d40a82b470d575fe1feb6b1fdb4b71a4669cef8aa349f90ae38fc4ab3cfaab2ef1c0f8405c4e706a523992c977e65fe38c31a77d0e9"' }>
+                                        <li class="link">
+                                            <a href="injectables/DescriptionControlService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >DescriptionControlService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/EmailModule.html" data-type="entity-link" >EmailModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-EmailModule-514ac070a49f76aca7969442cb4138cb2cac7bbe0d8f0e9f01212f7353cc335ca0cfa99472d82622f170c8616fe8c8c35d000bcbeee5e82c700e761025af9c61"' : 'data-bs-target="#xs-injectables-links-module-EmailModule-514ac070a49f76aca7969442cb4138cb2cac7bbe0d8f0e9f01212f7353cc335ca0cfa99472d82622f170c8616fe8c8c35d000bcbeee5e82c700e761025af9c61"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-EmailModule-514ac070a49f76aca7969442cb4138cb2cac7bbe0d8f0e9f01212f7353cc335ca0cfa99472d82622f170c8616fe8c8c35d000bcbeee5e82c700e761025af9c61"' :
+                                        'id="xs-injectables-links-module-EmailModule-514ac070a49f76aca7969442cb4138cb2cac7bbe0d8f0e9f01212f7353cc335ca0cfa99472d82622f170c8616fe8c8c35d000bcbeee5e82c700e761025af9c61"' }>
+                                        <li class="link">
+                                            <a href="injectables/EmailNodemailerService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >EmailNodemailerService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/EntryAndLocationRecordModule.html" data-type="entity-link" >EntryAndLocationRecordModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' : 'data-bs-target="#xs-controllers-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' :
+                                            'id="xs-controllers-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' }>
+                                            <li class="link">
+                                                <a href="controllers/EntryAndLocationRecordController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >EntryAndLocationRecordController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' : 'data-bs-target="#xs-injectables-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' :
+                                        'id="xs-injectables-links-module-EntryAndLocationRecordModule-e9ebe244dedee2afc8e6946be6573ce993dcf4ac3ab4eeccd9d4ae1f07ef1d8cfa05603f2a7a5849fd925c21ffb1897519b896556e356bb365a111a207f0edb7"' }>
+                                        <li class="link">
+                                            <a href="injectables/EntryAndLocationRecordService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >EntryAndLocationRecordService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/FileStorageModule.html" data-type="entity-link" >FileStorageModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-FileStorageModule-75f5870df89a350257ef3bcee714e27bb72551cc5ee731e02cb38dd203820517cbe1494cb697d048596243762f02f1fa41574342cf3d4e4b47ebe2c31663bd35"' : 'data-bs-target="#xs-controllers-links-module-FileStorageModule-75f5870df89a350257ef3bcee714e27bb72551cc5ee731e02cb38dd203820517cbe1494cb697d048596243762f02f1fa41574342cf3d4e4b47ebe2c31663bd35"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-FileStorageModule-75f5870df89a350257ef3bcee714e27bb72551cc5ee731e02cb38dd203820517cbe1494cb697d048596243762f02f1fa41574342cf3d4e4b47ebe2c31663bd35"' :
+                                            'id="xs-controllers-links-module-FileStorageModule-75f5870df89a350257ef3bcee714e27bb72551cc5ee731e02cb38dd203820517cbe1494cb697d048596243762f02f1fa41574342cf3d4e4b47ebe2c31663bd35"' }>
+                                            <li class="link">
+                                                <a href="controllers/FileStorageController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FileStorageController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/HandledErrorModule.html" data-type="entity-link" >HandledErrorModule</a>
+                            </li>
+                            <li class="link">
+                                <a href="modules/InstitutionsModule.html" data-type="entity-link" >InstitutionsModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' : 'data-bs-target="#xs-controllers-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' :
+                                            'id="xs-controllers-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' }>
+                                            <li class="link">
+                                                <a href="controllers/InstitutionsController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InstitutionsController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' : 'data-bs-target="#xs-injectables-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' :
+                                        'id="xs-injectables-links-module-InstitutionsModule-35f893f9bf1959404597e9f55d0500609db47bb40f690da91998ff337919dc5b379b80a04db2ec6db37cf6a33a7b651d81e20c7e103922845d414c53345134f3"' }>
+                                        <li class="link">
+                                            <a href="injectables/InstitutionsService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InstitutionsService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/MunicipalityModule.html" data-type="entity-link" >MunicipalityModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' : 'data-bs-target="#xs-controllers-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' :
+                                            'id="xs-controllers-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' }>
+                                            <li class="link">
+                                                <a href="controllers/MunicipalityController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >MunicipalityController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' : 'data-bs-target="#xs-injectables-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' :
+                                        'id="xs-injectables-links-module-MunicipalityModule-3b60d94c209fa82fe1b796228d4297c6e6cd845be1913b23df5535aa4fdb2fc191f1464b32d9f30d5c38029d423fd51106ca5dc932e62f164cff2179854a74b2"' }>
+                                        <li class="link">
+                                            <a href="injectables/MunicipalityService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >MunicipalityService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/ProducerAuthorRecordModule.html" data-type="entity-link" >ProducerAuthorRecordModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' : 'data-bs-target="#xs-controllers-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' :
+                                            'id="xs-controllers-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' }>
+                                            <li class="link">
+                                                <a href="controllers/ProducerAuthorRecordController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ProducerAuthorRecordController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' : 'data-bs-target="#xs-injectables-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' :
+                                        'id="xs-injectables-links-module-ProducerAuthorRecordModule-dda3b0f54b492252b8ed0898b68afa31562f6a2996aaff573d4a6a3634c24343c2e8f655a446c084fa3d3e220fd87ea7307193562743248d9e48e611d2361d90"' }>
+                                        <li class="link">
+                                            <a href="injectables/ProducerAuthorRecordService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ProducerAuthorRecordService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/ProvinceModule.html" data-type="entity-link" >ProvinceModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' : 'data-bs-target="#xs-controllers-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' :
+                                            'id="xs-controllers-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' }>
+                                            <li class="link">
+                                                <a href="controllers/ProvinceController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ProvinceController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' : 'data-bs-target="#xs-injectables-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' :
+                                        'id="xs-injectables-links-module-ProvinceModule-cffebe9ee4696f446d71dd80aa7aacac86989b1160aa8de164a61198a7d46a08a524bfda4ec5d0d7b785cda856b46154bdae0e2c2d70931d86fa0a3b1ac17fb6"' }>
+                                        <li class="link">
+                                            <a href="injectables/ProvinceService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ProvinceService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/SeedModule.html" data-type="entity-link" >SeedModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-SeedModule-91b96a5489d424d218bd91eb01c692ae7791c803366fcee8c89b81005a9297f199860c41bb2f1e9ff2c1215e9c5ed2831f151ac2cfb2954cd4c48e922222cdb7"' : 'data-bs-target="#xs-injectables-links-module-SeedModule-91b96a5489d424d218bd91eb01c692ae7791c803366fcee8c89b81005a9297f199860c41bb2f1e9ff2c1215e9c5ed2831f151ac2cfb2954cd4c48e922222cdb7"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-SeedModule-91b96a5489d424d218bd91eb01c692ae7791c803366fcee8c89b81005a9297f199860c41bb2f1e9ff2c1215e9c5ed2831f151ac2cfb2954cd4c48e922222cdb7"' :
+                                        'id="xs-injectables-links-module-SeedModule-91b96a5489d424d218bd91eb01c692ae7791c803366fcee8c89b81005a9297f199860c41bb2f1e9ff2c1215e9c5ed2831f151ac2cfb2954cd4c48e922222cdb7"' }>
+                                        <li class="link">
+                                            <a href="injectables/SeedService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SeedService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/SharedModule.html" data-type="entity-link" >SharedModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-SharedModule-b26fa73af79c4ab633a2c5b5499e8f068a6cd76d9bb00e38bea0247c51d10688a2440f17b6f33220a76641107212bd25d5d77be544a57699df7ed9b8c2f4e10c"' : 'data-bs-target="#xs-injectables-links-module-SharedModule-b26fa73af79c4ab633a2c5b5499e8f068a6cd76d9bb00e38bea0247c51d10688a2440f17b6f33220a76641107212bd25d5d77be544a57699df7ed9b8c2f4e10c"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-SharedModule-b26fa73af79c4ab633a2c5b5499e8f068a6cd76d9bb00e38bea0247c51d10688a2440f17b6f33220a76641107212bd25d5d77be544a57699df7ed9b8c2f4e10c"' :
+                                        'id="xs-injectables-links-module-SharedModule-b26fa73af79c4ab633a2c5b5499e8f068a6cd76d9bb00e38bea0247c51d10688a2440f17b6f33220a76641107212bd25d5d77be544a57699df7ed9b8c2f4e10c"' }>
+                                        <li class="link">
+                                            <a href="injectables/EventEmitter2Adapter.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >EventEmitter2Adapter</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/UsersModule.html" data-type="entity-link" >UsersModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' : 'data-bs-target="#xs-controllers-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' :
+                                            'id="xs-controllers-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' }>
+                                            <li class="link">
+                                                <a href="controllers/UsersController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UsersController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' : 'data-bs-target="#xs-injectables-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' :
+                                        'id="xs-injectables-links-module-UsersModule-bb21824e47371c87ec377e4bb0ead8bacbc6e70acacca41f3571cd692b33d087dd050397a1d25fac84329cb849a6e67fcce69f27127e4f762f7953e24a11fa32"' }>
+                                        <li class="link">
+                                            <a href="injectables/UserMongoRepository.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UserMongoRepository</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/UsersService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UsersService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                </ul>
+                </li>
+                        <li class="chapter">
+                            <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#controllers-links"' :
+                                'data-bs-target="#xs-controllers-links"' }>
+                                <span class="icon ion-md-swap"></span>
+                                <span>Controllers</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                            <ul class="links collapse " ${ isNormalMode ? 'id="controllers-links"' : 'id="xs-controllers-links"' }>
+                                <li class="link">
+                                    <a href="controllers/AccessAndUseConditionsController.html" data-type="entity-link" >AccessAndUseConditionsController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/AppController.html" data-type="entity-link" >AppController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/AssociatedDocumentationController.html" data-type="entity-link" >AssociatedDocumentationController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/AuthController.html" data-type="entity-link" >AuthController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/CountryController.html" data-type="entity-link" >CountryController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/CulturalHeritagePropertyController.html" data-type="entity-link" >CulturalHeritagePropertyController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/CulturalNotesController.html" data-type="entity-link" >CulturalNotesController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/CulturalRecordController.html" data-type="entity-link" >CulturalRecordController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/DescriptionControlController.html" data-type="entity-link" >DescriptionControlController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/EntryAndLocationRecordController.html" data-type="entity-link" >EntryAndLocationRecordController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/FileStorageController.html" data-type="entity-link" >FileStorageController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/InstitutionsController.html" data-type="entity-link" >InstitutionsController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/MunicipalityController.html" data-type="entity-link" >MunicipalityController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/ProducerAuthorRecordController.html" data-type="entity-link" >ProducerAuthorRecordController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/ProvinceController.html" data-type="entity-link" >ProvinceController</a>
+                                </li>
+                                <li class="link">
+                                    <a href="controllers/UsersController.html" data-type="entity-link" >UsersController</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#classes-links"' :
+                            'data-bs-target="#xs-classes-links"' }>
+                            <span class="icon ion-ios-paper"></span>
+                            <span>Classes</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
+                            <li class="link">
+                                <a href="classes/AccessAndUseCondition.html" data-type="entity-link" >AccessAndUseCondition</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AccessAndUseConditions.html" data-type="entity-link" >AccessAndUseConditions</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AccessAndUseConditionsEntity.html" data-type="entity-link" >AccessAndUseConditionsEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ActivatedUserDto.html" data-type="entity-link" >ActivatedUserDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AllExceptionsFilter.html" data-type="entity-link" >AllExceptionsFilter</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AssociatedDocumentation.html" data-type="entity-link" >AssociatedDocumentation</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AssociatedDocumentationEntity.html" data-type="entity-link" >AssociatedDocumentationEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AssociatedDocumentationsEntity.html" data-type="entity-link" >AssociatedDocumentationsEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Auth.html" data-type="entity-link" >Auth</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Auth-1.html" data-type="entity-link" >Auth</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AuthChangePasswordDto.html" data-type="entity-link" >AuthChangePasswordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AuthResponseDto.html" data-type="entity-link" >AuthResponseDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/AuthVerifyCodeDto.html" data-type="entity-link" >AuthVerifyCodeDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/BaseEntity.html" data-type="entity-link" >BaseEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/BaseSchema.html" data-type="entity-link" >BaseSchema</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ChangeEmailDto.html" data-type="entity-link" >ChangeEmailDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Countries.html" data-type="entity-link" >Countries</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Country.html" data-type="entity-link" >Country</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Country-1.html" data-type="entity-link" >Country</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CountryNotFoundException.html" data-type="entity-link" >CountryNotFoundException</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateAccessAndUseConditionDto.html" data-type="entity-link" >CreateAccessAndUseConditionDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateAssociatedDocumentationDto.html" data-type="entity-link" >CreateAssociatedDocumentationDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateCountryDto.html" data-type="entity-link" >CreateCountryDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateCulturalNoteDto.html" data-type="entity-link" >CreateCulturalNoteDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateCulturalPropertyDto.html" data-type="entity-link" >CreateCulturalPropertyDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateCulturalRecordDto.html" data-type="entity-link" >CreateCulturalRecordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateDescriptionControlDto.html" data-type="entity-link" >CreateDescriptionControlDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateEntryAndLocationRecordDto.html" data-type="entity-link" >CreateEntryAndLocationRecordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateInstitutionDto.html" data-type="entity-link" >CreateInstitutionDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateMunicipalityDto.html" data-type="entity-link" >CreateMunicipalityDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateProducerAuthorRecordDto.html" data-type="entity-link" >CreateProducerAuthorRecordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateProvinceDto.html" data-type="entity-link" >CreateProvinceDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CreateUserDto.html" data-type="entity-link" >CreateUserDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalHeritagePropertiesEntity.html" data-type="entity-link" >CulturalHeritagePropertiesEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalHeritageProperty.html" data-type="entity-link" >CulturalHeritageProperty</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalHeritageProperty-1.html" data-type="entity-link" >CulturalHeritageProperty</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalNoteEntity.html" data-type="entity-link" >CulturalNoteEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalNotesEntity.html" data-type="entity-link" >CulturalNotesEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalRecord.html" data-type="entity-link" >CulturalRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CulturalRecord-1.html" data-type="entity-link" >CulturalRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/DataConflictFoundException.html" data-type="entity-link" >DataConflictFoundException</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/DescriptionControl.html" data-type="entity-link" >DescriptionControl</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/DescriptionControl-1.html" data-type="entity-link" >DescriptionControl</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Dimensions.html" data-type="entity-link" >Dimensions</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/EditProfileDto.html" data-type="entity-link" >EditProfileDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Either.html" data-type="entity-link" >Either</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/EntryAndLocationRecord.html" data-type="entity-link" >EntryAndLocationRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/EntryAndLocationRecord-1.html" data-type="entity-link" >EntryAndLocationRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ExtendedAccessAndUseConditionEntity.html" data-type="entity-link" >ExtendedAccessAndUseConditionEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ExtendedAssociatedDocumentationEntity.html" data-type="entity-link" >ExtendedAssociatedDocumentationEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ExtendedCulturalNoteEntity.html" data-type="entity-link" >ExtendedCulturalNoteEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ExtendedProducerAuthorRecord.html" data-type="entity-link" >ExtendedProducerAuthorRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/FileControl.html" data-type="entity-link" >FileControl</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/FilesDto.html" data-type="entity-link" >FilesDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/FileStorage.html" data-type="entity-link" >FileStorage</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/FileUploadDto.html" data-type="entity-link" >FileUploadDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/FilterUserDto.html" data-type="entity-link" >FilterUserDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/FindAllDto.html" data-type="entity-link" >FindAllDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Forbidden.html" data-type="entity-link" >Forbidden</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ForgotPasswordDto.html" data-type="entity-link" >ForgotPasswordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/HttpExceptionFilter.html" data-type="entity-link" >HttpExceptionFilter</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Institution.html" data-type="entity-link" >Institution</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Institution-1.html" data-type="entity-link" >Institution</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Institutions.html" data-type="entity-link" >Institutions</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/JwtPayload.html" data-type="entity-link" >JwtPayload</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Location.html" data-type="entity-link" >Location</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/LoginDto.html" data-type="entity-link" >LoginDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/LoginResponseDto.html" data-type="entity-link" >LoginResponseDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Maybe.html" data-type="entity-link" >Maybe</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/MediaFileMetadata.html" data-type="entity-link" >MediaFileMetadata</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Municipalities.html" data-type="entity-link" >Municipalities</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Municipalities-1.html" data-type="entity-link" >Municipalities</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Municipalities-2.html" data-type="entity-link" >Municipalities</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Municipality.html" data-type="entity-link" >Municipality</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Municipality-1.html" data-type="entity-link" >Municipality</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/MunicipalityNotFoundException.html" data-type="entity-link" >MunicipalityNotFoundException</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Notes.html" data-type="entity-link" >Notes</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Paginator.html" data-type="entity-link" >Paginator</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ProducerAuthorRecord.html" data-type="entity-link" >ProducerAuthorRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ProducerAuthorRecord-1.html" data-type="entity-link" >ProducerAuthorRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ProducerAuthorRecords.html" data-type="entity-link" >ProducerAuthorRecords</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Province.html" data-type="entity-link" >Province</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Province-1.html" data-type="entity-link" >Province</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ProvinceNotFoundException.html" data-type="entity-link" >ProvinceNotFoundException</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Provinces.html" data-type="entity-link" >Provinces</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/RefreshAuthTokenDto.html" data-type="entity-link" >RefreshAuthTokenDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/RegisterDto.html" data-type="entity-link" >RegisterDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/SendEmailAuthException.html" data-type="entity-link" >SendEmailAuthException</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/SerializeDto.html" data-type="entity-link" >SerializeDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/SerializerResponse.html" data-type="entity-link" >SerializerResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/SetOperation.html" data-type="entity-link" >SetOperation</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Unauthorized.html" data-type="entity-link" >Unauthorized</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UnauthorizedAuthException.html" data-type="entity-link" >UnauthorizedAuthException</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateAccessAndUseConditionDto.html" data-type="entity-link" >UpdateAccessAndUseConditionDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateAssociatedDocumentationDto.html" data-type="entity-link" >UpdateAssociatedDocumentationDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateCountryDto.html" data-type="entity-link" >UpdateCountryDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateCulturalNoteDto.html" data-type="entity-link" >UpdateCulturalNoteDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateCulturalRecordDto.html" data-type="entity-link" >UpdateCulturalRecordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateDescriptionControlDto.html" data-type="entity-link" >UpdateDescriptionControlDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateEntryAndLocationRecordDto.html" data-type="entity-link" >UpdateEntryAndLocationRecordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateInstitutionDto.html" data-type="entity-link" >UpdateInstitutionDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateMunicipalityDto.html" data-type="entity-link" >UpdateMunicipalityDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateProducerAuthorRecordDto.html" data-type="entity-link" >UpdateProducerAuthorRecordDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateProvinceDto.html" data-type="entity-link" >UpdateProvinceDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UpdateUserDto.html" data-type="entity-link" >UpdateUserDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UploadAvatarUserDto.html" data-type="entity-link" >UploadAvatarUserDto</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UploadedFileEmbed.html" data-type="entity-link" >UploadedFileEmbed</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/User.html" data-type="entity-link" >User</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/User-1.html" data-type="entity-link" >User</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/UserEventBadRequest.html" data-type="entity-link" >UserEventBadRequest</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Users.html" data-type="entity-link" >Users</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/VolumeQuantities.html" data-type="entity-link" >VolumeQuantities</a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li class="chapter">
+                            <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#injectables-links"' :
+                                'data-bs-target="#xs-injectables-links"' }>
+                                <span class="icon ion-md-arrow-round-down"></span>
+                                <span>Injectables</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                            <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
+                                <li class="link">
+                                    <a href="injectables/AssociatedDocumentationService.html" data-type="entity-link" >AssociatedDocumentationService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthJwtModuleConfig.html" data-type="entity-link" >AuthJwtModuleConfig</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthMongoRepository.html" data-type="entity-link" >AuthMongoRepository</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/AuthService.html" data-type="entity-link" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CapitalizePipe.html" data-type="entity-link" >CapitalizePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CommonRecordService.html" data-type="entity-link" >CommonRecordService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CountryService.html" data-type="entity-link" >CountryService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CulturalHeritagePropertyService.html" data-type="entity-link" >CulturalHeritagePropertyService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CulturalNotesService.html" data-type="entity-link" >CulturalNotesService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/CulturalRecordService.html" data-type="entity-link" >CulturalRecordService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DescriptionControlService.html" data-type="entity-link" >DescriptionControlService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EmailNodemailerService.html" data-type="entity-link" >EmailNodemailerService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EntryAndLocationRecordService.html" data-type="entity-link" >EntryAndLocationRecordService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ErrorInterceptor.html" data-type="entity-link" >ErrorInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EventEmitter2Adapter.html" data-type="entity-link" >EventEmitter2Adapter</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/FileStorageMongoRepository.html" data-type="entity-link" >FileStorageMongoRepository</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/FileStorageService.html" data-type="entity-link" >FileStorageService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/HandledErrorService.html" data-type="entity-link" >HandledErrorService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ImageProcessingPipe.html" data-type="entity-link" >ImageProcessingPipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/InstitutionsService.html" data-type="entity-link" >InstitutionsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/JwtActivationGuard.html" data-type="entity-link" >JwtActivationGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/JwtAuthGuard.html" data-type="entity-link" >JwtAuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/JwtRefreshGuard.html" data-type="entity-link" >JwtRefreshGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/JwtRefreshTokenStrategy.html" data-type="entity-link" >JwtRefreshTokenStrategy</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/JwtStrategy.html" data-type="entity-link" >JwtStrategy</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LocalAuthGuard.html" data-type="entity-link" >LocalAuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LocalStrategy.html" data-type="entity-link" >LocalStrategy</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/LoggerInterceptor.html" data-type="entity-link" >LoggerInterceptor</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MongoGridConnection.html" data-type="entity-link" >MongoGridConnection</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MongooseConfigService.html" data-type="entity-link" >MongooseConfigService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/MunicipalityService.html" data-type="entity-link" >MunicipalityService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ProducerAuthorRecordService.html" data-type="entity-link" >ProducerAuthorRecordService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ProvinceService.html" data-type="entity-link" >ProvinceService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/SeedService.html" data-type="entity-link" >SeedService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserMongoRepository.html" data-type="entity-link" >UserMongoRepository</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UsersService.html" data-type="entity-link" >UsersService</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#guards-links"' :
+                            'data-bs-target="#xs-guards-links"' }>
+                            <span class="icon ion-ios-lock"></span>
+                            <span>Guards</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="guards-links"' : 'id="xs-guards-links"' }>
+                            <li class="link">
+                                <a href="guards/RolesGuard.html" data-type="entity-link" >RolesGuard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#interfaces-links"' :
+                            'data-bs-target="#xs-interfaces-links"' }>
+                            <span class="icon ion-md-information-circle-outline"></span>
+                            <span>Interfaces</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                            <li class="link">
+                                <a href="interfaces/AccessAndUseConditionsModel.html" data-type="entity-link" >AccessAndUseConditionsModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/AssociatedDocumentationModel.html" data-type="entity-link" >AssociatedDocumentationModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/AuthError.html" data-type="entity-link" >AuthError</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/AuthModel.html" data-type="entity-link" >AuthModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/AuthRepositoryModel.html" data-type="entity-link" >AuthRepositoryModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/BaseModel.html" data-type="entity-link" >BaseModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CombinedMetadata.html" data-type="entity-link" >CombinedMetadata</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CountryModel.html" data-type="entity-link" >CountryModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CulturalPropertyModel.html" data-type="entity-link" >CulturalPropertyModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CulturalRecordModel.html" data-type="entity-link" >CulturalRecordModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DescriptionControlModel.html" data-type="entity-link" >DescriptionControlModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DimensionsModel.html" data-type="entity-link" >DimensionsModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/EmailServiceModel.html" data-type="entity-link" >EmailServiceModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/EmitAsyncParams.html" data-type="entity-link" >EmitAsyncParams</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/EmitParams.html" data-type="entity-link" >EmitParams</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/EntryAndLocationRecordModel.html" data-type="entity-link" >EntryAndLocationRecordModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/FileMetadata.html" data-type="entity-link" >FileMetadata</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/FileMetadataModel.html" data-type="entity-link" >FileMetadataModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/FileStorageModel.html" data-type="entity-link" >FileStorageModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/FileStorageRepositoryModel.html" data-type="entity-link" >FileStorageRepositoryModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/FileStorageServiceModel.html" data-type="entity-link" >FileStorageServiceModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/HandlerErrorServiceModel.html" data-type="entity-link" >HandlerErrorServiceModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/HelperMockMethods.html" data-type="entity-link" >HelperMockMethods</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InstitutionModel.html" data-type="entity-link" >InstitutionModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/LocationModel.html" data-type="entity-link" >LocationModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MongooseOptionsFactoryInterface.html" data-type="entity-link" >MongooseOptionsFactoryInterface</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MunicipalityModel.html" data-type="entity-link" >MunicipalityModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MunicipalityModel-1.html" data-type="entity-link" >MunicipalityModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/NotesModel.html" data-type="entity-link" >NotesModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ProducerAuthorRecordModel.html" data-type="entity-link" >ProducerAuthorRecordModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ProvinceModel.html" data-type="entity-link" >ProvinceModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UploadedFile.html" data-type="entity-link" >UploadedFile</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UseGuardOptions.html" data-type="entity-link" >UseGuardOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UserModel.html" data-type="entity-link" >UserModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UserParams.html" data-type="entity-link" >UserParams</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UsersModel.html" data-type="entity-link" >UsersModel</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/VolumeQuantitiesModel.html" data-type="entity-link" >VolumeQuantitiesModel</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ? 'data-bs-target="#miscellaneous-links"'
+                            : 'data-bs-target="#xs-miscellaneous-links"' }>
+                            <span class="icon ion-ios-cube"></span>
+                            <span>Miscellaneous</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                            <li class="link">
+                                <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="copyright">
+                        Documentation generated using <a href="https://compodoc.app/" target="_blank" rel="noopener noreferrer">
+                            <img data-src="images/compodoc-vectorise.png" class="img-responsive" data-type="compodoc-logo">
+                        </a>
+                    </li>
+            </ul>
+        </nav>
+        `);
+        this.innerHTML = tp.strings;
+    }
+});

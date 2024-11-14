@@ -5,8 +5,8 @@ import {
   CulturalHeritagePropertyModel,
 } from './Schema/cultural-heritage-property';
 import { CreateCulturalPropertyDto } from './dto/create-cultural-property.dto';
-import {CulturalHeritageProperty} from "./entity/cultural-heritage-property.entity";
-import {CulturalHeritagePropertiesEntity} from "./entity/cultural-heritage-properties.entity";
+import { CulturalHeritageProperty } from './entity/cultural-heritage-property.entity';
+import { CulturalHeritagePropertiesEntity } from './entity/cultural-heritage-properties.entity';
 
 @Injectable()
 export class CulturalHeritagePropertyService {
@@ -23,9 +23,11 @@ export class CulturalHeritagePropertyService {
   }
 
   async find() {
-    const culturalProperties = await this.culturalHeritagePropertyModel.find({ deleted: false }).exec();
+    const culturalProperties = await this.culturalHeritagePropertyModel
+      .find({ deleted: false })
+      .exec();
 
-    return CulturalHeritagePropertiesEntity.create(culturalProperties)
+    return CulturalHeritagePropertiesEntity.create(culturalProperties);
   }
 
   async findOne(uuid: string) {

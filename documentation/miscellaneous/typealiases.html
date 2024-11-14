@@ -1,0 +1,1072 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>museo-api documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">museo-api documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-typealiases">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Type aliases</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#Arguments" title="src/common/lib/set-operation.lib.ts" ><b>Arguments</b>&nbsp;&nbsp;&nbsp;(src/.../set-operation.lib.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AuthDocument" title="src/auth/schema/auth.schema.ts" ><b>AuthDocument</b>&nbsp;&nbsp;&nbsp;(src/.../auth.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AuthMongoModel" title="src/auth/schema/auth.schema.ts" ><b>AuthMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../auth.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AuthPropertiesModel" title="src/auth/repositories/auth.model.ts" ><b>AuthPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../auth.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ClassType" title="src/common/dto/serialize.dto.ts" ><b>ClassType</b>&nbsp;&nbsp;&nbsp;(src/.../serialize.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CountryDocument" title="src/address/country/schema/country.schema.ts" ><b>CountryDocument</b>&nbsp;&nbsp;&nbsp;(src/.../country.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CountryMongoModel" title="src/address/country/schema/country.schema.ts" ><b>CountryMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../country.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CountryPropertiesModel" title="src/address/country/entities/country.model.ts" ><b>CountryPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../country.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createUserModel" title="src/users/repositories/user-mongo.repository.ts" ><b>createUserModel</b>&nbsp;&nbsp;&nbsp;(src/.../user-mongo.repository.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CulturalHeritagePropertyDocument" title="src/cultural-heritage-property/cultural-heritage-property/Schema/cultural-heritage-property.ts" ><b>CulturalHeritagePropertyDocument</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-heritage-property.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CulturalHeritagePropertyModel" title="src/cultural-heritage-property/cultural-heritage-property/Schema/cultural-heritage-property.ts" ><b>CulturalHeritagePropertyModel</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-heritage-property.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CulturalPropertiesModel" title="src/cultural-heritage-property/cultural-record/models/cultural-record.ts" ><b>CulturalPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-record.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DeepPartial" title="src/common/interfaces/deep-partial.ts" ><b>DeepPartial</b>&nbsp;&nbsp;&nbsp;(src/.../deep-partial.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EitherValue" title="src/common/lib/either.lib.ts" ><b>EitherValue</b>&nbsp;&nbsp;&nbsp;(src/.../either.lib.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ExceptionConstructor" title="src/shared/event-emitter/event-emitter.adapter.ts" ><b>ExceptionConstructor</b>&nbsp;&nbsp;&nbsp;(src/.../event-emitter.adapter.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FileStoragePropertiesModel" title="src/file-storage/model/file-storage.model.ts" ><b>FileStoragePropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../file-storage.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FunctionProperties" title="src/common/interfaces/manipulate-properties.ts" ><b>FunctionProperties</b>&nbsp;&nbsp;&nbsp;(src/.../manipulate-properties.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FunctionPropertyNames" title="src/common/interfaces/manipulate-properties.ts" ><b>FunctionPropertyNames</b>&nbsp;&nbsp;&nbsp;(src/.../manipulate-properties.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Instantiable" title="src/common/interfaces/instantiable.ts" ><b>Instantiable</b>&nbsp;&nbsp;&nbsp;(src/.../instantiable.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InstitutionDocument" title="src/address/institutions/schema/institution.schema.ts" ><b>InstitutionDocument</b>&nbsp;&nbsp;&nbsp;(src/.../institution.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InstitutionDtoPropertiesModel" title="src/address/institutions/entities/institution.model.ts" ><b>InstitutionDtoPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../institution.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InstitutionMongoModel" title="src/address/institutions/schema/institution.schema.ts" ><b>InstitutionMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../institution.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InstitutionPropertiesModel" title="src/address/institutions/entities/institution.model.ts" ><b>InstitutionPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../institution.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MaybeValue" title="src/common/lib/maybe.lib.ts" ><b>MaybeValue</b>&nbsp;&nbsp;&nbsp;(src/.../maybe.lib.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MunicipalitiesDocument" title="src/address/municipality/schema/municipalities.schema.ts" ><b>MunicipalitiesDocument</b>&nbsp;&nbsp;&nbsp;(src/.../municipalities.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MunicipalitiesMongoModel" title="src/address/municipality/schema/municipalities.schema.ts" ><b>MunicipalitiesMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../municipalities.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MunicipalityPropertiesModel" title="src/address/municipality/entities/municipality.model.ts" ><b>MunicipalityPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../municipality.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MunicipalityPropertiesModel" title="src/address/province/entities/municipality.model.ts" ><b>MunicipalityPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../municipality.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#None" title="src/common/lib/maybe.lib.ts" ><b>None</b>&nbsp;&nbsp;&nbsp;(src/.../maybe.lib.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NonFunctionProperties" title="src/common/interfaces/manipulate-properties.ts" ><b>NonFunctionProperties</b>&nbsp;&nbsp;&nbsp;(src/.../manipulate-properties.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NonFunctionPropertyNames" title="src/common/interfaces/manipulate-properties.ts" ><b>NonFunctionPropertyNames</b>&nbsp;&nbsp;&nbsp;(src/.../manipulate-properties.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Options" title="src/common/lib/paginator.lib.ts" ><b>Options</b>&nbsp;&nbsp;&nbsp;(src/.../paginator.lib.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceDocument" title="src/address/province/schema/province.schema.ts" ><b>ProvinceDocument</b>&nbsp;&nbsp;&nbsp;(src/.../province.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceMongoModel" title="src/address/province/schema/province.schema.ts" ><b>ProvinceMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../province.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvincePropertiesModel" title="src/address/province/entities/province.model.ts" ><b>ProvincePropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../province.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SendCodeBody" title="src/shared/email/email-nodemailer.service.ts" ><b>SendCodeBody</b>&nbsp;&nbsp;&nbsp;(src/.../email-nodemailer.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SendOptions" title="src/shared/email/model/email.service.model.ts" ><b>SendOptions</b>&nbsp;&nbsp;&nbsp;(src/.../email.service.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Some" title="src/common/lib/maybe.lib.ts" ><b>Some</b>&nbsp;&nbsp;&nbsp;(src/.../maybe.lib.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdatedUser" title="src/users/users.service.ts" ><b>UpdatedUser</b>&nbsp;&nbsp;&nbsp;(src/.../users.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UpdateOptions" title="src/auth/repositories/auth.repository.model.ts" ><b>UpdateOptions</b>&nbsp;&nbsp;&nbsp;(src/.../auth.repository.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserDocument" title="src/users/schema/users.schema.ts" ><b>UserDocument</b>&nbsp;&nbsp;&nbsp;(src/.../users.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserMongoModel" title="src/users/schema/users.schema.ts" ><b>UserMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../users.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserPropertiesModel" title="src/users/models/user.model.ts" ><b>UserPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../user.model.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/common/lib/set-operation.lib.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Arguments"></a>
+                    <span class="name "><b>Arguments</b><a href="#Arguments"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/auth/schema/auth.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AuthDocument"></a>
+                    <span class="name "><b>AuthDocument</b><a href="#AuthDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/functions.html#Auth" target="_self" >HydratedDocument&lt;Auth&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AuthMongoModel"></a>
+                    <span class="name "><b>AuthMongoModel</b><a href="#AuthMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/functions.html#Auth" target="_self" >Model&lt;AuthDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/auth/repositories/auth.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AuthPropertiesModel"></a>
+                    <span class="name "><b>AuthPropertiesModel</b><a href="#AuthPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/AuthModel.html" target="_self" >NonFunctionProperties&lt;AuthModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/dto/serialize.dto.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ClassType"></a>
+                    <span class="name "><b>ClassType</b><a href="#ClassType"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/country/schema/country.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CountryDocument"></a>
+                    <span class="name "><b>CountryDocument</b><a href="#CountryDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;Country&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CountryMongoModel"></a>
+                    <span class="name "><b>CountryMongoModel</b><a href="#CountryMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#CountryDocument" target="_self" >Model&lt;CountryDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/country/entities/country.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CountryPropertiesModel"></a>
+                    <span class="name "><b>CountryPropertiesModel</b><a href="#CountryPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/CountryModel.html" target="_self" >NonFunctionProperties&lt;CountryModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/users/repositories/user-mongo.repository.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createUserModel"></a>
+                    <span class="name "><b>createUserModel</b><a href="#createUserModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/UserModel.html" target="_self" >Omit&lt;UserModel | &quot;active&quot; | &quot;deleted&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/cultural-heritage-property/cultural-heritage-property/Schema/cultural-heritage-property.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CulturalHeritagePropertyDocument"></a>
+                    <span class="name "><b>CulturalHeritagePropertyDocument</b><a href="#CulturalHeritagePropertyDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;CulturalHeritageProperty&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CulturalHeritagePropertyModel"></a>
+                    <span class="name "><b>CulturalHeritagePropertyModel</b><a href="#CulturalHeritagePropertyModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#CulturalHeritagePropertyDocument" target="_self" >Model&lt;CulturalHeritagePropertyDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/cultural-heritage-property/cultural-record/models/cultural-record.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CulturalPropertiesModel"></a>
+                    <span class="name "><b>CulturalPropertiesModel</b><a href="#CulturalPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/CulturalRecordModel.html" target="_self" >NonFunctionProperties&lt;CulturalRecordModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/interfaces/deep-partial.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DeepPartial"></a>
+                    <span class="name "><b>DeepPartial</b><a href="#DeepPartial"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/lib/either.lib.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EitherValue"></a>
+                    <span class="name "><b>EitherValue</b><a href="#EitherValue"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type | literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/shared/event-emitter/event-emitter.adapter.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ExceptionConstructor"></a>
+                    <span class="name "><b>ExceptionConstructor</b><a href="#ExceptionConstructor"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/file-storage/model/file-storage.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FileStoragePropertiesModel"></a>
+                    <span class="name "><b>FileStoragePropertiesModel</b><a href="#FileStoragePropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/FileStorageModel.html" target="_self" >NonFunctionProperties&lt;FileStorageModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/interfaces/manipulate-properties.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FunctionProperties"></a>
+                    <span class="name "><b>FunctionProperties</b><a href="#FunctionProperties"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#FunctionPropertyNames" target="_self" >Pick&lt;T | FunctionPropertyNames&lt;T&gt;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FunctionPropertyNames"></a>
+                    <span class="name "><b>FunctionPropertyNames</b><a href="#FunctionPropertyNames"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NonFunctionProperties"></a>
+                    <span class="name "><b>NonFunctionProperties</b><a href="#NonFunctionProperties"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>Pick&lt;T | NonFunctionPropertyNames&lt;T&gt;&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NonFunctionPropertyNames"></a>
+                    <span class="name "><b>NonFunctionPropertyNames</b><a href="#NonFunctionPropertyNames"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/interfaces/instantiable.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Instantiable"></a>
+                    <span class="name "><b>Instantiable</b><a href="#Instantiable"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/institutions/schema/institution.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InstitutionDocument"></a>
+                    <span class="name "><b>InstitutionDocument</b><a href="#InstitutionDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;Institution&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InstitutionMongoModel"></a>
+                    <span class="name "><b>InstitutionMongoModel</b><a href="#InstitutionMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#InstitutionDocument" target="_self" >Model&lt;InstitutionDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/institutions/entities/institution.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InstitutionDtoPropertiesModel"></a>
+                    <span class="name "><b>InstitutionDtoPropertiesModel</b><a href="#InstitutionDtoPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#InstitutionPropertiesModel" target="_self" >Omit&lt;InstitutionPropertiesModel | &quot;uuid&quot; | &quot;updatedAt&quot; | &quot;createdAt&quot; | &quot;deleted&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InstitutionPropertiesModel"></a>
+                    <span class="name "><b>InstitutionPropertiesModel</b><a href="#InstitutionPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/InstitutionModel.html" target="_self" >NonFunctionProperties&lt;InstitutionModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/lib/maybe.lib.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MaybeValue"></a>
+                    <span class="name "><b>MaybeValue</b><a href="#MaybeValue"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>None | Some&lt;Data&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="None"></a>
+                    <span class="name "><b>None</b><a href="#None"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Some"></a>
+                    <span class="name "><b>Some</b><a href="#Some"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/municipality/schema/municipalities.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MunicipalitiesDocument"></a>
+                    <span class="name "><b>MunicipalitiesDocument</b><a href="#MunicipalitiesDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;Municipalities&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MunicipalitiesMongoModel"></a>
+                    <span class="name "><b>MunicipalitiesMongoModel</b><a href="#MunicipalitiesMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#MunicipalitiesDocument" target="_self" >Model&lt;MunicipalitiesDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/municipality/entities/municipality.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MunicipalityPropertiesModel"></a>
+                    <span class="name "><b>MunicipalityPropertiesModel</b><a href="#MunicipalityPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>NonFunctionProperties&lt;MunicipalityModel&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/province/entities/municipality.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MunicipalityPropertiesModel"></a>
+                    <span class="name "><b>MunicipalityPropertiesModel</b><a href="#MunicipalityPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>NonFunctionProperties&lt;MunicipalityModel&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/common/lib/paginator.lib.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Options"></a>
+                    <span class="name "><b>Options</b><a href="#Options"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/province/schema/province.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceDocument"></a>
+                    <span class="name "><b>ProvinceDocument</b><a href="#ProvinceDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;Province&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceMongoModel"></a>
+                    <span class="name "><b>ProvinceMongoModel</b><a href="#ProvinceMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#ProvinceDocument" target="_self" >Model&lt;ProvinceDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/address/province/entities/province.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvincePropertiesModel"></a>
+                    <span class="name "><b>ProvincePropertiesModel</b><a href="#ProvincePropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/ProvinceModel.html" target="_self" >NonFunctionProperties&lt;ProvinceModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/shared/email/email-nodemailer.service.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SendCodeBody"></a>
+                    <span class="name "><b>SendCodeBody</b><a href="#SendCodeBody"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/shared/email/model/email.service.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SendOptions"></a>
+                    <span class="name "><b>SendOptions</b><a href="#SendOptions"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/users/users.service.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdatedUser"></a>
+                    <span class="name "><b>UpdatedUser</b><a href="#UpdatedUser"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/auth/repositories/auth.repository.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UpdateOptions"></a>
+                    <span class="name "><b>UpdateOptions</b><a href="#UpdateOptions"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>literal type</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/users/schema/users.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserDocument"></a>
+                    <span class="name "><b>UserDocument</b><a href="#UserDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;User&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserMongoModel"></a>
+                    <span class="name "><b>UserMongoModel</b><a href="#UserMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#UserDocument" target="_self" >Model&lt;UserDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/users/models/user.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserPropertiesModel"></a>
+                    <span class="name "><b>UserPropertiesModel</b><a href="#UserPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/UserModel.html" target="_self" >NonFunctionProperties&lt;UserModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1982 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>museo-api documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">museo-api documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#AccessAndUseConditionsSchema" title="src/cultural-heritage-property/access-and-use-conditions/schema/access-and-use-conditions.ts" ><b>AccessAndUseConditionsSchema</b>&nbsp;&nbsp;&nbsp;(src/.../access-and-use-conditions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#apiEnv" title="src/config/app.const.ts" ><b>apiEnv</b>&nbsp;&nbsp;&nbsp;(src/.../app.const.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ApiSerializeResponse" title="src/common/dto/serialize.dto.ts" ><b>ApiSerializeResponse</b>&nbsp;&nbsp;&nbsp;(src/.../serialize.dto.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AssociatedDocumentationSchema" title="src/cultural-heritage-property/associated-documentation/schema/associated-documentation.ts" ><b>AssociatedDocumentationSchema</b>&nbsp;&nbsp;&nbsp;(src/.../associated-documentation.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AuthNameEntity" title="src/auth/schema/auth.schema.ts" ><b>AuthNameEntity</b>&nbsp;&nbsp;&nbsp;(src/.../auth.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#AuthSchema" title="src/auth/schema/auth.schema.ts" ><b>AuthSchema</b>&nbsp;&nbsp;&nbsp;(src/.../auth.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BaseSchemaFactory" title="src/common/schema/base.schema.ts" ><b>BaseSchemaFactory</b>&nbsp;&nbsp;&nbsp;(src/.../base.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#calculateDuration" title="src/shared/common/util/date-time-format.function.ts" ><b>calculateDuration</b>&nbsp;&nbsp;&nbsp;(src/.../date-time-format.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CountryNameEntity" title="src/address/country/schema/country.schema.ts" ><b>CountryNameEntity</b>&nbsp;&nbsp;&nbsp;(src/.../country.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CountrySchema" title="src/address/country/schema/country.schema.ts" ><b>CountrySchema</b>&nbsp;&nbsp;&nbsp;(src/.../country.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createProvider" title="src/common/utils/create-provider.ts" ><b>createProvider</b>&nbsp;&nbsp;&nbsp;(src/.../create-provider.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CulturalHeritagePropertyEntity" title="src/cultural-heritage-property/cultural-heritage-property/Schema/cultural-heritage-property.ts" ><b>CulturalHeritagePropertyEntity</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-heritage-property.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CulturalHeritagePropertySchema" title="src/cultural-heritage-property/cultural-heritage-property/Schema/cultural-heritage-property.ts" ><b>CulturalHeritagePropertySchema</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-heritage-property.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CulturalRecordSchema" title="src/cultural-heritage-property/cultural-record/Schema/cultural-record.ts" ><b>CulturalRecordSchema</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-record.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CurrentUser" title="src/auth/decorator/user.decorator.ts" ><b>CurrentUser</b>&nbsp;&nbsp;&nbsp;(src/.../user.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DataApiDefaultConst" title="src/common/data/data-api-default.const.ts" ><b>DataApiDefaultConst</b>&nbsp;&nbsp;&nbsp;(src/.../data-api-default.const.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DescriptionControlSchema" title="src/cultural-heritage-property/description-control/schema/description-control.ts" ><b>DescriptionControlSchema</b>&nbsp;&nbsp;&nbsp;(src/.../description-control.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DimensionsSchema" title="src/cultural-heritage-property/cultural-record/Schema/dimensions.ts" ><b>DimensionsSchema</b>&nbsp;&nbsp;&nbsp;(src/.../dimensions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ensureString" title="src/shared/common/util/date-time-format.function.ts" ><b>ensureString</b>&nbsp;&nbsp;&nbsp;(src/.../date-time-format.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EntryAndLocationRecordSchema" title="src/cultural-heritage-property/entry-and-location-record/schema/entry-and-location-record.schema.ts" ><b>EntryAndLocationRecordSchema</b>&nbsp;&nbsp;&nbsp;(src/.../entry-and-location-record.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EventEmitter" title="src/shared/event-emitter/event-emitter.const.ts" ><b>EventEmitter</b>&nbsp;&nbsp;&nbsp;(src/.../event-emitter.const.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ExtremeDatesSchema" title="src/cultural-heritage-property/cultural-record/Schema/extreme-dates.schema.ts" ><b>ExtremeDatesSchema</b>&nbsp;&nbsp;&nbsp;(src/.../extreme-dates.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FILE_STORAGE_REPOSITORY_TOKEN" title="src/file-storage/providers/file-storage-repository.provider.ts" ><b>FILE_STORAGE_REPOSITORY_TOKEN</b>&nbsp;&nbsp;&nbsp;(src/.../file-storage-repository.provider.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FILE_STORAGE_SERVICE_TOKEN" title="src/file-storage/providers/file-storage-service.provider.ts" ><b>FILE_STORAGE_SERVICE_TOKEN</b>&nbsp;&nbsp;&nbsp;(src/.../file-storage-service.provider.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#fileConfig" title="src/users/config/user.config.ts" ><b>fileConfig</b>&nbsp;&nbsp;&nbsp;(src/.../user.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FileStorageRepositoryProvider" title="src/file-storage/providers/file-storage-repository.provider.ts" ><b>FileStorageRepositoryProvider</b>&nbsp;&nbsp;&nbsp;(src/.../file-storage-repository.provider.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FileStorageServiceProvider" title="src/file-storage/providers/file-storage-service.provider.ts" ><b>FileStorageServiceProvider</b>&nbsp;&nbsp;&nbsp;(src/.../file-storage-service.provider.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#formatDate" title="src/shared/common/util/date-time-format.function.ts" ><b>formatDate</b>&nbsp;&nbsp;&nbsp;(src/.../date-time-format.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#formatTime" title="src/shared/common/util/date-time-format.function.ts" ><b>formatTime</b>&nbsp;&nbsp;&nbsp;(src/.../date-time-format.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InstitutionNameEntity" title="src/address/institutions/schema/institution.schema.ts" ><b>InstitutionNameEntity</b>&nbsp;&nbsp;&nbsp;(src/.../institution.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#InstitutionSchema" title="src/address/institutions/schema/institution.schema.ts" ><b>InstitutionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../institution.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IS_PUBLIC_KEY" title="src/auth/decorator/public.decorator.ts" ><b>IS_PUBLIC_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../public.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#jwtConstants" title="src/auth/config/auth.config.ts" ><b>jwtConstants</b>&nbsp;&nbsp;&nbsp;(src/.../auth.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LocationSchema" title="src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts" ><b>LocationSchema</b>&nbsp;&nbsp;&nbsp;(src/.../location.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#module" title="src/main.ts" ><b>module</b>&nbsp;&nbsp;&nbsp;(src/.../main.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MunicipalitiesNameEntity" title="src/address/municipality/schema/municipalities.schema.ts" ><b>MunicipalitiesNameEntity</b>&nbsp;&nbsp;&nbsp;(src/.../municipalities.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MunicipalitiesSchema" title="src/address/municipality/schema/municipalities.schema.ts" ><b>MunicipalitiesSchema</b>&nbsp;&nbsp;&nbsp;(src/.../municipalities.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NotesSchema" title="src/cultural-heritage-property/cultural-notes/schema/notes.ts" ><b>NotesSchema</b>&nbsp;&nbsp;&nbsp;(src/.../notes.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProducerAuthorRecordSchema" title="src/cultural-heritage-property/producer-author-record/schema/producer-author-record.ts" ><b>ProducerAuthorRecordSchema</b>&nbsp;&nbsp;&nbsp;(src/.../producer-author-record.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceNameEntity" title="src/address/province/schema/province.schema.ts" ><b>ProvinceNameEntity</b>&nbsp;&nbsp;&nbsp;(src/.../province.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProvinceSchema" title="src/address/province/schema/province.schema.ts" ><b>ProvinceSchema</b>&nbsp;&nbsp;&nbsp;(src/.../province.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Public" title="src/auth/decorator/public.decorator.ts" ><b>Public</b>&nbsp;&nbsp;&nbsp;(src/.../public.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Roles" title="src/auth/decorator/roles.decorator.ts" ><b>Roles</b>&nbsp;&nbsp;&nbsp;(src/.../roles.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ROLES_KEY" title="src/auth/decorator/roles.decorator.ts" ><b>ROLES_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../roles.decorator.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#swaggerDocumentation" title="src/config/swagger.config.ts" ><b>swaggerDocumentation</b>&nbsp;&nbsp;&nbsp;(src/.../swagger.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#timeZone" title="src/shared/common/util/date-time-format.function.ts" ><b>timeZone</b>&nbsp;&nbsp;&nbsp;(src/.../date-time-format.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TransformToBoolean" title="src/common/decorator/transform/transform-to-boolean.ts" ><b>TransformToBoolean</b>&nbsp;&nbsp;&nbsp;(src/.../transform-to-boolean.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserNameEntity" title="src/users/schema/users.schema.ts" ><b>UserNameEntity</b>&nbsp;&nbsp;&nbsp;(src/.../users.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UserSchema" title="src/users/schema/users.schema.ts" ><b>UserSchema</b>&nbsp;&nbsp;&nbsp;(src/.../users.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#validationSchema" title="src/config/env-validation.schema.ts" ><b>validationSchema</b>&nbsp;&nbsp;&nbsp;(src/.../env-validation.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#verifyInject" title="src/common/utils/verify-inject.ts" ><b>verifyInject</b>&nbsp;&nbsp;&nbsp;(src/.../verify-inject.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#VolumeQuantitiesSchema" title="src/cultural-heritage-property/cultural-record/Schema/volume-quantities.ts" ><b>VolumeQuantitiesSchema</b>&nbsp;&nbsp;&nbsp;(src/.../volume-quantities.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/cultural-heritage-property/access-and-use-conditions/schema/access-and-use-conditions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AccessAndUseConditionsSchema"></a>
+                    <span class="name">
+                        <span ><b>AccessAndUseConditionsSchema</b></span>
+                        <a href="#AccessAndUseConditionsSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(
+  AccessAndUseConditions,
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mongoose schema definition for <code>AccessAndUseConditions</code>.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/config/app.const.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiEnv"></a>
+                    <span class="name">
+                        <span ><b>apiEnv</b></span>
+                        <a href="#apiEnv"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  database: {
+    uri: &#x27;DB_URI&#x27;,
+  },
+  app: {
+    hostname: &#x27;APP_HOST&#x27;,
+    port: &#x27;APP_PORT&#x27;,
+  },
+  email: {
+    from: &#x27;EMAIL_FROM&#x27;,
+    host: &#x27;EMAIL_HOST&#x27;,
+    port: &#x27;EMAIL_PORT&#x27;,
+    secure: &#x27;EMAIL_SECURE&#x27;,
+    user: &#x27;EMAIL_USER&#x27;,
+    pass: &#x27;EMAIL_PASS&#x27;,
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/dto/serialize.dto.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ApiSerializeResponse"></a>
+                    <span class="name">
+                        <span ><b>ApiSerializeResponse</b></span>
+                        <a href="#ApiSerializeResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;TModel extends ClassType&lt;unknown&gt;&gt;(
+  model?: TModel,
+  status &#x3D; 200,
+) &#x3D;&gt; {
+  if (!model)
+    return applyDecorators(
+      ApiResponse({
+        status,
+        type: OmitType(SerializeDto, [&#x27;data&#x27;] as const),
+      }),
+    );
+
+  return applyDecorators(
+    ApiExtraModels(SerializeDto, model),
+    ApiResponse({
+      status,
+      schema: {
+        allOf: [
+          { $ref: getSchemaPath(SerializeDto) },
+          {
+            properties: {
+              data: { $ref: getSchemaPath(model) },
+            },
+          },
+        ],
+      },
+    }),
+  );
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/associated-documentation/schema/associated-documentation.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AssociatedDocumentationSchema"></a>
+                    <span class="name">
+                        <span ><b>AssociatedDocumentationSchema</b></span>
+                        <a href="#AssociatedDocumentationSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(
+  AssociatedDocumentation,
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mongoose schema definition for the <code>AssociatedDocumentation</code> class.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/auth/schema/auth.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AuthNameEntity"></a>
+                    <span class="name">
+                        <span ><b>AuthNameEntity</b></span>
+                        <a href="#AuthNameEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Auth&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AuthSchema"></a>
+                    <span class="name">
+                        <span ><b>AuthSchema</b></span>
+                        <a href="#AuthSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Auth)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/schema/base.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BaseSchemaFactory"></a>
+                    <span class="name">
+                        <span ><b>BaseSchemaFactory</b></span>
+                        <a href="#BaseSchemaFactory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(BaseSchema)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/shared/common/util/date-time-format.function.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateDuration"></a>
+                    <span class="name">
+                        <span ><b>calculateDuration</b></span>
+                        <a href="#calculateDuration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(entryTime: any, exitTime: any) &#x3D;&gt; {
+  if (!entryTime || !exitTime) return;
+  const isoEntryTime &#x3D; ensureString(entryTime);
+  const isoExitTime &#x3D; ensureString(exitTime);
+  const entry &#x3D; DateTime.fromISO(isoEntryTime, { zone: &#x27;utc&#x27; }).setZone(
+    timeZone,
+  );
+  const exit &#x3D; DateTime.fromISO(isoExitTime, { zone: &#x27;utc&#x27; }).setZone(timeZone);
+  const duration &#x3D; exit.diff(entry, [&#x27;hours&#x27;, &#x27;minutes&#x27;]);
+  return duration.toFormat(&#x27;hh&#x27;);
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ensureString"></a>
+                    <span class="name">
+                        <span ><b>ensureString</b></span>
+                        <a href="#ensureString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(date: any): string &#x3D;&gt; {
+  if (date instanceof Date) {
+    return date.toISOString();
+  }
+  return date;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDate"></a>
+                    <span class="name">
+                        <span ><b>formatDate</b></span>
+                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(date: any) &#x3D;&gt; {
+  if (date) {
+    const ensureDateString &#x3D; ensureString(date);
+    return DateTime.fromISO(ensureDateString, { zone: &#x27;utc&#x27; })
+      .setZone(timeZone)
+      .toFormat(&#x27;dd/MM/yyyy&#x27;);
+  }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatTime"></a>
+                    <span class="name">
+                        <span ><b>formatTime</b></span>
+                        <a href="#formatTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(date: any) &#x3D;&gt; {
+  if (date) {
+    const ensureDateString &#x3D; ensureString(date);
+    return DateTime.fromISO(ensureDateString, { zone: &#x27;utc&#x27; })
+      .setZone(timeZone)
+      .toFormat(&#x27;HH:mm:ss&#x27;);
+  }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timeZone"></a>
+                    <span class="name">
+                        <span ><b>timeZone</b></span>
+                        <a href="#timeZone"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Europe/Madrid&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/address/country/schema/country.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CountryNameEntity"></a>
+                    <span class="name">
+                        <span ><b>CountryNameEntity</b></span>
+                        <a href="#CountryNameEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Country&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CountrySchema"></a>
+                    <span class="name">
+                        <span ><b>CountrySchema</b></span>
+                        <a href="#CountrySchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Country)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/utils/create-provider.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createProvider"></a>
+                    <span class="name">
+                        <span ><b>createProvider</b></span>
+                        <a href="#createProvider"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;T&gt;(
+  useClass: Instantiable&lt;T&gt;,
+): [symbol, Provider] &#x3D;&gt; {
+  const token &#x3D; Symbol(useClass.name);
+  const provider: Provider &#x3D; {
+    provide: token,
+    useClass: useClass,
+  };
+  return [token, provider];
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/cultural-heritage-property/Schema/cultural-heritage-property.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CulturalHeritagePropertyEntity"></a>
+                    <span class="name">
+                        <span ><b>CulturalHeritagePropertyEntity</b></span>
+                        <a href="#CulturalHeritagePropertyEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;CulturalHeritageProperty&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CulturalHeritagePropertySchema"></a>
+                    <span class="name">
+                        <span ><b>CulturalHeritagePropertySchema</b></span>
+                        <a href="#CulturalHeritagePropertySchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(
+  CulturalHeritageProperty,
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/cultural-record/Schema/cultural-record.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CulturalRecordSchema"></a>
+                    <span class="name">
+                        <span ><b>CulturalRecordSchema</b></span>
+                        <a href="#CulturalRecordSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(CulturalRecord)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/auth/decorator/user.decorator.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CurrentUser"></a>
+                    <span class="name">
+                        <span ><b>CurrentUser</b></span>
+                        <a href="#CurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createParamDecorator(
+  (data: string, ctx: ExecutionContext) &#x3D;&gt; {
+    const request &#x3D; ctx.switchToHttp().getRequest();
+    const user &#x3D; request.user;
+
+    return data ? user?.[data] : user;
+  },
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/data/data-api-default.const.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DataApiDefaultConst"></a>
+                    <span class="name">
+                        <span ><b>DataApiDefaultConst</b></span>
+                        <a href="#DataApiDefaultConst"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  country: &#x27;Cuba&#x27;,
+  provinces: [
+    {
+      name: &#x27;Pinar del Río&#x27;,
+      municipalities: [
+        &#x27;Pinar del Río&#x27;,
+        &#x27;San Luis&#x27;,
+        &#x27;San Juan y Martínez&#x27;,
+        &#x27;Guane&#x27;,
+        &#x27;Consolación del Sur&#x27;,
+        &#x27;Los Palacios&#x27;,
+        &#x27;Minas de Matahambre&#x27;,
+        &#x27;Viñales&#x27;,
+        &#x27;La Palma&#x27;,
+        &#x27;Mantua&#x27;,
+        &#x27;Sandino&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Artemisa&#x27;,
+      municipalities: [
+        &#x27;Artemisa&#x27;,
+        &#x27;Bahía Honda&#x27;,
+        &#x27;Bauta&#x27;,
+        &#x27;Caimito&#x27;,
+        &#x27;Guanajay&#x27;,
+        &#x27;Güira de Melena&#x27;,
+        &#x27;Mariel&#x27;,
+        &#x27;San Antonio de los Baños&#x27;,
+        &#x27;Alquízar&#x27;,
+        &#x27;Candelaria&#x27;,
+        &#x27;San Cristóbal&#x27;,
+      ],
+    },
+    {
+      name: &#x27;La Habana&#x27;,
+      municipalities: [
+        &#x27;Plaza de la Revolución&#x27;,
+        &#x27;Centro Habana&#x27;,
+        &#x27;La Habana Vieja&#x27;,
+        &#x27;Diez de Octubre&#x27;,
+        &#x27;Cerro&#x27;,
+        &#x27;Marianao&#x27;,
+        &#x27;Playa&#x27;,
+        &#x27;Boyeros&#x27;,
+        &#x27;Arroyo Naranjo&#x27;,
+        &#x27;Habana del Este&#x27;,
+        &#x27;San Miguel del Padrón&#x27;,
+        &#x27;Guanabacoa&#x27;,
+        &#x27;Regla&#x27;,
+        &#x27;La Lisa&#x27;,
+        &#x27;Cotorro&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Mayabeque&#x27;,
+      municipalities: [
+        &#x27;San José de las Lajas&#x27;,
+        &#x27;Jaruco&#x27;,
+        &#x27;Santa Cruz del Norte&#x27;,
+        &#x27;Madruga&#x27;,
+        &#x27;Nueva Paz&#x27;,
+        &#x27;San Nicolás&#x27;,
+        &#x27;Güines&#x27;,
+        &#x27;Melena del Sur&#x27;,
+        &#x27;Batabanó&#x27;,
+        &#x27;Quivicán&#x27;,
+        &#x27;Bejucal&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Matanzas&#x27;,
+      municipalities: [
+        &#x27;Matanzas&#x27;,
+        &#x27;Cárdenas&#x27;,
+        &#x27;Martí&#x27;,
+        &#x27;Colón&#x27;,
+        &#x27;Perico&#x27;,
+        &#x27;Jovellanos&#x27;,
+        &#x27;Pedro Betancourt&#x27;,
+        &#x27;Limonar&#x27;,
+        &#x27;Unión de Reyes&#x27;,
+        &#x27;Ciénaga de Zapata&#x27;,
+        &#x27;Jagüey Grande&#x27;,
+        &#x27;Calimete&#x27;,
+        &#x27;Los Arabos&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Cienfuegos&#x27;,
+      municipalities: [
+        &#x27;Cienfuegos&#x27;,
+        &#x27;Aguada de Pasajeros&#x27;,
+        &#x27;Rodas&#x27;,
+        &#x27;Palmira&#x27;,
+        &#x27;Cruces&#x27;,
+        &#x27;Cumanayagua&#x27;,
+        &#x27;Lajas&#x27;,
+        &#x27;Abreus&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Villa Clara&#x27;,
+      municipalities: [
+        &#x27;Santa Clara&#x27;,
+        &#x27;Cifuentes&#x27;,
+        &#x27;Placetas&#x27;,
+        &#x27;Remedios&#x27;,
+        &#x27;Caibarién&#x27;,
+        &#x27;Camajuaní&#x27;,
+        &#x27;Encrucijada&#x27;,
+        &#x27;Sagua la Grande&#x27;,
+        &#x27;Quemado de Güines&#x27;,
+        &#x27;Corralillo&#x27;,
+        &#x27;Manicaragua&#x27;,
+        &#x27;Ranchuelo&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Sancti Spíritus&#x27;,
+      municipalities: [
+        &#x27;Sancti Spíritus&#x27;,
+        &#x27;Trinidad&#x27;,
+        &#x27;Jatibonico&#x27;,
+        &#x27;Taguasco&#x27;,
+        &#x27;Cabaiguán&#x27;,
+        &#x27;Fomento&#x27;,
+        &#x27;Yaguajay&#x27;,
+        &#x27;La Sierpe&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Ciego de Ávila&#x27;,
+      municipalities: [
+        &#x27;Ciego de Ávila&#x27;,
+        &#x27;Morón&#x27;,
+        &#x27;Venezuela&#x27;,
+        &#x27;Baraguá&#x27;,
+        &#x27;Bolivia&#x27;,
+        &#x27;Chambas&#x27;,
+        &#x27;Ciro Redondo&#x27;,
+        &#x27;Florencia&#x27;,
+        &#x27;Majagua&#x27;,
+        &#x27;Primero de Enero&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Camagüey&#x27;,
+      municipalities: [
+        &#x27;Camagüey&#x27;,
+        &#x27;Nuevitas&#x27;,
+        &#x27;Minas&#x27;,
+        &#x27;Sibanicú&#x27;,
+        &#x27;Guáimaro&#x27;,
+        &#x27;Santa Cruz del Sur&#x27;,
+        &#x27;Najasa&#x27;,
+        &#x27;Esmeralda&#x27;,
+        &#x27;Sierra de Cubitas&#x27;,
+        &#x27;Florida&#x27;,
+        &#x27;Vertientes&#x27;,
+        &#x27;Jimaguayú&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Las Tunas&#x27;,
+      municipalities: [
+        &#x27;Las Tunas&#x27;,
+        &#x27;Puerto Padre&#x27;,
+        &#x27;Amancio&#x27;,
+        &#x27;Colombia&#x27;,
+        &#x27;Manatí&#x27;,
+        &#x27;Jesús Menéndez&#x27;,
+        &#x27;Majibacoa&#x27;,
+        &#x27;Jobabo&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Holguín&#x27;,
+      municipalities: [
+        &#x27;Holguín&#x27;,
+        &#x27;Gibara&#x27;,
+        &#x27;Rafael Freyre&#x27;,
+        &#x27;Banes&#x27;,
+        &#x27;Antilla&#x27;,
+        &#x27;Báguanos&#x27;,
+        &#x27;Cacocum&#x27;,
+        &#x27;Calixto García&#x27;,
+        &#x27;Cueto&#x27;,
+        &#x27;Mayarí&#x27;,
+        &#x27;Frank País&#x27;,
+        &#x27;Sagua de Tánamo&#x27;,
+        &#x27;Moa&#x27;,
+        &#x27;Urbano Noris&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Granma&#x27;,
+      municipalities: [
+        &#x27;Bayamo&#x27;,
+        &#x27;Manzanillo&#x27;,
+        &#x27;Yara&#x27;,
+        &#x27;Bartolomé Masó&#x27;,
+        &#x27;Jiguaní&#x27;,
+        &#x27;Río Cauto&#x27;,
+        &#x27;Campechuela&#x27;,
+        &#x27;Media Luna&#x27;,
+        &#x27;Niquero&#x27;,
+        &#x27;Pilón&#x27;,
+        &#x27;Guisa&#x27;,
+        &#x27;Cauto Cristo&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Santiago de Cuba&#x27;,
+      municipalities: [
+        &#x27;Santiago de Cuba&#x27;,
+        &#x27;Palma Soriano&#x27;,
+        &#x27;San Luis&#x27;,
+        &#x27;Songo-La Maya&#x27;,
+        &#x27;Contramaestre&#x27;,
+        &#x27;Mella&#x27;,
+        &#x27;Segundo Frente&#x27;,
+        &#x27;Tercer Frente&#x27;,
+        &#x27;Guamá&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Guantánamo&#x27;,
+      municipalities: [
+        &#x27;Guantánamo&#x27;,
+        &#x27;Baracoa&#x27;,
+        &#x27;Maisí&#x27;,
+        &#x27;Imías&#x27;,
+        &#x27;San Antonio del Sur&#x27;,
+        &#x27;Yateras&#x27;,
+        &#x27;Manuel Tames&#x27;,
+        &#x27;Caimanera&#x27;,
+        &#x27;Niceto Pérez&#x27;,
+        &#x27;El Salvador&#x27;,
+      ],
+    },
+    {
+      name: &#x27;Isla de la Juventud&#x27;,
+      municipalities: [&#x27;Isla de la Juventud&#x27;],
+    },
+  ],
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/description-control/schema/description-control.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DescriptionControlSchema"></a>
+                    <span class="name">
+                        <span ><b>DescriptionControlSchema</b></span>
+                        <a href="#DescriptionControlSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(DescriptionControl)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/cultural-record/Schema/dimensions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DimensionsSchema"></a>
+                    <span class="name">
+                        <span ><b>DimensionsSchema</b></span>
+                        <a href="#DimensionsSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Dimensions)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/entry-and-location-record/schema/entry-and-location-record.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EntryAndLocationRecordSchema"></a>
+                    <span class="name">
+                        <span ><b>EntryAndLocationRecordSchema</b></span>
+                        <a href="#EntryAndLocationRecordSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(
+  EntryAndLocationRecord,
+)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/shared/event-emitter/event-emitter.const.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EventEmitter"></a>
+                    <span class="name">
+                        <span ><b>EventEmitter</b></span>
+                        <a href="#EventEmitter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  userFound: &#x27;user.found&#x27;,
+  userUpdated: &#x27;user.updated&#x27;,
+  sendEmailCode: &#x27;send.email.code&#x27;,
+  provinceFound: &#x27;province.found&#x27;,
+  countryFound: &#x27;country.found&#x27;,
+  municipalityFound: &#x27;municipality.found&#x27;,
+  fileDelete: &#x27;file.delete&#x27;,
+  fileChunksUintArray: &#x27;file.chunks.uint.array&#x27;,
+  fileMetadata: &#x27;file.metadata&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/cultural-record/Schema/extreme-dates.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ExtremeDatesSchema"></a>
+                    <span class="name">
+                        <span ><b>ExtremeDatesSchema</b></span>
+                        <a href="#ExtremeDatesSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new MongooseSchema({
+  start: { type: Date, required: true },
+  end: { type: Date, required: true },
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/file-storage/providers/file-storage-repository.provider.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FILE_STORAGE_REPOSITORY_TOKEN"></a>
+                    <span class="name">
+                        <span ><b>FILE_STORAGE_REPOSITORY_TOKEN</b></span>
+                        <a href="#FILE_STORAGE_REPOSITORY_TOKEN"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FileStorageRepositoryProvider"></a>
+                    <span class="name">
+                        <span ><b>FileStorageRepositoryProvider</b></span>
+                        <a href="#FileStorageRepositoryProvider"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/file-storage/providers/file-storage-service.provider.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FILE_STORAGE_SERVICE_TOKEN"></a>
+                    <span class="name">
+                        <span ><b>FILE_STORAGE_SERVICE_TOKEN</b></span>
+                        <a href="#FILE_STORAGE_SERVICE_TOKEN"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FileStorageServiceProvider"></a>
+                    <span class="name">
+                        <span ><b>FileStorageServiceProvider</b></span>
+                        <a href="#FileStorageServiceProvider"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/users/config/user.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fileConfig"></a>
+                    <span class="name">
+                        <span ><b>fileConfig</b></span>
+                        <a href="#fileConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[{ name: &#x27;avatar&#x27;, maxCount: 1 }]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/address/institutions/schema/institution.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InstitutionNameEntity"></a>
+                    <span class="name">
+                        <span ><b>InstitutionNameEntity</b></span>
+                        <a href="#InstitutionNameEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Institution&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="InstitutionSchema"></a>
+                    <span class="name">
+                        <span ><b>InstitutionSchema</b></span>
+                        <a href="#InstitutionSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Institution)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/auth/decorator/public.decorator.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IS_PUBLIC_KEY"></a>
+                    <span class="name">
+                        <span ><b>IS_PUBLIC_KEY</b></span>
+                        <a href="#IS_PUBLIC_KEY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;isPublic&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Public"></a>
+                    <span class="name">
+                        <span ><b>Public</b></span>
+                        <a href="#Public"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; SetMetadata(IS_PUBLIC_KEY, true)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/auth/config/auth.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="jwtConstants"></a>
+                    <span class="name">
+                        <span ><b>jwtConstants</b></span>
+                        <a href="#jwtConstants"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  secret: &#x27;JWT_SECRET&#x27;,
+  expirationTime: &#x27;JWT_EXPIRATION_TIME&#x27;,
+  refreshSecret: &#x27;JWT_REFRESH_TOKEN_SECRET&#x27;,
+  refreshExpirationTime: &#x27;JWT_REFRESH_EXPIRATION_TIME&#x27;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LocationSchema"></a>
+                    <span class="name">
+                        <span ><b>LocationSchema</b></span>
+                        <a href="#LocationSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Location)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/main.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="module"></a>
+                    <span class="name">
+                        <span ><b>module</b></span>
+                        <a href="#module"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/address/municipality/schema/municipalities.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MunicipalitiesNameEntity"></a>
+                    <span class="name">
+                        <span ><b>MunicipalitiesNameEntity</b></span>
+                        <a href="#MunicipalitiesNameEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Municipalities&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MunicipalitiesSchema"></a>
+                    <span class="name">
+                        <span ><b>MunicipalitiesSchema</b></span>
+                        <a href="#MunicipalitiesSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Municipalities)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/cultural-notes/schema/notes.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NotesSchema"></a>
+                    <span class="name">
+                        <span ><b>NotesSchema</b></span>
+                        <a href="#NotesSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Notes)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/producer-author-record/schema/producer-author-record.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProducerAuthorRecordSchema"></a>
+                    <span class="name">
+                        <span ><b>ProducerAuthorRecordSchema</b></span>
+                        <a href="#ProducerAuthorRecordSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(ProducerAuthorRecord)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/address/province/schema/province.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceNameEntity"></a>
+                    <span class="name">
+                        <span ><b>ProvinceNameEntity</b></span>
+                        <a href="#ProvinceNameEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Province&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProvinceSchema"></a>
+                    <span class="name">
+                        <span ><b>ProvinceSchema</b></span>
+                        <a href="#ProvinceSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(Province)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/auth/decorator/roles.decorator.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Roles"></a>
+                    <span class="name">
+                        <span ><b>Roles</b></span>
+                        <a href="#Roles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(...roles: UserRoles[]) &#x3D;&gt; SetMetadata(ROLES_KEY, roles)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ROLES_KEY"></a>
+                    <span class="name">
+                        <span ><b>ROLES_KEY</b></span>
+                        <a href="#ROLES_KEY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;roles&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/config/swagger.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="swaggerDocumentation"></a>
+                    <span class="name">
+                        <span ><b>swaggerDocumentation</b></span>
+                        <a href="#swaggerDocumentation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>async (app: INestApplication&lt;any&gt;) &#x3D;&gt; {
+  const config &#x3D; new DocumentBuilder()
+    .setTitle(&#x27;Api Museum&#x27;)
+    .setDescription(
+      &#x27;The job website API description. [Click here to download the Swagger JSON file](/swagger-json)&#x27;,
+    )
+    .addBearerAuth()
+    .setVersion(&#x27;1.0&#x27;)
+    .build();
+
+  const document &#x3D; SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup(&#x27;api&#x27;, app, document);
+
+  app.getHttpAdapter().get(&#x27;/swagger-json&#x27;, (req: Request, res: Response) &#x3D;&gt; {
+    res.setHeader(
+      &#x27;Content-Disposition&#x27;,
+      &#x27;attachment; filename&#x3D;app-museum-swagger.json&#x27;,
+    );
+    res.setHeader(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;);
+    res.send(document);
+  });
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/decorator/transform/transform-to-boolean.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TransformToBoolean"></a>
+                    <span class="name">
+                        <span ><b>TransformToBoolean</b></span>
+                        <a href="#TransformToBoolean"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt;
+  Transform(({ value }) &#x3D;&gt; {
+    if (typeof value &#x3D;&#x3D;&#x3D; &#x27;boolean&#x27;) return value;
+    if (value !&#x3D;&#x3D; &#x27;true&#x27; || value !&#x3D;&#x3D; &#x27;false&#x27;) return undefined;
+    return value &#x3D;&#x3D;&#x3D; &#x27;true&#x27;;
+  })</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/users/schema/users.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserNameEntity"></a>
+                    <span class="name">
+                        <span ><b>UserNameEntity</b></span>
+                        <a href="#UserNameEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;User&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UserSchema"></a>
+                    <span class="name">
+                        <span ><b>UserSchema</b></span>
+                        <a href="#UserSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(User)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/config/env-validation.schema.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validationSchema"></a>
+                    <span class="name">
+                        <span ><b>validationSchema</b></span>
+                        <a href="#validationSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Joi.object({
+  DB_URI: Joi.string().required(),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/common/utils/verify-inject.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verifyInject"></a>
+                    <span class="name">
+                        <span ><b>verifyInject</b></span>
+                        <a href="#verifyInject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&lt;T&gt;(value: Instantiable&lt;T&gt;): Instantiable&lt;T&gt; &#x3D;&gt;
+  value</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Checks by its generic if the class corresponds to its abstraction</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/cultural-heritage-property/cultural-record/Schema/volume-quantities.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="VolumeQuantitiesSchema"></a>
+                    <span class="name">
+                        <span ><b>VolumeQuantitiesSchema</b></span>
+                        <a href="#VolumeQuantitiesSchema"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>SchemaFactory.createForClass(VolumeQuantities)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
