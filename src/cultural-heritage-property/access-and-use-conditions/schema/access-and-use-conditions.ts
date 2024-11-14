@@ -8,7 +8,6 @@ import { AccessAndUseConditionsModel } from '../models/access-and-use-conditions
  */
 @Schema()
 class AccessAndUseConditions implements AccessAndUseConditionsModel {
-
   /** List of conditions required for accessing the resource. */
   @Prop()
   accessConditions: string[];
@@ -24,5 +23,5 @@ class AccessAndUseConditions implements AccessAndUseConditionsModel {
 
 /** Mongoose schema definition for `AccessAndUseConditions`. */
 export const AccessAndUseConditionsSchema = SchemaFactory.createForClass(
-    AccessAndUseConditions,
+  AccessAndUseConditions,
 );

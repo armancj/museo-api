@@ -32,13 +32,13 @@ import { AccessAndUseConditionsEntity } from './entities/access-and-use-conditio
 @Controller('access-and-use-conditions')
 export class AccessAndUseConditionsController {
   constructor(
-      @Inject('ACCESS_AND_USE_CONDITIONS_SERVICE')
-      private readonly accessAndUseConditionsService: CommonRecordService<
-          any,
-          CreateAccessAndUseConditionDto,
-          AccessAndUseCondition,
-          AccessAndUseConditionsEntity
-      >,
+    @Inject('ACCESS_AND_USE_CONDITIONS_SERVICE')
+    private readonly accessAndUseConditionsService: CommonRecordService<
+      any,
+      CreateAccessAndUseConditionDto,
+      AccessAndUseCondition,
+      AccessAndUseConditionsEntity
+    >,
   ) {}
 
   /**
@@ -55,12 +55,12 @@ export class AccessAndUseConditionsController {
   })
   @ApiNotFoundResponse({ description: 'Resource not found.' })
   create(
-      @Param('uuid') uuid: string,
-      @Body() createAccessAndUseConditionDto: CreateAccessAndUseConditionDto,
+    @Param('uuid') uuid: string,
+    @Body() createAccessAndUseConditionDto: CreateAccessAndUseConditionDto,
   ) {
     return this.accessAndUseConditionsService.create(
-        uuid,
-        createAccessAndUseConditionDto,
+      uuid,
+      createAccessAndUseConditionDto,
     );
   }
 
@@ -69,7 +69,10 @@ export class AccessAndUseConditionsController {
    */
   @Get()
   @ApiOperation({ summary: 'Retrieve all access conditions' })
-  @ApiOkResponse({ description: 'Records retrieved successfully.', type: [AccessAndUseConditionsEntity] })
+  @ApiOkResponse({
+    description: 'Records retrieved successfully.',
+    type: [AccessAndUseConditionsEntity],
+  })
   findAll() {
     return this.accessAndUseConditionsService.findAll();
   }
@@ -80,7 +83,10 @@ export class AccessAndUseConditionsController {
    */
   @Get(':uuid')
   @ApiOperation({ summary: 'Retrieve an access condition by UUID' })
-  @ApiOkResponse({ description: 'Record retrieved successfully.', type: AccessAndUseCondition })
+  @ApiOkResponse({
+    description: 'Record retrieved successfully.',
+    type: AccessAndUseCondition,
+  })
   @ApiNotFoundResponse({ description: 'Record not found.' })
   findOne(@Param('uuid') uuid: string) {
     return this.accessAndUseConditionsService.findOne(uuid);
@@ -97,12 +103,12 @@ export class AccessAndUseConditionsController {
   @ApiNotFoundResponse({ description: 'Record not found.' })
   @ApiBody({ type: UpdateAccessAndUseConditionDto })
   update(
-      @Param('uuid') uuid: string,
-      @Body() updateAccessAndUseConditionDto: UpdateAccessAndUseConditionDto,
+    @Param('uuid') uuid: string,
+    @Body() updateAccessAndUseConditionDto: UpdateAccessAndUseConditionDto,
   ) {
     return this.accessAndUseConditionsService.update(
-        uuid,
-        updateAccessAndUseConditionDto,
+      uuid,
+      updateAccessAndUseConditionDto,
     );
   }
 

@@ -2,7 +2,6 @@
  * Interface representing the model for access and use conditions.
  */
 export interface AccessAndUseConditionsModel {
-
   /** List of conditions required for accessing the resource. */
   accessConditions: string[];
 

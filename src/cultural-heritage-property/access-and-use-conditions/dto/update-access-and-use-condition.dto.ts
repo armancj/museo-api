@@ -8,5 +8,5 @@ import { CreateAccessAndUseConditionDto } from './create-access-and-use-conditio
  * making all fields optional for update purposes.
  */
 export class UpdateAccessAndUseConditionDto extends PartialType(
-    CreateAccessAndUseConditionDto,
+  CreateAccessAndUseConditionDto,
 ) {}
