@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Delete, Put, HttpCode, HttpStatus } from "@nestjs/common";
 import { AssociatedDocumentationService } from './associated-documentation.service';
 import { CreateAssociatedDocumentationDto } from './dto/create-associated-documentation.dto';
 import { UpdateAssociatedDocumentationDto } from './dto/update-associated-documentation.dto';
@@ -7,7 +7,7 @@ import { UpdateAssociatedDocumentationDto } from './dto/update-associated-docume
 export class AssociatedDocumentationController {
   constructor(private readonly associatedDocumentationService: AssociatedDocumentationService) {}
 
-  @Post()
+  @Put()
   create(@Body() createAssociatedDocumentationDto: CreateAssociatedDocumentationDto) {
     return this.associatedDocumentationService.create(createAssociatedDocumentationDto);
   }
@@ -17,18 +17,19 @@ export class AssociatedDocumentationController {
     return this.associatedDocumentationService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.associatedDocumentationService.findOne(+id);
+  @Get(':uuid')
+  findOne(@Param('uuid') uuid: string) {
+    return this.associatedDocumentationService.findOne(+uuid);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto) {
-    return this.associatedDocumentationService.update(+id, updateAssociatedDocumentationDto);
+  @Patch(':uuid')
+  update(@Param('uuid') uuid: string, @Body() updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto) {
+    return this.associatedDocumentationService.update(uuid, updateAssociatedDocumentationDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.associatedDocumentationService.remove(+id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(':uuid')
+  remove(@Param('uuid') uuid: string) {
+    return this.associatedDocumentationService.remove(uuid);
   }
 }
