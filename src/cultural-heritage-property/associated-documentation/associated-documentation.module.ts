@@ -9,6 +9,8 @@ import {
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { AccessAndUseCondition } from '../access-and-use-conditions/entities/access-and-use-condition.entity';
 import { AccessAndUseConditionsEntity } from '../access-and-use-conditions/entities/access-and-use-conditions.entity';
+import { AssociatedDocumentationEntity } from "./entities/associated-documentation.entity";
+import { AssociatedDocumentationsEntity } from "./entities/associated-documentations.entity";
 
 @Module({
   imports: [
@@ -35,9 +37,9 @@ import { AccessAndUseConditionsEntity } from '../access-and-use-conditions/entit
       useFactory: (culturalHeritagePropertyModel) =>
         new CommonRecordService(
           culturalHeritagePropertyModel,
-          AccessAndUseCondition,
-          AccessAndUseConditionsEntity,
-          'accessAndUseConditions',
+          AssociatedDocumentationEntity,
+          AssociatedDocumentationsEntity,
+          'associatedDocumentation',
         ),
       inject: [getModelToken(CulturalHeritagePropertyEntity)],
     },
