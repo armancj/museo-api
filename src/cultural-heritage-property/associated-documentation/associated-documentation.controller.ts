@@ -48,6 +48,7 @@ export class AssociatedDocumentationController {
     @Body() createAssociatedDocumentationDto: CreateAssociatedDocumentationDto,
   ) {
     return this.associatedDocumentationService.create(
+      uuid,
       createAssociatedDocumentationDto,
     );
   }

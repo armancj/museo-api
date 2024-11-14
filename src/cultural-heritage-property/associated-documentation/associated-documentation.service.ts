@@ -1,29 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateAssociatedDocumentationDto } from './dto/create-associated-documentation.dto';
 import { UpdateAssociatedDocumentationDto } from './dto/update-associated-documentation.dto';
-
+import { CommonRecordService } from '../shared/common-record-service.service';
+import { AssociatedDocumentationEntity } from './entities/associated-documentation.entity';
+import { AssociatedDocumentationsEntity } from './entities/associated-documentations.entity';
 @Injectable()
 export class AssociatedDocumentationService {
-  create(uuid: string, createAssociatedDocumentationDto: CreateAssociatedDocumentationDto) {
-    return 'This action adds a new associatedDocumentation';
+  constructor(
+    @Inject('ACCESS_AND_USE_CONDITIONS_SERVICE')
+    private readonly accessAndUseConditionsService: CommonRecordService<
+      any,
+      CreateAssociatedDocumentationDto,
+      AssociatedDocumentationEntity,
+      AssociatedDocumentationsEntity
+    >,
+  ) {}
+  create(
+    uuid: string,
+    createAssociatedDocumentationDto: CreateAssociatedDocumentationDto,
+  ) {
+    return this.accessAndUseConditionsService.create(
+      uuid,
+      createAssociatedDocumentationDto,
+    );
   }
 
   findAll() {
-    return `This action returns all associatedDocumentation`;
+    return this.accessAndUseConditionsService.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} associatedDocumentation`;
+  findOne(uuid: string) {
+    return this.accessAndUseConditionsService.findOne(uuid);
   }
 
   update(
-    id: number,
+    uuid: string,
     updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto,
   ) {
-    return `This action updates a #${id} associatedDocumentation`;
+    return this.accessAndUseConditionsService.update(
+      uuid,
+      updateAssociatedDocumentationDto,
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} associatedDocumentation`;
+  remove(uuid: string) {
+    return this.accessAndUseConditionsService.remove(uuid);
   }
 }

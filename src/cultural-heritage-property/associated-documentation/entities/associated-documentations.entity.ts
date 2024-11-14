@@ -12,7 +12,7 @@ export class AssociatedDocumentationsEntity {
    *
    * @param value A partial object containing documentation data and UUID.
    */
-  private constructor(
+  public constructor(
     public value: Partial<AssociatedDocumentationModel & { uuid: string }>,
   ) {}
 
