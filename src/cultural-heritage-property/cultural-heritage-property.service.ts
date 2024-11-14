@@ -5,6 +5,7 @@ import {
   CulturalHeritagePropertyModel,
 } from './Schema/cultural-heritage-property';
 import { CreateCulturalPropertyDto } from './dto/create-cultural-property.dto';
+import {CulturalHeritageProperty} from "./entity/cultural-heritage-property.entity";
 
 @Injectable()
 export class CulturalHeritagePropertyService {
@@ -14,9 +15,10 @@ export class CulturalHeritagePropertyService {
   ) {}
 
   async created(createCulturalPropertyDto: CreateCulturalPropertyDto) {
-    return this.culturalHeritagePropertyModel.create({
+    const culturalProperty = await this.culturalHeritagePropertyModel.create({
       ...createCulturalPropertyDto,
     });
+    return CulturalHeritageProperty.create(culturalProperty);
   }
 
   async find() {
@@ -29,7 +31,7 @@ export class CulturalHeritagePropertyService {
       .exec();
     if (!culturalProperty)
       throw new NotFoundException('Cultural property heritage not found');
-    return culturalProperty;
+    return CulturalHeritageProperty.create(culturalProperty);
   }
 
   async remove(uuid: string) {
