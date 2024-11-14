@@ -13,8 +13,18 @@ export class ProducerAuthorRecord implements ProducerAuthorRecordModel {
   province: string;
   street: string;
 
-  constructor(option: ProducerAuthorRecordModel) {
-    Object.assign(this as ProducerAuthorRecordModel, option);
+  constructor(option: Partial<ProducerAuthorRecordModel>) {
+    this.betweenStreet1 = option.betweenStreet1;
+    this.betweenStreet2 = option.betweenStreet2;
+    this.district = option.district;
+    this.institutionalHistory = option.institutionalHistory;
+    this.locality = option.locality;
+    this.municipality = option.municipality;
+    this.number = option.number;
+    this.objectEntryHistory = option.objectEntryHistory;
+    this.producerAuthorNames = option.producerAuthorNames;
+    this.province = option.province;
+    this.street = option.street;
   }
 
   static create(option: ProducerAuthorRecordModel): ProducerAuthorRecord {

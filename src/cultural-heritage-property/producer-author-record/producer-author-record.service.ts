@@ -16,7 +16,7 @@ export class ProducerAuthorRecordService {
     private readonly producerAuthorModel: CulturalHeritagePropertyModel,
   ) {}
   async create(uuid: string, producerAuthor: CreateProducerAuthorRecordDto) {
-    return await this.update(uuid, producerAuthor);
+    return await this.updatedDataMongo(uuid, producerAuthor);
   }
 
   async findAll() {
@@ -49,23 +49,32 @@ export class ProducerAuthorRecordService {
     uuid: string,
     producerAuthor: Partial<ProducerAuthorRecordModel>,
   ) {
+    await this.findOne(uuid);
+    return await this.updatedDataMongo(uuid, producerAuthor);
+  }
+
+  async remove(uuid: string) {
+    await this.findOne(uuid);
+    await this.producerAuthorModel.updateOne(
+        { uuid },
+        { $unset: { producerAuthor: "" } },
+    );
+  }
+
+
+  private async updatedDataMongo(uuid: string, producerAuthor: Partial<ProducerAuthorRecordModel>) {
     const culturalProperty = await this.producerAuthorModel
-      .findOneAndUpdate(
-        { uuid, deleted: false },
-        { producerAuthor },
-        { new: true },
-      )
-      .lean()
-      .exec();
+        .findOneAndUpdate(
+            {uuid, deleted: false},
+            {producerAuthor},
+            {new: true},
+        )
+        .lean()
+        .exec();
 
     if (!culturalProperty)
       throw new NotFoundException('Not Found cultural Property');
 
     return ProducerAuthorRecord.create(culturalProperty.producerAuthor);
-  }
-
-  async remove(uuid: string) {
-    await this.findOne(uuid);
-    await this.update(uuid, undefined);
   }
 }
