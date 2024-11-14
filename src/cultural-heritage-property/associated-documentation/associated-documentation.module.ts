@@ -7,11 +7,16 @@ import {
   CulturalHeritagePropertySchema,
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { CommonRecordService } from '../shared/common-record-service.service';
-import { AccessAndUseCondition } from '../access-and-use-conditions/entities/access-and-use-condition.entity';
-import { AccessAndUseConditionsEntity } from '../access-and-use-conditions/entities/access-and-use-conditions.entity';
-import { AssociatedDocumentationEntity } from "./entities/associated-documentation.entity";
-import { AssociatedDocumentationsEntity } from "./entities/associated-documentations.entity";
+import { AssociatedDocumentationEntity } from './entities/associated-documentation.entity';
+import { AssociatedDocumentationsEntity } from './entities/associated-documentations.entity';
 
+/**
+ * Module that manages associated documentation.
+ *
+ * Provides the controller and service to handle associated documentation within
+ * the cultural heritage property schema. It also sets up the provider for `CommonRecordService`
+ * to interact with the associated documentation data in a standardized way.
+ */
 @Module({
   imports: [
     /**
@@ -26,13 +31,13 @@ import { AssociatedDocumentationsEntity } from "./entities/associated-documentat
   ],
   controllers: [AssociatedDocumentationController],
   providers: [
+    /**
+     * Provider for `CommonRecordService` configured for managing associated documentation.
+     *
+     * The service is injected using a factory pattern with the cultural heritage property model,
+     * and is registered with the token `'ASSOCIATED_DOCUMENTATION_SERVICE'`.
+     */
     {
-      /**
-       * Provider for `CommonRecordService` configured for managing access and use conditions.
-       *
-       * The service is injected using a factory pattern with the cultural heritage property model,
-       * and is registered with the token `'ACCESS_AND_USE_CONDITIONS_SERVICE'`.
-       */
       provide: 'ASSOCIATED_DOCUMENTATION_SERVICE',
       useFactory: (culturalHeritagePropertyModel) =>
         new CommonRecordService(
@@ -43,6 +48,9 @@ import { AssociatedDocumentationsEntity } from "./entities/associated-documentat
         ),
       inject: [getModelToken(CulturalHeritagePropertyEntity)],
     },
+    /**
+     * Service for handling the business logic of associated documentation.
+     */
     AssociatedDocumentationService,
   ],
 })
