@@ -20,7 +20,11 @@ export interface DimensionsModel {
   squareMeters?: number;
   cubicMeters?: number;
   weightKg?: number;
+  calculateSquareMeters: () => number;
+  calculateCubicMeters: () => number;
 }
+
+export type DimensionsPropertiesModel = NonFunctionProperties<DimensionsModel>;
 
 export interface CulturalRecordModel {
   backgroundTitle?: string;
@@ -36,14 +40,12 @@ export interface CulturalRecordModel {
   descriptionLevel: DescriptionLevel;
   valuation?: number;
   volumesQuantities: VolumeQuantitiesModel;
-  dimensions: DimensionsModel;
+  dimensions: DimensionsPropertiesModel;
   languages: string[];
   supports: string[];
   letters: string[];
   descriptionInstrument: string[];
   conservationState: string[];
-  calculateSquareMeters: () => number;
-  calculateCubicMeters: () => number;
 }
 
 export type CulturalPropertiesModel =

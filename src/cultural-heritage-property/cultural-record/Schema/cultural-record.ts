@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   CulturalPropertiesModel,
-  DimensionsModel,
+  DimensionsPropertiesModel,
   VolumeQuantitiesModel,
 } from '../models/cultural-record';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
@@ -24,7 +24,7 @@ export class CulturalRecord implements CulturalPropertiesModel {
   descriptionLevel: DescriptionLevel;
 
   @Prop({ type: DimensionsSchema })
-  dimensions: DimensionsModel;
+  dimensions: DimensionsPropertiesModel;
 
   @Prop({ type: VolumeQuantitiesSchema })
   volumesQuantities: VolumeQuantitiesModel;

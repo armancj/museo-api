@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { DimensionsModel } from '../models/cultural-record';
+import { DimensionsPropertiesModel } from '../models/cultural-record';
 
 @Schema()
-class Dimensions implements DimensionsModel {
+class Dimensions implements DimensionsPropertiesModel {
   @Prop()
   heightCms?: number;
 
@@ -13,9 +13,6 @@ class Dimensions implements DimensionsModel {
   lengthCms?: number;
 
   @Prop()
-  squareMeters?: number;
-
-  @Prop()
-  cubicMeters?: number;
+  weightKg: number;
 }
 export const DimensionsSchema = SchemaFactory.createForClass(Dimensions);
