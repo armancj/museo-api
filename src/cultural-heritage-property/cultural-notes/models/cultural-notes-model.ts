@@ -1,7 +1,3 @@
-
-
-
 export interface NotesModel {
-    notes?: string;
+  notes?: string;
 }
-

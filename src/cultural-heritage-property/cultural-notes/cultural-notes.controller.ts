@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CulturalNotesService } from './cultural-notes.service';
 import { CreateCulturalNoteDto } from './dto/create-cultural-note.dto';
 import { UpdateCulturalNoteDto } from './dto/update-cultural-note.dto';
@@ -23,7 +31,10 @@ export class CulturalNotesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCulturalNoteDto: UpdateCulturalNoteDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCulturalNoteDto: UpdateCulturalNoteDto,
+  ) {
     return this.culturalNotesService.update(+id, updateCulturalNoteDto);
   }
 

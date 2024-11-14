@@ -1,21 +1,21 @@
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
-import { ProducerAuthorRecord } from './producer-author-record.entity';
-import { ExtendedProducerAuthorRecord } from './extended-producer-author-record.entity';
+import { ExtendedCulturalNoteEntity } from './extended-cultural-note.entity';
+import { CulturalNoteEntity } from './cultural-note.entity';
 
-export class ProducerAuthorRecords {
+export class CulturalNotesEntity {
   private constructor(public value: CulturalPropertyModel[]) {}
 
   public static create(
     value: CulturalPropertyModel[],
-  ): ExtendedProducerAuthorRecord[] {
+  ): ExtendedCulturalNoteEntity[] {
     if (!Array.isArray(value))
       throw new TypeError('Input in producer author is not an array');
 
     return value
-      .filter((data) => data.producerAuthor)
+      .filter((data) => data.notes)
       .map((data) => {
-        const { uuid, producerAuthor } = data;
-        return { uuid, ...ProducerAuthorRecord.create(producerAuthor) };
+        const { uuid, notes } = data;
+        return { uuid, ...CulturalNoteEntity.create(notes) };
       });
   }
 }

@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { CommonRecordService } from '../shared/common-record-service.service';
 import { CreateCulturalNoteDto } from './dto/create-cultural-note.dto';
 import { UpdateCulturalNoteDto } from './dto/update-cultural-note.dto';
+import { AssociatedDocumentationEntity } from '../associated-documentation/entities/associated-documentation.entity';
+import { AssociatedDocumentationsEntity } from '../associated-documentation/entities/associated-documentations.entity';
 
 @Injectable()
 export class CulturalNotesService {
-  create(createCulturalNoteDto: CreateCulturalNoteDto) {
-    return 'This action adds a new culturalNote';
+  constructor(
+    @Inject('CULTURAL_NOTES_SERVICE')
+    private readonly commonRecordService: CommonRecordService<
+      any,
+      CreateCulturalNoteDto,
+      AssociatedDocumentationEntity,
+      AssociatedDocumentationsEntity
+    >,
+  ) {}
+  create(uuid: string, commonDto: CreateCulturalNoteDto) {
+    return this.commonRecordService.create(uuid, commonDto);
   }
 
   findAll() {
-    return `This action returns all culturalNotes`;
+    return this.commonRecordService.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} culturalNote`;
+  findOne(uuid: string) {
+    return this.commonRecordService.findOne(uuid);
   }
 
-  update(id: number, updateCulturalNoteDto: UpdateCulturalNoteDto) {
-    return `This action updates a #${id} culturalNote`;
+  update(uuid: string, commonDto: UpdateCulturalNoteDto) {
+    return this.commonRecordService.update(uuid, commonDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} culturalNote`;
+  remove(uuid: string) {
+    return this.commonRecordService.remove(uuid);
   }
 }

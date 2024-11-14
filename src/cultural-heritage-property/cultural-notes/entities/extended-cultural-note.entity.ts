@@ -1,7 +1,7 @@
-import { CulturalNote } from './cultural-note.entity';
+import { CulturalNoteEntity } from './cultural-note.entity';
 import { NotesModel } from '../models/cultural-notes-model';
 
-export class ExtendedCulturalNoteEntity extends CulturalNote {
+export class ExtendedCulturalNoteEntity extends CulturalNoteEntity {
   uuid: string;
 
   constructor(option: Partial<NotesModel & { uuid: string }>) {
