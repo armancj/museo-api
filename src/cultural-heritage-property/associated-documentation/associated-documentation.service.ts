@@ -7,8 +7,8 @@ import { AssociatedDocumentationsEntity } from './entities/associated-documentat
 @Injectable()
 export class AssociatedDocumentationService {
   constructor(
-    @Inject('ACCESS_AND_USE_CONDITIONS_SERVICE')
-    private readonly accessAndUseConditionsService: CommonRecordService<
+    @Inject('ASSOCIATED_DOCUMENTATION_SERVICE')
+    private readonly commonRecordService: CommonRecordService<
       any,
       CreateAssociatedDocumentationDto,
       AssociatedDocumentationEntity,
@@ -19,31 +19,31 @@ export class AssociatedDocumentationService {
     uuid: string,
     createAssociatedDocumentationDto: CreateAssociatedDocumentationDto,
   ) {
-    return this.accessAndUseConditionsService.create(
+    return this.commonRecordService.create(
       uuid,
       createAssociatedDocumentationDto,
     );
   }
 
   findAll() {
-    return this.accessAndUseConditionsService.findAll();
+    return this.commonRecordService.findAll();
   }
 
   findOne(uuid: string) {
-    return this.accessAndUseConditionsService.findOne(uuid);
+    return this.commonRecordService.findOne(uuid);
   }
 
   update(
     uuid: string,
     updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto,
   ) {
-    return this.accessAndUseConditionsService.update(
+    return this.commonRecordService.update(
       uuid,
       updateAssociatedDocumentationDto,
     );
   }
 
   remove(uuid: string) {
-    return this.accessAndUseConditionsService.remove(uuid);
+    return this.commonRecordService.remove(uuid);
   }
 }
