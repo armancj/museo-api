@@ -30,7 +30,7 @@ export class CulturalRecordsEntity {
         return {
           uuid,
           ...culturalRecord,
-        } as CulturalRecordEntity;
+        } as unknown as CulturalRecordEntity;
       });
   }
 }
