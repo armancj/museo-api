@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { DescriptionControlModel } from '../models/access-and-use-conditions';
+import {DescriptionControlModel} from "../models/description-control-model";
 
 @Schema()
 class DescriptionControl implements DescriptionControlModel {

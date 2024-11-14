@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   CulturalHeritagePropertyEntity,
   CulturalHeritagePropertySchema,
-} from '../Schema/cultural-heritage-property';
+} from '../cultural-heritage-property/Schema/cultural-heritage-property';
 
 @Module({
   imports: [

@@ -1,4 +1,4 @@
-import { CulturalPropertyModel } from '../../models/cultural-property.model';
+import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { ProducerAuthorRecord } from './producer-author-record.entity';
 import {ExtendedProducerAuthorRecord} from "./extended-producer-author-record.entity";
 

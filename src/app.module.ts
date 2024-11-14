@@ -12,7 +12,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
-import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property.module';
+import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
 
 @Module({
   imports: [

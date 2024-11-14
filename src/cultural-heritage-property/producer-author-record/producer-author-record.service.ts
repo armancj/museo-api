@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import {
   CulturalHeritagePropertyEntity,
   CulturalHeritagePropertyModel,
-} from '../Schema/cultural-heritage-property';
+} from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { ProducerAuthorRecord } from './entities/producer-author-record.entity';
 import { ProducerAuthorRecordModel } from './models/producer-author-record.models';
 import { ProducerAuthorRecords } from './entities/producer-author-records.entity';
@@ -60,7 +60,6 @@ export class ProducerAuthorRecordService {
         { $unset: { producerAuthor: "" } },
     );
   }
-
 
   private async updatedDataMongo(uuid: string, producerAuthor: Partial<ProducerAuthorRecordModel>) {
     const culturalProperty = await this.producerAuthorModel

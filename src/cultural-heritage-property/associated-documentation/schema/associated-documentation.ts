@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { AssociatedDocumentationModel } from '../models/access-and-use-conditions';
-
+import {AssociatedDocumentationModel} from "../models/associated-documentation-model";
 @Schema()
 class AssociatedDocumentation implements AssociatedDocumentationModel {
   @Prop()

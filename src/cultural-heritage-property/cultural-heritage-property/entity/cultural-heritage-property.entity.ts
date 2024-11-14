@@ -1,5 +1,5 @@
 import {CulturalPropertyModel} from "../models/cultural-property.model";
-import {ProducerAuthorRecord} from "../producer-author-record/entities/producer-author-record.entity";
+import {ProducerAuthorRecord} from "../../producer-author-record/entities/producer-author-record.entity";
 
 export class CulturalHeritageProperty implements CulturalPropertyModel {
     createdAt: Date;
