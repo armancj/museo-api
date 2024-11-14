@@ -11,7 +11,9 @@ describe('AssociatedDocumentationController', () => {
       providers: [AssociatedDocumentationService],
     }).compile();
 
-    controller = module.get<AssociatedDocumentationController>(AssociatedDocumentationController);
+    controller = module.get<AssociatedDocumentationController>(
+      AssociatedDocumentationController,
+    );
   });
 
   it('should be defined', () => {

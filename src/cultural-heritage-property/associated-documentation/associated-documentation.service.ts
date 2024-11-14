@@ -4,7 +4,7 @@ import { UpdateAssociatedDocumentationDto } from './dto/update-associated-docume
 
 @Injectable()
 export class AssociatedDocumentationService {
-  create(createAssociatedDocumentationDto: CreateAssociatedDocumentationDto) {
+  create(uuid: string, createAssociatedDocumentationDto: CreateAssociatedDocumentationDto) {
     return 'This action adds a new associatedDocumentation';
   }
 
@@ -16,7 +16,10 @@ export class AssociatedDocumentationService {
     return `This action returns a #${id} associatedDocumentation`;
   }
 
-  update(id: number, updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto) {
+  update(
+    id: number,
+    updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto,
+  ) {
     return `This action updates a #${id} associatedDocumentation`;
   }
 
