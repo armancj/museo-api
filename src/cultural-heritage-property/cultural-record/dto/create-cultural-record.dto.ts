@@ -5,15 +5,15 @@ import {
   IsArray,
   IsObject,
   IsNumber,
+  ValidateNested,
 } from 'class-validator';
-import {
-  CulturalPropertiesModel,
-  VolumeQuantitiesModel,
-  DimensionsModel,
-} from '../models/cultural-record';
+import { CulturalPropertiesModel } from '../models/cultural-record';
 
 import { Type } from 'class-transformer';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
+import { VolumesQuantitiesDto } from './volumes-quantities.dto';
+import { DimensionsDto } from './dimensions.dto';
+import { ExtremeDatesDto } from './extreme-dates.dto';
 
 /**
  * Data Transfer Object (DTO) for creating a cultural record.
@@ -80,8 +80,9 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
    */
   @IsOptional()
   @IsObject()
-  @Type(() => Date)
-  extremeDates?: { start: Date; end: Date };
+  @ValidateNested()
+  @Type(() => ExtremeDatesDto)
+  extremeDates?: ExtremeDatesDto;
 
   /**
    * The value grade of the cultural record.
@@ -106,13 +107,18 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
    * Volume quantities related to the cultural record.
    */
   @IsObject()
-  volumesQuantities: VolumeQuantitiesModel;
+  @ValidateNested()
+  @Type(() => VolumesQuantitiesDto)
+  volumesQuantities: VolumesQuantitiesDto;
 
   /**
    * Dimensions related to the cultural record.
    */
   @IsObject()
-  dimensions: DimensionsModel;
+  @ValidateNested()
+  @Type(() => DimensionsDto)
+  @IsObject()
+  dimensions: DimensionsDto;
 
   /**
    * Languages used in the cultural record.

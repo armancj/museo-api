@@ -2,6 +2,7 @@ import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { CulturalRecordModel } from '../models/cultural-record';
 import { VolumeQuantitiesEntity } from './volume-quantities-entity';
 import { DimensionsEntity } from './dimensions-entity';
+import { ExtremeDatesEntity } from "./extreme-dates.entity";
 
 export class CulturalRecordEntity implements CulturalRecordModel {
   objectTitle: string;
@@ -31,7 +32,7 @@ export class CulturalRecordEntity implements CulturalRecordModel {
     this.geographicDescriptors = option.geographicDescriptors;
     this.institutionalDescriptors = option.institutionalDescriptors;
     this.subjectDescriptors = option.subjectDescriptors;
-    this.extremeDates = option.extremeDates;
+    this.extremeDates = ExtremeDatesEntity.create(option.extremeDates);
     this.valueGrade = option.valueGrade;
     this.descriptionLevel = option.descriptionLevel;
     this.valuation = option.valuation;
