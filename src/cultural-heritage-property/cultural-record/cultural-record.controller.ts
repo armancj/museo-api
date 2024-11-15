@@ -8,11 +8,11 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
-import { CulturalRecordService } from './cultural-record.service'; // Servicio actualizado
-import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto'; // DTO actualizado
-import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto'; // DTO actualizado
+import { CulturalRecordService } from './cultural-record.service';
+import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto';
+import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto';
 import { CulturalRecordEntity } from './entities/cultural-record.entity';
-import { ExtendedCulturalRecordEntity } from "./entities/extended-cultural-record.entity"; // Entidad actualizada
+import { ExtendedCulturalRecordEntity } from './entities/extended-cultural-record.entity';
 
 @ApiTags('CulturalRecord')
 @Controller('cultural-record')
