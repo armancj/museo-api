@@ -91,9 +91,8 @@ export class DescriptionControlController {
     name: 'uuid',
     description: 'Unique identifier of the description control to retrieve',
   })
-  @ApiBody({ type: DescriptionControlsEntity })
   @Get(':uuid')
-  findOne(@Param('uuid') uuid: string) {
+  findOne(@Param('uuid') uuid: string): Promise<CreateDescriptionControlDto> {
     return this.descriptionControlService.findOne(uuid);
   }
 
