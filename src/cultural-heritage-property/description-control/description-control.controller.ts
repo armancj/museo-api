@@ -5,8 +5,10 @@ import {
   Patch,
   Param,
   Delete,
-  Put, HttpCode, HttpStatus
-} from "@nestjs/common";
+  Put,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -17,7 +19,7 @@ import {
 import { DescriptionControlService } from './description-control.service';
 import { CreateDescriptionControlDto } from './dto/create-description-control.dto';
 import { UpdateDescriptionControlDto } from './dto/update-description-control.dto';
-import { DescriptionControlsEntity } from "./entities/description-controls.entity";
+import { DescriptionControlsEntity } from './entities/description-controls.entity';
 
 /**
  * Controller for managing description controls.
