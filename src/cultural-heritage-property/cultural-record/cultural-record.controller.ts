@@ -11,7 +11,8 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { CulturalRecordService } from './cultural-record.service'; // Servicio actualizado
 import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto'; // DTO actualizado
 import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto'; // DTO actualizado
-import { CulturalRecordEntity } from './entities/cultural-record.entity'; // Entidad actualizada
+import { CulturalRecordEntity } from './entities/cultural-record.entity';
+import { ExtendedCulturalRecordEntity } from "./entities/extended-cultural-record.entity"; // Entidad actualizada
 
 @ApiTags('CulturalRecord')
 @Controller('cultural-record')
@@ -51,7 +52,7 @@ export class CulturalRecordController {
   @ApiResponse({
     status: 200,
     description: 'List of cultural records',
-    type: [CulturalRecordEntity],
+    type: [ExtendedCulturalRecordEntity],
   })
   findAll() {
     return this.culturalRecordService.findAll();

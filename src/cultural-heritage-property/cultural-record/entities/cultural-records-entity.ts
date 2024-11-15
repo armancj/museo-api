@@ -1,5 +1,6 @@
 import { CulturalRecordEntity } from './cultural-record.entity';
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
+import { ExtendedCulturalRecordEntity } from './extended-cultural-record.entity';
 
 /**
  * Entity for a collection of cultural records.
@@ -7,11 +8,7 @@ import { CulturalPropertyModel } from '../../cultural-heritage-property/models/c
  * Represents a collection or list of cultural records.
  */
 export class CulturalRecordsEntity {
-  public records: CulturalRecordEntity[];
-
-  constructor(records: CulturalRecordEntity[]) {
-    this.records = records;
-  }
+  public constructor(public records: CulturalPropertyModel[]) {}
 
   /**
    * Factory method to create a collection of CulturalRecordEntity instances.
@@ -19,7 +16,9 @@ export class CulturalRecordsEntity {
    * @param records - The array of cultural record data.
    * @returns A new instance of the CulturalRecordsEntity.
    */
-  static create(records: CulturalPropertyModel[]): CulturalRecordEntity[] {
+  static create(
+    records: CulturalPropertyModel[],
+  ): ExtendedCulturalRecordEntity[] {
     if (!Array.isArray(records))
       throw new TypeError('Input in associatedDocumentation is not an array');
 
@@ -27,10 +26,11 @@ export class CulturalRecordsEntity {
       .filter((data) => data.culturalRecord)
       .map((data) => {
         const { uuid, culturalRecord } = data;
+
         return {
           uuid,
-          ...culturalRecord,
-        } as unknown as CulturalRecordEntity;
+          ...CulturalRecordEntity.create(culturalRecord),
+        };
       });
   }
 }
