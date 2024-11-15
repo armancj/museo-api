@@ -56,20 +56,23 @@ export class ProducerAuthorRecordService {
   async remove(uuid: string) {
     await this.findOne(uuid);
     await this.producerAuthorModel.updateOne(
-        { uuid },
-        { $unset: { producerAuthor: "" } },
+      { uuid },
+      { $unset: { producerAuthor: '' } },
     );
   }
 
-  private async updatedDataMongo(uuid: string, producerAuthor: Partial<ProducerAuthorRecordModel>) {
+  private async updatedDataMongo(
+    uuid: string,
+    producerAuthor: Partial<ProducerAuthorRecordModel>,
+  ) {
     const culturalProperty = await this.producerAuthorModel
-        .findOneAndUpdate(
-            {uuid, deleted: false},
-            {producerAuthor},
-            {new: true},
-        )
-        .lean()
-        .exec();
+      .findOneAndUpdate(
+        { uuid, deleted: false },
+        { producerAuthor },
+        { new: true },
+      )
+      .lean()
+      .exec();
 
     if (!culturalProperty)
       throw new NotFoundException('Not Found cultural Property');

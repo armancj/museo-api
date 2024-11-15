@@ -5,8 +5,10 @@ import {
   Patch,
   Param,
   Delete,
-  Put, HttpCode, HttpStatus
-} from "@nestjs/common";
+  Put,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { ProducerAuthorRecordService } from './producer-author-record.service';
 import { CreateProducerAuthorRecordDto } from './dto/create-producer-author-record.dto';
 import { UpdateProducerAuthorRecordDto } from './dto/update-producer-author-record.dto';
