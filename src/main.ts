@@ -6,12 +6,21 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggerInterceptor } from './common/interceptors/logger.interceptor';
 import { swaggerDocumentation } from './config/swagger.config';
 import { apiEnv } from './config/app.const';
+import { CommandFactory } from 'nest-commander';
 
 declare const module: any;
 async function bootstrap() {
+  const isCommandExecution = process.argv.length > 2;
+  if (isCommandExecution) {
+    console.log('Command execution detected, running command...');
+    await CommandFactory.run(AppModule);
+    return;
+  }
+
+  const logger = new Logger(`Server running`);
   const app = await NestFactory.create(AppModule);
   const config: ConfigService = app.get(ConfigService);
-  const logger = new Logger(`Server running`);
+
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({

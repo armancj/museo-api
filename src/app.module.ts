@@ -13,6 +13,7 @@ import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
+import { CommandsModule } from './commands/commands.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cul
     AddressModule,
     SeedModule,
     CulturalHeritagePropertyModule,
+    CommandsModule,
   ],
   controllers: [AppController],
   providers: [
