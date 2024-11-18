@@ -1,6 +1,5 @@
-import {EntryAndLocationRecord} from "./entry-and-location-record.entity";
-import {EntryAndLocationRecordModel} from "../models/entry-and-location-record.model";
-
+import { EntryAndLocationRecord } from './entry-and-location-record.entity';
+import { EntryAndLocationRecordModel } from '../models/entry-and-location-record.model';
 
 /**
  * Extended entity representing a cultural note with an associated UUID.
