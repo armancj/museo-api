@@ -2,7 +2,6 @@ import { CulturalPropertyModel } from '../models/cultural-property.model';
 import { ProducerAuthorRecord } from '../../producer-author-record/entities/producer-author-record.entity';
 import { AccessAndUseCondition } from '../../access-and-use-conditions/entities/access-and-use-condition.entity';
 import { AssociatedDocumentationEntity } from '../../associated-documentation/entities/associated-documentation.entity';
-import { DescriptionControlModel } from '../../description-control/models/description-control-model';
 import {CulturalRecordEntity} from "../../cultural-record/entities/cultural-record.entity";
 import {EntryAndLocationRecord} from "../../entry-and-location-record/entities/entry-and-location-record.entity";
 import {DescriptionControl} from "../../description-control/entities/description-control.entity";
@@ -23,7 +22,7 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
   entryAndLocation: EntryAndLocationRecord;
 
-  descriptionControl: DescriptionControlModel;
+  descriptionControl: DescriptionControl;
 
   notes: CulturalNoteEntity;
 

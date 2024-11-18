@@ -20,6 +20,7 @@ import { DescriptionControlService } from './description-control.service';
 import { CreateDescriptionControlDto } from './dto/create-description-control.dto';
 import { UpdateDescriptionControlDto } from './dto/update-description-control.dto';
 import { DescriptionControlsEntity } from './entities/description-controls.entity';
+import {ExtendedDescriptionControlEntity} from "./entities/extended-description-control.entity";
 
 /**
  * Controller for managing description controls.
@@ -70,6 +71,7 @@ export class DescriptionControlController {
   @ApiResponse({
     status: 200,
     description: 'List of description controls retrieved successfully.',
+    type: [ExtendedDescriptionControlEntity]
   })
   @Get()
   findAll() {
