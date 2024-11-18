@@ -25,6 +25,6 @@ export interface EntryAndLocationRecordModel {
   initialDescription: string;
   entryMethod: string;
   entryDate: Date;
-  objectLocation: Location;
+  objectLocation: LocationModel;
   institutionType: InstitutionType;
 }
