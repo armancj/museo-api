@@ -1,8 +1,8 @@
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { CulturalRecordModel } from '../models/cultural-record';
-import { VolumeQuantitiesEntity } from './volume-quantities-entity';
-import { DimensionsEntity } from './dimensions-entity';
 import { ExtremeDatesEntity } from './extreme-dates.entity';
+import { VolumeQuantitiesEntity } from "./volume-quantities.entity";
+import { DimensionsEntity } from "./dimensions.entity";
 
 /**
  * Entity class representing a cultural record.
