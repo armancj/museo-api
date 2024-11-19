@@ -12,8 +12,8 @@ declare const module: any;
 async function bootstrap() {
   const isCommandExecution = process.argv.length > 2;
   if (isCommandExecution) {
+    await CommandFactory.run(AppModule, { logger: ['log', 'error', 'debug'] });
     console.log('Command execution detected, running command...');
-    await CommandFactory.run(AppModule);
     return;
   }
 

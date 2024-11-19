@@ -12,8 +12,8 @@ import { Institutions } from './entities/institutions.entity';
 import { RootFilterQuery } from 'mongoose';
 import { InstitutionModel } from './entities/institution.model';
 import { EventEmitter2Adapter } from '../../shared/event-emitter/event-emitter.adapter';
-import {getFieldOfInstitutionData} from "../../common/utils/get-field-of-user-data";
-import {JwtPayload} from "../../auth/strategies/jwt.payload";
+import { getFieldOfInstitutionData } from '../../common/utils/get-field-of-user-data';
+import { JwtPayload } from '../../auth/strategies/jwt.payload';
 
 @Injectable()
 export class InstitutionsService {
@@ -31,7 +31,7 @@ export class InstitutionsService {
   }
 
   async findAll(user: JwtPayload) {
-    const filter: Partial<InstitutionModel> = {}
+    const filter: Partial<InstitutionModel> = {};
     getFieldOfInstitutionData(user, filter);
     const institutions = await this.institutionDocumentModel
       .find({ deleted: false, ...filter })
@@ -40,14 +40,22 @@ export class InstitutionsService {
   }
 
   async findOne(uuid: string, user: JwtPayload) {
-    const filter: Partial<InstitutionModel> = {}
+    const filter: Partial<InstitutionModel> = {};
     getFieldOfInstitutionData(user, filter);
-    const institution = await this.getInstitution({ uuid, deleted: false, ...filter });
+    const institution = await this.getInstitution({
+      uuid,
+      deleted: false,
+      ...filter,
+    });
     if (!institution) throw new NotFoundException('Institution not found');
     return Institution.create(institution);
   }
 
-  async update(uuid: string, updateInstitutionDto: UpdateInstitutionDto, user: JwtPayload) {
+  async update(
+    uuid: string,
+    updateInstitutionDto: UpdateInstitutionDto,
+    user: JwtPayload,
+  ) {
     await this.findOne(uuid, user);
     await this.validationData(updateInstitutionDto);
     await this.institutionDocumentModel

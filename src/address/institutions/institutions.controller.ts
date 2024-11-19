@@ -11,9 +11,9 @@ import { InstitutionsService } from './institutions.service';
 import { CreateInstitutionDto } from './dto/create-institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { ApiTags } from '@nestjs/swagger';
-import {Auth, CurrentUser} from '../../auth/decorator';
-import {JwtPayload} from "../../auth/strategies/jwt.payload";
-import {UserRoles} from "../../users/enum/user-roles.enum";
+import { Auth, CurrentUser } from '../../auth/decorator';
+import { JwtPayload } from '../../auth/strategies/jwt.payload';
+import { UserRoles } from '../../users/enum/user-roles.enum';
 
 @ApiTags('Institution')
 @Controller('institutions')
@@ -24,7 +24,10 @@ export class InstitutionsController {
     roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
   })
   @Post()
-  create(@Body() createInstitutionDto: CreateInstitutionDto, @CurrentUser() user: JwtPayload,) {
+  create(
+    @Body() createInstitutionDto: CreateInstitutionDto,
+    @CurrentUser() user: JwtPayload,
+  ) {
     return this.institutionsService.create(createInstitutionDto, user);
   }
 
@@ -33,7 +36,6 @@ export class InstitutionsController {
   findAll(@CurrentUser() user: JwtPayload) {
     return this.institutionsService.findAll(user);
   }
-
 
   @Auth()
   @Get(':uuid')
@@ -48,7 +50,7 @@ export class InstitutionsController {
   update(
     @Param('uuid') uuid: string,
     @Body() updateInstitutionDto: UpdateInstitutionDto,
-    @CurrentUser() user: JwtPayload
+    @CurrentUser() user: JwtPayload,
   ) {
     return this.institutionsService.update(uuid, updateInstitutionDto, user);
   }

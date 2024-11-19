@@ -13,7 +13,8 @@ import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.
 import { firstValueFrom } from 'rxjs';
 import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
 import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
-import {getFieldOfUserData} from "../common/utils/get-field-of-user-data";
+import { getFieldOfUserData } from '../common/utils/get-field-of-user-data';
+import { UserRoles } from './enum/user-roles.enum';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -32,7 +33,7 @@ export class UsersService {
 
     getFieldOfUserData(user, rest);
 
-    await this.validationData(rest);
+    if (user.roles !== UserRoles.superAdmin) await this.validationData(rest);
 
     const passwordHashed = await hashedPassword(password);
 
@@ -42,8 +43,7 @@ export class UsersService {
 
   async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
     getFieldOfUserData(user, filter);
-
-    return await this.userMongoRepository.findAll(filter, {}, query);
+    return await this.userMongoRepository.findAll(filter, {}, query, user);
   }
 
   async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
@@ -64,7 +64,7 @@ export class UsersService {
 
     getFieldOfUserData(user, rest);
 
-    await this.validationData(rest);
+    if (user.roles !== UserRoles.superAdmin) await this.validationData(rest);
 
     const updateUser: Partial<UserModel> = { ...rest } as UserModel;
     if (password) updateUser.passwordHashed = await hashedPassword(password);
@@ -72,13 +72,13 @@ export class UsersService {
     return this.userMongoRepository.updatedOne(filter, updateUser);
   }
 
-  async remove(filter: Partial<UserModel>): Promise<boolean> {
-    await this.findOne(filter);
+  async remove(filter: Partial<UserModel>, user?: User): Promise<boolean> {
+    await this.findOne(filter, user);
     return this.userMongoRepository.deleteOne(filter);
   }
 
-  async softDelete(param: { uuid: string }) {
-    const user = await this.findOne({ ...param, deleted: false });
+  async softDelete(param: { uuid: string }, currentUser?: User) {
+    const user = await this.findOne({ ...param, deleted: false }, currentUser);
 
     return await this.userMongoRepository.updatedOne({
       deleted: true,
