@@ -13,7 +13,6 @@ import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.
 import { firstValueFrom } from 'rxjs';
 import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
 import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
-import { UserRoles } from './enum/user-roles.enum';
 import {getFieldOfUserData} from "../common/utils/get-field-of-user-data";
 
 export type UpdatedUser = {

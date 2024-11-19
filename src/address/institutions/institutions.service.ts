@@ -12,6 +12,8 @@ import { Institutions } from './entities/institutions.entity';
 import { RootFilterQuery } from 'mongoose';
 import { InstitutionModel } from './entities/institution.model';
 import { EventEmitter2Adapter } from '../../shared/event-emitter/event-emitter.adapter';
+import {getFieldOfInstitutionData, getFieldOfUserData} from "../../common/utils/get-field-of-user-data";
+import {User} from "../../users/entities/user.entity";
 
 @Injectable()
 export class InstitutionsService {
@@ -20,7 +22,8 @@ export class InstitutionsService {
     private institutionDocumentModel: InstitutionMongoModel,
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
-  async create(createInstitutionDto: CreateInstitutionDto) {
+  async create(createInstitutionDto: CreateInstitutionDto, user: User) {
+    getFieldOfInstitutionData(user, createInstitutionDto);
     await this.validationData(createInstitutionDto);
     const institution =
       await this.institutionDocumentModel.create(createInstitutionDto);

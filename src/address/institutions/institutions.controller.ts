@@ -11,7 +11,8 @@ import { InstitutionsService } from './institutions.service';
 import { CreateInstitutionDto } from './dto/create-institution.dto';
 import { UpdateInstitutionDto } from './dto/update-institution.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Auth } from '../../auth/decorator';
+import {Auth, CurrentUser} from '../../auth/decorator';
+import {User} from "../../users/entities/user.entity";
 
 @Auth()
 @ApiTags('Institution')
@@ -20,8 +21,8 @@ export class InstitutionsController {
   constructor(private readonly institutionsService: InstitutionsService) {}
 
   @Post()
-  create(@Body() createInstitutionDto: CreateInstitutionDto) {
-    return this.institutionsService.create(createInstitutionDto);
+  create(@Body() createInstitutionDto: CreateInstitutionDto,  @CurrentUser() user: User,) {
+    return this.institutionsService.create(createInstitutionDto, user);
   }
 
   @Get()
