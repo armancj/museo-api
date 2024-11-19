@@ -14,6 +14,7 @@ import { firstValueFrom } from 'rxjs';
 import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
 import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
 import { UserRoles } from './enum/user-roles.enum';
+import {getFieldOfUserData} from "../common/utils/get-field-of-user-data";
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -30,7 +31,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto, user?: User): Promise<User> {
     const { password, ...rest } = createUserDto;
 
-    this.getFieldOfUserData(user, rest);
+    getFieldOfUserData(user, rest);
 
     await this.validationData(rest);
 
@@ -41,13 +42,13 @@ export class UsersService {
   }
 
   async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
-    this.getFieldOfUserData(user, filter);
+    getFieldOfUserData(user, filter);
 
     return await this.userMongoRepository.findAll(filter, {}, query);
   }
 
   async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
-    this.getFieldOfUserData(currentUser, filter);
+    getFieldOfUserData(currentUser, filter);
     const user = await this.userMongoRepository.findOne(
       filter,
       {},
@@ -62,7 +63,7 @@ export class UsersService {
     await this.findOne(filter, user);
     const { password, ...rest } = updateUserDto;
 
-    this.getFieldOfUserData(user, rest);
+    getFieldOfUserData(user, rest);
 
     await this.validationData(rest);
 
@@ -197,18 +198,5 @@ export class UsersService {
     if (!user?.avatar?.id)
       throw new NotFoundException('User not have upload file');
     return user?.avatar?.id;
-  }
-
-  private getFieldOfUserData(user: User, rest: Partial<UserModel>) {
-    if (user?.roles === UserRoles.administrator) {
-      rest.nationality = user.nationality;
-      rest.province = user.province;
-    }
-
-    if (user?.roles === UserRoles.manager) {
-      rest.nationality = user.nationality;
-      rest.province = user.province;
-      rest.municipal = user.municipal;
-    }
   }
 }
