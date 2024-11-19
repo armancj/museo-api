@@ -1,16 +1,18 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { EntryAndLocationRecordService } from './entry-and-location-record.service';
 import { CreateEntryAndLocationRecordDto } from './dto/create-entry-and-location-record.dto';
 import { UpdateEntryAndLocationRecordDto } from './dto/update-entry-and-location-record.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { EntryAndLocationRecord } from './entities/entry-and-location-record.entity';
+import { LocationEntity } from './entities/location.entity';
 
 @ApiTags('EntryLocationRecord')
 @Controller('entry-and-location-record')
@@ -19,38 +21,113 @@ export class EntryAndLocationRecordController {
     private readonly entryAndLocationRecordService: EntryAndLocationRecordService,
   ) {}
 
-  @Post()
-  create(
+  /**
+   * Creates or updates an entry and location record.
+   *
+   * @param uuid The uuid of the entry and location record to update or create.
+   * @param createEntryAndLocationRecordDto The data to create or update an entry and location record.
+   * @returns The created or updated entry and location record entity.
+   */
+  @Put(':uuid')
+  @ApiOperation({
+    summary: 'Create or update an entry and location record by uuid',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Entry and location record created or updated successfully',
+    type: EntryAndLocationRecord,
+  })
+  @ApiResponse({ status: 400, description: 'Invaluuid input' })
+  @ApiBody({ type: CreateEntryAndLocationRecordDto })
+  createOrUpdate(
+    @Param('uuid') uuid: string,
     @Body() createEntryAndLocationRecordDto: CreateEntryAndLocationRecordDto,
   ) {
     return this.entryAndLocationRecordService.create(
+      uuid,
       createEntryAndLocationRecordDto,
     );
   }
 
+  /**
+   * Retrieves all entry and location records.
+   *
+   * @returns A list of entry and location records.
+   */
   @Get()
+  @ApiOperation({ summary: 'Retrieve all entry and location records' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of entry and location records',
+    type: [LocationEntity],
+  })
   findAll() {
     return this.entryAndLocationRecordService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.entryAndLocationRecordService.findOne(+id);
+  /**
+   * Retrieves an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record.
+   * @returns The entry and location record entity.
+   */
+  @Get(':uuid')
+  @ApiOperation({ summary: 'Retrieve an entry and location record by uuid' })
+  @ApiResponse({
+    status: 200,
+    description: 'Entry and location record retrieved successfully',
+    type: EntryAndLocationRecord,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Entry and location record not found',
+  })
+  findOne(@Param('uuid') uuid: string) {
+    return this.entryAndLocationRecordService.findOne(uuid);
   }
 
-  @Patch(':id')
+  /**
+   * Updates an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record.
+   * @param updateEntryAndLocationRecordDto The data to update the entry and location record.
+   * @returns The updated entry and location record entity.
+   */
+  @Patch(':uuid')
+  @ApiOperation({ summary: 'Update an entry and location record by uuid' })
+  @ApiResponse({
+    status: 200,
+    description: 'Entry and location record updated successfully',
+    type: EntryAndLocationRecord,
+  })
+  @ApiResponse({ status: 400, description: 'Invaluuid input' })
   update(
-    @Param('id') id: string,
+    @Param('uuid') uuid: string,
     @Body() updateEntryAndLocationRecordDto: UpdateEntryAndLocationRecordDto,
   ) {
     return this.entryAndLocationRecordService.update(
-      +id,
+      uuid,
       updateEntryAndLocationRecordDto,
     );
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.entryAndLocationRecordService.remove(+id);
+  /**
+   * Deletes an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record.
+   * @returns A success message.
+   */
+  @Delete(':uuid')
+  @ApiOperation({ summary: 'Delete an entry and location record by uuid' })
+  @ApiResponse({
+    status: 204,
+    description: 'Entry and location record deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Entry and location record not found',
+  })
+  remove(@Param('uuid') uuid: string) {
+    return this.entryAndLocationRecordService.remove(uuid);
   }
 }

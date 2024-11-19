@@ -3,7 +3,7 @@ import { CommonRecordService } from '../shared/common-record-service.service';
 import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto';
 import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto';
 import { CulturalRecordEntity } from './entities/cultural-record.entity';
-import { CulturalRecordsEntity } from './entities/cultural-records-entity';
+import { CulturalRecordsEntity } from './entities/cultural-records.entity';
 
 @Injectable()
 export class CulturalRecordService {

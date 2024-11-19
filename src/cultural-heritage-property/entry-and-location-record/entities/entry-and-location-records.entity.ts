@@ -1,6 +1,6 @@
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { ExtendedEntryAndLocationRecordsEntity } from './extended-entry-and-location-records.entity';
-import {EntryAndLocationRecord} from "./entry-and-location-record.entity";
+import { EntryAndLocationRecord } from './entry-and-location-record.entity';
 
 /**
  * Entity representing a collection of entry and location records.
@@ -28,7 +28,9 @@ export class EntryAndLocationRecordsEntity {
     value: CulturalPropertyModel[],
   ): ExtendedEntryAndLocationRecordsEntity[] {
     if (!Array.isArray(value))
-      throw new TypeError('Input in entry and location records is not an array');
+      throw new TypeError(
+        'Input in entry and location records is not an array',
+      );
 
     return value
       .filter((data) => data.entryAndLocation)

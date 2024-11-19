@@ -7,7 +7,7 @@ import {
   CulturalHeritagePropertyEntity,
   CulturalHeritagePropertySchema,
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
-import { CulturalRecordsEntity } from './entities/cultural-records-entity';
+import { CulturalRecordsEntity } from './entities/cultural-records.entity';
 import { CulturalRecordEntity } from './entities/cultural-record.entity';
 
 /**

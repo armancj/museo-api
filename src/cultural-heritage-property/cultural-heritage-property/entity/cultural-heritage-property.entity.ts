@@ -2,10 +2,10 @@ import { CulturalPropertyModel } from '../models/cultural-property.model';
 import { ProducerAuthorRecord } from '../../producer-author-record/entities/producer-author-record.entity';
 import { AccessAndUseCondition } from '../../access-and-use-conditions/entities/access-and-use-condition.entity';
 import { AssociatedDocumentationEntity } from '../../associated-documentation/entities/associated-documentation.entity';
-import {CulturalRecordEntity} from "../../cultural-record/entities/cultural-record.entity";
-import {EntryAndLocationRecord} from "../../entry-and-location-record/entities/entry-and-location-record.entity";
-import {DescriptionControl} from "../../description-control/entities/description-control.entity";
-import {CulturalNoteEntity} from "../../cultural-notes/entities/cultural-note.entity";
+import { CulturalRecordEntity } from '../../cultural-record/entities/cultural-record.entity';
+import { EntryAndLocationRecord } from '../../entry-and-location-record/entities/entry-and-location-record.entity';
+import { DescriptionControl } from '../../description-control/entities/description-control.entity';
+import { CulturalNoteEntity } from '../../cultural-notes/entities/cultural-note.entity';
 
 export class CulturalHeritageProperty implements CulturalPropertyModel {
   createdAt: Date;
@@ -49,13 +49,16 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
         option.associatedDocumentation,
       );
 
-    if (option.culturalRecord) this.culturalRecord = CulturalRecordEntity.create(option.culturalRecord);
+    if (option.culturalRecord)
+      this.culturalRecord = CulturalRecordEntity.create(option.culturalRecord);
 
     if (option.entryAndLocation)
       this.entryAndLocation = option.entryAndLocation;
 
     if (option.descriptionControl)
-      this.descriptionControl = DescriptionControl.create(option.descriptionControl);
+      this.descriptionControl = DescriptionControl.create(
+        option.descriptionControl,
+      );
 
     if (option.notes) this.notes = CulturalNoteEntity.create(option.notes);
   }
