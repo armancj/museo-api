@@ -12,8 +12,8 @@ import { Institutions } from './entities/institutions.entity';
 import { RootFilterQuery } from 'mongoose';
 import { InstitutionModel } from './entities/institution.model';
 import { EventEmitter2Adapter } from '../../shared/event-emitter/event-emitter.adapter';
-import {getFieldOfInstitutionData, getFieldOfUserData} from "../../common/utils/get-field-of-user-data";
-import {User} from "../../users/entities/user.entity";
+import {getFieldOfInstitutionData} from "../../common/utils/get-field-of-user-data";
+import {JwtPayload} from "../../auth/strategies/jwt.payload";
 
 @Injectable()
 export class InstitutionsService {
@@ -22,7 +22,7 @@ export class InstitutionsService {
     private institutionDocumentModel: InstitutionMongoModel,
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
-  async create(createInstitutionDto: CreateInstitutionDto, user: User) {
+  async create(createInstitutionDto: CreateInstitutionDto, user: JwtPayload) {
     getFieldOfInstitutionData(user, createInstitutionDto);
     await this.validationData(createInstitutionDto);
     const institution =
@@ -30,21 +30,25 @@ export class InstitutionsService {
     return Institution.create(institution);
   }
 
-  async findAll() {
+  async findAll(user: JwtPayload) {
+    const filter: Partial<InstitutionModel> = {}
+    getFieldOfInstitutionData(user, filter);
     const institutions = await this.institutionDocumentModel
-      .find({ deleted: false })
+      .find({ deleted: false, ...filter })
       .exec();
     return Institutions.create(institutions).value;
   }
 
-  async findOne(uuid: string) {
-    const institution = await this.getInstitution({ uuid, deleted: false });
+  async findOne(uuid: string, user: JwtPayload) {
+    const filter: Partial<InstitutionModel> = {}
+    getFieldOfInstitutionData(user, filter);
+    const institution = await this.getInstitution({ uuid, deleted: false, ...filter });
     if (!institution) throw new NotFoundException('Institution not found');
     return Institution.create(institution);
   }
 
-  async update(uuid: string, updateInstitutionDto: UpdateInstitutionDto) {
-    await this.findOne(uuid);
+  async update(uuid: string, updateInstitutionDto: UpdateInstitutionDto, user: JwtPayload) {
+    await this.findOne(uuid, user);
     await this.validationData(updateInstitutionDto);
     await this.institutionDocumentModel
       .updateOne(
@@ -54,8 +58,8 @@ export class InstitutionsService {
       .exec();
   }
 
-  async remove(uuid: string) {
-    await this.findOne(uuid);
+  async remove(uuid: string, user: JwtPayload) {
+    await this.findOne(uuid, user);
     await this.institutionDocumentModel
       .updateOne({ uuid, deleted: false }, { deleted: true })
       .exec();

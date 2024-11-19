@@ -2,6 +2,7 @@ import {User} from "../../users/entities/user.entity";
 import {UserModel} from "../../users/models/user.model";
 import {UserRoles} from "../../users/enum/user-roles.enum";
 import {InstitutionModel} from "../../address/institutions/entities/institution.model";
+import {JwtPayload} from "../../auth/strategies/jwt.payload";
 
 export function getFieldOfUserData(user: User, rest: Partial<UserModel>) {
     if (user?.roles === UserRoles.administrator) {
@@ -16,7 +17,7 @@ export function getFieldOfUserData(user: User, rest: Partial<UserModel>) {
     }
 }
 
-export function getFieldOfInstitutionData(user: User, rest: Partial<InstitutionModel>) {
+export function getFieldOfInstitutionData(user: JwtPayload, rest: Partial<InstitutionModel>) {
     if (user?.roles === UserRoles.administrator) {
         rest.country = user.nationality;
         rest.province = user.province;
