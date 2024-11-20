@@ -59,7 +59,7 @@ export class CulturalHeritageProperty extends BaseSchema {
   InstitutionId: string;
 
   @Type(() => Institution)
-  institution: Institution;
+  institutionId: Institution;
 }
 
 export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(
@@ -68,7 +68,7 @@ export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(
 
 CulturalHeritagePropertySchema.virtual('institution', {
   ref: InstitutionNameEntity,
-  localField: 'InstitutionId',
+  localField: 'institutionId',
   foreignField: 'uuid',
   justOne: true,
 });

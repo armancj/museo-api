@@ -1,59 +1,91 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Model } from 'mongoose';
-import { UserPropertiesModel } from '../models/user.model';
-import { UploadedFileEmbed } from './uploaded-file.embed';
-import { UserRoles } from '../enum/user-roles.enum';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import {HydratedDocument, Model} from 'mongoose';
+import {UserModel, UserPropertiesModel} from '../models/user.model';
+import {UploadedFileEmbed} from './uploaded-file.embed';
+import {UserRoles} from '../enum/user-roles.enum';
+import {Institution, InstitutionNameEntity} from "../../address/institutions/schema/institution.schema";
+import {Type} from "class-transformer";
 
 type UserDocument = HydratedDocument<User>;
 
-@Schema()
-export class User implements UserPropertiesModel {
-  @Prop({ unique: true })
-  uuid: string;
+@Schema({
+    toJSON: {
+        getters: true,
+        virtuals: true,
+    },
+})
+export class User implements UserModel {
+    @Prop({unique: true})
+    uuid: string;
 
-  @Prop()
-  name: string;
+    @Prop()
+    name: string;
 
-  @Prop()
-  lastName: string;
+    @Prop()
+    lastName: string;
 
-  @Prop()
-  nationality?: string;
+    @Prop()
+    nationality?: string;
 
-  @Prop()
-  address?: string;
+    @Prop()
+    address?: string;
 
-  @Prop()
-  province?: string;
+    @Prop()
+    province?: string;
 
-  @Prop({ type: String, unique: true, sparse: true })
-  email: string;
+    @Prop({type: String, unique: true, sparse: true})
+    email: string;
 
-  @Prop({ type: String, unique: true, sparse: true })
-  mobile: string;
+    @Prop({type: String, unique: true, sparse: true})
+    mobile: string;
 
-  @Prop()
-  passwordHashed: string;
+    @Prop()
+    passwordHashed: string;
 
-  @Prop({ default: true })
-  active?: boolean;
+    @Prop({default: true})
+    active?: boolean;
 
-  @Prop({ default: false })
-  deleted?: boolean;
+    @Prop({default: false})
+    deleted?: boolean;
 
-  @Prop({ type: UploadedFileEmbed })
-  avatar?: UploadedFileEmbed;
+    @Prop({type: UploadedFileEmbed})
+    avatar?: UploadedFileEmbed;
 
-  @Prop({ default: UserRoles.employee })
-  roles?: UserRoles;
+    @Prop({default: UserRoles.employee})
+    roles?: UserRoles;
 
-  @Prop()
-  municipal: string;
+    @Prop()
+    municipal: string;
+
+    @Prop()
+    institutionId?: string;
+
+    @Type(() => Institution)
+    institution?: Institution;
 }
 
 const UserSchema = SchemaFactory.createForClass(User);
 
+UserSchema.virtual('institution', {
+    ref: InstitutionNameEntity,
+    localField: 'institutionId',
+    foreignField: 'uuid',
+    justOne: true,
+});
+
+UserSchema.pre('save', function (next) {
+    if (this.roles === UserRoles.superAdmin) {
+        this.nationality = null;
+        this.province = null;
+        this.municipal = null;
+    }
+    if (this.roles === UserRoles.administrator) {
+        this.municipal = null;
+    }
+    next();
+});
+
 const UserNameEntity = 'User';
 type UserMongoModel = Model<UserDocument>;
 
-export { UserSchema, UserNameEntity, UserMongoModel, UserDocument };
+export {UserSchema, UserNameEntity, UserMongoModel, UserDocument};

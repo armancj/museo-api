@@ -5,6 +5,7 @@ import {
 } from '../models/user.model';
 import { Expose, plainToClass } from 'class-transformer';
 import { UserRoles } from '../enum/user-roles.enum';
+import {Institution} from "../../address/institutions/entities/institution.entity";
 
 export class User implements UserModel {
   @Expose()
@@ -48,8 +49,17 @@ export class User implements UserModel {
   @Expose()
   readonly deleted?: boolean;
 
+
+  institutionId?: string;
+
+
+  @Expose()
+  institution?: Institution
+
   constructor(options: UserPropertiesModel) {
     Object.assign(this as UserModel, options);
+    if((options as any)?.institution)
+    this.institution =Institution.create((options as any).institution);
   }
 
   updateUserInfo(updatedInfo: Partial<UserPropertiesModel>): void {

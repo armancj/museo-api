@@ -1,20 +1,20 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserMongoRepository } from './repositories/user-mongo.repository';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
-import { FindAllDto } from '../common/dto/find-all.dto';
-import { UploadedFile, UserModel } from './models/user.model';
-import { hashedPassword } from '../common/utils/hashed-password';
-import { OnEvent } from '@nestjs/event-emitter';
-import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
-import { EventEmitter2Adapter } from '../shared/event-emitter/event-emitter.adapter';
-import { FileStorageModel } from '../file-storage/model/file-storage.model';
-import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.exception';
-import { firstValueFrom } from 'rxjs';
-import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
-import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
-import { getFieldOfUserData } from '../common/utils/get-field-of-user-data';
-import { UserRoles } from './enum/user-roles.enum';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import {UserMongoRepository} from './repositories/user-mongo.repository';
+import {CreateUserDto} from './dto/create-user.dto';
+import {User} from './entities/user.entity';
+import {FindAllDto} from '../common/dto/find-all.dto';
+import {UploadedFile, UserModel} from './models/user.model';
+import {hashedPassword} from '../common/utils/hashed-password';
+import {OnEvent} from '@nestjs/event-emitter';
+import {EventEmitter} from '../shared/event-emitter/event-emitter.const';
+import {EventEmitter2Adapter} from '../shared/event-emitter/event-emitter.adapter';
+import {FileStorageModel} from '../file-storage/model/file-storage.model';
+import {UnauthorizedAuthException} from '../auth/exceptions/unauthorized-auth.exception';
+import {firstValueFrom} from 'rxjs';
+import {FileMetadataModel} from '../file-storage/model/file-metadata.model';
+import {concatenateUint8Arrays} from '../common/utils/concatenate-uint8-arrays.function';
+import {getFieldOfUserData} from '../common/utils/get-field-of-user-data';
+import {UserRoles} from './enum/user-roles.enum';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -43,7 +43,7 @@ export class UsersService {
 
   async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
     getFieldOfUserData(user, filter);
-    return await this.userMongoRepository.findAll(filter, {}, query, user);
+    return await this.userMongoRepository.findAll(filter, {}, query);
   }
 
   async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {

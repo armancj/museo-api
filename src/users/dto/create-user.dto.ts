@@ -5,7 +5,7 @@ import {
   IsMobilePhone,
   IsNotEmpty,
   IsEnum,
-  ValidateIf,
+  ValidateIf, IsUUID,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserPropertiesModel } from '../models/user.model';
@@ -95,4 +95,10 @@ export class CreateUserDto
   @IsOptional()
   @IsEnum(UserRoles)
   roles?: UserRoles;
+
+  @IsString()
+  @IsUUID()
+  @IsOptional()
+  @IsNotEmpty()
+  institutionId?: string;
 }

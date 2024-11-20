@@ -30,6 +30,8 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
   uuid: string;
 
+
+
   constructor(option: CulturalPropertyModel) {
     this.createdAt = option.createdAt;
     this.deleted = option.deleted;

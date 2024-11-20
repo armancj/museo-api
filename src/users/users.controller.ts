@@ -100,11 +100,6 @@ export class UsersController {
     });
   }
 
-  @Delete(':uuid/soft')
-  async removeSoft(@Param('uuid') uuid: string): Promise<boolean> {
-    return this.userService.softDelete({ uuid });
-  }
-
   @Post(':uuid/avatar')
   @UseInterceptors(FileInterceptor('file') as any)
   @ApiConsumes('multipart/form-data')
@@ -134,6 +129,6 @@ export class UsersController {
 
   @Delete(':uuid')
   async remove(@Param('uuid') uuid: string): Promise<boolean> {
-    return this.userService.remove({ uuid });
+    return this.userService.softDelete({ uuid });
   }
 }
