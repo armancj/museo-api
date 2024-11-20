@@ -31,9 +31,10 @@ export class UsersService {
   async create(createUserDto: CreateUserDto, user?: User): Promise<User> {
     const { password, ...rest } = createUserDto;
 
+
     getFieldOfUserData(user, rest);
 
-    if (user.roles !== UserRoles.superAdmin) await this.validationData(rest);
+    if (rest.roles !== UserRoles.superAdmin) await this.validationData(rest);
 
     const passwordHashed = await hashedPassword(password);
 
@@ -101,7 +102,7 @@ export class UsersService {
         this.eventEmitter.checkProvinceExists(userDto.province),
       );
     }
-    if (userDto.municipal) {
+    if (userDto.municipal && userDto.roles !== UserRoles.administrator) {
       validationPromises.push(
         this.eventEmitter.checkMunicipalityExists(userDto.municipal),
       );

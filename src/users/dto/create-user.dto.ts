@@ -96,9 +96,13 @@ export class CreateUserDto
   @IsEnum(UserRoles)
   roles?: UserRoles;
 
+  @ValidateIf(
+      (dto) =>
+          dto.roles !== UserRoles.superAdmin ||
+          dto.roles !== UserRoles.administrator,
+  )
   @IsString()
   @IsUUID()
-  @IsOptional()
   @IsNotEmpty()
   institutionId?: string;
 }

@@ -78,9 +78,11 @@ UserSchema.pre('save', function (next) {
         this.nationality = null;
         this.province = null;
         this.municipal = null;
+        this.institutionId = null;
     }
     if (this.roles === UserRoles.administrator) {
         this.municipal = null;
+        this.institutionId = null;
     }
     next();
 });
