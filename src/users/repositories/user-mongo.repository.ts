@@ -24,7 +24,7 @@ export type createUserModel = Omit<
 
 @Injectable()
 export class UserMongoRepository {
-  private POPULATE = [
+  private POPULATE: any = [
     {
       path: 'institution',
       match: { delete: false },
