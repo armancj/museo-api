@@ -3,57 +3,43 @@ import {
     UserModel,
     UserPropertiesModel,
 } from '../models/user.model';
-import {Expose} from 'class-transformer';
+import {Exclude, Expose} from 'class-transformer';
 import {UserRoles} from '../enum/user-roles.enum';
 import {Institution} from "../../address/institutions/entities/institution.entity";
 
 export class User implements UserModel {
-    @Expose()
     uuid: string;
 
-    @Expose()
     mobile: string;
 
-    @Expose()
     municipal: string;
 
-    @Expose()
     readonly email: string;
 
-    @Expose()
     readonly address?: string;
 
-    @Expose()
     readonly lastName: string;
 
-    @Expose()
     readonly name: string;
 
-    @Expose()
     readonly nationality?: string;
 
-    @Expose()
     readonly province?: string;
 
-    @Expose()
     readonly avatar?: UploadedFile;
 
-    @Expose()
     readonly roles?: UserRoles;
 
+    @Exclude()
     readonly passwordHashed: string;
 
-    @Expose()
     readonly active?: boolean;
 
-    @Expose()
+    @Exclude()
     readonly deleted?: boolean;
-
 
     institutionId?: string;
 
-
-    @Expose()
     institution?: Institution
 
 

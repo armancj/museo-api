@@ -10,12 +10,16 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { UserPropertiesModel } from '../models/user.model';
 import { UserRoles } from '../enum/user-roles.enum';
+import {Transform} from "class-transformer";
+import {ApplyTransform} from "../../common/decorator/apply-transform.decorator";
+import {toLowerCase} from "../../common/utils/to-lower-case";
 
 export class CreateUserDto
   implements Omit<UserPropertiesModel, 'passwordHashed' | 'uuid'>
 {
-  @IsEmail()
   @IsString()
+  @ApplyTransform(toLowerCase)
+  @IsEmail()
   @IsNotEmpty()
   @ApiProperty({
     type: String,
@@ -62,7 +66,7 @@ export class CreateUserDto
   })
   name: string;
 
-  @ValidateIf((dto) => dto.roles !== UserRoles.superAdmin)
+  @ValidateIf((dto) => dto?.roles !== UserRoles.superAdmin)
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -71,7 +75,7 @@ export class CreateUserDto
   })
   nationality: string;
 
-  @ValidateIf((dto) => dto.roles !== UserRoles.superAdmin)
+  @ValidateIf((dto) => dto?.roles !== UserRoles.superAdmin)
   @IsString()
   @ApiProperty({
     type: String,
@@ -81,8 +85,8 @@ export class CreateUserDto
 
   @ValidateIf(
     (dto) =>
-      dto.roles !== UserRoles.superAdmin ||
-      dto.roles !== UserRoles.administrator,
+        dto?.roles === UserRoles.employee ||
+        dto?.roles === UserRoles.manager,
   )
   @IsString()
   @ApiProperty({
@@ -92,14 +96,15 @@ export class CreateUserDto
   municipal: string;
 
   @IsString()
+  @IsNotEmpty()
   @IsOptional()
   @IsEnum(UserRoles)
   roles?: UserRoles;
 
   @ValidateIf(
       (dto) =>
-          dto.roles !== UserRoles.superAdmin ||
-          dto.roles !== UserRoles.administrator,
+          dto?.roles === UserRoles.employee ||
+          dto?.roles === UserRoles.manager,
   )
   @IsString()
   @IsUUID()

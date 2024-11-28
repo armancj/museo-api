@@ -3,6 +3,8 @@ import { UserModel } from '../../users/models/user.model';
 import { UserRoles } from '../../users/enum/user-roles.enum';
 import { InstitutionModel } from '../../address/institutions/entities/institution.model';
 import { JwtPayload } from '../../auth/strategies/jwt.payload';
+import {Forbidden} from "../dto/exception.dto";
+import {ForbiddenException} from "@nestjs/common";
 
 function canCreateRole(userRole: UserRoles, targetRole: UserRoles): boolean {
   if (userRole === UserRoles.superAdmin) {
@@ -22,7 +24,7 @@ function canCreateRole(userRole: UserRoles, targetRole: UserRoles): boolean {
 
 export function getFieldOfUserData(user: User, rest: Partial<UserModel>) {
   if (!canCreateRole(user?.roles, rest.roles!)) {
-    throw new Error('You do not have permission to create this type of user.');
+    throw new ForbiddenException('You do not have permission to create this type of user.');
   }
 
   if (user?.roles === UserRoles.administrator) {
