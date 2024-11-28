@@ -1,11 +1,13 @@
 import {
     IsEmail,
-    IsString,
-    IsOptional,
+    IsEmpty,
+    IsEnum,
     IsMobilePhone,
     IsNotEmpty,
-    IsEnum,
-    ValidateIf, IsUUID, isString, isUUID, isNotEmpty,
+    IsOptional,
+    IsString,
+    IsUUID,
+    ValidateIf,
 } from 'class-validator';
 import {ApiProperty} from '@nestjs/swagger';
 import {UserPropertiesModel} from '../models/user.model';
@@ -100,12 +102,11 @@ export class CreateUserDto
     @IsEnum(UserRoles)
     roles?: UserRoles;
 
-
-    @IsForbiddenForRoles([UserRoles.superAdmin, UserRoles.administrator],
-        [
-            (value: any) => isString(value),
-            (value: any) => isUUID(value),
-            (value: any) => isNotEmpty(value),
-        ])
+    @ValidateIf((dto) =>
+        dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager
+    )
+    @IsUUID()
+    @IsString()
+    @IsNotEmpty()
     institutionId?: string;
 }

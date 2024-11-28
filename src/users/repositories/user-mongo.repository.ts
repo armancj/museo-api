@@ -17,6 +17,7 @@ import {OnEvent} from '@nestjs/event-emitter';
 import {EventEmitter} from '../../shared/event-emitter/event-emitter.const';
 import {InstitutionMongoModel, InstitutionNameEntity} from "../../address/institutions/schema/institution.schema";
 import {InstitutionModel} from "../../address/institutions/entities/institution.model";
+import {UserRoles} from "../enum/user-roles.enum";
 
 export type createUserModel = Omit<
   UserModel,
@@ -111,7 +112,8 @@ export class UserMongoRepository {
 
 
     private async checkInstitution(createUserDto: UpdateQuery<UserModel>) {
-        if (!createUserDto?.institutionId) return;
+        if (!createUserDto?.institutionId || [UserRoles.administrator, UserRoles.superAdmin].includes(createUserDto?.roles) ) return;
+
         const institution: InstitutionModel = await this.institutionDocumentModel.findOne({
             uuid: createUserDto.institutionId,
             deleted: false
@@ -121,8 +123,11 @@ export class UserMongoRepository {
             throw new UnauthorizedException('Institution not found or has been deleted');
         }
 
-        if (institution.province !== createUserDto?.province || institution.country !== createUserDto?.nationality || institution.municipality !== createUserDto?.municipal)
+        if (institution.province !== createUserDto?.province ||
+            institution.country !== createUserDto?.nationality ||
+            institution.municipality !== createUserDto?.municipal)
             throw new UnauthorizedException('Mismatch between user and institution data');
+
         return institution;
     }
 }
