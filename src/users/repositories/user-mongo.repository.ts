@@ -8,8 +8,7 @@ import {
     ProjectionType,
     QueryOptions,
     RootFilterQuery,
-    UpdateQuery,
-    UpdateWithAggregationPipeline
+    UpdateQuery
 } from 'mongoose';
 import {Users} from '../entities/users.entity';
 import {UserModel, UserPropertiesModel} from '../models/user.model';
@@ -88,7 +87,7 @@ export class UserMongoRepository {
         update?: UpdateQuery<UserModel>,
     ): Promise<boolean> {
         const filterMongo: RootFilterQuery<UserModel> = {...filter};
-        if (update?.institutionId) await this.checkInstitution(update)
+         await this.checkInstitution(update)
 
         const user = await this.userMongoModel
             .updateOne(filterMongo, {...update, updatedAt: new Date(Date.now())})
@@ -110,6 +109,7 @@ export class UserMongoRepository {
 
 
     private async checkInstitution(createUserDto: UpdateQuery<UserModel>) {
+        if (!createUserDto?.institutionId) return;
         const institution: InstitutionModel = await this.institutionDocumentModel.findOne({
             uuid: createUserDto.institutionId,
             deleted: false
