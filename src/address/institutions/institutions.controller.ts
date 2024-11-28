@@ -5,7 +5,7 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Delete, UseInterceptors, ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { InstitutionsService } from './institutions.service';
 import { CreateInstitutionDto } from './dto/create-institution.dto';
@@ -21,7 +21,7 @@ export class InstitutionsController {
   constructor(private readonly institutionsService: InstitutionsService) {}
 
   @Auth({
-    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+    roles: [UserRoles.administrator, UserRoles.superAdmin],
   })
   @Post()
   create(

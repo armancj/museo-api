@@ -9,6 +9,7 @@ import {
 import { Classification, InstitutionType } from '../enum/institutions.enum';
 import { InstitutionDtoPropertiesModel } from '../entities/institution.model';
 import { validateIsMuseum } from '../utilities/validate-is-museum/validate-is-museum';
+import {UserRoles} from "../../../users/enum/user-roles.enum";
 
 export class CreateInstitutionDto implements InstitutionDtoPropertiesModel {
   @IsString()
@@ -43,6 +44,7 @@ export class CreateInstitutionDto implements InstitutionDtoPropertiesModel {
   @IsNotEmpty()
   locality: string;
 
+  @ValidateIf((dto) => dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager || dto?.roles === UserRoles.superAdmin)
   @IsString()
   @IsNotEmpty()
   province: string;
@@ -51,6 +53,7 @@ export class CreateInstitutionDto implements InstitutionDtoPropertiesModel {
   @IsNotEmpty()
   municipality: string;
 
+  @ValidateIf((dto) => dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager || dto?.roles === UserRoles.superAdmin)
   @IsString()
   @IsNotEmpty()
   country: string;

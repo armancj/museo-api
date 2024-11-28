@@ -10,9 +10,9 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { UserPropertiesModel } from '../models/user.model';
 import { UserRoles } from '../enum/user-roles.enum';
-import {Transform} from "class-transformer";
 import {ApplyTransform} from "../../common/decorator/apply-transform.decorator";
 import {toLowerCase} from "../../common/utils/to-lower-case";
+import {IsForbiddenForRoles} from "../../auth/decorator/is-forbidden-for-roles-constraint.decorator";
 
 export class CreateUserDto
   implements Omit<UserPropertiesModel, 'passwordHashed' | 'uuid'>
@@ -101,13 +101,9 @@ export class CreateUserDto
   @IsEnum(UserRoles)
   roles?: UserRoles;
 
-  @ValidateIf(
-      (dto) =>
-          dto?.roles === UserRoles.employee ||
-          dto?.roles === UserRoles.manager,
-  )
   @IsString()
   @IsUUID()
+  @IsForbiddenForRoles( [UserRoles.superAdmin, UserRoles.administrator], [UserRoles.employee, UserRoles.manager] )
   @IsNotEmpty()
   institutionId?: string;
 }

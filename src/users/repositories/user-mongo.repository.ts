@@ -1,43 +1,44 @@
 import {InjectModel} from '@nestjs/mongoose';
 import {UserMongoModel, UserNameEntity} from '../schema/users.schema';
 import {FindAllDto} from '../../common/dto/find-all.dto';
-import {Injectable} from '@nestjs/common';
+import {Injectable, UnauthorizedException} from '@nestjs/common';
 import {User} from '../entities/user.entity';
 import {
+    FilterQuery,
     ProjectionType,
     QueryOptions,
-    RootFilterQuery, UpdateQuery,
-    UpdateWithAggregationPipeline,
-    FilterQuery
+    RootFilterQuery,
+    UpdateQuery,
+    UpdateWithAggregationPipeline
 } from 'mongoose';
 import {Users} from '../entities/users.entity';
-import {UserModel} from '../models/user.model';
+import {UserModel, UserPropertiesModel} from '../models/user.model';
 import {Paginator} from '../../common/lib/paginator.lib';
 import {OnEvent} from '@nestjs/event-emitter';
 import {EventEmitter} from '../../shared/event-emitter/event-emitter.const';
+import {InstitutionMongoModel, InstitutionNameEntity} from "../../address/institutions/schema/institution.schema";
+import {InstitutionModel} from "../../address/institutions/entities/institution.model";
 
 export type createUserModel = Omit<UserModel, 'active' | 'deleted' | 'institution'>;
 
 
 @Injectable()
 export class UserMongoRepository {
-    private POPULATE = [
-        {
-            path: 'institution',
-            match: {delete: false},
-        },
-    ];
+    private POPULATE = { path: 'institution', match: { deleted: false } };
 
     constructor(
         @InjectModel(UserNameEntity)
         private readonly userMongoModel: UserMongoModel,
+
+        @InjectModel(InstitutionNameEntity)
+        private institutionDocumentModel: InstitutionMongoModel,
     ) {
     }
 
     async create(createUserDto: createUserModel): Promise<User> {
-        const createdUser = await this.userMongoModel.create(createUserDto)
-        const getUser = await this.userMongoModel.findById(createdUser._id).populate(this.POPULATE).lean().exec();
-        return User.create(getUser);
+        const institution = await this.checkInstitution(createUserDto);
+        const createdUser = await this.userMongoModel.create(createUserDto);
+        return User.create({...createdUser.toObject() , institution} as UserPropertiesModel );
     }
 
     async findAll(
@@ -51,7 +52,7 @@ export class UserMongoRepository {
 
         const usersMongo = await this.userMongoModel
             .find(filterMongo, projection)
-            .populate(this.POPULATE).lean()
+            .populate(this.POPULATE)
             .skip(paginator.skip)
             .limit(paginator.limit)
             .exec();
@@ -84,9 +85,11 @@ export class UserMongoRepository {
 
     async updatedOne(
         filter: Partial<UserModel> = {},
-        update?: UpdateQuery<UserModel> | UpdateWithAggregationPipeline,
+        update?: UpdateQuery<UserModel>,
     ): Promise<boolean> {
         const filterMongo: RootFilterQuery<UserModel> = {...filter};
+        if (update?.institutionId) await this.checkInstitution(update)
+
         const user = await this.userMongoModel
             .updateOne(filterMongo, {...update, updatedAt: new Date(Date.now())})
             .exec();
@@ -103,5 +106,21 @@ export class UserMongoRepository {
         const filterMongo: RootFilterQuery<UserModel> = {...filter};
         const user = await this.userMongoModel.deleteMany(filterMongo).exec();
         return user.deletedCount > 0;
+    }
+
+
+    private async checkInstitution(createUserDto: UpdateQuery<UserModel>) {
+        const institution: InstitutionModel = await this.institutionDocumentModel.findOne({
+            uuid: createUserDto.institutionId,
+            deleted: false
+        }).lean().exec()
+
+        if (!institution) {
+            throw new UnauthorizedException('Institution not found or has been deleted');
+        }
+
+        if (institution.province !== createUserDto?.province || institution.country !== createUserDto?.nationality || institution.municipality !== createUserDto?.municipal)
+            throw new UnauthorizedException('Mismatch between user and institution data');
+        return institution;
     }
 }

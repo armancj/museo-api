@@ -3,7 +3,7 @@ import {
   InstitutionPropertiesModel,
 } from './institution.model';
 import { Classification, InstitutionType } from '../enum/institutions.enum';
-import { Expose, plainToClass } from 'class-transformer';
+import {Exclude, Expose, plainToClass} from 'class-transformer';
 
 export class Institution implements InstitutionModel {
   @Expose()
@@ -24,7 +24,6 @@ export class Institution implements InstitutionModel {
   @Expose()
   createdAt: Date;
 
-  @Expose()
   deleted: boolean;
 
   @Expose()
