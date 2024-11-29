@@ -1,5 +1,5 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
-import {UserMongoRepository} from './repositories/user-mongo.repository';
+import {createUserModel, UserMongoRepository} from './repositories/user-mongo.repository';
 import {CreateUserDto} from './dto/create-user.dto';
 import {User} from './entities/user.entity';
 import {FindAllDto} from '../common/dto/find-all.dto';
@@ -32,23 +32,25 @@ export class UsersService {
     const { password, ...rest } = createUserDto;
 
 
-    getFieldOfUserData(user, rest);
+    const dataUser = getFieldOfUserData(user, rest);
 
-    if (rest.roles !== UserRoles.superAdmin) await this.validationData(rest);
+
+    if (rest.roles !== UserRoles.superAdmin) await this.validationData(dataUser);
 
     const passwordHashed = await hashedPassword(password);
 
     const uuid = crypto.randomUUID();
-    return this.userMongoRepository.create({ ...rest, passwordHashed, uuid });
+
+    return this.userMongoRepository.create({ ...dataUser, passwordHashed, uuid } as createUserModel);
   }
 
   async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
-    getFieldOfUserData(user, filter);
+    getFieldOfUserData(user, filter as createUserModel);
     return await this.userMongoRepository.findAll(filter, {}, query);
   }
 
   async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
-    getFieldOfUserData(currentUser, filter);
+    const filterData = getFieldOfUserData(currentUser, filter as createUserModel);
     const user = await this.userMongoRepository.findOne(
       filter,
       {},
@@ -63,11 +65,11 @@ export class UsersService {
     await this.findOne(filter, user);
     const { password, ...rest } = updateUserDto;
 
-    getFieldOfUserData(user, rest);
+    const userData = getFieldOfUserData(user, rest as createUserModel);
 
     if (user.roles !== UserRoles.superAdmin) await this.validationData(rest);
 
-    const updateUser: Partial<UserModel> = { ...rest } as UserModel;
+    const updateUser: Partial<UserModel> = { ...userData } as UserModel;
     if (password) updateUser.passwordHashed = await hashedPassword(password);
 
     return this.userMongoRepository.updatedOne(filter, updateUser);

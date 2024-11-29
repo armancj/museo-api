@@ -1,10 +1,11 @@
 import { User } from '../../users/entities/user.entity';
-import { UserModel } from '../../users/models/user.model';
 import { UserRoles } from '../../users/enum/user-roles.enum';
 import { InstitutionModel } from '../../address/institutions/entities/institution.model';
 import { JwtPayload } from '../../auth/strategies/jwt.payload';
-import {Forbidden} from "../dto/exception.dto";
 import {ForbiddenException} from "@nestjs/common";
+import {CreateUserDto} from "../../users/dto/create-user.dto";
+import {createUserModel} from "../../users/repositories/user-mongo.repository";
+import {UserModel} from "../../users/models/user.model";
 
 function canCreateRole(userRole: UserRoles, targetRole: UserRoles): boolean {
   if (userRole === UserRoles.superAdmin) {
@@ -36,6 +37,7 @@ export function getFieldOfUserData(user: User, rest: Partial<UserModel>) {
     rest.province = user.province;
     rest.municipal = user.municipal;
   }
+  return rest;
 }
 
 export function getFieldOfInstitutionData(
