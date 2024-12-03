@@ -1,7 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import * as path from 'path';
 import { Params,} from 'nestjs-pino'
-import {apiEnv} from "../config/app.const";
 import {Options} from "pino-http";
 
 

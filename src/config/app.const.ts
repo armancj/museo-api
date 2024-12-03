@@ -5,7 +5,6 @@ export const apiEnv = {
   app: {
     hostname: 'APP_HOST',
     port: 'APP_PORT',
-    log_path: 'LOG_PATH'
   },
   email: {
     from: 'EMAIL_FROM',
