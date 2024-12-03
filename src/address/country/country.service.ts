@@ -8,6 +8,7 @@ import { Countries } from './entities/countries.entity';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../../shared/event-emitter/event-emitter.const';
 import { CountryModel } from './entities/country.model';
+import {FilterCountryByNameDto} from "./dto/filter-country-by-name.dto";
 
 @Injectable()
 export class CountryService {
@@ -21,9 +22,9 @@ export class CountryService {
     return Country.create(createdCountry);
   }
 
-  async findAll() {
+  async findAll(filter: FilterCountryByNameDto) {
     const countries = await this.countryDocumentModel
-      .find({ deleted: false })
+      .find({ ...filter, deleted: false })
       .exec();
     return Countries.create(countries).value;
   }

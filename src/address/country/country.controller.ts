@@ -5,7 +5,7 @@ import {
   Get,
   Param,
   Patch,
-  Post,
+  Post, Query,
 } from '@nestjs/common';
 import { CountryService } from './country.service';
 import { CreateCountryDto } from './dto/create-country.dto';
@@ -13,6 +13,7 @@ import { UpdateCountryDto } from './dto/update-country.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Auth } from '../../auth/decorator';
 import { UserRoles } from '../../users/enum/user-roles.enum';
+import {FilterCountryByNameDto} from "./dto/filter-country-by-name.dto";
 
 @ApiTags('Country')
 @Controller('country')
@@ -27,8 +28,8 @@ export class CountryController {
 
   @Auth()
   @Get()
-  findAll() {
-    return this.countryService.findAll();
+  findAll(@Query() filter: FilterCountryByNameDto) {
+    return this.countryService.findAll(filter);
   }
 
   @Auth()
