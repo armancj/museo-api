@@ -6,7 +6,7 @@ import {Options} from "pino-http";
 
 
     export const createPinoOptions = (config: ConfigService): Params =>  {
-        const logPath = path.join(config.get<string>(apiEnv.app.log_path));
+        const logPath = path.resolve('logs');
 
         const pinoHttp: Options = {
             level: config.get<string>('NODE_ENV') === 'production' ? 'info' : 'debug',
