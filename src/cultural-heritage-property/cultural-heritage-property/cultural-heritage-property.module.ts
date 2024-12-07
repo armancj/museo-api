@@ -17,6 +17,9 @@ import {FieldReviewStatusModule} from "../field-review-status/field-review-statu
 
 @Module({
   imports: [
+    /**
+     * Imports the Mongoose module with the cultural heritage property schema.
+     */
     MongooseModule.forFeature([
       {
         name: CulturalHeritagePropertyEntity,

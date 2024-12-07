@@ -1,12 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import {BaseSchema} from "../../../common/schema/base.schema";
-import {FieldReviewStatusModel} from "../models/field-review-status.model";
+import mongoose, {HydratedDocument, Model, Types} from 'mongoose';
+import {BaseSchema, BaseSchemaFactory} from "../../../common/schema/base.schema";
+import {FieldReviewStatusModel as FieldReviewStatusInterface} from "../models/field-review-status.model";
 
-export type FieldReviewStatusDocument = FieldReviewStatus & Document;
+
+export type FieldReviewStatusDocument = HydratedDocument<FieldReviewStatusInterface>;
 
 @Schema()
-export class FieldReviewStatus extends BaseSchema implements FieldReviewStatusModel{
+export class FieldReviewStatus extends BaseSchema {
     @Prop()
     isUnderReview: boolean;
 
@@ -19,17 +20,32 @@ export class FieldReviewStatus extends BaseSchema implements FieldReviewStatusMo
     @Prop()
     reviewDate: Date;
 
-    @Prop()
+    @Prop({ type: mongoose.Schema.Types.Mixed})
+    currentValue: any;
+
+    @Prop({ type: mongoose.Schema.Types.Mixed})
     previousValue: any;
 
-    @Prop()
+    @Prop({default: 'system' })
     modifiedBy: string;
 
-    @Prop()
+    @Prop({ default: Date.now })
     modificationDate: Date;
 
     @Prop()
     comment: string;
+
+    @Prop({ type: String })
+    fieldName: string;
+
+    @Prop({ type: Types.ObjectId, ref: 'CulturalHeritageProperty' })
+    culturalHeritageProperty: Types.ObjectId;
 }
 
 export const FieldReviewStatusSchema = SchemaFactory.createForClass(FieldReviewStatus);
+
+FieldReviewStatusSchema.add(BaseSchemaFactory);
+
+export const FieldReviewStatusEntity = 'FieldReviewStatus';
+export type FieldReviewStatusModel =
+    Model<FieldReviewStatusDocument>;

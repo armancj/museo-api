@@ -6,16 +6,17 @@ import {
   CulturalHeritagePropertyEntity,
   CulturalHeritagePropertySchema
 } from "../cultural-heritage-property/Schema/cultural-heritage-property";
+import {FieldReviewStatusEntity, FieldReviewStatusSchema} from "./schema/field-review-status.schema";
 
 @Module({
   imports: [
     /**
-     * Imports the Mongoose module with the cultural heritage property schema.
+     * Imports the Mongoose module with the field review status entity schema.
      */
     MongooseModule.forFeature([
       {
-        name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        name: FieldReviewStatusEntity,
+        schema: FieldReviewStatusSchema,
       },
     ]),
   ],

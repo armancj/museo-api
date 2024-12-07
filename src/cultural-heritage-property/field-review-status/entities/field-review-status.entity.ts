@@ -5,6 +5,7 @@ export class FieldReviewStatus implements FieldReviewStatusModel {
     isApproved: boolean;
     isUnderReview: boolean;
     modifiedBy: string;
+    currentValue: any;
     previousValue: any;
     reviewDate: Date;
     reviewedBy: string;
