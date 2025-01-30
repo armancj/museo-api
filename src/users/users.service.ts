@@ -1,20 +1,23 @@
-import {Injectable, NotFoundException} from '@nestjs/common';
-import {createUserModel, UserMongoRepository} from './repositories/user-mongo.repository';
-import {CreateUserDto} from './dto/create-user.dto';
-import {User} from './entities/user.entity';
-import {FindAllDto} from '../common/dto/find-all.dto';
-import {UploadedFile, UserModel} from './models/user.model';
-import {hashedPassword} from '../common/utils/hashed-password';
-import {OnEvent} from '@nestjs/event-emitter';
-import {EventEmitter} from '../shared/event-emitter/event-emitter.const';
-import {EventEmitter2Adapter} from '../shared/event-emitter/event-emitter.adapter';
-import {FileStorageModel} from '../file-storage/model/file-storage.model';
-import {UnauthorizedAuthException} from '../auth/exceptions/unauthorized-auth.exception';
-import {firstValueFrom} from 'rxjs';
-import {FileMetadataModel} from '../file-storage/model/file-metadata.model';
-import {concatenateUint8Arrays} from '../common/utils/concatenate-uint8-arrays.function';
-import {getFieldOfUserData} from '../common/utils/get-field-of-user-data';
-import {UserRoles} from './enum/user-roles.enum';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  createUserModel,
+  UserMongoRepository,
+} from './repositories/user-mongo.repository';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './entities/user.entity';
+import { FindAllDto } from '../common/dto/find-all.dto';
+import { UploadedFile, UserModel } from './models/user.model';
+import { hashedPassword } from '../common/utils/hashed-password';
+import { OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
+import { EventEmitter2Adapter } from '../shared/event-emitter/event-emitter.adapter';
+import { FileStorageModel } from '../file-storage/model/file-storage.model';
+import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.exception';
+import { firstValueFrom } from 'rxjs';
+import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
+import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
+import { getFieldOfUserData } from '../common/utils/get-field-of-user-data';
+import { UserRoles } from './enum/user-roles.enum';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
@@ -31,17 +34,20 @@ export class UsersService {
   async create(createUserDto: CreateUserDto, user?: User): Promise<User> {
     const { password, ...rest } = createUserDto;
 
-
     const dataUser = getFieldOfUserData(user, rest);
 
-
-    if (rest.roles !== UserRoles.superAdmin) await this.validationData(dataUser);
+    if (rest.roles !== UserRoles.superAdmin)
+      await this.validationData(dataUser);
 
     const passwordHashed = await hashedPassword(password);
 
     const uuid = crypto.randomUUID();
 
-    return this.userMongoRepository.create({ ...dataUser, passwordHashed, uuid } as createUserModel);
+    return this.userMongoRepository.create({
+      ...dataUser,
+      passwordHashed,
+      uuid,
+    } as createUserModel);
   }
 
   async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
@@ -50,9 +56,12 @@ export class UsersService {
   }
 
   async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
-    const filterData = getFieldOfUserData(currentUser, filter as createUserModel);
+    const filterData = getFieldOfUserData(
+      currentUser,
+      filter as createUserModel,
+    );
     const user = await this.userMongoRepository.findOne(
-      filter,
+      filterData,
       {},
       { lean: true },
     );

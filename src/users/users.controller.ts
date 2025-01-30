@@ -12,7 +12,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiNotFoundResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -27,6 +27,7 @@ import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe'
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
 import { Auth, CurrentUser } from '../auth/decorator';
 import { UserRoles } from './enum/user-roles.enum';
+import { NotFound } from "../common/dto/exception.dto";
 
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -62,6 +63,7 @@ export class UsersController {
     return { usersData: users.value, totalPage, totalElement };
   }
 
+  @ApiNotFoundResponse({ description: 'User not found', type: NotFound })
   @Auth({
     roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
   })
