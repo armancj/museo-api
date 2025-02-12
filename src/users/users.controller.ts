@@ -12,7 +12,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -25,6 +25,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarUserDto } from './dto/upload-avatar-user.dto';
 import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe';
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
+import { DeleteUserResponseDto, NotFoundResponseDto,UnauthorizedResponseDto } from './dto/responses.dto';
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
@@ -108,7 +109,23 @@ export class UsersController {
   }
 
   @Delete(':uuid')
-  async remove(@Param('uuid') uuid: string): Promise<boolean> {
-    return this.userService.remove({ uuid });
+  @ApiResponse({ 
+    status: 200, 
+    description: 'Usuario eliminado exitosamente',
+    type: DeleteUserResponseDto
+  })
+  @ApiResponse({ 
+    status: 404, 
+    description: 'Usuario no encontrado',
+    type: NotFoundResponseDto
+  })
+  @ApiResponse({ 
+    status: 401, 
+    description: 'No autorizado',
+    type: UnauthorizedResponseDto
+  })
+  async remove(@Param('uuid') uuid: string): Promise<DeleteUserResponseDto> {
+    await this.userService.remove({ uuid });
+    return { message: 'User successfully deleted' };
   }
 }
