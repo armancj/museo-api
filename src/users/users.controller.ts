@@ -25,7 +25,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarUserDto } from './dto/upload-avatar-user.dto';
 import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe';
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
-import { DeleteUserResponseDto, NotFoundResponseDto,UnauthorizedResponseDto } from './dto/responses.dto';
+import { DeleteUserResponseDto, DeleteUserResponseDtoAvatar, NotFoundResponseDto,NotFoundResponseDtoAvatar,UnauthorizedResponseDto, UnauthorizedResponseDtoAvatar } from './dto/responses.dto';
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
@@ -104,6 +104,21 @@ export class UsersController {
   }
 
   @Delete(':uuid/avatar')
+  @ApiResponse({ 
+    status: 200, 
+    description: 'Usuario eliminado exitosamente',
+    type: DeleteUserResponseDtoAvatar
+  })
+  @ApiResponse({ 
+    status: 404, 
+    description: 'Usuario no encontrado',
+    type: NotFoundResponseDtoAvatar
+  })
+  @ApiResponse({ 
+    status: 401, 
+    description: 'No autorizado',
+    type: UnauthorizedResponseDtoAvatar
+  })
   removeFile(@Param('uuid') uuid: string) {
     return this.userService.removeFile(uuid);
   }
