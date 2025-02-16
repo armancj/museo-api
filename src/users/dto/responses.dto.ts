@@ -1,151 +1,173 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiProduces, ApiProperty } from '@nestjs/swagger';
+import { applyDecorators } from '@nestjs/common';
+import { ApiParam, ApiResponse } from '@nestjs/swagger';
+import { UploadAvatarUserDto } from './upload-avatar-user.dto';
+
 
 export class DeleteUserResponseDto {
   @ApiProperty({
     type: String,
-    example: 'User successfully deleted'
+    example: 'Usuario eliminado exitosamente'
   })
   message: string;
 }
 
+export class UploadAvatarResponseDto {
+  @ApiProperty({
+    type: String,
+    example: 'Avatar subido exitosamente'
+  })
+  message: string;
+}
 
-export class NotFoundResponseDto {
-  @ApiProperty({ example: 404, description: 'NotFound' })
-  statusCode: number;
-
-  @ApiProperty({ example: 'Recurso no encontrado' })
+export class DeleteAvatarResponseDto {
+  @ApiProperty({
+    type: String,
+    example: 'Avatar eliminado exitosamente'
+  })
   message: string;
 }
 
 export class BadRequestResponseDto {
-  @ApiProperty({ example: 400, description: 'BadRequest' })
+  @ApiProperty({ example: 400, description: 'Solicitud incorrecta' })
   statusCode: number;
 
-  @ApiProperty({ example: 'Datos de entrada inválidos'})
+  @ApiProperty({ example: 'Datos de entrada inválidos' })
   message: string;
 
   @ApiProperty({
-    example: ['El campo "email" debe ser un correo válido'],
-    
     type: [String],
+    example: ['Error de formato de archivo', 'Tamaño de archivo excedido'],
+    description: 'Errores detallados'
   })
   errors: string[];
 }
 
 export class UnauthorizedResponseDto {
-  @ApiProperty({ example: 401, description: 'Unauthorized' })
+  @ApiProperty({ example: 401, description: 'No autorizado' })
   statusCode: number;
 
-  @ApiProperty({ example: 'No autorizado' })
+  @ApiProperty({ example: 'Autenticación requerida' })
   message: string;
 }
 
 export class ForbiddenResponseDto {
-  @ApiProperty({ example: 403, description: 'Forbidden' })
+  @ApiProperty({ example: 403, description: 'Acceso prohibido' })
   statusCode: number;
 
-  @ApiProperty({ example: 'Prohibido' })
+  @ApiProperty({ example: 'No tiene permisos para esta acción' })
+  message: string;
+}
+
+export class NotFoundResponseDto {
+  @ApiProperty({ example: 404, description: 'Recurso no encontrado' })
+  statusCode: number;
+
+  @ApiProperty({ example: 'Usuario no encontrado' })
   message: string;
 }
 
 export class ConflictResponseDto {
-  @ApiProperty({ example: 409, description: 'Conflict' })
+  @ApiProperty({ example: 409, description: 'Conflicto de estado' })
   statusCode: number;
 
-  @ApiProperty({ example: 'Conflicto con el estado actual del recurso' })
+  @ApiProperty({ example: 'El usuario ya está inactivo' })
   message: string;
 }
 
 export class InternalServerErrorResponseDto {
-  @ApiProperty({ example: 500, description: 'InternalServerError' })
+  @ApiProperty({ example: 500, description: 'Error interno del servidor' })
   statusCode: number;
 
-  @ApiProperty({ example: 'Error interno del servidor' })
+  @ApiProperty({ example: 'Error procesando la solicitud' })
   message: string;
 }
 
-export class DeleteUserResponseDtoAvatar {
-    @ApiProperty({
-      type: String,
-      example: 'User successfully deleted'
-    })
-    message: string;
-  }
-  
-  export class NotFoundResponseDtoAvatar {
-    @ApiProperty({
-      type: Number,
-      example: 404,
-    })
-    statusCode: number;
-  
-    @ApiProperty({
-      type: String,
-      example: 'User not found',
-    })
-    message: string;
-  
-    @ApiProperty({
-      type: String,
-      example: 'Not Found',
-    })
-    error: string;
-  
-    @ApiProperty({
-      type: String,
-      example: '2025-02-12T01:07:51.956Z',
-    })
-    timestamp: string;
-  
-    @ApiProperty({
-      type: String,
-      example: '/users/a6470913-e513-4e17-ba2c-70c922b9161e',
-    })
-    path: string;
-  
-    @ApiProperty({
-      type: String,
-      example: 'DELETE',
-    })
-    method: string;
-  }
-  
-  
-  export class UnauthorizedResponseDtoAvatar {
-    @ApiProperty({
-      type: Number,
-      example: 401,
-    })
-    statusCode: number;
-  
-    @ApiProperty({
-      type: String,
-      example: 'Unauthorized',
-    })
-    message: string;
-  
-    @ApiProperty({
-      type: String,
-      example: 'Unauthorized',
-    })
-    error: string;
-  
-    @ApiProperty({
-      type: String,
-      example: '2025-02-12T01:07:51.956Z',
-    })
-    timestamp: string;
-  
-    @ApiProperty({
-      type: String,
-      example: '/users/a6470913-e513-4e17-ba2c-70c922b9161e',
-    })
-    path: string;
-  
-    @ApiProperty({
-      type: String,
-      example: 'DELETE',
-    })
-    method: string;
-  }
+export function DeleteUserApiDocs() {
+  return applyDecorators(
+    ApiResponse({ status: 200, description: 'Eliminación exitosa', type: Boolean }),
+    ApiResponse({ status: 404, description: 'Usuario no encontrado', type: NotFoundResponseDto }),
+    ApiResponse({ status: 400, description: 'Datos inválidos', type: BadRequestResponseDto }),
+    ApiResponse({ status: 401, description: 'No autorizado', type: UnauthorizedResponseDto }),
+    ApiResponse({ status: 403, description: 'Acceso prohibido', type: ForbiddenResponseDto }),
+    ApiResponse({ status: 500, description: 'Error del servidor', type: InternalServerErrorResponseDto })
+  );
+}
 
+export function UpdateUserApiDocs() {
+  return applyDecorators(
+    ApiResponse({ status: 200, description: 'Usuario actualizado', type: Boolean }),
+    ApiResponse({ status: 400, type: BadRequestResponseDto }),
+    ApiResponse({ status: 404, type: NotFoundResponseDto }),
+    ApiResponse({ status: 401, type: UnauthorizedResponseDto }),
+    ApiResponse({ status: 403, type: ForbiddenResponseDto }),
+    ApiResponse({ status: 409, type: ConflictResponseDto }),
+    ApiResponse({ status: 500, type: InternalServerErrorResponseDto })
+  );
+}
+
+export function ChangeActivateUserApiDocs() {
+  return applyDecorators(
+    ApiResponse({ status: 200, description: 'Estado actualizado', type: Boolean }),
+    ApiResponse({ status: 400, type: BadRequestResponseDto }),
+    ApiResponse({ status: 404, type: NotFoundResponseDto }),
+    ApiResponse({ status: 401, type: UnauthorizedResponseDto })
+  );
+}
+
+export function SoftDeleteUserApiDocs() {
+  return applyDecorators(
+
+    ApiResponse({ status: 200, description: 'Eliminación temporal exitosa', type: Boolean }),
+    ApiResponse({ status: 404, type: NotFoundResponseDto }),
+    ApiResponse({ status: 400, type: BadRequestResponseDto }),
+    ApiResponse({ status: 401, type: UnauthorizedResponseDto }),
+    ApiResponse({ status: 403, type: ForbiddenResponseDto }),
+    ApiResponse({ status: 500, type: InternalServerErrorResponseDto })
+  );
+}
+
+// Decoradores para endpoints de avatar
+export function UploadAvatarApiDocs() {
+  return applyDecorators(
+    ApiConsumes('multipart/form-data'),
+    ApiBody({
+      description: 'Archivo de imagen para el avatar',
+      type: UploadAvatarUserDto,
+    }),
+    ApiResponse({
+      status: 201,
+      description: 'Avatar subido exitosamente',
+      type: UploadAvatarResponseDto,
+    }),
+    ApiResponse({ status: 400, type: BadRequestResponseDto }),
+    ApiResponse({ status: 404, type: NotFoundResponseDto }),
+    ApiResponse({ status: 401, type: UnauthorizedResponseDto }),
+    ApiResponse({ status: 500, type: InternalServerErrorResponseDto })
+  );
+}
+
+export function GetAvatarApiDocs() {
+  return applyDecorators(
+    ApiProduces('image/*'),
+    ApiResponse({
+      status: 200,
+      description: 'Avatar obtenido exitosamente',
+      content: {
+        'image/*': { schema: { type: 'string', format: 'binary' } },
+      },
+    }),
+    ApiResponse({ status: 404, type: NotFoundResponseDto }),
+    ApiResponse({ status: 401, type: UnauthorizedResponseDto }),
+    ApiResponse({ status: 500, type: InternalServerErrorResponseDto })
+  );
+}
+
+export function DeleteAvatarApiDocs() {
+  return applyDecorators(
+    ApiResponse({ status: 200, description: 'Avatar eliminado', type: DeleteAvatarResponseDto }),
+    ApiResponse({ status: 401, type: UnauthorizedResponseDto }),
+    ApiResponse({ status: 404, type: NotFoundResponseDto }),
+    ApiResponse({ status: 500, type: InternalServerErrorResponseDto })
+  );
+}

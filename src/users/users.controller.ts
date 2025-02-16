@@ -12,7 +12,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -25,7 +25,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarUserDto } from './dto/upload-avatar-user.dto';
 import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe';
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
-import { BadRequestResponseDto, ConflictResponseDto, DeleteUserResponseDto, DeleteUserResponseDtoAvatar, ForbiddenResponseDto, InternalServerErrorResponseDto, NotFoundResponseDto, NotFoundResponseDtoAvatar, UnauthorizedResponseDto, UnauthorizedResponseDtoAvatar } from './dto/responses.dto';
+import { ChangeActivateUserApiDocs, DeleteAvatarApiDocs, DeleteUserApiDocs, GetAvatarApiDocs, UpdateUserApiDocs, UploadAvatarApiDocs } from './dto/responses.dto';
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
@@ -55,46 +55,7 @@ export class UsersController {
   }
 
   @Patch(':uuid')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID del usuario a actualizar',
-    example: '123e4567-e89b-12d3-a456-426614174000',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Usuario actualizado exitosamente',
-    type: Boolean,
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Datos de entrada inválidos',
-    type: BadRequestResponseDto,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Usuario no encontrado',
-    type: NotFoundResponseDto,
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'No autorizado',
-    type: UnauthorizedResponseDto,
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Prohibido',
-    type: ForbiddenResponseDto,
-  })
-  @ApiResponse({
-    status: 409,
-    description: 'Conflicto con el estado actual del recurso',
-    type: ConflictResponseDto,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'Error interno del servidor',
-    type: InternalServerErrorResponseDto,
-  })
+  @UpdateUserApiDocs()
   async update(
     @Param('uuid') uuid: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -107,31 +68,7 @@ export class UsersController {
 
 
   @Patch(':uuid/change-activate')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID del usuario',
-    example: '123e4567-e89b-12d3-a456-426614174000',
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Datos de entrada inválidos',
-    type: BadRequestResponseDto,
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Estado actualizado exitosamente',
-    type: Boolean,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Usuario no encontrado',
-    type: NotFoundResponseDto,
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'No autorizado',
-    type: UnauthorizedResponseDto,
-  })
+  @ChangeActivateUserApiDocs()
   async updateChangeActivate(
     @Param('uuid') uuid: string,
     @Body() activatedUserDto: ActivatedUserDto,
@@ -143,54 +80,14 @@ export class UsersController {
   }
 
   @Delete(':uuid/soft')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID del usuario',
-    example: '123e4567-e89b-12d3-a456-426614174000',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Eliminación exitosa',
-    type: Boolean,
-  })
-
-  @ApiResponse({
-    status: 404,
-    description: 'Usuario no encontrado',
-    type: NotFoundResponseDto,
-  })
-
-  @ApiResponse({
-    status: 400,
-    description: 'Datos de entrada inválidos',
-    type: BadRequestResponseDto,
-  })
-
-  @ApiResponse({
-    status: 401,
-    description: 'No autorizado',
-    type: UnauthorizedResponseDto,
-  })
-
-  @ApiResponse({
-    status: 403,
-    description: 'Prohibido',
-    type: ForbiddenResponseDto,
-  })
-
-  @ApiResponse({
-    status: 500,
-    description: 'Error interno del servidor',
-    type: InternalServerErrorResponseDto,
-  })
-
+  @DeleteUserApiDocs()
   async removeSoft(@Param('uuid') uuid: string): Promise<boolean> {
     return this.userService.softDelete({ uuid });
   }
 
   @Post(':uuid/avatar')
-  @UseInterceptors(FileInterceptor('file') as any)
-  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  @UploadAvatarApiDocs()
   async uploadFileAvatarImage(
     @Param('uuid') uuid: string,
     @Body() body: UploadAvatarUserDto,
@@ -200,7 +97,9 @@ export class UsersController {
     return { message: `File successfully uploaded` };
   }
 
+  // Get avatar
   @Get(':uuid/avatar')
+  @GetAvatarApiDocs()
   async getFile(@Param('uuid') uuid: string): Promise<StreamableFile> {
     const { file, metadata } = await this.userService.streamFile(uuid);
     return new StreamableFile(file, {
@@ -211,67 +110,13 @@ export class UsersController {
   }
 
   @Delete(':uuid/avatar')
-  @ApiResponse({
-    status: 200,
-    description: 'Usuario eliminado exitosamente',
-    type: DeleteUserResponseDtoAvatar
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'Usuario no encontrado',
-    type: NotFoundResponseDtoAvatar
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'No autorizado',
-    type: UnauthorizedResponseDtoAvatar
-  })
+  @DeleteAvatarApiDocs()
   removeFile(@Param('uuid') uuid: string) {
     return this.userService.removeFile(uuid);
   }
 
   @Delete(':uuid')
-  @ApiParam({
-    name: 'uuid',
-    description: 'UUID del usuario a eliminar',
-    example: '123e4567-e89b-12d3-a456-426614174000',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Eliminación exitosa',
-    type: Boolean,
-  })
-
-  @ApiResponse({
-    status: 404,
-    description: 'Usuario no encontrado',
-    type: NotFoundResponseDto,
-  })
-
-  @ApiResponse({
-    status: 400,
-    description: 'Datos de entrada inválidos',
-    type: BadRequestResponseDto,
-  })
-
-  @ApiResponse({
-    status: 401,
-    description: 'No autorizado',
-    type: UnauthorizedResponseDto,
-  })
-
-  @ApiResponse({
-    status: 403,
-    description: 'Prohibido',
-    type: ForbiddenResponseDto,
-  })
-
-  @ApiResponse({
-    status: 500,
-    description: 'Error interno del servidor',
-    type: InternalServerErrorResponseDto,
-  })
-
+  @DeleteUserApiDocs()
   async remove(@Param('uuid') uuid: string): Promise<boolean> {
     return await this.userService.remove({ uuid });
   }
