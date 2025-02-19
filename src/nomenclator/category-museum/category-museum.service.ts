@@ -7,6 +7,7 @@ import {
 } from './schema/category-museum.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { CategoryMuseum } from './entities/category-museum.entity';
+import { CategoryMuseums } from './entities/museums.entity';
 
 @Injectable()
 export class CategoryMuseumService {
@@ -16,13 +17,17 @@ export class CategoryMuseumService {
   ) {}
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
-    const createdMuseum=
+    const createdCategoryMuseum=
       await this.categoryMuseumRepository.create(createCategoryMuseumDto);
-      return CategoryMuseum.create(createdMuseum);
+      return CategoryMuseum.create(createdCategoryMuseum);
   }
 
-  findAll() {
-    return this.categoryMuseumRepository.find();
+  async findAll() {
+    const categoryMuseums = await this.categoryMuseumRepository
+    .find({deleted:false})
+    .exec();
+    
+    return CategoryMuseums.create(categoryMuseums).value;
   }
 
   findOne(id: number) {

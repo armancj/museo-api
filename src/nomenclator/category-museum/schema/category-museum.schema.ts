@@ -10,7 +10,7 @@ export type CategoryMuseumDocument = HydratedDocument<CategoryMuseum>;
 
 @Schema({})
 export class CategoryMuseum extends BaseSchema implements CategoryMuseumModel {
-  @Prop()
+  @Prop({ required: true, unique: true })
   name: string;
 }
 
