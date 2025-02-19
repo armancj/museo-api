@@ -6,6 +6,7 @@ import {
   CategoryMuseumNameEntity,
 } from './schema/category-museum.schema';
 import { InjectModel } from '@nestjs/mongoose';
+import { CategoryMuseum } from './entities/category-museum.entity';
 
 @Injectable()
 export class CategoryMuseumService {
@@ -15,7 +16,9 @@ export class CategoryMuseumService {
   ) {}
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
-    return this.categoryMuseumRepository.create(createCategoryMuseumDto);
+    const createdMuseum=
+      await this.categoryMuseumRepository.create(createCategoryMuseumDto);
+      return CategoryMuseum.create(createdMuseum);
   }
 
   findAll() {

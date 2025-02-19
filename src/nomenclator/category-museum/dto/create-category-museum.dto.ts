@@ -1,9 +1,7 @@
-import { CategoryMuseumModel } from '../model/category-museum.model';
-import { IsString } from 'class-validator';
+import { IsNotEmpty,  IsString } from "class-validator";
 
-export class CreateCategoryMuseumDto
-  implements Pick<CategoryMuseumModel, 'name'>
-{
-  @IsString()
-  name: string;
+export class CreateCategoryMuseumDto {
+    @IsString()
+    @IsNotEmpty()
+    name:string;
 }
