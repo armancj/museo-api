@@ -15,7 +15,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Category Museum')
 @Controller('category-museum')
 export class CategoryMuseumController {
-  constructor(private readonly categoryMuseumService: CategoryMuseumService) {}
+  constructor(private readonly categoryMuseumService: CategoryMuseumService) { }
 
   @Post()
   create(@Body() createCategoryMuseumDto: CreateCategoryMuseumDto) {
@@ -32,16 +32,16 @@ export class CategoryMuseumController {
     return this.categoryMuseumService.findOne(uuid);
   }
 
-  @Patch(':id')
+  @Patch(':uuid')
   update(
-    @Param('id') id: string,
+    @Param('uuid') uuid: string,
     @Body() updateCategoryMuseumDto: UpdateCategoryMuseumDto,
   ) {
-    return this.categoryMuseumService.update(+id, updateCategoryMuseumDto);
+    return this.categoryMuseumService.update(uuid, updateCategoryMuseumDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryMuseumService.remove(+id);
+  @Delete(':uuid')
+  remove(@Param('uuid') uuid: string) {
+    return this.categoryMuseumService.remove(uuid);
   }
 }
