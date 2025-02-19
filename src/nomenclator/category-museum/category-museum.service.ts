@@ -1,7 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateCategoryMuseumDto } from './dto/create-category-museum.dto';
 import { UpdateCategoryMuseumDto } from './dto/update-category-museum.dto';
-import { CategoryMuseumMongoModel, CategoryMuseumNameEntity } from "./schema/category-museum.schema";
+import {
+  CategoryMuseumMongoModel,
+  CategoryMuseumNameEntity,
+} from './schema/category-museum.schema';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
@@ -11,8 +14,8 @@ export class CategoryMuseumService {
     private readonly categoryMuseumRepository: CategoryMuseumMongoModel,
   ) {}
 
-  create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
-    return 'This action adds a new categoryMuseum';
+  async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
+    return this.categoryMuseumRepository.create(createCategoryMuseumDto);
   }
 
   findAll() {
