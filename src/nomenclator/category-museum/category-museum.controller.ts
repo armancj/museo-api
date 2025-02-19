@@ -27,9 +27,9 @@ export class CategoryMuseumController {
     return this.categoryMuseumService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.categoryMuseumService.findOne(+id);
+  @Get(':uuid')
+  findOne(@Param('uuid') uuid: string) {
+    return this.categoryMuseumService.findOne(uuid);
   }
 
   @Patch(':id')

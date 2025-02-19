@@ -8,6 +8,10 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { CategoryMuseum } from './entities/category-museum.entity';
 import { CategoryMuseums } from './entities/museums.entity';
+import { NotFoundException } from '@nestjs/common';
+import { CategoryMuseumModel } from './model/category-museum.model';
+import { OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter } from 'stream';
 
 @Injectable()
 export class CategoryMuseumService {
@@ -30,8 +34,16 @@ export class CategoryMuseumService {
     return CategoryMuseums.create(categoryMuseums).value;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} categoryMuseum`;
+  async findOne(uuid: string): Promise<CategoryMuseumModel> {
+    const CategoryMuseums = await this.getCategoryMuseum({ uuid, deleted: false });
+    return CategoryMuseum.create(CategoryMuseums)
+  }
+
+
+  private async getCategoryMuseum(filter: Partial<CategoryMuseumModel>) {
+    const categoryMuseum = await this.categoryMuseumRepository.findOne(filter).exec();
+    if (!categoryMuseum) throw new NotFoundException('Not found category museum');
+    return categoryMuseum;
   }
 
   update(id: number, updateCategoryMuseumDto: UpdateCategoryMuseumDto) {
