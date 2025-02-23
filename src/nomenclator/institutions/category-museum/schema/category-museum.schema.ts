@@ -4,7 +4,7 @@ import { CategoryMuseumModel } from '../model/category-museum.model';
 import {
   BaseSchema,
   BaseSchemaFactory,
-} from '../../../common/schema/base.schema';
+} from '../../../../common/schema/base.schema';
 
 export type CategoryMuseumDocument = HydratedDocument<CategoryMuseum>;
 

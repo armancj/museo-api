@@ -3,9 +3,9 @@ import { CategoryMuseumService } from './category-museum.service';
 import { CreateCategoryMuseumDto } from './dto/create-category-museum.dto';
 import { UpdateCategoryMuseumDto } from './dto/update-category-museum.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { Auth } from '../../auth/decorator/auth.decorator';
-import { Roles } from '../../auth/decorator/roles.decorator';
-import { UserRoles } from '../../users/enum/user-roles.enum';
+import { Auth } from '../../../auth/decorator/auth.decorator';
+import { Roles } from '../../../auth/decorator/roles.decorator';
+import { UserRoles } from '../../../users/enum/user-roles.enum';
 
 @ApiTags('Category Museum')
 @Controller('category-museum')
