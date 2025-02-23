@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CategoryMuseumService } from './category-museum.service';
 import { CreateCategoryMuseumDto } from './dto/create-category-museum.dto';
 import { UpdateCategoryMuseumDto } from './dto/update-category-museum.dto';
@@ -19,9 +19,11 @@ export class CategoryMuseumController {
   }
 
   
-  @Get()
-  findAll() {
-    return this.categoryMuseumService.findAll();
+   @Get()
+  findAll(
+  @Query('active') active?: boolean
+  ) {
+    return this.categoryMuseumService.findAll({ active });
   }
 
   

@@ -12,6 +12,12 @@ export type CategoryMuseumDocument = HydratedDocument<CategoryMuseum>;
 export class CategoryMuseum extends BaseSchema implements CategoryMuseumModel {
   @Prop({ required: true, unique: true })
   name: string;
+
+  @Prop()
+  description?: string;
+
+  @Prop({ default: true })
+  active: boolean;
 }
 
 export const CategoryMuseumSchema =

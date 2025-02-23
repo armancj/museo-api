@@ -26,10 +26,16 @@ export class CategoryMuseumService {
       return CategoryMuseum.create(createdCategoryMuseum);
   }
 
-  async findAll() {
+  async findAll(filter?: { active?: boolean }) {
+    const query: any = { deleted: false };
+    
+    if (filter?.active !== undefined) {
+      query.active = filter.active;
+    }
+
     const categoryMuseums = await this.categoryMuseumRepository
-    .find({deleted:false})
-    .exec();
+      .find(query)
+      .exec();
     
     return CategoryMuseums.create(categoryMuseums).value;
   }
