@@ -16,7 +16,6 @@ import { CategoryMuseumModule } from './nomenclator/institutions/category-museum
 import { NomenclatorModule } from './nomenclator/nomenclator.module';
 import { InstitutionTypesController } from './nomenclator/institutions/institution-types/institution-types.controller';
 import { InstitutionTypesService } from './nomenclator/institutions/institution-types/institution-types.service';
-import { CommercialRegistrationModule } from './commercial-registration/commercial-registration.module';
 import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
 import { InstitutionCategoriesModule } from './nomenclator/institutions/institution-categories/institution-categories.module';
 import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
