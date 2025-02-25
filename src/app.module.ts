@@ -13,7 +13,7 @@ import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
 import { CategoryMuseumModule } from './nomenclator/institutions/category-museum/category-museum.module';
-import { NomenclatorModule } from './nomenclator/nomenclator.module';
+import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 import { InstitutionTypesController } from './nomenclator/institutions/institution-types/institution-types.controller';
 import { InstitutionTypesService } from './nomenclator/institutions/institution-types/institution-types.service';
 import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
@@ -33,7 +33,6 @@ import { CreationDetailsModule } from './nomenclator/creation-details/creation-d
 import { ReportsModule } from './nomenclator/reports/reports.module';
 import { ExtraInformationModule } from './nomenclator/extra-information/extra-information.module';
 
-
 @Module({
   imports: [
     EventEmitterModule.forRoot({ global: true }),
@@ -46,7 +45,7 @@ import { ExtraInformationModule } from './nomenclator/extra-information/extra-in
     AddressModule,
     SeedModule,
     CategoryMuseumModule,
-    NomenclatorModule,
+    NomenclatureModule,
     CommercialRegistrationModule,
     InstitutionTypesModule,
     InstitutionCategoriesModule,

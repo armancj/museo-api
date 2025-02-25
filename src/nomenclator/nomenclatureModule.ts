@@ -36,7 +36,7 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     NotesModule,
     CreationDetailsModule,
     ReportsModule,
-    ExtraInformationModule
+    ExtraInformationModule,
   ],
   exports: [
     CategoryMuseumModule,
@@ -55,7 +55,7 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     NotesModule,
     CreationDetailsModule,
     ReportsModule,
-    ExtraInformationModule
-  ]
+    ExtraInformationModule,
+  ],
 })
-export class NomenclatorModule {}
+export class NomenclatureModule {}

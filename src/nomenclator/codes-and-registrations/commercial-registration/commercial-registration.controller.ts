@@ -1,15 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CommercialRegistrationService } from './commercial-registration.service';
 import { CreateCommercialRegistrationDto } from './dto/create-commercial-registration.dto';
 import { UpdateCommercialRegistrationDto } from './dto/update-commercial-registration.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Commercial Registration')
 @Controller('commercial-registration')
 export class CommercialRegistrationController {
-  constructor(private readonly commercialRegistrationService: CommercialRegistrationService) {}
+  constructor(
+    private readonly commercialRegistrationService: CommercialRegistrationService,
+  ) {}
 
   @Post()
-  create(@Body() createCommercialRegistrationDto: CreateCommercialRegistrationDto) {
-    return this.commercialRegistrationService.create(createCommercialRegistrationDto);
+  create(
+    @Body() createCommercialRegistrationDto: CreateCommercialRegistrationDto,
+  ) {
+    return this.commercialRegistrationService.create(
+      createCommercialRegistrationDto,
+    );
   }
 
   @Get()
@@ -23,8 +39,14 @@ export class CommercialRegistrationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommercialRegistrationDto: UpdateCommercialRegistrationDto) {
-    return this.commercialRegistrationService.update(+id, updateCommercialRegistrationDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateCommercialRegistrationDto: UpdateCommercialRegistrationDto,
+  ) {
+    return this.commercialRegistrationService.update(
+      +id,
+      updateCommercialRegistrationDto,
+    );
   }
 
   @Delete(':id')
