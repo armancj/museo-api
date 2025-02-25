@@ -12,9 +12,27 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
+import { CategoryMuseumModule } from './nomenclator/institutions/category-museum/category-museum.module';
+import { NomenclatureModule } from './nomenclator/nomenclatureModule';
+import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
+import { InstitutionCategoriesModule } from './nomenclator/institutions/institution-categories/institution-categories.module';
+import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
+import { HeritageOfficesModule } from './nomenclator/institutions/heritage-offices/heritage-offices.module';
+import { PhoneNumbersModule } from './nomenclator/contact-information/phone-numbers/phone-numbers.module';
+import { EmailsModule } from './nomenclator/contact-information/emails/emails.module';
+import { SocialMediaModule } from './nomenclator/contact-information/social-media/social-media.module';
+import { ReeupCodeModule } from './nomenclator/codes-and-registrations/reeup-code/reeup-code.module';
+import { TaxIdentificationNumberModule } from './nomenclator/codes-and-registrations/tax-identification-number/tax-identification-number.module';
+import { CommercialRegistrationModule } from './nomenclator/codes-and-registrations/commercial-registration/commercial-registration.module';
+import { SubordinationModule } from './nomenclator/subordination/subordination.module';
+import { DescriptionUnitsModule } from './nomenclator/description-units/description-units.module';
+import { NotesModule } from './nomenclator/notes/notes.module';
+import { CreationDetailsModule } from './nomenclator/creation-details/creation-details.module';
+import { ReportsModule } from './nomenclator/reports/reports.module';
+import { ExtraInformationModule } from './nomenclator/extra-information/extra-information.module';
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
 import { CommandsModule } from './commands/commands.module';
-import {LoggerModule} from "./logger/logger.module";
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -27,6 +45,24 @@ import {LoggerModule} from "./logger/logger.module";
     FileStorageModule,
     AddressModule,
     SeedModule,
+    CategoryMuseumModule,
+    NomenclatureModule,
+    CommercialRegistrationModule,
+    InstitutionTypesModule,
+    InstitutionCategoriesModule,
+    MuseumTypesModule,
+    HeritageOfficesModule,
+    PhoneNumbersModule,
+    EmailsModule,
+    SocialMediaModule,
+    ReeupCodeModule,
+    TaxIdentificationNumberModule,
+    SubordinationModule,
+    DescriptionUnitsModule,
+    NotesModule,
+    CreationDetailsModule,
+    ReportsModule,
+    ExtraInformationModule,
     CulturalHeritagePropertyModule,
     CommandsModule,
     LoggerModule,
