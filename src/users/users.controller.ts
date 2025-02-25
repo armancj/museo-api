@@ -12,7 +12,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiNotFoundResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
@@ -25,42 +25,69 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarUserDto } from './dto/upload-avatar-user.dto';
 import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe';
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
+import { Auth, CurrentUser } from '../auth/decorator';
+import { UserRoles } from './enum/user-roles.enum';
+import { NotFound } from "../common/dto/exception.dto";
+
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.userService.create(createUserDto);
+  async create(
+    @Body() createUserDto: CreateUserDto,
+    @CurrentUser() user: User,
+  ): Promise<User> {
+    return this.userService.create(createUserDto, user);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Post('/all')
   async findAll(
     @Query() query: FindAllDto,
     @Body() filterUserDto: FilterUserDto,
+    @CurrentUser() user: User,
   ) {
     const { users, totalPage, totalElement } = await this.userService.findAll(
       query,
       { ...filterUserDto, deleted: false } as UserModel,
+      user,
     );
     return { usersData: users.value, totalPage, totalElement };
   }
 
+  @ApiNotFoundResponse({ description: 'User not found', type: NotFound })
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Get(':uuid')
-  async findOne(@Param('uuid') uuid: string): Promise<User> {
-    return this.userService.findOne({ uuid, deleted: false });
+  async findOne(
+    @Param('uuid') uuid: string,
+    @CurrentUser() user: User,
+  ): Promise<User> {
+    return this.userService.findOne({ uuid, deleted: false }, user);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Patch(':uuid')
   async update(
     @Param('uuid') uuid: string,
     @Body() updateUserDto: UpdateUserDto,
+    @CurrentUser() user: User,
   ): Promise<boolean> {
     return this.userService.update({
       filter: { uuid, deleted: false },
       updateUserDto,
+      user,
     });
   }
 
@@ -73,11 +100,6 @@ export class UsersController {
       filter: { uuid, deleted: false },
       updateUserDto: activatedUserDto,
     });
-  }
-
-  @Delete(':uuid/soft')
-  async removeSoft(@Param('uuid') uuid: string): Promise<boolean> {
-    return this.userService.softDelete({ uuid });
   }
 
   @Post(':uuid/avatar')
@@ -109,6 +131,6 @@ export class UsersController {
 
   @Delete(':uuid')
   async remove(@Param('uuid') uuid: string): Promise<boolean> {
-    return this.userService.remove({ uuid });
+    return this.userService.softDelete({ uuid });
   }
 }

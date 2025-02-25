@@ -61,7 +61,10 @@ export class MunicipalityService {
       );
 
     await this.municipalitiesMongoModel
-      .updateOne({ uuid }, updateMunicipalityDto)
+      .updateOne(
+        { uuid },
+        { ...updateMunicipalityDto, updatedAt: new Date(Date.now()) },
+      )
       .exec();
   }
 

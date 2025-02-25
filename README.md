@@ -59,6 +59,10 @@ $ pnpm run test:cov
 ```
 
 ## Resources
+```bash
+# Add Super Admin
+$ pnpm run command create:default-user
+```
 
 Check out a few resources that may come in handy when working with NestJS:
 

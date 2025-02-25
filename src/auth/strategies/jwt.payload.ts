@@ -4,4 +4,7 @@ export class JwtPayload {
   name: string;
   lastName: string;
   roles: string;
+  municipal: string;
+  province: string;
+  nationality: string;
 }

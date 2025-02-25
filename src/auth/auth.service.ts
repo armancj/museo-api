@@ -65,6 +65,9 @@ export class AuthService {
       email: user.email,
       name: user.name,
       lastName: user.lastName,
+      municipal: user.municipal,
+      nationality: user.nationality,
+      province: user.province
     };
     const refresh_token = await this.getJwtRefreshToken(payload);
     await this.setCurrentRefreshToken(refresh_token, user.uuid, payload);

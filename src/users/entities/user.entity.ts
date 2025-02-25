@@ -1,70 +1,87 @@
 import {
-  UploadedFile,
-  UserModel,
-  UserPropertiesModel,
+    UploadedFile,
+    UserModel,
+    UserPropertiesModel,
 } from '../models/user.model';
-import { Expose, plainToClass } from 'class-transformer';
-import { UserRoles } from '../enum/user-roles.enum';
+import {Exclude, Expose} from 'class-transformer';
+import {UserRoles} from '../enum/user-roles.enum';
+import {Institution} from "../../address/institutions/entities/institution.entity";
 
 export class User implements UserModel {
-  @Expose()
-  uuid: string;
+    uuid: string;
 
-  @Expose()
-  mobile: string;
+    mobile: string;
 
-  @Expose()
-  municipal: string;
+    municipal: string;
 
-  @Expose()
-  readonly email: string;
+    readonly email: string;
 
-  @Expose()
-  readonly address?: string;
+    readonly address?: string;
 
-  @Expose()
-  readonly lastName: string;
+    readonly lastName: string;
 
-  @Expose()
-  readonly name: string;
+    readonly name: string;
 
-  @Expose()
-  readonly nationality?: string;
+    readonly nationality?: string;
 
-  @Expose()
-  readonly province?: string;
+    readonly province?: string;
 
-  @Expose()
-  readonly avatar?: UploadedFile;
+    readonly avatar?: UploadedFile;
 
-  @Expose()
-  readonly roles?: UserRoles;
+    readonly roles?: UserRoles;
 
-  readonly passwordHashed: string;
+    @Exclude()
+    readonly passwordHashed: string;
 
-  @Expose()
-  readonly active?: boolean;
+    readonly active?: boolean;
 
-  @Expose()
-  readonly deleted?: boolean;
+    @Exclude()
+    readonly deleted?: boolean;
 
-  constructor(options: UserPropertiesModel) {
-    Object.assign(this as UserModel, options);
-  }
+    institutionId?: string;
 
-  updateUserInfo(updatedInfo: Partial<UserPropertiesModel>): void {
-    Object.assign(this as UserModel, updatedInfo);
-  }
+    institution?: Institution
 
-  isActive(): boolean {
-    return this.active ?? false;
-  }
 
-  isDeleted(): boolean {
-    return this.deleted ?? false;
-  }
+    constructor(option: UserPropertiesModel) {
+        this.uuid = option.uuid;
+        this.mobile = option.mobile;
+        this.email = option.email;
+        this.address = option.address;
+        this.lastName = option.lastName;
+        this.name = option.name;
+        this.avatar = option.avatar;
+        this.roles = option.roles;
+        this.passwordHashed = option.passwordHashed;
+        this.active = option.active;
+        this.deleted = option.deleted;
 
-  static create(options: UserPropertiesModel): User {
-    return plainToClass(User, options, { excludeExtraneousValues: true });
-  }
+        if (option?.nationality)
+            this.nationality = option.nationality;
+
+        if (option?.province)
+            this.province = option.province;
+
+        if (option?.municipal)
+            this.municipal = option.municipal;
+
+        if (option?.institution)
+            this.institution = Institution.create(option?.institution);
+    }
+
+    updateUserInfo(updatedInfo: Partial<UserPropertiesModel>): void {
+        Object.assign(this as UserModel, updatedInfo);
+    }
+
+    isActive(): boolean {
+        return this.active ?? false;
+    }
+
+    isDeleted(): boolean {
+        return this.deleted ?? false;
+    }
+
+    static create(options: UserPropertiesModel): User {
+        return new User(options);
+    }
 }

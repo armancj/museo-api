@@ -12,6 +12,9 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
+import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
+import { CommandsModule } from './commands/commands.module';
+import {LoggerModule} from "./logger/logger.module";
 
 @Module({
   imports: [
@@ -24,6 +27,9 @@ import { AddressModule } from './address/address.module';
     FileStorageModule,
     AddressModule,
     SeedModule,
+    CulturalHeritagePropertyModule,
+    CommandsModule,
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [

@@ -18,6 +18,7 @@ export class BaseSchema implements BaseModel {
 
 export const BaseSchemaFactory = SchemaFactory.createForClass(BaseSchema);
 
+BaseSchemaFactory.index({ uuid: 1 });
 BaseSchemaFactory.pre('save', function (next) {
   if (!this.uuid) {
     this.uuid = crypto.randomUUID();
