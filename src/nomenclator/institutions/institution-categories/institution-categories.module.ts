@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { InstitutionCategoriesController } from './institution-categories.controller';
 import { InstitutionCategoriesService } from './institution-categories.service';
+import { InstitutionCategoriesController } from './institution-categories.controller';
 
 @Module({
   controllers: [InstitutionCategoriesController],
-  providers: [InstitutionCategoriesService]
+  providers: [InstitutionCategoriesService],
 })
 export class InstitutionCategoriesModule {}

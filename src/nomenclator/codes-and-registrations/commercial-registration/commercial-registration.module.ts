@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { CommercialRegistrationController } from './commercial-registration.controller';
 import { CommercialRegistrationService } from './commercial-registration.service';
+import { CommercialRegistrationController } from './commercial-registration.controller';
 
 @Module({
   controllers: [CommercialRegistrationController],
-  providers: [CommercialRegistrationService]
+  providers: [CommercialRegistrationService],
 })
 export class CommercialRegistrationModule {}

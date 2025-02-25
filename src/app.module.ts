@@ -17,6 +17,22 @@ import { NomenclatorModule } from './nomenclator/nomenclator.module';
 import { InstitutionTypesController } from './nomenclator/institutions/institution-types/institution-types.controller';
 import { InstitutionTypesService } from './nomenclator/institutions/institution-types/institution-types.service';
 import { CommercialRegistrationModule } from './commercial-registration/commercial-registration.module';
+import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
+import { InstitutionCategoriesModule } from './nomenclator/institutions/institution-categories/institution-categories.module';
+import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
+import { HeritageOfficesModule } from './nomenclator/institutions/heritage-offices/heritage-offices.module';
+import { PhoneNumbersModule } from './nomenclator/contact-information/phone-numbers/phone-numbers.module';
+import { EmailsModule } from './nomenclator/contact-information/emails/emails.module';
+import { SocialMediaModule } from './nomenclator/contact-information/social-media/social-media.module';
+import { ReeupCodeModule } from './nomenclator/codes-and-registrations/reeup-code/reeup-code.module';
+import { TaxIdentificationNumberModule } from './nomenclator/codes-and-registrations/tax-identification-number/tax-identification-number.module';
+import { CommercialRegistrationModule } from './nomenclator/codes-and-registrations/commercial-registration/commercial-registration.module';
+import { SubordinationModule } from './nomenclator/subordination/subordination.module';
+import { DescriptionUnitsModule } from './nomenclator/description-units/description-units.module';
+import { NotesModule } from './nomenclator/notes/notes.module';
+import { CreationDetailsModule } from './nomenclator/creation-details/creation-details.module';
+import { ReportsModule } from './nomenclator/reports/reports.module';
+import { ExtraInformationModule } from './nomenclator/extra-information/extra-information.module';
 
 
 @Module({
@@ -33,6 +49,21 @@ import { CommercialRegistrationModule } from './commercial-registration/commerci
     CategoryMuseumModule,
     NomenclatorModule,
     CommercialRegistrationModule,
+    InstitutionTypesModule,
+    InstitutionCategoriesModule,
+    MuseumTypesModule,
+    HeritageOfficesModule,
+    PhoneNumbersModule,
+    EmailsModule,
+    SocialMediaModule,
+    ReeupCodeModule,
+    TaxIdentificationNumberModule,
+    SubordinationModule,
+    DescriptionUnitsModule,
+    NotesModule,
+    CreationDetailsModule,
+    ReportsModule,
+    ExtraInformationModule,
   ],
   controllers: [AppController, InstitutionTypesController],
   providers: [

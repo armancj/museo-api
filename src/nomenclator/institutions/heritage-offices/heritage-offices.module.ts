@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { HeritageOfficesController } from './heritage-offices.controller';
 import { HeritageOfficesService } from './heritage-offices.service';
+import { HeritageOfficesController } from './heritage-offices.controller';
 
 @Module({
   controllers: [HeritageOfficesController],
-  providers: [HeritageOfficesService]
+  providers: [HeritageOfficesService],
 })
 export class HeritageOfficesModule {}

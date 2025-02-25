@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { MuseumTypesController } from './museum-types.controller';
 import { MuseumTypesService } from './museum-types.service';
+import { MuseumTypesController } from './museum-types.controller';
 
 @Module({
   controllers: [MuseumTypesController],
-  providers: [MuseumTypesService]
+  providers: [MuseumTypesService],
 })
 export class MuseumTypesModule {}
