@@ -29,8 +29,8 @@ export class CategoryMuseumController {
   }
 
   @Get()
-  findAll(@Query('active') active?: boolean) {
-    return this.categoryMuseumService.findAll({ active });
+  findAll(@Query() updateCategoryMuseumDto: UpdateCategoryMuseumDto) {
+    return this.categoryMuseumService.findAll(updateCategoryMuseumDto);
   }
 
   @Get(':uuid')
