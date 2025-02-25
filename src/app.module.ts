@@ -14,8 +14,6 @@ import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
 import { CategoryMuseumModule } from './nomenclator/institutions/category-museum/category-museum.module';
 import { NomenclatureModule } from './nomenclator/nomenclatureModule';
-import { InstitutionTypesController } from './nomenclator/institutions/institution-types/institution-types.controller';
-import { InstitutionTypesService } from './nomenclator/institutions/institution-types/institution-types.service';
 import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
 import { InstitutionCategoriesModule } from './nomenclator/institutions/institution-categories/institution-categories.module';
 import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
@@ -69,14 +67,13 @@ import { LoggerModule } from './logger/logger.module';
     CommandsModule,
     LoggerModule,
   ],
-  controllers: [AppController, InstitutionTypesController],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: ErrorInterceptor,
     },
     LoggerInterceptor,
-    InstitutionTypesService,
   ],
 })
 export class AppModule {}
