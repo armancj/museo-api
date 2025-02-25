@@ -32,6 +32,9 @@ import { NotesModule } from './nomenclator/notes/notes.module';
 import { CreationDetailsModule } from './nomenclator/creation-details/creation-details.module';
 import { ReportsModule } from './nomenclator/reports/reports.module';
 import { ExtraInformationModule } from './nomenclator/extra-information/extra-information.module';
+import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
+import { CommandsModule } from './commands/commands.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -62,6 +65,9 @@ import { ExtraInformationModule } from './nomenclator/extra-information/extra-in
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    CulturalHeritagePropertyModule,
+    CommandsModule,
+    LoggerModule,
   ],
   controllers: [AppController, InstitutionTypesController],
   providers: [

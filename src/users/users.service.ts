@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserMongoRepository } from './repositories/user-mongo.repository';
+import {
+  createUserModel,
+  UserMongoRepository,
+} from './repositories/user-mongo.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { FindAllDto } from '../common/dto/find-all.dto';
@@ -13,10 +16,13 @@ import { UnauthorizedAuthException } from '../auth/exceptions/unauthorized-auth.
 import { firstValueFrom } from 'rxjs';
 import { FileMetadataModel } from '../file-storage/model/file-metadata.model';
 import { concatenateUint8Arrays } from '../common/utils/concatenate-uint8-arrays.function';
+import { getFieldOfUserData } from '../common/utils/get-field-of-user-data';
+import { UserRoles } from './enum/user-roles.enum';
 
 export type UpdatedUser = {
   filter: Partial<UserModel>;
   updateUserDto: Partial<UserModel> & { password?: string };
+  user?: User;
 };
 @Injectable()
 export class UsersService {
@@ -25,24 +31,37 @@ export class UsersService {
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto, user?: User): Promise<User> {
     const { password, ...rest } = createUserDto;
 
-    await this.validationData(rest);
+    const dataUser = getFieldOfUserData(user, rest);
+
+    if (rest.roles !== UserRoles.superAdmin)
+      await this.validationData(dataUser);
 
     const passwordHashed = await hashedPassword(password);
 
     const uuid = crypto.randomUUID();
-    return this.userMongoRepository.create({ ...rest, passwordHashed, uuid });
+
+    return this.userMongoRepository.create({
+      ...dataUser,
+      passwordHashed,
+      uuid,
+    } as createUserModel);
   }
 
-  async findAll(query: FindAllDto, filter: Partial<UserModel>) {
+  async findAll(query: FindAllDto, filter: Partial<UserModel>, user?: User) {
+    getFieldOfUserData(user, filter as createUserModel);
     return await this.userMongoRepository.findAll(filter, {}, query);
   }
 
-  async findOne(filter: Partial<UserModel>): Promise<User> {
+  async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
+    const filterData = getFieldOfUserData(
+      currentUser,
+      filter as createUserModel,
+    );
     const user = await this.userMongoRepository.findOne(
-      filter,
+      filterData,
       {},
       { lean: true },
     );
@@ -51,25 +70,27 @@ export class UsersService {
   }
 
   @OnEvent(EventEmitter.userUpdated)
-  async update({ filter, updateUserDto }: UpdatedUser): Promise<boolean> {
-    await this.findOne(filter);
-
+  async update({ filter, updateUserDto, user }: UpdatedUser): Promise<boolean> {
+    await this.findOne(filter, user);
     const { password, ...rest } = updateUserDto;
-    await this.validationData(rest);
 
-    const updateUser: Partial<UserModel> = { ...rest } as UserModel;
+    const userData = getFieldOfUserData(user, rest as createUserModel);
+
+    if (user.roles !== UserRoles.superAdmin) await this.validationData(rest);
+
+    const updateUser: Partial<UserModel> = { ...userData } as UserModel;
     if (password) updateUser.passwordHashed = await hashedPassword(password);
 
     return this.userMongoRepository.updatedOne(filter, updateUser);
   }
 
-  async remove(filter: Partial<UserModel>): Promise<boolean> {
-    await this.findOne(filter);
+  async remove(filter: Partial<UserModel>, user?: User): Promise<boolean> {
+    await this.findOne(filter, user);
     return this.userMongoRepository.deleteOne(filter);
   }
 
-  async softDelete(param: { uuid: string }) {
-    const user = await this.findOne({ ...param, deleted: false });
+  async softDelete(param: { uuid: string }, currentUser?: User) {
+    const user = await this.findOne({ ...param, deleted: false }, currentUser);
 
     return await this.userMongoRepository.updatedOne({
       deleted: true,
@@ -92,7 +113,7 @@ export class UsersService {
         this.eventEmitter.checkProvinceExists(userDto.province),
       );
     }
-    if (userDto.municipal) {
+    if (userDto.municipal && userDto.roles !== UserRoles.administrator) {
       validationPromises.push(
         this.eventEmitter.checkMunicipalityExists(userDto.municipal),
       );
