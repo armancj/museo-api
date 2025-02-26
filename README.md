@@ -58,12 +58,17 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
-## Resources
+## Resources User
 ```bash
 # Add Super Admin
 $ pnpm run command create:default-user
 ```
 
+## Resources Museun Categories
+```bash
+# Add Museun Categories
+$ pnpm run command create:default-categories
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
