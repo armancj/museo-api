@@ -180,6 +180,15 @@
 
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Module that manages cultural records, including volume quantities, dimensions, and other associated data.</p>
+<p>Provides the controller and service to handle cultural records within the schema,
+as well as setting up the provider for <code>CommonRecordService</code> to interact with the cultural record data.</p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -214,10 +223,57 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
 import { CulturalRecordService } from &#x27;./cultural-record.service&#x27;;
 import { CulturalRecordController } from &#x27;./cultural-record.controller&#x27;;
+import { getModelToken, MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
+import { CommonRecordService } from &#x27;../shared/common-record-service.service&#x27;;
+import {
+  CulturalHeritagePropertyEntity,
+  CulturalHeritagePropertySchema,
+} from &#x27;../cultural-heritage-property/Schema/cultural-heritage-property&#x27;;
+import { CulturalRecordsEntity } from &#x27;./entities/cultural-records.entity&#x27;;
+import { CulturalRecordEntity } from &#x27;./entities/cultural-record.entity&#x27;;
 
+/**
+ * Module that manages cultural records, including volume quantities, dimensions, and other associated data.
+ *
+ * Provides the controller and service to handle cultural records within the schema,
+ * as well as setting up the provider for &#x60;CommonRecordService&#x60; to interact with the cultural record data.
+ */
 @Module({
+  imports: [
+    /**
+     * Imports the Mongoose module with the cultural heritage property schema.
+     */
+    MongooseModule.forFeature([
+      {
+        name: CulturalHeritagePropertyEntity,
+        schema: CulturalHeritagePropertySchema,
+      },
+    ]),
+  ],
   controllers: [CulturalRecordController],
-  providers: [CulturalRecordService],
+  providers: [
+    /**
+     * Provider for &#x60;CommonRecordService&#x60; configured for managing cultural records.
+     *
+     * The service is injected using a factory pattern with the cultural record, dimensions, and volume quantities models,
+     * and is registered with the token &#x60;&#x27;CULTURAL_RECORD_SERVICE&#x27;&#x60;.
+     */
+    {
+      provide: &#x27;CULTURAL_RECORD_SERVICE&#x27;,
+      useFactory: (culturalRecordModel) &#x3D;&gt;
+        new CommonRecordService(
+          culturalRecordModel,
+          CulturalRecordEntity,
+          CulturalRecordsEntity,
+          &#x27;culturalRecord&#x27;,
+        ),
+      inject: [getModelToken(CulturalHeritagePropertyEntity)],
+    },
+    /**
+     * Service for handling the business logic of cultural records.
+     */
+    CulturalRecordService,
+  ],
 })
 export class CulturalRecordModule {}
 </code></pre>

@@ -351,7 +351,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/CulturalRecordModel.html" target="_self" >CulturalRecordModel</a></code>
+                        <i>Type : </i>        <code><a href="../classes/CulturalRecordEntity.html" target="_self" >CulturalRecordEntity</a></code>
 
                     </td>
                 </tr>
@@ -403,7 +403,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/DescriptionControlModel.html" target="_self" >DescriptionControlModel</a></code>
+                        <i>Type : </i>        <code><a href="../classes/DescriptionControl.html" target="_self" >DescriptionControl</a></code>
 
                     </td>
                 </tr>
@@ -429,7 +429,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/EntryAndLocationRecordModel.html" target="_self" >EntryAndLocationRecordModel</a></code>
+                        <i>Type : </i>        <code><a href="../classes/EntryAndLocationRecord.html" target="_self" >EntryAndLocationRecord</a></code>
 
                     </td>
                 </tr>
@@ -455,7 +455,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/NotesModel.html" target="_self" >NotesModel</a></code>
+                        <i>Type : </i>        <code><a href="../classes/CulturalNoteEntity.html" target="_self" >CulturalNoteEntity</a></code>
 
                     </td>
                 </tr>
@@ -575,8 +575,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-heritage-property/entity/cultural-heritage-property.entity.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-heritage-property/entity/cultural-heritage-property.entity.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -636,10 +636,10 @@
 import { ProducerAuthorRecord } from &#x27;../../producer-author-record/entities/producer-author-record.entity&#x27;;
 import { AccessAndUseCondition } from &#x27;../../access-and-use-conditions/entities/access-and-use-condition.entity&#x27;;
 import { AssociatedDocumentationEntity } from &#x27;../../associated-documentation/entities/associated-documentation.entity&#x27;;
-import { NotesModel } from &#x27;../../cultural-notes/models/cultural-notes-model&#x27;;
-import { CulturalRecordModel } from &#x27;../../cultural-record/models/cultural-record&#x27;;
-import { EntryAndLocationRecordModel } from &#x27;../../entry-and-location-record/models/entry-and-location-record.model&#x27;;
-import { DescriptionControlModel } from &#x27;../../description-control/models/description-control-model&#x27;;
+import { CulturalRecordEntity } from &#x27;../../cultural-record/entities/cultural-record.entity&#x27;;
+import { EntryAndLocationRecord } from &#x27;../../entry-and-location-record/entities/entry-and-location-record.entity&#x27;;
+import { DescriptionControl } from &#x27;../../description-control/entities/description-control.entity&#x27;;
+import { CulturalNoteEntity } from &#x27;../../cultural-notes/entities/cultural-note.entity&#x27;;
 
 export class CulturalHeritageProperty implements CulturalPropertyModel {
   createdAt: Date;
@@ -652,17 +652,19 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
   associatedDocumentation: AssociatedDocumentationEntity;
 
-  culturalRecord: CulturalRecordModel;
+  culturalRecord: CulturalRecordEntity;
 
-  entryAndLocation: EntryAndLocationRecordModel;
+  entryAndLocation: EntryAndLocationRecord;
 
-  descriptionControl: DescriptionControlModel;
+  descriptionControl: DescriptionControl;
 
-  notes: NotesModel;
+  notes: CulturalNoteEntity;
 
   updatedAt: Date;
 
   uuid: string;
+
+
 
   constructor(option: CulturalPropertyModel) {
     this.createdAt &#x3D; option.createdAt;
@@ -683,15 +685,18 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
         option.associatedDocumentation,
       );
 
-    if (option.culturalRecord) this.culturalRecord &#x3D; option.culturalRecord;
+    if (option.culturalRecord)
+      this.culturalRecord &#x3D; CulturalRecordEntity.create(option.culturalRecord);
 
     if (option.entryAndLocation)
       this.entryAndLocation &#x3D; option.entryAndLocation;
 
     if (option.descriptionControl)
-      this.descriptionControl &#x3D; option.descriptionControl;
+      this.descriptionControl &#x3D; DescriptionControl.create(
+        option.descriptionControl,
+      );
 
-    if (option.notes) this.notes &#x3D; option.notes;
+    if (option.notes) this.notes &#x3D; CulturalNoteEntity.create(option.notes);
   }
 
   static create(option: CulturalPropertyModel): CulturalHeritageProperty {

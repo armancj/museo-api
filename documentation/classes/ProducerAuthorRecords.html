@@ -183,7 +183,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/cultural-heritage-property/producer-author-record/entities/producer-author-records.entity.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/cultural-heritage-property/producer-author-record/entities/producer-author-records.entity.ts:5</a></div>
                             </td>
                         </tr>
 
@@ -246,7 +246,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/cultural-heritage-property/producer-author-record/entities/producer-author-records.entity.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/cultural-heritage-property/producer-author-record/entities/producer-author-records.entity.ts:6</a></div>
                         </td>
                     </tr>
 
@@ -282,8 +282,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="9"
-                                    class="link-to-prism">src/cultural-heritage-property/producer-author-record/entities/producer-author-records.entity.ts:9</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="8"
+                                    class="link-to-prism">src/cultural-heritage-property/producer-author-record/entities/producer-author-records.entity.ts:8</a></div>
                         </td>
                     </tr>
 
@@ -341,24 +341,23 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CulturalPropertyModel } from &#x27;../../cultural-heritage-property/models/cultural-property.model&#x27;;
 import { ProducerAuthorRecord } from &#x27;./producer-author-record.entity&#x27;;
-import {ExtendedProducerAuthorRecord} from &quot;./extended-producer-author-record.entity&quot;;
-
+import { ExtendedProducerAuthorRecord } from &#x27;./extended-producer-author-record.entity&#x27;;
 
 export class ProducerAuthorRecords {
   private constructor(public value: CulturalPropertyModel[]) {}
 
   public static create(
     value: CulturalPropertyModel[],
-  ): ExtendedProducerAuthorRecord [] {
+  ): ExtendedProducerAuthorRecord[] {
     if (!Array.isArray(value))
       throw new TypeError(&#x27;Input in producer author is not an array&#x27;);
 
     return value
-        .filter((data) &#x3D;&gt; data.producerAuthor)
-        .map((data) &#x3D;&gt; {
-          const {uuid, producerAuthor} &#x3D; data;
-          return {uuid, ...ProducerAuthorRecord.create(producerAuthor)};
-        });
+      .filter((data) &#x3D;&gt; data.producerAuthor)
+      .map((data) &#x3D;&gt; {
+        const { uuid, producerAuthor } &#x3D; data;
+        return { uuid, ...ProducerAuthorRecord.create(producerAuthor) };
+      });
   }
 }
 </code></pre>

@@ -119,6 +119,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to manage cultural notes.</p>
+<p>This service provides methods for creating, retrieving, updating, and deleting
+cultural notes associated with a specific cultural property identified by its UUID.</p>
+
+            </p>
 
 
 
@@ -173,7 +182,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -236,14 +245,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:33</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new cultural note.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -254,6 +265,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -268,6 +280,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural property</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>commonDto</td>
@@ -280,6 +296,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The data used to create the cultural note</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -289,7 +309,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The created cultural note</p>
+
                             </div>
                 </td>
             </tr>
@@ -315,19 +336,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:42</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all cultural notes.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A list of cultural notes</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -352,14 +379,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves a specific cultural note by UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -370,6 +399,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -384,6 +414,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural property</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -393,7 +427,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The cultural note associated with the given UUID</p>
+
                             </div>
                 </td>
             </tr>
@@ -419,14 +454,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:73</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a cultural note.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -437,6 +474,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -451,6 +489,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural property</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -460,7 +502,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A response indicating success or failure of the deletion</p>
+
                             </div>
                 </td>
             </tr>
@@ -486,14 +529,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/cultural-notes.service.ts:63</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing cultural note.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -504,6 +549,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -518,6 +564,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural property</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>commonDto</td>
@@ -530,6 +580,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The updated data for the cultural note</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -539,7 +593,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The updated cultural note</p>
+
                             </div>
                 </td>
             </tr>
@@ -558,6 +613,12 @@ import { UpdateCulturalNoteDto } from &#x27;./dto/update-cultural-note.dto&#x27;
 import { CulturalNoteEntity } from &#x27;./entities/cultural-note.entity&#x27;;
 import { CulturalNotesEntity } from &#x27;./entities/cultural-notes.entity&#x27;;
 
+/**
+ * Service to manage cultural notes.
+ *
+ * This service provides methods for creating, retrieving, updating, and deleting
+ * cultural notes associated with a specific cultural property identified by its UUID.
+ */
 @Injectable()
 export class CulturalNotesService {
   constructor(
@@ -569,22 +630,54 @@ export class CulturalNotesService {
       CulturalNotesEntity
     &gt;,
   ) {}
+
+  /**
+   * Creates a new cultural note.
+   *
+   * @param uuid The UUID of the cultural property
+   * @param commonDto The data used to create the cultural note
+   * @returns The created cultural note
+   */
   create(uuid: string, commonDto: CreateCulturalNoteDto) {
     return this.commonRecordService.create(uuid, commonDto);
   }
 
+  /**
+   * Retrieves all cultural notes.
+   *
+   * @returns A list of cultural notes
+   */
   findAll() {
     return this.commonRecordService.findAll();
   }
 
+  /**
+   * Retrieves a specific cultural note by UUID.
+   *
+   * @param uuid The UUID of the cultural property
+   * @returns The cultural note associated with the given UUID
+   */
   findOne(uuid: string) {
     return this.commonRecordService.findOne(uuid);
   }
 
+  /**
+   * Updates an existing cultural note.
+   *
+   * @param uuid The UUID of the cultural property
+   * @param commonDto The updated data for the cultural note
+   * @returns The updated cultural note
+   */
   update(uuid: string, commonDto: UpdateCulturalNoteDto) {
     return this.commonRecordService.update(uuid, commonDto);
   }
 
+  /**
+   * Deletes a cultural note.
+   *
+   * @param uuid The UUID of the cultural property
+   * @returns A response indicating success or failure of the deletion
+   */
   remove(uuid: string) {
     return this.commonRecordService.remove(uuid);
   }

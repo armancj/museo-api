@@ -162,6 +162,54 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(commonRecordService: <a href="../injectables/CommonRecordService.html" target="_self">CommonRecordService&lt;any | CreateCulturalRecordDto | CulturalRecordEntity | CulturalRecordsEntity&gt;</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>commonRecordService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CommonRecordService.html" target="_self" >CommonRecordService&lt;any | CreateCulturalRecordDto | CulturalRecordEntity | CulturalRecordsEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -181,21 +229,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>create(createCulturalRecordDto: <a href="../classes/CreateCulturalRecordDto.html" target="_self">CreateCulturalRecordDto</a>)</code>
+<code>create(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, createCulturalRecordDto: <a href="../classes/CreateCulturalRecordDto.html" target="_self">CreateCulturalRecordDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="7"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:7</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new cultural record, passing the UUID to associate the record.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -206,9 +256,26 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                                <td>uuid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The UUID for the new cultural record.</p>
+
+                                            </td>
+                                        </tr>
                                         <tr>
                                                 <td>createCulturalRecordDto</td>
                                             <td>
@@ -220,16 +287,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Data to create the cultural record.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The created cultural record.</p>
+
                             </div>
                 </td>
             </tr>
@@ -255,19 +327,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:36</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all cultural records.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>List of all cultural records.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -285,21 +363,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:46</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves a cultural record by UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -310,13 +390,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -324,16 +405,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural record to find.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The cultural record found.</p>
+
                             </div>
                 </td>
             </tr>
@@ -352,21 +438,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Removes a cultural record by UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -377,13 +465,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -391,16 +480,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural record to remove.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A message indicating the removal.</p>
+
                             </div>
                 </td>
             </tr>
@@ -419,21 +513,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateCulturalRecordDto: <a href="../classes/UpdateCulturalRecordDto.html" target="_self">UpdateCulturalRecordDto</a>)</code>
+<code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateCulturalRecordDto: <a href="../classes/UpdateCulturalRecordDto.html" target="_self">UpdateCulturalRecordDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-record/cultural-record.service.ts:57</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing cultural record by UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -444,13 +540,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -458,6 +555,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The UUID of the cultural record to update.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>updateCulturalRecordDto</td>
@@ -470,16 +571,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The updated data.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The updated cultural record.</p>
+
                             </div>
                 </td>
             </tr>
@@ -491,30 +597,74 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@nestjs/common&#x27;;
+import { CommonRecordService } from &#x27;../shared/common-record-service.service&#x27;;
 import { CreateCulturalRecordDto } from &#x27;./dto/create-cultural-record.dto&#x27;;
 import { UpdateCulturalRecordDto } from &#x27;./dto/update-cultural-record.dto&#x27;;
+import { CulturalRecordEntity } from &#x27;./entities/cultural-record.entity&#x27;;
+import { CulturalRecordsEntity } from &#x27;./entities/cultural-records.entity&#x27;;
 
 @Injectable()
 export class CulturalRecordService {
-  create(createCulturalRecordDto: CreateCulturalRecordDto) {
-    return &#x27;This action adds a new culturalRecord&#x27;;
+  constructor(
+    @Inject(&#x27;CULTURAL_RECORD_SERVICE&#x27;)
+    private readonly commonRecordService: CommonRecordService&lt;
+      any,
+      CreateCulturalRecordDto,
+      CulturalRecordEntity,
+      CulturalRecordsEntity
+    &gt;,
+  ) {}
+
+  /**
+   * Creates a new cultural record, passing the UUID to associate the record.
+   *
+   * @param uuid The UUID for the new cultural record.
+   * @param createCulturalRecordDto Data to create the cultural record.
+   * @returns The created cultural record.
+   */
+  create(uuid: string, createCulturalRecordDto: CreateCulturalRecordDto) {
+    return this.commonRecordService.create(uuid, createCulturalRecordDto);
   }
 
+  /**
+   * Retrieves all cultural records.
+   *
+   * @returns List of all cultural records.
+   */
   findAll() {
-    return &#x60;This action returns all culturalRecord&#x60;;
+    return this.commonRecordService.findAll();
   }
 
-  findOne(id: number) {
-    return &#x60;This action returns a #${id} culturalRecord&#x60;;
+  /**
+   * Retrieves a cultural record by UUID.
+   *
+   * @param uuid The UUID of the cultural record to find.
+   * @returns The cultural record found.
+   */
+  findOne(uuid: string) {
+    return this.commonRecordService.findOne(uuid);
   }
 
-  update(id: number, updateCulturalRecordDto: UpdateCulturalRecordDto) {
-    return &#x60;This action updates a #${id} culturalRecord&#x60;;
+  /**
+   * Updates an existing cultural record by UUID.
+   *
+   * @param uuid The UUID of the cultural record to update.
+   * @param updateCulturalRecordDto The updated data.
+   * @returns The updated cultural record.
+   */
+  update(uuid: string, updateCulturalRecordDto: UpdateCulturalRecordDto) {
+    return this.commonRecordService.update(uuid, updateCulturalRecordDto);
   }
 
-  remove(id: number) {
-    return &#x60;This action removes a #${id} culturalRecord&#x60;;
+  /**
+   * Removes a cultural record by UUID.
+   *
+   * @param uuid The UUID of the cultural record to remove.
+   * @returns A message indicating the removal.
+   */
+  remove(uuid: string) {
+    return this.commonRecordService.remove(uuid);
   }
 }
 </code></pre>

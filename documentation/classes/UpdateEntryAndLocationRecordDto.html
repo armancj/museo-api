@@ -123,6 +123,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO for updating an entry and location record.
+Inherits all fields from CreateEntryAndLocationRecordDto, but makes them optional.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -148,9 +156,13 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PartialType } from &#x27;@nestjs/mapped-types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PartialType } from &#x27;@nestjs/swagger&#x27;;
 import { CreateEntryAndLocationRecordDto } from &#x27;./create-entry-and-location-record.dto&#x27;;
 
+/**
+ * DTO for updating an entry and location record.
+ * Inherits all fields from CreateEntryAndLocationRecordDto, but makes them optional.
+ */
 export class UpdateEntryAndLocationRecordDto extends PartialType(
   CreateEntryAndLocationRecordDto,
 ) {}

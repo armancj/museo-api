@@ -123,6 +123,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Extended entity representing a cultural note with an associated UUID.</p>
+<p>Extends the functionality of <code>CulturalNoteEntity</code> by adding a unique identifier (<code>uuid</code>).</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -190,12 +198,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/extended-cultural-note.entity.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/extended-cultural-note.entity.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Initializes a new instance of <code>ExtendedCulturalNoteEntity</code>.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -204,6 +214,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -218,6 +229,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Partial object containing the <code>NotesModel</code> data along with the <code>uuid</code> identifier.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -252,10 +269,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/extended-cultural-note.entity.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/extended-cultural-note.entity.ts:13</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique identifier for the cultural note.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -284,11 +307,17 @@
                         </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in         <code><a href="../classes/CulturalNoteEntity.html#source" target="_self" >CulturalNoteEntity:4</a></code>
+                                <div class="io-line">Defined in         <code><a href="../classes/CulturalNoteEntity.html#source" target="_self" >CulturalNoteEntity:13</a></code>
 </div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Content of the cultural note.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -327,7 +356,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in         <code><a href="../classes/CulturalNoteEntity.html#source" target="_self" >CulturalNoteEntity:10</a></code>
+                                <div class="io-line">Defined in         <code><a href="../classes/CulturalNoteEntity.html#source" target="_self" >CulturalNoteEntity:31</a></code>
 </div>
                         </td>
                     </tr>
@@ -335,6 +364,8 @@
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Factory method to create an instance of <code>ExtendedCulturalNoteEntity</code>.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -345,6 +376,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -359,6 +391,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Partial object including <code>NotesModel</code> data and a <code>uuid</code> field.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -368,7 +406,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A new instance of <code>ExtendedCulturalNoteEntity</code>.</p>
+
                             </div>
                 </td>
             </tr>
@@ -387,12 +426,33 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CulturalNoteEntity } from &#x27;./cultural-note.entity&#x27;;
 import { NotesModel } from &#x27;../models/cultural-notes-model&#x27;;
 
+/**
+ * Extended entity representing a cultural note with an associated UUID.
+ *
+ * Extends the functionality of &#x60;CulturalNoteEntity&#x60; by adding a unique identifier (&#x60;uuid&#x60;).
+ */
 export class ExtendedCulturalNoteEntity extends CulturalNoteEntity {
+  /**
+   * Unique identifier for the cultural note.
+   */
   uuid: string;
 
+  /**
+   * Initializes a new instance of &#x60;ExtendedCulturalNoteEntity&#x60;.
+   *
+   * @param option - Partial object containing the &#x60;NotesModel&#x60; data along with the &#x60;uuid&#x60; identifier.
+   */
   constructor(option: Partial&lt;NotesModel &amp; { uuid: string }&gt;) {
     super(option);
+    this.uuid &#x3D; option.uuid;
   }
+
+  /**
+   * Factory method to create an instance of &#x60;ExtendedCulturalNoteEntity&#x60;.
+   *
+   * @param option - Partial object including &#x60;NotesModel&#x60; data and a &#x60;uuid&#x60; field.
+   * @returns A new instance of &#x60;ExtendedCulturalNoteEntity&#x60;.
+   */
   static create(
     option: Partial&lt;NotesModel &amp; { uuid: string }&gt;,
   ): ExtendedCulturalNoteEntity {

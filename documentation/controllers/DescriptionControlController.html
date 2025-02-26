@@ -123,6 +123,14 @@
             </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller for managing description controls.</p>
+<p>Provides endpoints to create, retrieve, update, and delete description control records.</p>
+
+            </p>
 
 
 
@@ -142,21 +150,38 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#create" >create</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#findAll" >findAll</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#findOne" >findOne</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#remove" >remove</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#update" >update</a>
                             </li>
@@ -184,6 +209,10 @@
                     <a name="create"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>create</b></span>
                         <a href="#create"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -192,7 +221,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(createDescriptionControlDto: <a href="../classes/CreateDescriptionControlDto.html" target="_self">CreateDescriptionControlDto</a>)</code>
+                    <code>create(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, createDescriptionControlDto: <a href="../classes/CreateDescriptionControlDto.html" target="_self">CreateDescriptionControlDto</a>)</code>
                 </td>
             </tr>
 
@@ -200,20 +229,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Create a description control&#x27;})<br />@ApiResponse({status: 201, description: &#x27;Description control created successfully.&#x27;})<br />@ApiParam({name: &#x27;uuid&#x27;, description: &#x27;Unique identifier for the description control&#x27;})<br />@ApiBody({type: CreateDescriptionControlDto})<br />@Put(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:55</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new description control record.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -224,9 +255,28 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                                <td>uuid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Unique identifier for the description control.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
                                         <tr>
                                                 <td>createDescriptionControlDto</td>
                                             <td>
@@ -238,6 +288,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>DTO with the data required to create a description control.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -247,7 +303,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The newly created description control record.</p>
+
                             </div>
                 </td>
             </tr>
@@ -259,6 +316,8 @@
                 <td class="col-md-4">
                     <a name="findAll"></a>
                     <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                         <span ><b>findAll</b></span>
                         <a href="#findAll"><span class="icon ion-ios-link"></span></a>
@@ -276,25 +335,31 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Get all description controls&#x27;})<br />@ApiResponse({status: 200, description: &#x27;List of description controls retrieved successfully.&#x27;, type: undefined})<br />@Get()<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:77</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all description control records.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>An array of all description control records.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -306,6 +371,9 @@
                     <a name="findOne"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>findOne</b></span>
                         <a href="#findOne"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -314,7 +382,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -322,20 +390,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:id&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Get a description control by UUID&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Description control retrieved successfully.&#x27;})<br />@ApiParam({name: &#x27;uuid&#x27;, description: &#x27;Unique identifier of the description control to retrieve&#x27;})<br />@Get(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:97</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves a single description control record by its UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -346,11 +416,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -360,16 +431,23 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Unique identifier of the description control to retrieve.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;CreateDescriptionControlDto&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The description control record identified by the given UUID.</p>
+
                             </div>
                 </td>
             </tr>
@@ -382,6 +460,10 @@
                     <a name="remove"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>remove</b></span>
                         <a href="#remove"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -390,7 +472,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -398,20 +480,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Delete a description control by UUID&#x27;})<br />@ApiResponse({status: 204, description: &#x27;Description control deleted successfully.&#x27;})<br />@ApiParam({name: &#x27;uuid&#x27;, description: &#x27;Unique identifier of the description control to delete&#x27;})<br />@HttpCode(HttpStatus.NO_CONTENT)<br />@Delete(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:146</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes a description control record by its UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -422,11 +506,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -436,6 +521,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Unique identifier of the description control to delete.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -445,7 +536,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A confirmation message upon successful deletion.</p>
+
                             </div>
                 </td>
             </tr>
@@ -458,6 +550,10 @@
                     <a name="update"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>update</b></span>
                         <a href="#update"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -466,7 +562,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateDescriptionControlDto: <a href="../classes/UpdateDescriptionControlDto.html" target="_self">UpdateDescriptionControlDto</a>)</code>
+                    <code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateDescriptionControlDto: <a href="../classes/UpdateDescriptionControlDto.html" target="_self">UpdateDescriptionControlDto</a>)</code>
                 </td>
             </tr>
 
@@ -474,20 +570,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:id&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Update a description control by UUID&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Description control updated successfully.&#x27;})<br />@ApiParam({name: &#x27;uuid&#x27;, description: &#x27;Unique identifier of the description control to update&#x27;})<br />@ApiBody({type: UpdateDescriptionControlDto})<br />@Patch(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.controller.ts:119</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing description control record by its UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -498,11 +596,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -512,6 +611,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Unique identifier of the description control to update.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>updateDescriptionControlDto</td>
@@ -524,6 +629,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>DTO with the updated data for the description control.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -533,7 +644,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The updated description control record.</p>
+
                             </div>
                 </td>
             </tr>
@@ -543,38 +655,153 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Post, Body, Patch, Param, Delete } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Controller,
+  Get,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Put,
+  HttpCode,
+  HttpStatus,
+} from &#x27;@nestjs/common&#x27;;
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBody,
+} from &#x27;@nestjs/swagger&#x27;;
 import { DescriptionControlService } from &#x27;./description-control.service&#x27;;
 import { CreateDescriptionControlDto } from &#x27;./dto/create-description-control.dto&#x27;;
 import { UpdateDescriptionControlDto } from &#x27;./dto/update-description-control.dto&#x27;;
+import { DescriptionControlsEntity } from &#x27;./entities/description-controls.entity&#x27;;
+import {ExtendedDescriptionControlEntity} from &quot;./entities/extended-description-control.entity&quot;;
 
+/**
+ * Controller for managing description controls.
+ *
+ * Provides endpoints to create, retrieve, update, and delete description control records.
+ */
+@ApiTags(&#x27;Description Control&#x27;)
 @Controller(&#x27;description-control&#x27;)
 export class DescriptionControlController {
-  constructor(private readonly descriptionControlService: DescriptionControlService) {}
+  constructor(
+    private readonly descriptionControlService: DescriptionControlService,
+  ) {}
 
-  @Post()
-  create(@Body() createDescriptionControlDto: CreateDescriptionControlDto) {
-    return this.descriptionControlService.create(createDescriptionControlDto);
+  /**
+   * Creates a new description control record.
+   *
+   * @param uuid - Unique identifier for the description control.
+   * @param createDescriptionControlDto - DTO with the data required to create a description control.
+   * @returns The newly created description control record.
+   */
+  @ApiOperation({ summary: &#x27;Create a description control&#x27; })
+  @ApiResponse({
+    status: 201,
+    description: &#x27;Description control created successfully.&#x27;,
+  })
+  @ApiParam({
+    name: &#x27;uuid&#x27;,
+    description: &#x27;Unique identifier for the description control&#x27;,
+  })
+  @ApiBody({ type: CreateDescriptionControlDto })
+  @Put(&#x27;:uuid&#x27;)
+  create(
+    @Param(&#x27;uuid&#x27;) uuid: string,
+    @Body() createDescriptionControlDto: CreateDescriptionControlDto,
+  ) {
+    return this.descriptionControlService.create(
+      uuid,
+      createDescriptionControlDto,
+    );
   }
 
+  /**
+   * Retrieves all description control records.
+   *
+   * @returns An array of all description control records.
+   */
+  @ApiOperation({ summary: &#x27;Get all description controls&#x27; })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;List of description controls retrieved successfully.&#x27;,
+    type: [ExtendedDescriptionControlEntity]
+  })
   @Get()
   findAll() {
     return this.descriptionControlService.findAll();
   }
 
-  @Get(&#x27;:id&#x27;)
-  findOne(@Param(&#x27;id&#x27;) id: string) {
-    return this.descriptionControlService.findOne(+id);
+  /**
+   * Retrieves a single description control record by its UUID.
+   *
+   * @param uuid - Unique identifier of the description control to retrieve.
+   * @returns The description control record identified by the given UUID.
+   */
+  @ApiOperation({ summary: &#x27;Get a description control by UUID&#x27; })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;Description control retrieved successfully.&#x27;,
+  })
+  @ApiParam({
+    name: &#x27;uuid&#x27;,
+    description: &#x27;Unique identifier of the description control to retrieve&#x27;,
+  })
+  @Get(&#x27;:uuid&#x27;)
+  findOne(@Param(&#x27;uuid&#x27;) uuid: string): Promise&lt;CreateDescriptionControlDto&gt; {
+    return this.descriptionControlService.findOne(uuid);
   }
 
-  @Patch(&#x27;:id&#x27;)
-  update(@Param(&#x27;id&#x27;) id: string, @Body() updateDescriptionControlDto: UpdateDescriptionControlDto) {
-    return this.descriptionControlService.update(+id, updateDescriptionControlDto);
+  /**
+   * Updates an existing description control record by its UUID.
+   *
+   * @param uuid - Unique identifier of the description control to update.
+   * @param updateDescriptionControlDto - DTO with the updated data for the description control.
+   * @returns The updated description control record.
+   */
+  @ApiOperation({ summary: &#x27;Update a description control by UUID&#x27; })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;Description control updated successfully.&#x27;,
+  })
+  @ApiParam({
+    name: &#x27;uuid&#x27;,
+    description: &#x27;Unique identifier of the description control to update&#x27;,
+  })
+  @ApiBody({ type: UpdateDescriptionControlDto })
+  @Patch(&#x27;:uuid&#x27;)
+  update(
+    @Param(&#x27;uuid&#x27;) uuid: string,
+    @Body() updateDescriptionControlDto: UpdateDescriptionControlDto,
+  ) {
+    return this.descriptionControlService.update(
+      uuid,
+      updateDescriptionControlDto,
+    );
   }
 
-  @Delete(&#x27;:id&#x27;)
-  remove(@Param(&#x27;id&#x27;) id: string) {
-    return this.descriptionControlService.remove(+id);
+  /**
+   * Deletes a description control record by its UUID.
+   *
+   * @param uuid - Unique identifier of the description control to delete.
+   * @returns A confirmation message upon successful deletion.
+   */
+  @ApiOperation({ summary: &#x27;Delete a description control by UUID&#x27; })
+  @ApiResponse({
+    status: 204,
+    description: &#x27;Description control deleted successfully.&#x27;,
+  })
+  @ApiParam({
+    name: &#x27;uuid&#x27;,
+    description: &#x27;Unique identifier of the description control to delete&#x27;,
+  })
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(&#x27;:uuid&#x27;)
+  remove(@Param(&#x27;uuid&#x27;) uuid: string) {
+    return this.descriptionControlService.remove(uuid);
   }
 }
 </code></pre>

@@ -124,6 +124,12 @@
                             <a href="#AuthPropertiesModel" title="src/auth/repositories/auth.model.ts" ><b>AuthPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../auth.model.ts)</a>
                         </li>
                         <li>
+                            <a href="#CategoryMuseumDocument" title="src/nomenclator/institutions/category-museum/schema/category-museum.schema.ts" ><b>CategoryMuseumDocument</b>&nbsp;&nbsp;&nbsp;(src/.../category-museum.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CategoryMuseumMongoModel" title="src/nomenclator/institutions/category-museum/schema/category-museum.schema.ts" ><b>CategoryMuseumMongoModel</b>&nbsp;&nbsp;&nbsp;(src/.../category-museum.schema.ts)</a>
+                        </li>
+                        <li>
                             <a href="#ClassType" title="src/common/dto/serialize.dto.ts" ><b>ClassType</b>&nbsp;&nbsp;&nbsp;(src/.../serialize.dto.ts)</a>
                         </li>
                         <li>
@@ -151,10 +157,22 @@
                             <a href="#DeepPartial" title="src/common/interfaces/deep-partial.ts" ><b>DeepPartial</b>&nbsp;&nbsp;&nbsp;(src/.../deep-partial.ts)</a>
                         </li>
                         <li>
+                            <a href="#DimensionsPropertiesModel" title="src/cultural-heritage-property/cultural-record/models/cultural-record.ts" ><b>DimensionsPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../cultural-record.ts)</a>
+                        </li>
+                        <li>
                             <a href="#EitherValue" title="src/common/lib/either.lib.ts" ><b>EitherValue</b>&nbsp;&nbsp;&nbsp;(src/.../either.lib.ts)</a>
                         </li>
                         <li>
                             <a href="#ExceptionConstructor" title="src/shared/event-emitter/event-emitter.adapter.ts" ><b>ExceptionConstructor</b>&nbsp;&nbsp;&nbsp;(src/.../event-emitter.adapter.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FieldReviewPropertiesModel" title="src/cultural-heritage-property/field-review-status/models/field-review-status.model.ts" ><b>FieldReviewPropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../field-review-status.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FieldReviewStatusDocument" title="src/cultural-heritage-property/field-review-status/schema/field-review-status.schema.ts" ><b>FieldReviewStatusDocument</b>&nbsp;&nbsp;&nbsp;(src/.../field-review-status.schema.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FieldReviewStatusModel" title="src/cultural-heritage-property/field-review-status/schema/field-review-status.schema.ts" ><b>FieldReviewStatusModel</b>&nbsp;&nbsp;&nbsp;(src/.../field-review-status.schema.ts)</a>
                         </li>
                         <li>
                             <a href="#FileStoragePropertiesModel" title="src/file-storage/model/file-storage.model.ts" ><b>FileStoragePropertiesModel</b>&nbsp;&nbsp;&nbsp;(src/.../file-storage.model.ts)</a>
@@ -203,6 +221,9 @@
                         </li>
                         <li>
                             <a href="#NonFunctionPropertyNames" title="src/common/interfaces/manipulate-properties.ts" ><b>NonFunctionPropertyNames</b>&nbsp;&nbsp;&nbsp;(src/.../manipulate-properties.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#OmitReviewStatusModel" title="src/cultural-heritage-property/field-review-status/models/field-review-status.model.ts" ><b>OmitReviewStatusModel</b>&nbsp;&nbsp;&nbsp;(src/.../field-review-status.model.ts)</a>
                         </li>
                         <li>
                             <a href="#Options" title="src/common/lib/paginator.lib.ts" ><b>Options</b>&nbsp;&nbsp;&nbsp;(src/.../paginator.lib.ts)</a>
@@ -317,6 +338,40 @@
             </tr>
         </tbody>
     </table>
+</section>    <h3>src/nomenclator/institutions/category-museum/schema/category-museum.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CategoryMuseumDocument"></a>
+                    <span class="name "><b>CategoryMuseumDocument</b><a href="#CategoryMuseumDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;CategoryMuseum&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CategoryMuseumMongoModel"></a>
+                    <span class="name "><b>CategoryMuseumMongoModel</b><a href="#CategoryMuseumMongoModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#CategoryMuseumDocument" target="_self" >Model&lt;CategoryMuseumDocument&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    <h3>src/common/dto/serialize.dto.ts</h3>
     <section data-compodoc="block-typealias">
     <table class="table table-sm table-bordered">
@@ -399,7 +454,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <code>        <code><a href="../interfaces/UserModel.html" target="_self" >Omit&lt;UserModel | &quot;active&quot; | &quot;deleted&quot;&gt;</a></code>
+                    <code>        <code><a href="../interfaces/UserModel.html" target="_self" >Omit&lt;UserModel | &quot;active&quot; | &quot;deleted&quot; | &quot;institution&quot;&gt;</a></code>
 </code>
                 </td>
             </tr>
@@ -451,7 +506,35 @@
             </tr>
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Type alias for non-function properties of a cultural record.</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
                     <code>        <code><a href="../interfaces/CulturalRecordModel.html" target="_self" >NonFunctionProperties&lt;CulturalRecordModel&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DimensionsPropertiesModel"></a>
+                    <span class="name "><b>DimensionsPropertiesModel</b><a href="#DimensionsPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Type alias for dimension properties excluding functions.</p>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/DimensionsModel.html" target="_self" >NonFunctionProperties&lt;DimensionsModel&gt;</a></code>
 </code>
                 </td>
             </tr>
@@ -506,6 +589,74 @@
             <tr>
                 <td class="col-md-4">
                     <code>    <code></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/cultural-heritage-property/field-review-status/models/field-review-status.model.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FieldReviewPropertiesModel"></a>
+                    <span class="name "><b>FieldReviewPropertiesModel</b><a href="#FieldReviewPropertiesModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>NonFunctionProperties&lt;OmitReviewStatusModel&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="OmitReviewStatusModel"></a>
+                    <span class="name "><b>OmitReviewStatusModel</b><a href="#OmitReviewStatusModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../interfaces/FieldReviewStatusModel.html" target="_self" >Omit&lt;FieldReviewStatusModel | &quot;uuid&quot; | &quot;updatedAt&quot; | &quot;createdAt&quot; | &quot;deleted&quot;&gt;</a></code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/cultural-heritage-property/field-review-status/schema/field-review-status.schema.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FieldReviewStatusDocument"></a>
+                    <span class="name "><b>FieldReviewStatusDocument</b><a href="#FieldReviewStatusDocument"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>    <code>HydratedDocument&lt;FieldReviewStatusInterface&gt;</code>
+</code>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FieldReviewStatusModel"></a>
+                    <span class="name "><b>FieldReviewStatusModel</b><a href="#FieldReviewStatusModel"><span class="icon ion-ios-link"></span></a></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <code>        <code><a href="../miscellaneous/typealiases.html#FieldReviewStatusDocument" target="_self" >Model&lt;FieldReviewStatusDocument&gt;</a></code>
 </code>
                 </td>
             </tr>
