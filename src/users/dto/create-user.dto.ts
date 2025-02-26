@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Matches,
   ValidateIf,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
@@ -27,11 +28,14 @@ export class CreateUserDto
   })
   email: string;
 
-  @IsNumberString()
+  @IsString()
   @IsNotEmpty()
+  @Matches(/^\(\+\d{2}\) \d{2}-\d{2}-\d{2}-\d{2}$/, {
+    message: 'The number is this format (+CC) XX-XX-XX-XX',
+  })
   @ApiProperty({
     type: String,
-    example: '+34612345678',
+    example: '(+53) 55-56-80-63',
   })
   mobile: string;
 
