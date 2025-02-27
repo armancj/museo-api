@@ -110,8 +110,7 @@ export class UsersController {
     @Body() body: UploadAvatarUserDto,
     @UploadedFile(ImageProcessingPipe) file: FileStorageModel,
   ) {
-    await this.userService.uploadFiled(uuid, file);
-    return { message: `File successfully uploaded` };
+    return await this.userService.uploadFiled(uuid, file);
   }
 
   @Get(':uuid/avatar')

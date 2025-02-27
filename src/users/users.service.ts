@@ -139,6 +139,7 @@ export class UsersService {
       };
 
       await this.updateUserAvatar(uuid, avatar);
+      return { message: `File successfully uploaded`, avatar };
     } catch (e) {
       await this.handleFileDeletion(file.id);
       throw e;
