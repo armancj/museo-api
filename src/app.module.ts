@@ -15,7 +15,7 @@ import { AddressModule } from './address/address.module';
 import { CategoryMuseumModule } from './nomenclator/institutions/category-museum/category-museum.module';
 import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
-import { InstitutionCategoriesModule } from './nomenclator/institutions/institution-categories/institution-categories.module';
+
 import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './nomenclator/institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './nomenclator/contact-information/phone-numbers/phone-numbers.module';
@@ -49,7 +49,7 @@ import { LoggerModule } from './logger/logger.module';
     NomenclatureModule,
     CommercialRegistrationModule,
     InstitutionTypesModule,
-    InstitutionCategoriesModule,
+  
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,

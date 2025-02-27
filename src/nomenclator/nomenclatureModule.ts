@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { CategoryMuseumModule } from './institutions/category-museum/category-museum.module';
 import { InstitutionTypesModule } from './institutions/institution-types/institution-types.module';
-import { InstitutionCategoriesModule } from './institutions/institution-categories/institution-categories.module';
+
 import { MuseumTypesModule } from './institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './contact-information/phone-numbers/phone-numbers.module';
@@ -22,7 +22,7 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
   imports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    InstitutionCategoriesModule,
+    
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -41,7 +41,7 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
   exports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    InstitutionCategoriesModule,
+    
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
