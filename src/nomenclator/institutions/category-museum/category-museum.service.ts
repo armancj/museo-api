@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCategoryMuseumDto } from './dto/create-category-museum.dto';
 import { UpdateCategoryMuseumDto } from './dto/update-category-museum.dto';
 import {
+  CategoryMuseumDocument,
   CategoryMuseumMongoModel,
   CategoryMuseumNameEntity,
 } from './schema/category-museum.schema';
@@ -15,6 +16,7 @@ import { EventEmitter } from 'stream';
 import { InstitutionsService } from 'src/address/institutions/institutions.service';
 import { InstitutionType } from 'src/address/institutions/enum/institutions.enum';
 import { FilterCategoryMuseumDto } from './dto/filter-category-museum.dto';
+import { RootFilterQuery } from 'mongoose';
 
 
 @Injectable()
@@ -33,9 +35,9 @@ export class CategoryMuseumService {
   }
 
   async findAll(filter?: FilterCategoryMuseumDto ) {
-    const query: any = { deleted: false };
+    let query: RootFilterQuery<CategoryMuseumDocument> = { deleted: false };
 
-    if (filter?.active !== undefined) {
+    if (filter?.active) {
       query.active = filter.active;
     }
 
@@ -43,8 +45,9 @@ export class CategoryMuseumService {
 
     if(filter.instituionUUID) { 
       const institutionCategory = await this.getCategoryByInstitutionId(filter.instituionUUID);
- console.log({institutionCategory})
-      query.name = (institutionCategory as any).name;
+      query.$and=[institutionCategory]
+      //Object.assign(query, institutionCategory);
+      console.dir({query}, {depth: 6})
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
@@ -86,39 +89,38 @@ export class CategoryMuseumService {
       .exec();
   }
 
-  async getCategoryByInstitutionId(institutionId: string) {
+  async getCategoryByInstitutionId(institutionId: string): Promise<RootFilterQuery<CategoryMuseumDocument>> {
     const institution = await this.institutionService.findByUUID(institutionId);
     if (!institution) {
       throw new NotFoundException('Institution not found');
     }
-
-    console.log(institution)
     switch (institution.institutionType) {
   
-      case InstitutionType.MUSEUM:
+      case InstitutionType.MUSEUM||InstitutionType.COMPLEX_MUSEUM:
         return  {
           name: 'Categoría Especial',
-          active: true,
+          active: true,  
         };
-      case InstitutionType.COMPLEX_MUSEUM:
+      case InstitutionType.MUSEUM||InstitutionType.COMPLEX_MUSEUM||InstitutionType.MUSEUM_ROOMS: 
         return {
           name: 'Categoría I',
-         
           active: true,
         };
-      case InstitutionType.MUSEUM_ROOMS:
-        return [{
-          name: 'Categoría II',
-          
-          active: true,
-        }, {
-          name: 'Categoría III',
-          
-          active: true,
-        }];
+      case InstitutionType.MUSEUM_ROOMS: 
+        return { 
+          name: { 
+            $in: ['Categoría II', 'Categoría III'] 
+          }, 
+          active: true 
+        };
       
       default:
-        return;
+        return { 
+          name: { 
+            $nin: ['Categoría Especial', 'Categoría I', 'Categoría II', 'Categoría III'] 
+          }, 
+          active: true 
+        };
     }
   }
 }
