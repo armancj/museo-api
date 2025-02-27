@@ -96,20 +96,26 @@ export class CategoryMuseumService {
     }
     switch (institution.institutionType) {
   
-      case InstitutionType.MUSEUM||InstitutionType.COMPLEX_MUSEUM:
+      case InstitutionType.MUSEUM:
         return  {
-          name: 'Categoría Especial',
+          name: { 
+            $in: ['Categoría Especial', 'Categoría I'] 
+          }, 
           active: true,  
         };
-      case InstitutionType.MUSEUM||InstitutionType.COMPLEX_MUSEUM||InstitutionType.MUSEUM_ROOMS: 
-        return {
-          name: 'Categoría I',
-          active: true,
+
+        case InstitutionType.COMPLEX_MUSEUM:
+        return  {
+          name: { 
+            $in: ['Categoría Especial', 'Categoría I'] 
+          }, 
+          active: true,  
         };
+
       case InstitutionType.MUSEUM_ROOMS: 
         return { 
           name: { 
-            $in: ['Categoría II', 'Categoría III'] 
+            $in: ['Categoría I', 'Categoría II', 'Categoría III'] 
           }, 
           active: true 
         };
