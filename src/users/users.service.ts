@@ -24,6 +24,7 @@ export type UpdatedUser = {
   updateUserDto: Partial<UserModel> & { password?: string };
   user?: User;
 };
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -92,7 +93,7 @@ export class UsersService {
   async softDelete(param: { uuid: string }, currentUser?: User) {
     const user = await this.findOne({ ...param, deleted: false }, currentUser);
 
-    return await this.userMongoRepository.updatedOne({
+    return await this.userMongoRepository.updatedOne(param, {
       deleted: true,
       active: false,
       email: `${user.uuid}: ${user.email}`,

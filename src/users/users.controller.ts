@@ -27,7 +27,7 @@ import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe'
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
 import { Auth, CurrentUser } from '../auth/decorator';
 import { UserRoles } from './enum/user-roles.enum';
-import { NotFound } from "../common/dto/exception.dto";
+import { NotFound } from '../common/dto/exception.dto';
 
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
