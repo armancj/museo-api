@@ -12,12 +12,17 @@ import { NotFoundException } from '@nestjs/common';
 import { CategoryMuseumModel } from './model/category-museum.model';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from 'stream';
+import { InstitutionsService } from 'src/address/institutions/institutions.service';
+import { InstitutionType } from 'src/address/institutions/enum/institutions.enum';
+import { FilterCategoryMuseumDto } from './dto/filter-category-museum.dto';
+
 
 @Injectable()
 export class CategoryMuseumService {
   constructor(
     @InjectModel(CategoryMuseumNameEntity)
     private readonly categoryMuseumRepository: CategoryMuseumMongoModel,
+    private readonly institutionService: InstitutionsService,
   ) {}
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
@@ -27,7 +32,7 @@ export class CategoryMuseumService {
     return CategoryMuseum.create(createdCategoryMuseum);
   }
 
-  async findAll(filter?: UpdateCategoryMuseumDto) {
+  async findAll(filter?: FilterCategoryMuseumDto ) {
     const query: any = { deleted: false };
 
     if (filter?.active !== undefined) {
@@ -35,6 +40,11 @@ export class CategoryMuseumService {
     }
 
     if (filter.name) query.name = new RegExp(filter.name, 'i');
+
+    if(filter.instituionUUID) { 
+      const institutionCategory = await this.getCategoryByInstitutionId(filter.instituionUUID);
+ console.log({institutionCategory})
+    }
 
     const categoryMuseums = await this.categoryMuseumRepository
       .find(query)
@@ -73,5 +83,41 @@ export class CategoryMuseumService {
     await this.categoryMuseumRepository
       .updateOne({ uuid, deleted: false }, { deleted: true, name })
       .exec();
+  }
+
+  async getCategoryByInstitutionId(institutionId: string) {
+    const institution = await this.institutionService.findByUUID(institutionId);
+    if (!institution) {
+      throw new NotFoundException('Institution not found');
+    }
+
+    console.log(institution)
+    switch (institution.institutionType) {
+  
+      case InstitutionType.MUSEUM:
+        return  {
+          name: 'Categoría Especial',
+          active: true,
+        };
+      case InstitutionType.COMPLEX_MUSEUM:
+        return {
+          name: 'Categoría I',
+         
+          active: true,
+        };
+      case InstitutionType.MUSEUM_ROOMS:
+        return [{
+          name: 'Categoría II',
+          
+          active: true,
+        }, {
+          name: 'Categoría III',
+          
+          active: true,
+        }];
+      
+      default:
+        return;
+    }
   }
 }

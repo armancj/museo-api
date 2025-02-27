@@ -6,12 +6,14 @@ import {
   CategoryMuseumNameEntity,
   CategoryMuseumSchema,
 } from './schema/category-museum.schema';
+import { InstitutionsModule } from 'src/address/institutions/institutions.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: CategoryMuseumNameEntity, schema: CategoryMuseumSchema },
     ]),
+    InstitutionsModule,
   ],
   controllers: [CategoryMuseumController],
   providers: [CategoryMuseumService],
