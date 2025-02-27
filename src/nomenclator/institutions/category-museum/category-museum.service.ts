@@ -44,6 +44,7 @@ export class CategoryMuseumService {
     if(filter.instituionUUID) { 
       const institutionCategory = await this.getCategoryByInstitutionId(filter.instituionUUID);
  console.log({institutionCategory})
+      query.name = (institutionCategory as any).name;
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
