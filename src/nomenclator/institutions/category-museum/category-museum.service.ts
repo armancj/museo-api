@@ -21,14 +21,15 @@ export class CategoryMuseumService {
   ) {}
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
-    const createdCategoryMuseum=
-      await this.categoryMuseumRepository.create(createCategoryMuseumDto);
-      return CategoryMuseum.create(createdCategoryMuseum);
+    const createdCategoryMuseum = await this.categoryMuseumRepository.create(
+      createCategoryMuseumDto,
+    );
+    return CategoryMuseum.create(createdCategoryMuseum);
   }
 
   async findAll(filter?: { active?: boolean }) {
     const query: any = { deleted: false };
-    
+
     if (filter?.active !== undefined) {
       query.active = filter.active;
     }
@@ -36,19 +37,24 @@ export class CategoryMuseumService {
     const categoryMuseums = await this.categoryMuseumRepository
       .find(query)
       .exec();
-    
+
     return CategoryMuseums.create(categoryMuseums).value;
   }
 
   async findOne(uuid: string): Promise<CategoryMuseumModel> {
-    const CategoryMuseums = await this.getCategoryMuseum({ uuid, deleted: false });
-    return CategoryMuseum.create(CategoryMuseums)
+    const CategoryMuseums = await this.getCategoryMuseum({
+      uuid,
+      deleted: false,
+    });
+    return CategoryMuseum.create(CategoryMuseums);
   }
 
-
   private async getCategoryMuseum(filter: Partial<CategoryMuseumModel>) {
-    const categoryMuseum = await this.categoryMuseumRepository.findOne(filter).exec();
-    if (!categoryMuseum) throw new NotFoundException('Not found category museum');
+    const categoryMuseum = await this.categoryMuseumRepository
+      .findOne(filter)
+      .exec();
+    if (!categoryMuseum)
+      throw new NotFoundException('Not found category museum');
     return categoryMuseum;
   }
 
