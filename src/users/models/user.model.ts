@@ -1,6 +1,6 @@
 import { NonFunctionProperties } from '../../common/interfaces/manipulate-properties';
 import { UserRoles } from '../enum/user-roles.enum';
-import {InstitutionModel} from "../../address/institutions/entities/institution.model";
+import { InstitutionModel } from '../../address/institutions/entities/institution.model';
 
 export interface UploadedFile {
   id: string;
