@@ -28,7 +28,7 @@ export class CreateUserDto
     })
     email: string;
 
-    @IsMobilePhone()
+    @IsString() 
     @IsNotEmpty()
     @ApiProperty({
         type: String,
