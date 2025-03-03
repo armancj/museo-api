@@ -46,12 +46,10 @@ export class CategoryMuseumService {
     if(filter.instituionUUID) { 
       const institutionCategory = await this.getCategoryByInstitutionId(filter.instituionUUID);
       query.$and=[institutionCategory]
-      //Object.assign(query, institutionCategory);
-      console.dir({query}, {depth: 6})
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
-      .find(query)
+      .find({})
       .exec();
 
     return CategoryMuseums.create(categoryMuseums).value;
