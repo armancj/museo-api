@@ -49,7 +49,7 @@ export class CategoryMuseumService {
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
-      .find({})
+      .find(query)
       .exec();
 
     return CategoryMuseums.create(categoryMuseums).value;
