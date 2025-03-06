@@ -25,17 +25,16 @@ export class CategoryMuseumService {
     @InjectModel(CategoryMuseumNameEntity)
     private readonly categoryMuseumRepository: CategoryMuseumMongoModel,
     private readonly institutionService: InstitutionsService,
-  ) { }
+  ) {}
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
     const createdCategoryMuseum = await this.categoryMuseumRepository.create(
       createCategoryMuseumDto,
     );
     return CategoryMuseum.create(createdCategoryMuseum);
-
   }
 
-  async findAll(filter?: FilterCategoryMuseumDto) {
+  async findAll(filter?: FilterCategoryMuseumDto ) {
     let query: RootFilterQuery<CategoryMuseumDocument> = { deleted: false };
 
     if (filter?.active) {
@@ -44,15 +43,16 @@ export class CategoryMuseumService {
 
     if (filter.name) query.name = new RegExp(filter.name, 'i');
 
-    if (filter.instituionUUID) {
+    if(filter.instituionUUID) { 
       const institutionCategory = await this.getCategoryByInstitutionId(filter.instituionUUID);
-      query.$and = [institutionCategory]
+      query.$and=[institutionCategory]
+      //Object.assign(query, institutionCategory);
+      console.dir({query}, {depth: 6})
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
       .find(query)
       .exec();
-
 
     return CategoryMuseums.create(categoryMuseums).value;
   }
@@ -63,7 +63,6 @@ export class CategoryMuseumService {
       deleted: false,
     });
     return CategoryMuseum.create(CategoryMuseums);
-
   }
 
   private async getCategoryMuseum(filter: Partial<CategoryMuseumModel>) {
@@ -72,7 +71,6 @@ export class CategoryMuseumService {
       .exec();
     if (!categoryMuseum)
       throw new NotFoundException('Not found category museum');
-
     return categoryMuseum;
   }
 
@@ -97,37 +95,37 @@ export class CategoryMuseumService {
       throw new NotFoundException('Institution not found');
     }
     switch (institution.institutionType) {
-
+  
       case InstitutionType.MUSEUM:
-        return {
-          name: {
-            $in: ['Categoría Especial', 'Categoría I']
-          },
-          active: true,
+        return  {
+          name: { 
+            $in: ['Categoría Especial', 'Categoría I'] 
+          }, 
+          active: true,  
         };
 
-      case InstitutionType.COMPLEX_MUSEUM:
-        return {
-          name: {
-            $in: ['Categoría Especial', 'Categoría I']
-          },
-          active: true,
+        case InstitutionType.COMPLEX_MUSEUM:
+        return  {
+          name: { 
+            $in: ['Categoría Especial', 'Categoría I'] 
+          }, 
+          active: true,  
         };
 
-      case InstitutionType.MUSEUM_ROOMS:
-        return {
-          name: {
-            $in: ['Categoría I', 'Categoría II', 'Categoría III']
-          },
-          active: true
+      case InstitutionType.MUSEUM_ROOMS: 
+        return { 
+          name: { 
+            $in: ['Categoría I', 'Categoría II', 'Categoría III'] 
+          }, 
+          active: true 
         };
-
+      
       default:
-        return {
-          name: {
-            $nin: ['Categoría Especial', 'Categoría I', 'Categoría II', 'Categoría III']
-          },
-          active: true
+        return { 
+          name: { 
+            $nin: ['Categoría Especial', 'Categoría I', 'Categoría II', 'Categoría III'] 
+          }, 
+          active: true 
         };
     }
   }
