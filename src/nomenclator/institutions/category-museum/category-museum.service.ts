@@ -11,12 +11,13 @@ import { CategoryMuseum } from './entities/category-museum.entity';
 import { CategoryMuseums } from './entities/museums.entity';
 import { NotFoundException } from '@nestjs/common';
 import { CategoryMuseumModel } from './model/category-museum.model';
-import { OnEvent } from '@nestjs/event-emitter';
-import { EventEmitter } from 'stream';
-import { InstitutionsService } from 'src/address/institutions/institutions.service';
-import { InstitutionType } from 'src/address/institutions/enum/institutions.enum';
+
+
+import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { FilterCategoryMuseumDto } from './dto/filter-category-museum.dto';
 import { RootFilterQuery } from 'mongoose';
+import { InstitutionsService } from '../../../address/institutions/institutions.service';
+
 
 
 @Injectable()
@@ -25,7 +26,7 @@ export class CategoryMuseumService {
     @InjectModel(CategoryMuseumNameEntity)
     private readonly categoryMuseumRepository: CategoryMuseumMongoModel,
     private readonly institutionService: InstitutionsService,
-  ) {}
+  ) { }
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
     const createdCategoryMuseum = await this.categoryMuseumRepository.create(
@@ -34,7 +35,7 @@ export class CategoryMuseumService {
     return CategoryMuseum.create(createdCategoryMuseum);
   }
 
-  async findAll(filter?: FilterCategoryMuseumDto ) {
+  async findAll(filter?: FilterCategoryMuseumDto) {
     let query: RootFilterQuery<CategoryMuseumDocument> = { deleted: false };
 
     if (filter?.active) {
@@ -43,11 +44,11 @@ export class CategoryMuseumService {
 
     if (filter.name) query.name = new RegExp(filter.name, 'i');
 
-    if(filter.instituionUUID) { 
+    if (filter.instituionUUID) {
       const institutionCategory = await this.getCategoryByInstitutionId(filter.instituionUUID);
-      query.$and=[institutionCategory]
+      query.$and = [institutionCategory]
       //Object.assign(query, institutionCategory);
-      console.dir({query}, {depth: 6})
+      console.dir({ query }, { depth: 6 })
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
@@ -95,37 +96,37 @@ export class CategoryMuseumService {
       throw new NotFoundException('Institution not found');
     }
     switch (institution.institutionType) {
-  
+
       case InstitutionType.MUSEUM:
-        return  {
-          name: { 
-            $in: ['Categoría Especial', 'Categoría I'] 
-          }, 
-          active: true,  
+        return {
+          name: {
+            $in: ['Categoría Especial', 'Categoría I']
+          },
+          active: true,
         };
 
-        case InstitutionType.COMPLEX_MUSEUM:
-        return  {
-          name: { 
-            $in: ['Categoría Especial', 'Categoría I'] 
-          }, 
-          active: true,  
+      case InstitutionType.COMPLEX_MUSEUM:
+        return {
+          name: {
+            $in: ['Categoría Especial', 'Categoría I']
+          },
+          active: true,
         };
 
-      case InstitutionType.MUSEUM_ROOMS: 
-        return { 
-          name: { 
-            $in: ['Categoría I', 'Categoría II', 'Categoría III'] 
-          }, 
-          active: true 
+      case InstitutionType.MUSEUM_ROOMS:
+        return {
+          name: {
+            $in: ['Categoría I', 'Categoría II', 'Categoría III']
+          },
+          active: true
         };
-      
+
       default:
-        return { 
-          name: { 
-            $nin: ['Categoría Especial', 'Categoría I', 'Categoría II', 'Categoría III'] 
-          }, 
-          active: true 
+        return {
+          name: {
+            $nin: ['Categoría Especial', 'Categoría I', 'Categoría II', 'Categoría III']
+          },
+          active: true
         };
     }
   }

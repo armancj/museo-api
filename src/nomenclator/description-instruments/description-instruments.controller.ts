@@ -4,12 +4,19 @@ import { DescriptionInstrumentsService } from './description-instruments.service
 import { CreateDescriptionInstrumentDto } from './dto/create-description-instrument.dto';
 import { UpdateDescriptionInstrumentDto } from './dto/update-description-instrument.dto';
 import { DescriptionInstrument } from './entities/description-instrument.entity';
+import { Auth } from '../../auth/decorator';
+import { UserRoles } from '../../users/enum/user-roles.enum';
+
+
 
 @ApiTags('description-instruments')
 @Controller('description-instruments')
 export class DescriptionInstrumentsController {
-  constructor(private readonly descriptionInstrumentsService: DescriptionInstrumentsService) {}
+  constructor(private readonly descriptionInstrumentsService: DescriptionInstrumentsService) { }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post()
   @ApiOperation({ summary: 'Create a new description instrument' })
   @ApiResponse({ status: 201, description: 'The description instrument has been successfully created.', type: DescriptionInstrument })
@@ -33,6 +40,9 @@ export class DescriptionInstrumentsController {
     return this.descriptionInstrumentsService.findOne(id);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':id')
   @ApiOperation({ summary: 'Update a description instrument by ID' })
   @ApiResponse({ status: 200, description: 'The description instrument has been successfully updated.', type: DescriptionInstrument })
@@ -41,6 +51,9 @@ export class DescriptionInstrumentsController {
     return this.descriptionInstrumentsService.update(id, updateDescriptionInstrumentDto);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':id')
   @ApiOperation({ summary: 'Delete a description instrument by ID' })
   @ApiResponse({ status: 200, description: 'The description instrument has been successfully deleted.', type: DescriptionInstrument })

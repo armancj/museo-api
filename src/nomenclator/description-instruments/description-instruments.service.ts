@@ -4,12 +4,13 @@ import { UpdateDescriptionInstrumentDto } from './dto/update-description-instrum
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { DescriptionInstrument, DescriptionInstrumentDocument } from './schemas/description-instrument.schema';
+import { BaseSchema } from '../../common/schema/base.schema';
 
 @Injectable()
 export class DescriptionInstrumentsService {
   constructor(
     @InjectModel(DescriptionInstrument.name) private descriptionInstrumentModel: Model<DescriptionInstrumentDocument>,
-  ) {}
+  ) { }
 
   async create(createDescriptionInstrumentDto: CreateDescriptionInstrumentDto): Promise<DescriptionInstrument> {
     const createdDescriptionInstrument = new this.descriptionInstrumentModel(createDescriptionInstrumentDto);

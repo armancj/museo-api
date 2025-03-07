@@ -15,7 +15,7 @@ import { AddressModule } from './address/address.module';
 import { CategoryMuseumModule } from './nomenclator/institutions/category-museum/category-museum.module';
 import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
-
+import { InstitutionsModule } from './address/institutions/institutions.module';
 import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './nomenclator/institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './nomenclator/contact-information/phone-numbers/phone-numbers.module';
@@ -36,6 +36,7 @@ import { LoggerModule } from './logger/logger.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DescriptionInstrumentsModule } from './nomenclator/description-instruments/description-instruments.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { BaseSchema } from './common/schema/base.schema';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
     NomenclatureModule,
     CommercialRegistrationModule,
     InstitutionTypesModule,
+    InstitutionsModule,
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,

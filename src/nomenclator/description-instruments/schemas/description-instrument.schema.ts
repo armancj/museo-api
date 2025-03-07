@@ -1,10 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { BaseSchema, BaseSchemaFactory } from '../../../common/schema/base.schema';
+
 
 export type DescriptionInstrumentDocument = DescriptionInstrument & Document;
 
 @Schema()
-export class DescriptionInstrument {
+export class DescriptionInstrument extends BaseSchema {
   @Prop({ required: true })
   name: string;
 
@@ -16,3 +18,4 @@ export class DescriptionInstrument {
 }
 
 export const DescriptionInstrumentSchema = SchemaFactory.createForClass(DescriptionInstrument);
+DescriptionInstrumentSchema.add(BaseSchemaFactory);
