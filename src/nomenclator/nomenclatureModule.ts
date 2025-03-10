@@ -17,6 +17,8 @@ import { NotesModule } from './notes/notes.module';
 import { CreationDetailsModule } from './creation-details/creation-details.module';
 import { ReportsModule } from './reports/reports.module';
 import { ExtraInformationModule } from './extra-information/extra-information.module';
+import { AccessConditionsModule } from './access-conditions/access-conditions.module';
+import { ReproductionConditionsModule } from './reproduction-conditions/reproduction-conditions.module';
 
 @Module({
   imports: [
@@ -37,6 +39,8 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    AccessConditionsModule,
+    ReproductionConditionsModule,
   ],
   exports: [
     CategoryMuseumModule,
@@ -56,6 +60,8 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    AccessConditionsModule,
+    ReproductionConditionsModule,
   ],
 })
 export class NomenclatureModule {}
