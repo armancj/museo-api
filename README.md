@@ -75,6 +75,12 @@ $ pnpm run command create:default-categories
 # Add Default Description Instruments
 $ pnpm run command create:default-description-instruments
 ```
+
+## Resources Access Reproduction
+```bash
+# Add Default  Access Reproduction
+$ pnpm run command create:default-access-conditions
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
