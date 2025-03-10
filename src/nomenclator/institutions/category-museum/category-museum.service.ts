@@ -115,7 +115,7 @@ export class CategoryMuseumService {
           active: true,
         };
 
-      case InstitutionType.MUSEUM_ROOMS:
+  case InstitutionType.MUSEUM_ROOMS||InstitutionType.EXT_MUSEUM:
         return {
           name: {
             $in: ['Categoría I', 'Categoría II', 'Categoría III']
