@@ -36,10 +36,10 @@ import { LoggerModule } from './logger/logger.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DescriptionInstrumentsModule } from './nomenclator/description-instruments/description-instruments.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { BaseSchema } from './common/schema/base.schema';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/nest'),
     EventEmitterModule.forRoot({ global: true }),
     ConfigModule,
     AuthModule,
@@ -70,7 +70,6 @@ import { BaseSchema } from './common/schema/base.schema';
     CulturalHeritagePropertyModule,
     CommandsModule,
     LoggerModule,
-    MongooseModule.forRoot('mongodb://localhost/nest'),
     DescriptionInstrumentsModule,
   ],
   controllers: [AppController],
