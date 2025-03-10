@@ -5,7 +5,9 @@ import {
   Body,
   Patch,
   Param,
-  Delete, UseInterceptors, ClassSerializerInterceptor,
+  Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { InstitutionsService } from './institutions.service';
 import { CreateInstitutionDto } from './dto/create-institution.dto';

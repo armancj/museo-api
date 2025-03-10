@@ -123,12 +123,22 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Data Transfer Object for updating a Description Control.
+This DTO allows partial updates by making all the fields from CreateDescriptionControlDto optional.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
             </p>
             <p class="comment">
-                        <code>PartialType(CreateDescriptionControlDto)</code>
+                        <code>PartialType(
+  CreateDescriptionControlDto,
+)</code>
             </p>
 
 
@@ -146,10 +156,16 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PartialType } from &#x27;@nestjs/mapped-types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PartialType } from &#x27;@nestjs/swagger&#x27;;
 import { CreateDescriptionControlDto } from &#x27;./create-description-control.dto&#x27;;
 
-export class UpdateDescriptionControlDto extends PartialType(CreateDescriptionControlDto) {}
+/**
+ * Data Transfer Object for updating a Description Control.
+ * This DTO allows partial updates by making all the fields from CreateDescriptionControlDto optional.
+ */
+export class UpdateDescriptionControlDto extends PartialType(
+  CreateDescriptionControlDto,
+) {}
 </code></pre>
     </div>
 </div>

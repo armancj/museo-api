@@ -123,6 +123,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Entity representing a collection of cultural notes.</p>
+<p>This class handles the aggregation of cultural notes data extracted from an array of <code>CulturalPropertyModel</code>.</p>
+
+            </p>
 
 
 
@@ -183,12 +191,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-notes.entity.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-notes.entity.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Initializes a new instance of <code>CulturalNotesEntity</code>.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -197,6 +207,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -211,6 +222,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Array of <code>CulturalPropertyModel</code> containing cultural properties with potential notes.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -246,10 +263,15 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-notes.entity.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-notes.entity.ts:16</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">- Array of `CulturalPropertyModel` containing cultural properties with potential notes.</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -282,14 +304,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="8"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-notes.entity.ts:8</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-notes.entity.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Factory method to create an array of <code>ExtendedCulturalNoteEntity</code>.</p>
+<p>Filters the input array to include only cultural properties that have notes and maps them to instances of <code>ExtendedCulturalNoteEntity</code>.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -300,6 +325,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -314,6 +340,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Array of <code>CulturalPropertyModel</code>.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -323,7 +355,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>An array of <code>ExtendedCulturalNoteEntity</code>.</p>
+
                             </div>
                 </td>
             </tr>
@@ -343,9 +376,28 @@
 import { ExtendedCulturalNoteEntity } from &#x27;./extended-cultural-note.entity&#x27;;
 import { CulturalNoteEntity } from &#x27;./cultural-note.entity&#x27;;
 
+/**
+ * Entity representing a collection of cultural notes.
+ *
+ * This class handles the aggregation of cultural notes data extracted from an array of &#x60;CulturalPropertyModel&#x60;.
+ */
 export class CulturalNotesEntity {
+  /**
+   * Initializes a new instance of &#x60;CulturalNotesEntity&#x60;.
+   *
+   * @param value - Array of &#x60;CulturalPropertyModel&#x60; containing cultural properties with potential notes.
+   */
   public constructor(public value: CulturalPropertyModel[]) {}
 
+  /**
+   * Factory method to create an array of &#x60;ExtendedCulturalNoteEntity&#x60;.
+   *
+   * Filters the input array to include only cultural properties that have notes and maps them to instances of &#x60;ExtendedCulturalNoteEntity&#x60;.
+   *
+   * @param value - Array of &#x60;CulturalPropertyModel&#x60;.
+   * @returns An array of &#x60;ExtendedCulturalNoteEntity&#x60;.
+   * @throws {TypeError} If the input is not an array.
+   */
   public static create(
     value: CulturalPropertyModel[],
   ): ExtendedCulturalNoteEntity[] {

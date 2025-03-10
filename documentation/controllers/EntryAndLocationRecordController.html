@@ -142,21 +142,36 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
-                                <a href="#create" >create</a>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                <a href="#createOrUpdate" >createOrUpdate</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#findAll" >findAll</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#findOne" >findOne</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#remove" >remove</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#update" >update</a>
                             </li>
@@ -181,18 +196,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
+                    <a name="createOrUpdate"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                        <span ><b>create</b></span>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                        <span ><b>createOrUpdate</b></span>
+                        <a href="#createOrUpdate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(createEntryAndLocationRecordDto: <a href="../classes/CreateEntryAndLocationRecordDto.html" target="_self">CreateEntryAndLocationRecordDto</a>)</code>
+                    <code>createOrUpdate(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, createEntryAndLocationRecordDto: <a href="../classes/CreateEntryAndLocationRecordDto.html" target="_self">CreateEntryAndLocationRecordDto</a>)</code>
                 </td>
             </tr>
 
@@ -200,20 +219,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@Put(&#x27;:uuid&#x27;)<br />@ApiOperation({summary: &#x27;Create or update an entry and location record by uuid&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Entry and location record created or updated successfully&#x27;, type: EntryAndLocationRecord})<br />@ApiResponse({status: 400, description: &#x27;Invaluuid input&#x27;})<br />@ApiBody({type: CreateEntryAndLocationRecordDto})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:42</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates or updates an entry and location record.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -224,9 +245,26 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                                <td>uuid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The uuid of the entry and location record to update or create.</p>
+
+                                            </td>
+                                        </tr>
                                         <tr>
                                                 <td>createEntryAndLocationRecordDto</td>
                                             <td>
@@ -238,6 +276,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The data to create or update an entry and location record.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -247,7 +289,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The created or updated entry and location record entity.</p>
+
                             </div>
                 </td>
             </tr>
@@ -259,6 +302,8 @@
                 <td class="col-md-4">
                     <a name="findAll"></a>
                     <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                         <span ><b>findAll</b></span>
                         <a href="#findAll"><span class="icon ion-ios-link"></span></a>
@@ -276,25 +321,31 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@Get()<br />@ApiOperation({summary: &#x27;Retrieve all entry and location records&#x27;})<br />@ApiResponse({status: 200, description: &#x27;List of entry and location records&#x27;, type: undefined})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:64</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all entry and location records.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A list of entry and location records.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -306,6 +357,9 @@
                     <a name="findOne"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>findOne</b></span>
                         <a href="#findOne"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -314,7 +368,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -322,20 +376,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:id&#x27;)<br /></code>
+                    <code>@Get(&#x27;:uuid&#x27;)<br />@ApiOperation({summary: &#x27;Retrieve an entry and location record by uuid&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Entry and location record retrieved successfully&#x27;, type: EntryAndLocationRecord})<br />@ApiResponse({status: 404, description: &#x27;Entry and location record not found&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:85</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves an entry and location record by uuid.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -346,11 +402,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -360,6 +417,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The uuid of the entry and location record.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -369,7 +430,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The entry and location record entity.</p>
+
                             </div>
                 </td>
             </tr>
@@ -382,6 +444,9 @@
                     <a name="remove"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>remove</b></span>
                         <a href="#remove"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -390,7 +455,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -398,20 +463,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:id&#x27;)<br /></code>
+                    <code>@Delete(&#x27;:uuid&#x27;)<br />@ApiOperation({summary: &#x27;Delete an entry and location record by uuid&#x27;})<br />@ApiResponse({status: 204, description: &#x27;Entry and location record deleted successfully&#x27;})<br />@ApiResponse({status: 404, description: &#x27;Entry and location record not found&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:130</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Deletes an entry and location record by uuid.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -422,11 +489,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -436,6 +504,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The uuid of the entry and location record.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -445,7 +517,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A success message.</p>
+
                             </div>
                 </td>
             </tr>
@@ -458,6 +531,9 @@
                     <a name="update"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>update</b></span>
                         <a href="#update"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -466,7 +542,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateEntryAndLocationRecordDto: <a href="../classes/UpdateEntryAndLocationRecordDto.html" target="_self">UpdateEntryAndLocationRecordDto</a>)</code>
+                    <code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateEntryAndLocationRecordDto: <a href="../classes/UpdateEntryAndLocationRecordDto.html" target="_self">UpdateEntryAndLocationRecordDto</a>)</code>
                 </td>
             </tr>
 
@@ -474,20 +550,22 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:id&#x27;)<br /></code>
+                    <code>@Patch(&#x27;:uuid&#x27;)<br />@ApiOperation({summary: &#x27;Update an entry and location record by uuid&#x27;})<br />@ApiResponse({status: 200, description: &#x27;Entry and location record updated successfully&#x27;, type: EntryAndLocationRecord})<br />@ApiResponse({status: 400, description: &#x27;Invaluuid input&#x27;})<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.controller.ts:104</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an entry and location record by uuid.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -498,11 +576,12 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -512,6 +591,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The uuid of the entry and location record.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>updateEntryAndLocationRecordDto</td>
@@ -524,6 +607,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The data to update the entry and location record.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -533,7 +620,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The updated entry and location record entity.</p>
+
                             </div>
                 </td>
             </tr>
@@ -546,16 +634,18 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
   Delete,
+  Put,
 } from &#x27;@nestjs/common&#x27;;
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from &#x27;@nestjs/swagger&#x27;;
 import { EntryAndLocationRecordService } from &#x27;./entry-and-location-record.service&#x27;;
 import { CreateEntryAndLocationRecordDto } from &#x27;./dto/create-entry-and-location-record.dto&#x27;;
 import { UpdateEntryAndLocationRecordDto } from &#x27;./dto/update-entry-and-location-record.dto&#x27;;
-import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import { EntryAndLocationRecord } from &#x27;./entities/entry-and-location-record.entity&#x27;;
+import { LocationEntity } from &#x27;./entities/location.entity&#x27;;
 
 @ApiTags(&#x27;EntryLocationRecord&#x27;)
 @Controller(&#x27;entry-and-location-record&#x27;)
@@ -564,39 +654,114 @@ export class EntryAndLocationRecordController {
     private readonly entryAndLocationRecordService: EntryAndLocationRecordService,
   ) {}
 
-  @Post()
-  create(
+  /**
+   * Creates or updates an entry and location record.
+   *
+   * @param uuid The uuid of the entry and location record to update or create.
+   * @param createEntryAndLocationRecordDto The data to create or update an entry and location record.
+   * @returns The created or updated entry and location record entity.
+   */
+  @Put(&#x27;:uuid&#x27;)
+  @ApiOperation({
+    summary: &#x27;Create or update an entry and location record by uuid&#x27;,
+  })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;Entry and location record created or updated successfully&#x27;,
+    type: EntryAndLocationRecord,
+  })
+  @ApiResponse({ status: 400, description: &#x27;Invaluuid input&#x27; })
+  @ApiBody({ type: CreateEntryAndLocationRecordDto })
+  createOrUpdate(
+    @Param(&#x27;uuid&#x27;) uuid: string,
     @Body() createEntryAndLocationRecordDto: CreateEntryAndLocationRecordDto,
   ) {
     return this.entryAndLocationRecordService.create(
+      uuid,
       createEntryAndLocationRecordDto,
     );
   }
 
+  /**
+   * Retrieves all entry and location records.
+   *
+   * @returns A list of entry and location records.
+   */
   @Get()
+  @ApiOperation({ summary: &#x27;Retrieve all entry and location records&#x27; })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;List of entry and location records&#x27;,
+    type: [LocationEntity],
+  })
   findAll() {
     return this.entryAndLocationRecordService.findAll();
   }
 
-  @Get(&#x27;:id&#x27;)
-  findOne(@Param(&#x27;id&#x27;) id: string) {
-    return this.entryAndLocationRecordService.findOne(+id);
+  /**
+   * Retrieves an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record.
+   * @returns The entry and location record entity.
+   */
+  @Get(&#x27;:uuid&#x27;)
+  @ApiOperation({ summary: &#x27;Retrieve an entry and location record by uuid&#x27; })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;Entry and location record retrieved successfully&#x27;,
+    type: EntryAndLocationRecord,
+  })
+  @ApiResponse({
+    status: 404,
+    description: &#x27;Entry and location record not found&#x27;,
+  })
+  findOne(@Param(&#x27;uuid&#x27;) uuid: string) {
+    return this.entryAndLocationRecordService.findOne(uuid);
   }
 
-  @Patch(&#x27;:id&#x27;)
+  /**
+   * Updates an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record.
+   * @param updateEntryAndLocationRecordDto The data to update the entry and location record.
+   * @returns The updated entry and location record entity.
+   */
+  @Patch(&#x27;:uuid&#x27;)
+  @ApiOperation({ summary: &#x27;Update an entry and location record by uuid&#x27; })
+  @ApiResponse({
+    status: 200,
+    description: &#x27;Entry and location record updated successfully&#x27;,
+    type: EntryAndLocationRecord,
+  })
+  @ApiResponse({ status: 400, description: &#x27;Invaluuid input&#x27; })
   update(
-    @Param(&#x27;id&#x27;) id: string,
+    @Param(&#x27;uuid&#x27;) uuid: string,
     @Body() updateEntryAndLocationRecordDto: UpdateEntryAndLocationRecordDto,
   ) {
     return this.entryAndLocationRecordService.update(
-      +id,
+      uuid,
       updateEntryAndLocationRecordDto,
     );
   }
 
-  @Delete(&#x27;:id&#x27;)
-  remove(@Param(&#x27;id&#x27;) id: string) {
-    return this.entryAndLocationRecordService.remove(+id);
+  /**
+   * Deletes an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record.
+   * @returns A success message.
+   */
+  @Delete(&#x27;:uuid&#x27;)
+  @ApiOperation({ summary: &#x27;Delete an entry and location record by uuid&#x27; })
+  @ApiResponse({
+    status: 204,
+    description: &#x27;Entry and location record deleted successfully&#x27;,
+  })
+  @ApiResponse({
+    status: 404,
+    description: &#x27;Entry and location record not found&#x27;,
+  })
+  remove(@Param(&#x27;uuid&#x27;) uuid: string) {
+    return this.entryAndLocationRecordService.remove(uuid);
   }
 }
 </code></pre>

@@ -121,6 +121,9 @@
                             <a href="#bootstrap" title="src/main.ts" ><b>bootstrap</b>&nbsp;&nbsp;&nbsp;(src/.../main.ts)</a>
                         </li>
                         <li>
+                            <a href="#canCreateRole" title="src/common/utils/get-field-of-user-data.ts" ><b>canCreateRole</b>&nbsp;&nbsp;&nbsp;(src/.../get-field-of-user-data.ts)</a>
+                        </li>
+                        <li>
                             <a href="#concatenateUint8Arrays" title="src/common/utils/concatenate-uint8-arrays.function.ts" ><b>concatenateUint8Arrays</b>&nbsp;&nbsp;&nbsp;(src/.../concatenate-uint8-arrays.function.ts)</a>
                         </li>
                         <li>
@@ -133,10 +136,19 @@
                             <a href="#formatDate" title="src/common/utils/format-date.function.ts" ><b>formatDate</b>&nbsp;&nbsp;&nbsp;(src/.../format-date.function.ts)</a>
                         </li>
                         <li>
+                            <a href="#getFieldOfInstitutionData" title="src/common/utils/get-field-of-user-data.ts" ><b>getFieldOfInstitutionData</b>&nbsp;&nbsp;&nbsp;(src/.../get-field-of-user-data.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getFieldOfUserData" title="src/common/utils/get-field-of-user-data.ts" ><b>getFieldOfUserData</b>&nbsp;&nbsp;&nbsp;(src/.../get-field-of-user-data.ts)</a>
+                        </li>
+                        <li>
                             <a href="#hashedPassword" title="src/common/utils/hashed-password.ts" ><b>hashedPassword</b>&nbsp;&nbsp;&nbsp;(src/.../hashed-password.ts)</a>
                         </li>
                         <li>
                             <a href="#isDeepEqual" title="src/common/utils/is-deep-equal.function.ts" ><b>isDeepEqual</b>&nbsp;&nbsp;&nbsp;(src/.../is-deep-equal.function.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#IsForbiddenForRoles" title="src/auth/decorator/is-forbidden-for-roles-constraint.decorator.ts" ><b>IsForbiddenForRoles</b>&nbsp;&nbsp;&nbsp;(src/.../is-forbidden-for-roles-constraint.decorator.ts)</a>
                         </li>
                         <li>
                             <a href="#validateIsMuseum" title="src/address/institutions/utilities/validate-is-museum/validate-is-museum.ts" ><b>validateIsMuseum</b>&nbsp;&nbsp;&nbsp;(src/.../validate-is-museum.ts)</a>
@@ -318,6 +330,213 @@
 
 
 
+        </tbody>
+    </table>
+</section>    <h3>src/common/utils/get-field-of-user-data.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canCreateRole"></a>
+                    <span class="name">
+                        <span ><b>canCreateRole</b></span>
+                        <a href="#canCreateRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>canCreateRole(userRole: <a href="../undefineds/UserRoles.html" target="_self">UserRoles</a>, targetRole: <a href="../undefineds/UserRoles.html" target="_self">UserRoles</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>userRole</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#UserRoles" target="_self" >UserRoles</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>targetRole</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#UserRoles" target="_self" >UserRoles</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFieldOfInstitutionData"></a>
+                    <span class="name">
+                        <span ><b>getFieldOfInstitutionData</b></span>
+                        <a href="#getFieldOfInstitutionData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFieldOfInstitutionData(user: <a href="../classes/JwtPayload.html" target="_self">JwtPayload</a>, rest: Partial)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/JwtPayload.html" target="_self" >JwtPayload</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>rest</td>
+                                            <td>
+                                                        <code>Partial</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFieldOfUserData"></a>
+                    <span class="name">
+                        <span ><b>getFieldOfUserData</b></span>
+                        <a href="#getFieldOfUserData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFieldOfUserData(user: <a href="../classes/User.html" target="_self">User</a>, rest: Partial)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/User.html" target="_self" >User</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>rest</td>
+                                            <td>
+                                                        <code>Partial</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>    <h3>src/common/utils/concatenate-uint8-arrays.function.ts</h3>
@@ -696,6 +915,73 @@
 
                                             <td>
                                                     No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/auth/decorator/is-forbidden-for-roles-constraint.decorator.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="IsForbiddenForRoles"></a>
+                    <span class="name">
+                        <span ><b>IsForbiddenForRoles</b></span>
+                        <a href="#IsForbiddenForRoles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>IsForbiddenForRoles(forbiddenRoles, validationOptions?: <a href="../undefineds/Options.html" target="_self">ValidationOptions</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>forbiddenRoles</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>validationOptions</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#Options" target="_self" >ValidationOptions</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
                                             </td>
 
 

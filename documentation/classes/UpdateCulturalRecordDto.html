@@ -123,6 +123,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Data Transfer Object for updating a cultural record.</p>
+<p>This DTO allows updating cultural records by providing partial properties
+from <code>CreateCulturalRecordDto</code>, making them optional for flexibility in updates.</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -148,9 +157,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PartialType } from &#x27;@nestjs/mapped-types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PartialType } from &#x27;@nestjs/swagger&#x27;;
 import { CreateCulturalRecordDto } from &#x27;./create-cultural-record.dto&#x27;;
 
+/**
+ * Data Transfer Object for updating a cultural record.
+ *
+ * This DTO allows updating cultural records by providing partial properties
+ * from &#x60;CreateCulturalRecordDto&#x60;, making them optional for flexibility in updates.
+ */
 export class UpdateCulturalRecordDto extends PartialType(
   CreateCulturalRecordDto,
 ) {}

@@ -123,12 +123,248 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Data Transfer Object for creating a Description Control.
+This DTO represents the structure and validations needed when creating a description control record.</p>
+
+            </p>
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                            <code><a href="../interfaces/DescriptionControlModel.html" target="_self" >DescriptionControlModel</a></code>
+            </p>
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                <a href="#descriptionDateTime" >descriptionDateTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#descriptionMadeBy" >descriptionMadeBy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                <a href="#reviewDateTime" >reviewDateTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#reviewedBy" >reviewedBy</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
 
 
 
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="descriptionDateTime"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                        <span ><b>descriptionDateTime</b></span>
+                        <a href="#descriptionDateTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @IsDate()<br />@Type(undefined)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/cultural-heritage-property/description-control/dto/create-description-control.dto.ts:16</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Date and time when the description was made.
+Must be a valid Date object.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="descriptionMadeBy"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>descriptionMadeBy</b></span>
+                        <a href="#descriptionMadeBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @IsString()<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/cultural-heritage-property/description-control/dto/create-description-control.dto.ts:23</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identifier of the person who made the description.
+Must be a non-empty string.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reviewDateTime"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                        <span ><b>reviewDateTime</b></span>
+                        <a href="#reviewDateTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @IsDate()<br />@Type(undefined)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/cultural-heritage-property/description-control/dto/create-description-control.dto.ts:31</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Date and time when the description was reviewed.
+Must be a valid Date object.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reviewedBy"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>reviewedBy</b></span>
+                        <a href="#reviewedBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @IsString()<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/cultural-heritage-property/description-control/dto/create-description-control.dto.ts:38</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identifier of the person who reviewed the description.
+Must be a non-empty string.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
 
 
 
@@ -140,7 +376,45 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export class CreateDescriptionControlDto {}
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { IsDate, IsString } from &#x27;class-validator&#x27;;
+import { Type } from &#x27;class-transformer&#x27;;
+import { DescriptionControlModel } from &#x27;../models/description-control-model&#x27;;
+
+/**
+ * Data Transfer Object for creating a Description Control.
+ * This DTO represents the structure and validations needed when creating a description control record.
+ */
+export class CreateDescriptionControlDto implements DescriptionControlModel {
+  /**
+   * Date and time when the description was made.
+   * Must be a valid Date object.
+   */
+  @IsDate()
+  @Type(() &#x3D;&gt; Date)
+  descriptionDateTime: Date;
+
+  /**
+   * Identifier of the person who made the description.
+   * Must be a non-empty string.
+   */
+  @IsString()
+  descriptionMadeBy: string;
+
+  /**
+   * Date and time when the description was reviewed.
+   * Must be a valid Date object.
+   */
+  @IsDate()
+  @Type(() &#x3D;&gt; Date)
+  reviewDateTime: Date;
+
+  /**
+   * Identifier of the person who reviewed the description.
+   * Must be a non-empty string.
+   */
+  @IsString()
+  reviewedBy: string;
+}
 </code></pre>
     </div>
 </div>

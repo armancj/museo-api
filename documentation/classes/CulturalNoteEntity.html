@@ -123,6 +123,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Entity representing a cultural note.</p>
+<p>This entity is used to encapsulate the properties and methods related to cultural notes.
+It implements the <code>NotesModel</code> interface to ensure the data structure conforms to the model.</p>
+
+            </p>
 
 
             <p class="comment">
@@ -182,17 +191,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(option: <a href="../interfaces/NotesModel.html" target="_self">Partial&lt;NotesModel&gt;</a>)</code>
+<code>constructor(option: Partial<NotesModel>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-note.entity.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-note.entity.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Constructor to initialize a <code>CulturalNoteEntity</code>.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -201,6 +212,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -208,13 +220,19 @@
                                                         <td>option</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/NotesModel.html" target="_self" >Partial&lt;NotesModel&gt;</a></code>
+                                                                    <code>Partial&lt;NotesModel&gt;</code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Partial data based on the <code>NotesModel</code> to create a new instance.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -249,10 +267,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-note.entity.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-note.entity.ts:13</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Content of the cultural note.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -278,21 +302,23 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(option: <a href="../interfaces/NotesModel.html" target="_self">Partial&lt;NotesModel&gt;</a>)</code>
+                    <code>create(option: Partial<NotesModel>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="10"
-                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-note.entity.ts:10</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/cultural-heritage-property/cultural-notes/entities/cultural-note.entity.ts:30</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Factory method to create a new <code>CulturalNoteEntity</code> instance.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -303,13 +329,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                                 <td>option</td>
                                             <td>
-                                                            <code><a href="../interfaces/NotesModel.html" target="_self" >Partial&lt;NotesModel&gt;</a></code>
+                                                        <code>Partial&lt;NotesModel&gt;</code>
                                             </td>
 
                                             <td>
@@ -317,6 +344,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Partial data based on the <code>NotesModel</code>.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -326,7 +359,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A new instance of <code>CulturalNoteEntity</code>.</p>
+
                             </div>
                 </td>
             </tr>
@@ -344,13 +378,33 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NotesModel } from &#x27;../models/cultural-notes-model&#x27;;
 
+/**
+ * Entity representing a cultural note.
+ *
+ * This entity is used to encapsulate the properties and methods related to cultural notes.
+ * It implements the &#x60;NotesModel&#x60; interface to ensure the data structure conforms to the model.
+ */
 export class CulturalNoteEntity implements NotesModel {
+  /**
+   * Content of the cultural note.
+   */
   notes: string;
 
+  /**
+   * Constructor to initialize a &#x60;CulturalNoteEntity&#x60;.
+   *
+   * @param option - Partial data based on the &#x60;NotesModel&#x60; to create a new instance.
+   */
   constructor(option: Partial&lt;NotesModel&gt;) {
     this.notes &#x3D; option.notes;
   }
 
+  /**
+   * Factory method to create a new &#x60;CulturalNoteEntity&#x60; instance.
+   *
+   * @param option - Partial data based on the &#x60;NotesModel&#x60;.
+   * @returns A new instance of &#x60;CulturalNoteEntity&#x60;.
+   */
   static create(option: Partial&lt;NotesModel&gt;): CulturalNoteEntity {
     return new CulturalNoteEntity(option);
   }

@@ -197,7 +197,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="3" class="link-to-prism">src/common/dto/exception.dto.ts:3</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/common/dto/exception.dto.ts:5</a></div>
                         </td>
                     </tr>
 
@@ -228,7 +228,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/common/dto/exception.dto.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/common/dto/exception.dto.ts:8</a></div>
                         </td>
                     </tr>
 
@@ -259,7 +259,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/common/dto/exception.dto.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/common/dto/exception.dto.ts:7</a></div>
                         </td>
                     </tr>
 
@@ -290,7 +290,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="2" class="link-to-prism">src/common/dto/exception.dto.ts:2</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/common/dto/exception.dto.ts:4</a></div>
                         </td>
                     </tr>
 
@@ -321,7 +321,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/common/dto/exception.dto.ts:4</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/common/dto/exception.dto.ts:6</a></div>
                         </td>
                     </tr>
 
@@ -340,7 +340,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export class Unauthorized {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpStatus } from &quot;@nestjs/common&quot;;
+
+export class Unauthorized {
   &#x27;statusCode&#x27; &#x3D; 401;
   &#x27;message&#x27; &#x3D; &#x27;Unauthorized&#x27;;
   &#x27;timestamp&#x27; &#x3D; &#x27;2023-10-14T15:00:53.687Z&#x27;;
@@ -353,6 +355,14 @@ export class Forbidden {
   &#x27;error&#x27;: &#x27;Forbidden&#x27;;
   &#x27;timestamp&#x27; &#x3D; &#x27;2023-10-14T15:00:53.687Z&#x27;;
   &#x27;path&#x27; &#x3D; &#x27;/auth/profile&#x27;;
+  &#x27;method&#x27; &#x3D; &#x27;GET&#x27;;
+}
+
+export class NotFound {
+  &#x27;statusCode&#x27; &#x3D; HttpStatus.NOT_FOUND;
+  &#x27;message&#x27; &#x3D; &#x27;Not found resource&#x27;;
+  &#x27;error&#x27;: &#x27;NotFound &#x27;;
+  &#x27;timestamp&#x27; &#x3D; new Date(Date.now()).toISOString();
   &#x27;method&#x27; &#x3D; &#x27;GET&#x27;;
 }
 </code></pre>

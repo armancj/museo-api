@@ -162,6 +162,54 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(commonRecordService: <a href="../injectables/CommonRecordService.html" target="_self">CommonRecordService&lt;any | CreateEntryAndLocationRecordDto | EntryAndLocationRecord | EntryAndLocationRecordsEntity&gt;</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>commonRecordService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CommonRecordService.html" target="_self" >CommonRecordService&lt;any | CreateEntryAndLocationRecordDto | EntryAndLocationRecord | EntryAndLocationRecordsEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -181,21 +229,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>create(createEntryAndLocationRecordDto: <a href="../classes/CreateEntryAndLocationRecordDto.html" target="_self">CreateEntryAndLocationRecordDto</a>)</code>
+<code>create(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, createEntryAndLocationRecordDto: <a href="../classes/CreateEntryAndLocationRecordDto.html" target="_self">CreateEntryAndLocationRecordDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="7"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:7</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new entry and location record, passing the uuid to associate the record.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -206,9 +256,26 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                                <td>uuid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The uuid for the new entry and location record.</p>
+
+                                            </td>
+                                        </tr>
                                         <tr>
                                                 <td>createEntryAndLocationRecordDto</td>
                                             <td>
@@ -220,16 +287,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Data to create the entry and location record.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The created entry and location record.</p>
+
                             </div>
                 </td>
             </tr>
@@ -255,19 +327,25 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:42</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all entry and location records.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <p>List of all entry and location records.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -285,21 +363,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves an entry and location record by uuid.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -310,13 +390,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -324,16 +405,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The uuid of the entry and location record to find.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The entry and location record found.</p>
+
                             </div>
                 </td>
             </tr>
@@ -352,21 +438,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:79</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Removes an entry and location record by uuid.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -377,13 +465,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -391,16 +480,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The uuid of the entry and location record to remove.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>A message indicating the removal.</p>
+
                             </div>
                 </td>
             </tr>
@@ -419,21 +513,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateEntryAndLocationRecordDto: <a href="../classes/UpdateEntryAndLocationRecordDto.html" target="_self">UpdateEntryAndLocationRecordDto</a>)</code>
+<code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateEntryAndLocationRecordDto: <a href="../classes/UpdateEntryAndLocationRecordDto.html" target="_self">UpdateEntryAndLocationRecordDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/entry-and-location-record.service.ts:63</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing entry and location record by uuid.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -444,13 +540,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -458,6 +555,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The uuid of the entry and location record to update.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>updateEntryAndLocationRecordDto</td>
@@ -470,16 +571,21 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>The updated data.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>The updated entry and location record.</p>
+
                             </div>
                 </td>
             </tr>
@@ -491,33 +597,86 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@nestjs/common&#x27;;
+import { CommonRecordService } from &#x27;../shared/common-record-service.service&#x27;;
 import { CreateEntryAndLocationRecordDto } from &#x27;./dto/create-entry-and-location-record.dto&#x27;;
 import { UpdateEntryAndLocationRecordDto } from &#x27;./dto/update-entry-and-location-record.dto&#x27;;
+import { EntryAndLocationRecord } from &#x27;./entities/entry-and-location-record.entity&#x27;;
+import { EntryAndLocationRecordsEntity } from &#x27;./entities/entry-and-location-records.entity&#x27;;
 
 @Injectable()
 export class EntryAndLocationRecordService {
-  create(createEntryAndLocationRecordDto: CreateEntryAndLocationRecordDto) {
-    return &#x27;This action adds a new entryAndLocationRecord&#x27;;
+  constructor(
+    @Inject(&#x27;ENTRY_AND_LOCATION_RECORD_SERVICE&#x27;)
+    private readonly commonRecordService: CommonRecordService&lt;
+      any,
+      CreateEntryAndLocationRecordDto,
+      EntryAndLocationRecord,
+      EntryAndLocationRecordsEntity
+    &gt;,
+  ) {}
+
+  /**
+   * Creates a new entry and location record, passing the uuid to associate the record.
+   *
+   * @param uuid The uuid for the new entry and location record.
+   * @param createEntryAndLocationRecordDto Data to create the entry and location record.
+   * @returns The created entry and location record.
+   */
+  create(
+    uuid: string,
+    createEntryAndLocationRecordDto: CreateEntryAndLocationRecordDto,
+  ) {
+    return this.commonRecordService.create(
+      uuid,
+      createEntryAndLocationRecordDto,
+    );
   }
 
+  /**
+   * Retrieves all entry and location records.
+   *
+   * @returns List of all entry and location records.
+   */
   findAll() {
-    return &#x60;This action returns all entryAndLocationRecord&#x60;;
+    return this.commonRecordService.findAll();
   }
 
-  findOne(id: number) {
-    return &#x60;This action returns a #${id} entryAndLocationRecord&#x60;;
+  /**
+   * Retrieves an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record to find.
+   * @returns The entry and location record found.
+   */
+  findOne(uuid: string) {
+    return this.commonRecordService.findOne(uuid);
   }
 
+  /**
+   * Updates an existing entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record to update.
+   * @param updateEntryAndLocationRecordDto The updated data.
+   * @returns The updated entry and location record.
+   */
   update(
-    id: number,
+    uuid: string,
     updateEntryAndLocationRecordDto: UpdateEntryAndLocationRecordDto,
   ) {
-    return &#x60;This action updates a #${id} entryAndLocationRecord&#x60;;
+    return this.commonRecordService.update(
+      uuid,
+      updateEntryAndLocationRecordDto,
+    );
   }
 
-  remove(id: number) {
-    return &#x60;This action removes a #${id} entryAndLocationRecord&#x60;;
+  /**
+   * Removes an entry and location record by uuid.
+   *
+   * @param uuid The uuid of the entry and location record to remove.
+   * @returns A message indicating the removal.
+   */
+  remove(uuid: string) {
+    return this.commonRecordService.remove(uuid);
   }
 }
 </code></pre>

@@ -155,7 +155,16 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#email" >email</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#institutionId" >institutionId</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
@@ -201,6 +210,7 @@
                                 <a href="#province" >province</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
@@ -256,7 +266,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/users/dto/create-user.dto.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/users/dto/create-user.dto.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -269,6 +279,7 @@
                 <td class="col-md-4">
                     <a name="email"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -289,13 +300,53 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsEmail()<br />@IsString()<br />@IsNotEmpty()<br />@ApiProperty({type: String, example: &#x27;example@example.com&#x27;})<br />
+                            @IsString()<br />@ApplyTransform(toLowerCase)<br />@IsEmail()<br />@IsNotEmpty()<br />@ApiProperty({type: String, example: &#x27;example@example.com&#x27;})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/users/dto/create-user.dto.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/users/dto/create-user.dto.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="institutionId"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>institutionId</b></span>
+                        <a href="#institutionId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ValidateIf(dto &#x3D;&gt; )<br />@IsUUID()<br />@IsString()<br />@IsNotEmpty()<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/users/dto/create-user.dto.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -333,7 +384,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/users/dto/create-user.dto.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/users/dto/create-user.dto.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -371,7 +422,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/users/dto/create-user.dto.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/users/dto/create-user.dto.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -409,7 +460,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/users/dto/create-user.dto.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/users/dto/create-user.dto.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -447,7 +498,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/users/dto/create-user.dto.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/users/dto/create-user.dto.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -486,7 +537,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/users/dto/create-user.dto.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/users/dto/create-user.dto.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -524,7 +575,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/users/dto/create-user.dto.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/users/dto/create-user.dto.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -562,7 +613,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/users/dto/create-user.dto.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/users/dto/create-user.dto.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -575,6 +626,7 @@
                 <td class="col-md-4">
                     <a name="roles"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -595,13 +647,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@IsOptional()<br />@IsEnum(UserRoles)<br />
+                            @IsString()<br />@IsNotEmpty()<br />@IsOptional()<br />@IsEnum(UserRoles)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/users/dto/create-user.dto.ts:97</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/users/dto/create-user.dto.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -621,102 +673,116 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  IsEmail,
-  IsString,
-  IsOptional,
-  IsMobilePhone,
-  IsNotEmpty,
-  IsEnum,
-  ValidateIf,
+    IsEmail,
+    IsEmpty,
+    IsEnum,
+    IsMobilePhone,
+    IsNotEmpty,
+    IsOptional,
+    IsString,
+    IsUUID,
+    ValidateIf,
 } from &#x27;class-validator&#x27;;
-import { ApiProperty } from &#x27;@nestjs/swagger&#x27;;
-import { UserPropertiesModel } from &#x27;../models/user.model&#x27;;
-import { UserRoles } from &#x27;../enum/user-roles.enum&#x27;;
+import {ApiProperty} from &#x27;@nestjs/swagger&#x27;;
+import {UserPropertiesModel} from &#x27;../models/user.model&#x27;;
+import {UserRoles} from &#x27;../enum/user-roles.enum&#x27;;
+import {ApplyTransform} from &quot;../../common/decorator/apply-transform.decorator&quot;;
+import {toLowerCase} from &quot;../../common/utils/to-lower-case&quot;;
+import {IsForbiddenForRoles} from &quot;../../auth/decorator/is-forbidden-for-roles-constraint.decorator&quot;;
 
 export class CreateUserDto
-  implements Omit&lt;UserPropertiesModel, &#x27;passwordHashed&#x27; | &#x27;uuid&#x27;&gt;
-{
-  @IsEmail()
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: &#x27;example@example.com&#x27;,
-  })
-  email: string;
+    implements Omit&lt;UserPropertiesModel, &#x27;passwordHashed&#x27; | &#x27;uuid&#x27;&gt; {
+    @IsString()
+    @ApplyTransform(toLowerCase)
+    @IsEmail()
+    @IsNotEmpty()
+    @ApiProperty({
+        type: String,
+        example: &#x27;example@example.com&#x27;,
+    })
+    email: string;
 
-  @IsMobilePhone()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: &#x27;+34612345678&#x27;,
-  })
-  mobile: string;
+    @IsMobilePhone()
+    @IsNotEmpty()
+    @ApiProperty({
+        type: String,
+        example: &#x27;+34612345678&#x27;,
+    })
+    mobile: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: &#x27;secretpassword1&#x27;,
-  })
-  password: string;
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty({
+        type: String,
+        example: &#x27;secretpassword1&#x27;,
+    })
+    password: string;
 
-  @IsString()
-  @ApiProperty({
-    type: String,
-    example: &#x27;YourAddressHere&#x27;,
-  })
-  address: string;
+    @IsString()
+    @ApiProperty({
+        type: String,
+        example: &#x27;YourAddressHere&#x27;,
+    })
+    address: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: &#x27;YourLastName&#x27;,
-  })
-  lastName: string;
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty({
+        type: String,
+        example: &#x27;YourLastName&#x27;,
+    })
+    lastName: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: &#x27;YourName&#x27;,
-  })
-  name: string;
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty({
+        type: String,
+        example: &#x27;YourName&#x27;,
+    })
+    name: string;
 
-  @ValidateIf((dto) &#x3D;&gt; dto.roles !&#x3D;&#x3D; UserRoles.superAdmin)
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty({
-    type: String,
-    example: &#x27;Cuba&#x27;,
-  })
-  nationality: string;
+    @ValidateIf((dto) &#x3D;&gt; dto?.roles !&#x3D;&#x3D; UserRoles.superAdmin)
+    @IsString()
+    @IsNotEmpty()
+    @ApiProperty({
+        type: String,
+        example: &#x27;Cuba&#x27;,
+    })
+    nationality: string;
 
-  @ValidateIf((dto) &#x3D;&gt; dto.roles !&#x3D;&#x3D; UserRoles.superAdmin)
-  @IsString()
-  @ApiProperty({
-    type: String,
-    example: &#x27;Las Tunas&#x27;,
-  })
-  province: string;
+    @ValidateIf((dto) &#x3D;&gt; dto?.roles !&#x3D;&#x3D; UserRoles.superAdmin)
+    @IsString()
+    @ApiProperty({
+        type: String,
+        example: &#x27;Las Tunas&#x27;,
+    })
+    province: string;
 
-  @ValidateIf(
-    (dto) &#x3D;&gt;
-      dto.roles !&#x3D;&#x3D; UserRoles.superAdmin ||
-      dto.roles !&#x3D;&#x3D; UserRoles.administrator,
-  )
-  @IsString()
-  @ApiProperty({
-    type: String,
-    example: &#x27;Jobabo&#x27;,
-  })
-  municipal: string;
+    @ValidateIf(
+        (dto) &#x3D;&gt;
+            dto?.roles &#x3D;&#x3D;&#x3D; UserRoles.employee ||
+            dto?.roles &#x3D;&#x3D;&#x3D; UserRoles.manager,
+    )
+    @IsString()
+    @ApiProperty({
+        type: String,
+        example: &#x27;Jobabo&#x27;,
+    })
+    municipal: string;
 
-  @IsString()
-  @IsOptional()
-  @IsEnum(UserRoles)
-  roles?: UserRoles;
+    @IsString()
+    @IsNotEmpty()
+    @IsOptional()
+    @IsEnum(UserRoles)
+    roles?: UserRoles;
+
+    @ValidateIf((dto) &#x3D;&gt;
+        dto?.roles &#x3D;&#x3D;&#x3D; UserRoles.employee || dto?.roles &#x3D;&#x3D;&#x3D; UserRoles.manager
+    )
+    @IsUUID()
+    @IsString()
+    @IsNotEmpty()
+    institutionId?: string;
 }
 </code></pre>
     </div>

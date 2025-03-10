@@ -123,6 +123,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO for creating a cultural note.</p>
+<p>This class defines the structure of the data transfer object for creating cultural notes.
+It includes validation rules to ensure the data integrity.</p>
+
+            </p>
 
 
             <p class="comment">
@@ -203,10 +212,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/cultural-heritage-property/cultural-notes/dto/create-cultural-note.dto.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/cultural-heritage-property/cultural-notes/dto/create-cultural-note.dto.ts:20</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cultural note content.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -225,7 +240,19 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NotesModel } from &#x27;../models/cultural-notes-model&#x27;;
 import { IsNotEmpty, IsOptional, IsString } from &#x27;class-validator&#x27;;
 
+/**
+ * DTO for creating a cultural note.
+ *
+ * This class defines the structure of the data transfer object for creating cultural notes.
+ * It includes validation rules to ensure the data integrity.
+ */
 export class CreateCulturalNoteDto implements NotesModel {
+  /**
+   * Cultural note content.
+   *
+   * @type {string}
+   * @optional
+   */
   @IsString()
   @IsOptional()
   @IsNotEmpty()

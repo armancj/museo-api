@@ -42,6 +42,10 @@ export class InstitutionsService {
   async findOne(uuid: string, user: JwtPayload) {
     const filter: Partial<InstitutionModel> = {};
     getFieldOfInstitutionData(user, filter);
+    return await this.findByUUID(uuid, filter);
+  }
+
+  async findByUUID(uuid: string, filter: Partial<InstitutionModel>={}) {
     const institution = await this.getInstitution({
       uuid,
       deleted: false,
@@ -101,5 +105,13 @@ export class InstitutionsService {
     }
 
     await Promise.all(validationPromises);
+  }
+
+  async findInstitutionById(institutionId: string): Promise<Institution> {
+    const institution = await this.institutionDocumentModel.findById(institutionId).exec();
+    if (!institution) {
+      throw new NotFoundException('Institution not found');
+    }
+    return institution;
   }
 }

@@ -184,7 +184,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/address/country/country.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/address/country/country.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -249,8 +249,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/address/country/country.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/address/country/country.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -311,15 +311,15 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findAll()</code>
+                    <code>findAll(filter: <a href="../classes/FilterCountryByNameDto.html" target="_self">FilterCountryByNameDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/address/country/country.service.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/address/country/country.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -327,10 +327,40 @@
             <tr>
                 <td class="col-md-4">
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filter</td>
+                                            <td>
+                                                            <code><a href="../classes/FilterCountryByNameDto.html" target="_self" >FilterCountryByNameDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>    <code>unknown</code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -357,8 +387,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/address/country/country.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/address/country/country.service.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -435,8 +465,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/address/country/country.service.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/address/country/country.service.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -504,8 +534,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/address/country/country.service.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/address/country/country.service.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -573,8 +603,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/address/country/country.service.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/address/country/country.service.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -648,6 +678,7 @@ import { Countries } from &#x27;./entities/countries.entity&#x27;;
 import { OnEvent } from &#x27;@nestjs/event-emitter&#x27;;
 import { EventEmitter } from &#x27;../../shared/event-emitter/event-emitter.const&#x27;;
 import { CountryModel } from &#x27;./entities/country.model&#x27;;
+import {FilterCountryByNameDto} from &quot;./dto/filter-country-by-name.dto&quot;;
 
 @Injectable()
 export class CountryService {
@@ -661,9 +692,9 @@ export class CountryService {
     return Country.create(createdCountry);
   }
 
-  async findAll() {
+  async findAll(filter: FilterCountryByNameDto) {
     const countries &#x3D; await this.countryDocumentModel
-      .find({ deleted: false })
+      .find({ ...filter, deleted: false })
       .exec();
     return Countries.create(countries).value;
   }
