@@ -142,21 +142,26 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#create" >create</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#findAll" >findAll</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#findOne" >findOne</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#remove" >remove</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#update" >update</a>
                             </li>
@@ -184,6 +189,7 @@
                     <a name="create"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>create</b></span>
                         <a href="#create"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -192,7 +198,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(createInstitutionDto: <a href="../classes/CreateInstitutionDto.html" target="_self">CreateInstitutionDto</a>)</code>
+                    <code>create(createInstitutionDto: <a href="../classes/CreateInstitutionDto.html" target="_self">CreateInstitutionDto</a>, user: <a href="../classes/JwtPayload.html" target="_self">JwtPayload</a>)</code>
                 </td>
             </tr>
 
@@ -200,14 +206,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@Auth({roles: undefined})<br />@Post()<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -239,6 +245,18 @@
 
 
                                         </tr>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/JwtPayload.html" target="_self" >JwtPayload</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -260,6 +278,7 @@
                     <a name="findAll"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>findAll</b></span>
                         <a href="#findAll"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -268,7 +287,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findAll()</code>
+                    <code>findAll(user: <a href="../classes/JwtPayload.html" target="_self">JwtPayload</a>)</code>
                 </td>
             </tr>
 
@@ -276,14 +295,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get()<br /></code>
+                    <code>@Auth()<br />@Get()<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -291,10 +310,40 @@
             <tr>
                 <td class="col-md-4">
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/JwtPayload.html" target="_self" >JwtPayload</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -306,6 +355,7 @@
                     <a name="findOne"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>findOne</b></span>
                         <a href="#findOne"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -314,7 +364,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/JwtPayload.html" target="_self">JwtPayload</a>)</code>
                 </td>
             </tr>
 
@@ -322,14 +372,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;:uuid&#x27;)<br /></code>
+                    <code>@Auth()<br />@Get(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -353,6 +403,18 @@
                                                 <td>uuid</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/JwtPayload.html" target="_self" >JwtPayload</a></code>
                                             </td>
 
                                             <td>
@@ -382,6 +444,7 @@
                     <a name="remove"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>remove</b></span>
                         <a href="#remove"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -390,7 +453,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, user: <a href="../classes/JwtPayload.html" target="_self">JwtPayload</a>)</code>
                 </td>
             </tr>
 
@@ -398,14 +461,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Delete(&#x27;:uuid&#x27;)<br /></code>
+                    <code>@Auth({roles: undefined})<br />@Delete(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -437,6 +500,18 @@
 
 
                                         </tr>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/JwtPayload.html" target="_self" >JwtPayload</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -458,6 +533,7 @@
                     <a name="update"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>update</b></span>
                         <a href="#update"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -466,7 +542,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateInstitutionDto: <a href="../classes/UpdateInstitutionDto.html" target="_self">UpdateInstitutionDto</a>)</code>
+                    <code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateInstitutionDto: <a href="../classes/UpdateInstitutionDto.html" target="_self">UpdateInstitutionDto</a>, user: <a href="../classes/JwtPayload.html" target="_self">JwtPayload</a>)</code>
                 </td>
             </tr>
 
@@ -474,14 +550,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Patch(&#x27;:uuid&#x27;)<br /></code>
+                    <code>@Auth({roles: undefined})<br />@Patch(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/address/institutions/institutions.controller.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -525,6 +601,18 @@
 
 
                                         </tr>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/JwtPayload.html" target="_self" >JwtPayload</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -551,45 +639,63 @@
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from &#x27;@nestjs/common&#x27;;
 import { InstitutionsService } from &#x27;./institutions.service&#x27;;
 import { CreateInstitutionDto } from &#x27;./dto/create-institution.dto&#x27;;
 import { UpdateInstitutionDto } from &#x27;./dto/update-institution.dto&#x27;;
 import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
-import { Auth } from &#x27;../../auth/decorator&#x27;;
+import { Auth, CurrentUser } from &#x27;../../auth/decorator&#x27;;
+import { JwtPayload } from &#x27;../../auth/strategies/jwt.payload&#x27;;
+import { UserRoles } from &#x27;../../users/enum/user-roles.enum&#x27;;
 
-@Auth()
 @ApiTags(&#x27;Institution&#x27;)
 @Controller(&#x27;institutions&#x27;)
 export class InstitutionsController {
   constructor(private readonly institutionsService: InstitutionsService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin],
+  })
   @Post()
-  create(@Body() createInstitutionDto: CreateInstitutionDto) {
-    return this.institutionsService.create(createInstitutionDto);
+  create(
+    @Body() createInstitutionDto: CreateInstitutionDto,
+    @CurrentUser() user: JwtPayload,
+  ) {
+    return this.institutionsService.create(createInstitutionDto, user);
   }
 
+  @Auth()
   @Get()
-  findAll() {
-    return this.institutionsService.findAll();
+  findAll(@CurrentUser() user: JwtPayload) {
+    return this.institutionsService.findAll(user);
   }
 
+  @Auth()
   @Get(&#x27;:uuid&#x27;)
-  findOne(@Param(&#x27;uuid&#x27;) uuid: string) {
-    return this.institutionsService.findOne(uuid);
+  findOne(@Param(&#x27;uuid&#x27;) uuid: string, @CurrentUser() user: JwtPayload) {
+    return this.institutionsService.findOne(uuid, user);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Patch(&#x27;:uuid&#x27;)
   update(
     @Param(&#x27;uuid&#x27;) uuid: string,
     @Body() updateInstitutionDto: UpdateInstitutionDto,
+    @CurrentUser() user: JwtPayload,
   ) {
-    return this.institutionsService.update(uuid, updateInstitutionDto);
+    return this.institutionsService.update(uuid, updateInstitutionDto, user);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Delete(&#x27;:uuid&#x27;)
-  remove(@Param(&#x27;uuid&#x27;) uuid: string) {
-    return this.institutionsService.remove(uuid);
+  remove(@Param(&#x27;uuid&#x27;) uuid: string, @CurrentUser() user: JwtPayload) {
+    return this.institutionsService.remove(uuid, user);
   }
 }
 </code></pre>

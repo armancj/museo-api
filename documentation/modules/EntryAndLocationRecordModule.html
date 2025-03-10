@@ -180,6 +180,15 @@
 
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Module that manages entry and location records.</p>
+<p>Provides the controller and service to handle entry and location records within the schema,
+as well as setting up the provider for <code>CommonRecordService</code> to interact with the entry and location record data.</p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -214,10 +223,57 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
 import { EntryAndLocationRecordService } from &#x27;./entry-and-location-record.service&#x27;;
 import { EntryAndLocationRecordController } from &#x27;./entry-and-location-record.controller&#x27;;
+import { getModelToken, MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
+import { CommonRecordService } from &#x27;../shared/common-record-service.service&#x27;;
+import {
+  CulturalHeritagePropertyEntity,
+  CulturalHeritagePropertySchema,
+} from &#x27;../cultural-heritage-property/Schema/cultural-heritage-property&#x27;;
+import { EntryAndLocationRecord } from &#x27;./entities/entry-and-location-record.entity&#x27;;
+import { EntryAndLocationRecordsEntity } from &#x27;./entities/entry-and-location-records.entity&#x27;;
 
+/**
+ * Module that manages entry and location records.
+ *
+ * Provides the controller and service to handle entry and location records within the schema,
+ * as well as setting up the provider for &#x60;CommonRecordService&#x60; to interact with the entry and location record data.
+ */
 @Module({
+  imports: [
+    /**
+     * Imports the Mongoose module with the cultural heritage property schema.
+     */
+    MongooseModule.forFeature([
+      {
+        name: CulturalHeritagePropertyEntity,
+        schema: CulturalHeritagePropertySchema,
+      },
+    ]),
+  ],
   controllers: [EntryAndLocationRecordController],
-  providers: [EntryAndLocationRecordService],
+  providers: [
+    /**
+     * Provider for &#x60;CommonRecordService&#x60; configured for managing entry and location records.
+     *
+     * The service is injected using a factory pattern with the entry and location record model,
+     * and is registered with the token &#x60;&#x27;ENTRY_AND_LOCATION_RECORD_SERVICE&#x27;&#x60;.
+     */
+    {
+      provide: &#x27;ENTRY_AND_LOCATION_RECORD_SERVICE&#x27;,
+      useFactory: (entryAndLocationRecordModel) &#x3D;&gt;
+        new CommonRecordService(
+          entryAndLocationRecordModel,
+          EntryAndLocationRecord,
+          EntryAndLocationRecordsEntity,
+          &#x27;entryAndLocation&#x27;,
+        ),
+      inject: [getModelToken(CulturalHeritagePropertyEntity)],
+    },
+    /**
+     * Service for handling the business logic of entry and location records.
+     */
+    EntryAndLocationRecordService,
+  ],
 })
 export class EntryAndLocationRecordModule {}
 </code></pre>

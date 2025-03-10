@@ -14,6 +14,7 @@ import { UpdateCategoryMuseumDto } from './dto/update-category-museum.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Auth } from '../../../auth/decorator';
 import { UserRoles } from '../../../users/enum/user-roles.enum';
+import { FilterCategoryMuseumDto } from './dto/filter-category-museum.dto';
 
 @ApiTags('Category Museum')
 @Controller('category-museum')
@@ -29,8 +30,8 @@ export class CategoryMuseumController {
   }
 
   @Get()
-  findAll(@Query('active') active?: boolean) {
-    return this.categoryMuseumService.findAll({ active });
+  findAll(@Query() filterCategoryMuseum: FilterCategoryMuseumDto) {
+    return this.categoryMuseumService.findAll(filterCategoryMuseum);
   }
 
   @Get(':uuid')

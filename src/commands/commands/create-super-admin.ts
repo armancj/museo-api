@@ -9,7 +9,7 @@ const defaultUserData: CreateUserDto = {
   address: 'SuperAdmin Address',
   email: 'root@gmail.com',
   lastName: 'Root',
-  mobile: '9999999',
+  mobile: '(+99) 99-99-99-99',
   name: 'Root',
   password: 'secret',
   municipal: 'Las Tunas',

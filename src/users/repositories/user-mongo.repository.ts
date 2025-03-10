@@ -1,23 +1,26 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { UserMongoModel, UserNameEntity } from '../schema/users.schema';
 import { FindAllDto } from '../../common/dto/find-all.dto';
-import { Injectable , UnauthorizedException} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import {
-    FilterQuery,
-    ProjectionType,
-    QueryOptions,
-    RootFilterQuery,
-    UpdateQuery,
+  FilterQuery,
+  ProjectionType,
+  QueryOptions,
+  RootFilterQuery,
+  UpdateQuery,
 } from 'mongoose';
 import { Users } from '../entities/users.entity';
-import { UserModel , UserPropertiesModel} from '../models/user.model';
-import {Paginator} from '../../common/lib/paginator.lib';
-import {OnEvent} from '@nestjs/event-emitter';
-import {EventEmitter} from '../../shared/event-emitter/event-emitter.const';
-import {InstitutionMongoModel, InstitutionNameEntity} from "../../address/institutions/schema/institution.schema";
-import {InstitutionModel} from "../../address/institutions/entities/institution.model";
-import {UserRoles} from "../enum/user-roles.enum";
+import { UserModel, UserPropertiesModel } from '../models/user.model';
+import { Paginator } from '../../common/lib/paginator.lib';
+import { OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter } from '../../shared/event-emitter/event-emitter.const';
+import {
+  InstitutionMongoModel,
+  InstitutionNameEntity,
+} from '../../address/institutions/schema/institution.schema';
+import { InstitutionModel } from '../../address/institutions/entities/institution.model';
+import { UserRoles } from '../enum/user-roles.enum';
 
 export type createUserModel = Omit<
   UserModel,
@@ -28,20 +31,22 @@ export type createUserModel = Omit<
 export class UserMongoRepository {
   private POPULATE: any = { path: 'institution', match: { deleted: false } };
 
-    constructor(
-        @InjectModel(UserNameEntity)
-        private readonly userMongoModel: UserMongoModel,
+  constructor(
+    @InjectModel(UserNameEntity)
+    private readonly userMongoModel: UserMongoModel,
 
-        @InjectModel(InstitutionNameEntity)
-        private institutionDocumentModel: InstitutionMongoModel,
-    ) {}
+    @InjectModel(InstitutionNameEntity)
+    private institutionDocumentModel: InstitutionMongoModel,
+  ) {}
 
   async create(createUserDto: createUserModel): Promise<User> {
     const institution = await this.checkInstitution(createUserDto);
-    const createdUser = await this.userMongoModel
-      .create(createUserDto);
-    return User.create({...createdUser.toObject() , institution} as UserPropertiesModel );
-    }
+    const createdUser = await this.userMongoModel.create(createUserDto);
+    return User.create({
+      ...createdUser.toObject(),
+      institution,
+    } as UserPropertiesModel);
+  }
 
   async findAll(
     filter: Partial<UserModel> = {},
@@ -90,7 +95,7 @@ export class UserMongoRepository {
     update?: UpdateQuery<UserModel>,
   ): Promise<boolean> {
     const filterMongo: RootFilterQuery<UserModel> = { ...filter };
-         await this.checkInstitution(update)
+    await this.checkInstitution(update);
 
     const user = await this.userMongoModel
       .updateOne(filterMongo, { ...update, updatedAt: new Date(Date.now()) })
@@ -110,24 +115,38 @@ export class UserMongoRepository {
     return user.deletedCount > 0;
   }
 
+  private async checkInstitution(createUserDto: UpdateQuery<UserModel>) {
+    if (
+      !createUserDto?.institutionId ||
+      [UserRoles.administrator, UserRoles.superAdmin].includes(
+        createUserDto?.roles,
+      )
+    )
+      return;
 
-    private async checkInstitution(createUserDto: UpdateQuery<UserModel>) {
-        if (!createUserDto?.institutionId || [UserRoles.administrator, UserRoles.superAdmin].includes(createUserDto?.roles) ) return;
+    const institution: InstitutionModel = await this.institutionDocumentModel
+      .findOne({
+        uuid: createUserDto.institutionId,
+        deleted: false,
+      })
+      .lean()
+      .exec();
 
-        const institution: InstitutionModel = await this.institutionDocumentModel.findOne({
-            uuid: createUserDto.institutionId,
-            deleted: false
-        }).lean().exec()
-
-        if (!institution) {
-            throw new UnauthorizedException('Institution not found or has been deleted');
-        }
-
-        if (institution.province !== createUserDto?.province ||
-            institution.country !== createUserDto?.nationality ||
-            institution.municipality !== createUserDto?.municipal)
-            throw new UnauthorizedException('Mismatch between user and institution data');
-
-        return institution;
+    if (!institution) {
+      throw new UnauthorizedException(
+        'Institution not found or has been deleted',
+      );
     }
+
+    if (
+      institution.province !== createUserDto?.province ||
+      institution.country !== createUserDto?.nationality ||
+      institution.municipality !== createUserDto?.municipal
+    )
+      throw new UnauthorizedException(
+        'Mismatch between user and institution data',
+      );
+
+    return institution;
+  }
 }

@@ -16,6 +16,12 @@ export class CategoryMuseum implements CategoryMuseumModel {
   @Expose()
   name: string;
 
+  @Expose()
+  active: boolean;
+
+  @Expose()
+  description: string;
+
   constructor(options: CategoryMuseumModel) {
     Object.assign(this as CategoryMuseumModel, options);
   }

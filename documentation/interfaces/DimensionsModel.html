@@ -126,6 +126,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface for dimensions of objects.</p>
+<p>Represents physical dimensions and provides methods for calculations.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -140,6 +148,18 @@
                     <tr>
                         <td class="col-md-4">
                             <ul class="index-list">
+                                <li>
+                                        <a href="#calculateCubicMeters" 
+>
+                                            calculateCubicMeters
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#calculateSquareMeters" 
+>
+                                            calculateSquareMeters
+                                        </a>
+                                </li>
                                 <li>
                                             <span class="modifier">Optional</span>
                                         <a href="#cubicMeters" 
@@ -197,6 +217,84 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="calculateCubicMeters"></a>
+                                        <span class="name "><b>calculateCubicMeters</b>
+                                            <a href="#calculateCubicMeters">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>calculateCubicMeters:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Method to calculate cubic meters based on dimensions</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="calculateSquareMeters"></a>
+                                        <span class="name "><b>calculateSquareMeters</b>
+                                            <a href="#calculateSquareMeters">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>calculateSquareMeters:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Method to calculate square meters based on dimensions</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="cubicMeters"></a>
                                         <span class="name "><b>cubicMeters</b>
                                             <a href="#cubicMeters">
@@ -229,6 +327,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Volume in cubic meters (optional)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -267,6 +371,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Height in centimeters (optional)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -305,6 +415,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Length in centimeters (optional)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -343,6 +459,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Area in square meters (optional)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -381,6 +503,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Weight in kilograms (optional)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -419,6 +547,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Width in centimeters (optional)</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -429,51 +563,143 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DescriptionLevel, ValueGrade } from &#x27;../enum/cultural-record.enum&#x27;;
 import { NonFunctionProperties } from &#x27;../../../common/interfaces/manipulate-properties&#x27;;
 
+/**
+ * Interface for volume quantities.
+ *
+ * Represents the quantities of various types of physical and digital volumes.
+ */
 export interface VolumeQuantitiesModel {
+  /** Number of files (optional) */
   file?: number;
+
+  /** Number of pages (optional) */
   pages?: number;
+
+  /** Number of books (optional) */
   books?: number;
+
+  /** Number of physical objects (optional) */
   objects?: number;
+
+  /** Number of photographs (optional) */
   photos?: number;
+
+  /** Number of engravings (optional) */
   engravings?: number;
+
+  /** Number of slides (optional) */
   slides?: number;
+
+  /** Number of negatives (optional) */
   negatives?: number;
+
+  /** Number of maps, plans, or sketches (optional) */
   mapsPlansSketches?: number;
 }
 
+/**
+ * Interface for dimensions of objects.
+ *
+ * Represents physical dimensions and provides methods for calculations.
+ */
 export interface DimensionsModel {
+  /** Height in centimeters (optional) */
   heightCms?: number;
-  widthCms?: number;
-  lengthCms?: number;
-  squareMeters?: number;
-  cubicMeters?: number;
-  weightKg?: number;
-}
 
-export interface CulturalRecordModel {
-  backgroundTitle?: string;
-  sectionTitle?: string;
-  objectTitle: string;
-  objectDescription: string;
-  onomasticDescriptors?: string;
-  geographicDescriptors?: string;
-  institutionalDescriptors?: string;
-  subjectDescriptors?: string;
-  extremeDates?: { start: Date; end: Date };
-  valueGrade: ValueGrade;
-  descriptionLevel: DescriptionLevel;
-  valuation?: number;
-  volumesQuantities: VolumeQuantitiesModel;
-  dimensions: DimensionsModel;
-  languages: string[];
-  supports: string[];
-  letters: string[];
-  descriptionInstrument: string[];
-  conservationState: string[];
+  /** Width in centimeters (optional) */
+  widthCms?: number;
+
+  /** Length in centimeters (optional) */
+  lengthCms?: number;
+
+  /** Area in square meters (optional) */
+  squareMeters?: number;
+
+  /** Volume in cubic meters (optional) */
+  cubicMeters?: number;
+
+  /** Weight in kilograms (optional) */
+  weightKg?: number;
+
+  /** Method to calculate square meters based on dimensions */
   calculateSquareMeters: () &#x3D;&gt; number;
+
+  /** Method to calculate cubic meters based on dimensions */
   calculateCubicMeters: () &#x3D;&gt; number;
 }
 
+/**
+ * Type alias for dimension properties excluding functions.
+ */
+export type DimensionsPropertiesModel &#x3D; NonFunctionProperties&lt;DimensionsModel&gt;;
+
+/**
+ * Interface for a cultural record.
+ *
+ * Represents a comprehensive cultural record including titles, descriptors, quantities, dimensions, and more.
+ */
+export interface CulturalRecordModel {
+  /** Title of the background associated with the cultural record (optional) */
+  backgroundTitle?: string;
+
+  /** Title of the section within the cultural record (optional) */
+  sectionTitle?: string;
+
+  /** Title of the cultural object */
+  objectTitle: string;
+
+  /** Description of the cultural object */
+  objectDescription: string;
+
+  /** Onomastic descriptors associated with the cultural record (optional) */
+  onomasticDescriptors?: string;
+
+  /** Geographic descriptors (optional) */
+  geographicDescriptors?: string;
+
+  /** Institutional descriptors (optional) */
+  institutionalDescriptors?: string;
+
+  /** Subject descriptors (optional) */
+  subjectDescriptors?: string;
+
+  /** Extreme dates for the cultural record (optional) */
+  extremeDates?: { start: Date; end: Date };
+
+  /** Value grade of the cultural object */
+  valueGrade: ValueGrade;
+
+  /** Description level of the cultural object */
+  descriptionLevel: DescriptionLevel;
+
+  /** Valuation of the cultural object (optional) */
+  valuation?: number;
+
+  /** Volume quantities associated with the cultural record */
+  volumesQuantities: VolumeQuantitiesModel;
+
+  /** Dimensions associated with the cultural record */
+  dimensions: DimensionsPropertiesModel;
+
+  /** Languages represented in the cultural record */
+  languages: string[];
+
+  /** Supports available for the cultural record */
+  supports: string[];
+
+  /** Associated letters with the cultural record */
+  letters: string[];
+
+  /** Instruments used for describing the cultural object */
+  descriptionInstrument: string[];
+
+  /** State of conservation of the cultural object */
+  conservationState: string[];
+}
+
+/**
+ * Type alias for non-function properties of a cultural record.
+ */
 export type CulturalPropertiesModel &#x3D;
   NonFunctionProperties&lt;CulturalRecordModel&gt;;
 </code></pre>

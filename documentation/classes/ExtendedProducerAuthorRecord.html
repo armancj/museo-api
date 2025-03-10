@@ -744,18 +744,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {ProducerAuthorRecord} from &quot;./producer-author-record.entity&quot;;
-import {ProducerAuthorRecordModel} from &quot;../models/producer-author-record.models&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ProducerAuthorRecord } from &#x27;./producer-author-record.entity&#x27;;
+import { ProducerAuthorRecordModel } from &#x27;../models/producer-author-record.models&#x27;;
 
 export class ExtendedProducerAuthorRecord extends ProducerAuthorRecord {
-    uuid: string;
+  uuid: string;
 
-    constructor(option: Partial&lt;ProducerAuthorRecordModel &amp; {uuid: string}&gt;) {
-        super(option);
-    }
-    static create(option: Partial&lt;ProducerAuthorRecordModel &amp; {uuid: string}&gt;): ExtendedProducerAuthorRecord {
-        return new ExtendedProducerAuthorRecord(option);
-    }
+  constructor(option: Partial&lt;ProducerAuthorRecordModel &amp; { uuid: string }&gt;) {
+    super(option);
+  }
+  static create(
+    option: Partial&lt;ProducerAuthorRecordModel &amp; { uuid: string }&gt;,
+  ): ExtendedProducerAuthorRecord {
+    return new ExtendedProducerAuthorRecord(option);
+  }
 }
 </code></pre>
     </div>

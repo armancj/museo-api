@@ -162,6 +162,54 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(commonRecordService: <a href="../injectables/CommonRecordService.html" target="_self">CommonRecordService&lt;any | CreateDescriptionControlDto | DescriptionControl | DescriptionControlsEntity&gt;</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>commonRecordService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CommonRecordService.html" target="_self" >CommonRecordService&lt;any | CreateDescriptionControlDto | DescriptionControl | DescriptionControlsEntity&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
             <section data-compodoc="block-methods">
     
@@ -181,21 +229,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>create(createDescriptionControlDto: <a href="../classes/CreateDescriptionControlDto.html" target="_self">CreateDescriptionControlDto</a>)</code>
+<code>create(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, createDescriptionControlDto: <a href="../classes/CreateDescriptionControlDto.html" target="_self">CreateDescriptionControlDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="7"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:7</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new description control record, associating it with a UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -206,9 +256,28 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <tr>
+                                                <td>uuid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The UUID to associate with the new description control.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
                                         <tr>
                                                 <td>createDescriptionControlDto</td>
                                             <td>
@@ -220,16 +289,25 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Data transfer object containing the description control details.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;DescriptionControl&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Promise resolving to the created description control.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -255,19 +333,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:39</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves all description control records.</p>
+</div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;DescriptionControlsEntity[]&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <ul>
+<li>Promise resolving to an array of description control records.</li>
+</ul>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -285,21 +371,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>findOne(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves a description control record by its UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -310,13 +398,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -324,16 +413,25 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The UUID of the description control to retrieve.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;DescriptionControl&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Promise resolving to the found description control record.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -352,21 +450,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>remove(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:73</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Removes a description control record by UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -377,13 +477,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -391,16 +492,25 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The UUID of the description control to remove.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Promise resolving upon successful removal.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -419,21 +529,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateDescriptionControlDto: <a href="../classes/UpdateDescriptionControlDto.html" target="_self">UpdateDescriptionControlDto</a>)</code>
+<code>update(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updateDescriptionControlDto: <a href="../classes/UpdateDescriptionControlDto.html" target="_self">UpdateDescriptionControlDto</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="19"
-                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:19</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/cultural-heritage-property/description-control/description-control.service.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing description control record by UUID.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -444,13 +556,14 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>id</td>
+                                                <td>uuid</td>
                                             <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -458,6 +571,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>The UUID of the description control to update.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>updateDescriptionControlDto</td>
@@ -470,16 +589,25 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Data transfer object containing the updated details.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;DescriptionControl&gt;</code>
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Promise resolving to the updated description control record.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -491,30 +619,80 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@nestjs/common&#x27;;
+import { CommonRecordService } from &#x27;../shared/common-record-service.service&#x27;;
 import { CreateDescriptionControlDto } from &#x27;./dto/create-description-control.dto&#x27;;
 import { UpdateDescriptionControlDto } from &#x27;./dto/update-description-control.dto&#x27;;
+import { DescriptionControl } from &#x27;./entities/description-control.entity&#x27;;
+import { DescriptionControlsEntity } from &#x27;./entities/description-controls.entity&#x27;;
 
 @Injectable()
 export class DescriptionControlService {
-  create(createDescriptionControlDto: CreateDescriptionControlDto) {
-    return &#x27;This action adds a new descriptionControl&#x27;;
+  constructor(
+    @Inject(&#x27;DESCRIPTION_CONTROL_SERVICE&#x27;)
+    private readonly commonRecordService: CommonRecordService&lt;
+      any,
+      CreateDescriptionControlDto,
+      DescriptionControl,
+      DescriptionControlsEntity
+    &gt;,
+  ) {}
+
+  /**
+   * Creates a new description control record, associating it with a UUID.
+   *
+   * @param uuid - The UUID to associate with the new description control.
+   * @param createDescriptionControlDto - Data transfer object containing the description control details.
+   * @returns {Promise&lt;DescriptionControl&gt;} - Promise resolving to the created description control.
+   */
+  create(
+    uuid: string,
+    createDescriptionControlDto: CreateDescriptionControlDto,
+  ): Promise&lt;DescriptionControl&gt; {
+    return this.commonRecordService.create(uuid, createDescriptionControlDto);
   }
 
-  findAll() {
-    return &#x60;This action returns all descriptionControl&#x60;;
+  /**
+   * Retrieves all description control records.
+   *
+   * @returns {Promise&lt;DescriptionControlsEntity[]&gt;} - Promise resolving to an array of description control records.
+   */
+  findAll(): Promise&lt;DescriptionControlsEntity[]&gt; {
+    return this.commonRecordService.findAll();
   }
 
-  findOne(id: number) {
-    return &#x60;This action returns a #${id} descriptionControl&#x60;;
+  /**
+   * Retrieves a description control record by its UUID.
+   *
+   * @param uuid - The UUID of the description control to retrieve.
+   * @returns {Promise&lt;DescriptionControl&gt;} - Promise resolving to the found description control record.
+   */
+  findOne(uuid: string): Promise&lt;DescriptionControl&gt; {
+    return this.commonRecordService.findOne(uuid);
   }
 
-  update(id: number, updateDescriptionControlDto: UpdateDescriptionControlDto) {
-    return &#x60;This action updates a #${id} descriptionControl&#x60;;
+  /**
+   * Updates an existing description control record by UUID.
+   *
+   * @param uuid - The UUID of the description control to update.
+   * @param updateDescriptionControlDto - Data transfer object containing the updated details.
+   * @returns {Promise&lt;DescriptionControl&gt;} - Promise resolving to the updated description control record.
+   */
+  update(
+    uuid: string,
+    updateDescriptionControlDto: UpdateDescriptionControlDto,
+  ): Promise&lt;DescriptionControl&gt; {
+    return this.commonRecordService.update(uuid, updateDescriptionControlDto);
   }
 
-  remove(id: number) {
-    return &#x60;This action removes a #${id} descriptionControl&#x60;;
+  /**
+   * Removes a description control record by UUID.
+   *
+   * @param uuid - The UUID of the description control to remove.
+   * @returns {Promise&lt;void&gt;} - Promise resolving upon successful removal.
+   */
+  remove(uuid: string): Promise&lt;void&gt; {
+    return this.commonRecordService.remove(uuid);
   }
 }
 </code></pre>

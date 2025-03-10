@@ -123,6 +123,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Mongoose schema definition for cultural notes.</p>
+
+            </p>
 
 
             <p class="comment">
@@ -199,10 +206,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/cultural-heritage-property/cultural-notes/schema/notes.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/cultural-heritage-property/cultural-notes/schema/notes.ts:13</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores optional cultural notes or additional information.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -221,11 +234,24 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { NotesModel } from &#x27;../models/cultural-notes-model&#x27;;
 
+/**
+ * Mongoose schema definition for cultural notes.
+ */
 @Schema()
 class Notes implements NotesModel {
-  @Prop() notes?: string;
+  /**
+   * Stores optional cultural notes or additional information.
+   */
+  @Prop()
+  notes?: string;
 }
+
+/**
+ * Schema factory for creating the Mongoose schema for &#x60;Notes&#x60;.
+ */
 export const NotesSchema &#x3D; SchemaFactory.createForClass(Notes);
+
+
 </code></pre>
     </div>
 </div>

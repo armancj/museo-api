@@ -212,8 +212,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">src/address/country/country.controller.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/address/country/country.controller.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -275,7 +275,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>findAll()</code>
+                    <code>findAll(filter: <a href="../classes/FilterCountryByNameDto.html" target="_self">FilterCountryByNameDto</a>)</code>
                 </td>
             </tr>
 
@@ -289,8 +289,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/address/country/country.controller.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/address/country/country.controller.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -298,10 +298,40 @@
             <tr>
                 <td class="col-md-4">
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filter</td>
+                                            <td>
+                                                            <code><a href="../classes/FilterCountryByNameDto.html" target="_self" >FilterCountryByNameDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -336,8 +366,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/address/country/country.controller.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/address/country/country.controller.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -413,8 +443,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/address/country/country.controller.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/address/country/country.controller.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -490,8 +520,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/address/country/country.controller.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/address/country/country.controller.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -560,7 +590,7 @@
   Get,
   Param,
   Patch,
-  Post,
+  Post, Query,
 } from &#x27;@nestjs/common&#x27;;
 import { CountryService } from &#x27;./country.service&#x27;;
 import { CreateCountryDto } from &#x27;./dto/create-country.dto&#x27;;
@@ -568,6 +598,7 @@ import { UpdateCountryDto } from &#x27;./dto/update-country.dto&#x27;;
 import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { Auth } from &#x27;../../auth/decorator&#x27;;
 import { UserRoles } from &#x27;../../users/enum/user-roles.enum&#x27;;
+import {FilterCountryByNameDto} from &quot;./dto/filter-country-by-name.dto&quot;;
 
 @ApiTags(&#x27;Country&#x27;)
 @Controller(&#x27;country&#x27;)
@@ -582,8 +613,8 @@ export class CountryController {
 
   @Auth()
   @Get()
-  findAll() {
-    return this.countryService.findAll();
+  findAll(@Query() filter: FilterCountryByNameDto) {
+    return this.countryService.findAll(filter);
   }
 
   @Auth()

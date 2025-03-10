@@ -155,6 +155,7 @@
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Async</span>
                                 <a href="#findOne" >findOne</a>
                             </li>
@@ -171,11 +172,6 @@
                             <li>
                                     <span class="modifier"></span>
                                 <a href="#removeFile" >removeFile</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier">Async</span>
-                                <a href="#removeSoft" >removeSoft</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
@@ -243,8 +239,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">src/users/users.controller.ts:41</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/users/users.controller.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -333,8 +329,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/users/users.controller.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/users/users.controller.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -412,6 +408,7 @@
                     <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                             <span class="modifier">Async</span>
                         <span ><b>findOne</b></span>
                         <a href="#findOne"><span class="icon ion-ios-link"></span></a>
@@ -429,14 +426,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Auth({roles: undefined})<br />@Get(&#x27;:uuid&#x27;)<br /></code>
+                    <code>@ApiNotFoundResponse({description: &#x27;User not found&#x27;, type: NotFound})<br />@Auth({roles: undefined})<br />@Get(&#x27;:uuid&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/users/users.controller.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/users/users.controller.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -524,8 +521,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/users/users.controller.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/users/users.controller.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -601,8 +598,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="136"
-                                    class="link-to-prism">src/users/users.controller.ts:136</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/users/users.controller.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -677,8 +674,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/users/users.controller.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/users/users.controller.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -728,83 +725,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="removeSoft"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier">Async</span>
-                        <span ><b>removeSoft</b></span>
-                        <a href="#removeSoft"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>removeSoft(uuid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Delete(&#x27;:uuid/soft&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">src/users/users.controller.ts:104</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>uuid</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="update"></a>
                     <span class="name">
                             <span class="modifier"></span>
@@ -832,8 +752,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/users/users.controller.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/users/users.controller.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -933,8 +853,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/users/users.controller.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/users/users.controller.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -1024,8 +944,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/users/users.controller.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/users/users.controller.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -1113,7 +1033,7 @@
   UploadedFile,
   UseInterceptors,
 } from &#x27;@nestjs/common&#x27;;
-import { ApiConsumes, ApiTags } from &#x27;@nestjs/swagger&#x27;;
+import { ApiConsumes, ApiNotFoundResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { UsersService } from &#x27;./users.service&#x27;;
 import { CreateUserDto } from &#x27;./dto/create-user.dto&#x27;;
 import { User } from &#x27;./entities/user.entity&#x27;;
@@ -1128,6 +1048,7 @@ import { ImageProcessingPipe } from &#x27;../file-storage/pipe/image-processing.
 import { FileStorageModel } from &#x27;../file-storage/model/file-storage.model&#x27;;
 import { Auth, CurrentUser } from &#x27;../auth/decorator&#x27;;
 import { UserRoles } from &#x27;./enum/user-roles.enum&#x27;;
+import { NotFound } from &quot;../common/dto/exception.dto&quot;;
 
 @ApiTags(&#x27;Users&#x27;)
 @UseInterceptors(ClassSerializerInterceptor)
@@ -1163,6 +1084,7 @@ export class UsersController {
     return { usersData: users.value, totalPage, totalElement };
   }
 
+  @ApiNotFoundResponse({ description: &#x27;User not found&#x27;, type: NotFound })
   @Auth({
     roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
   })
@@ -1201,11 +1123,6 @@ export class UsersController {
     });
   }
 
-  @Delete(&#x27;:uuid/soft&#x27;)
-  async removeSoft(@Param(&#x27;uuid&#x27;) uuid: string): Promise&lt;boolean&gt; {
-    return this.userService.softDelete({ uuid });
-  }
-
   @Post(&#x27;:uuid/avatar&#x27;)
   @UseInterceptors(FileInterceptor(&#x27;file&#x27;) as any)
   @ApiConsumes(&#x27;multipart/form-data&#x27;)
@@ -1235,7 +1152,7 @@ export class UsersController {
 
   @Delete(&#x27;:uuid&#x27;)
   async remove(@Param(&#x27;uuid&#x27;) uuid: string): Promise&lt;boolean&gt; {
-    return this.userService.remove({ uuid });
+    return this.userService.softDelete({ uuid });
   }
 }
 </code></pre>

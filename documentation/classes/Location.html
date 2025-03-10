@@ -123,6 +123,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Mongoose schema for Location.</p>
+
+            </p>
 
 
             <p class="comment">
@@ -221,10 +228,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The box where the item is kept.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -257,10 +270,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:22</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The exhibition room where the item is displayed.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -293,10 +312,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The file folder where the item is archived.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -329,10 +354,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:15</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The floor where the item is located.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -365,10 +396,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The shelf drawer where the item is stored.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -401,10 +438,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The showcase shelf where the item is exhibited.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -437,10 +480,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/cultural-heritage-property/entry-and-location-record/schema/location.schema.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The storage area where the item is kept.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -459,26 +508,58 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 import { LocationModel } from &#x27;../models/entry-and-location-record.model&#x27;;
 
+/**
+ * Mongoose schema for Location.
+ * @schema Location
+ */
 @Schema()
 class Location implements LocationModel {
+  /**
+   * The floor where the item is located.
+   * @type {string}
+   */
   @Prop()
   floor: string;
 
+  /**
+   * The exhibition room where the item is displayed.
+   * @type {string}
+   */
   @Prop()
   exhibitionRoom: string;
 
+  /**
+   * The storage area where the item is kept.
+   * @type {string}
+   */
   @Prop()
   storage: string;
 
+  /**
+   * The showcase shelf where the item is exhibited.
+   * @type {string}
+   */
   @Prop()
   showcaseShelf: string;
 
+  /**
+   * The shelf drawer where the item is stored.
+   * @type {string}
+   */
   @Prop()
   shelfDrawer: string;
 
+  /**
+   * The box where the item is kept.
+   * @type {string}
+   */
   @Prop()
   box: string;
 
+  /**
+   * The file folder where the item is archived.
+   * @type {string}
+   */
   @Prop()
   fileFolder: string;
 }

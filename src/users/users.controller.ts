@@ -27,7 +27,7 @@ import { ImageProcessingPipe } from '../file-storage/pipe/image-processing.pipe'
 import { FileStorageModel } from '../file-storage/model/file-storage.model';
 import { Auth, CurrentUser } from '../auth/decorator';
 import { UserRoles } from './enum/user-roles.enum';
-import { NotFound } from "../common/dto/exception.dto";
+import { NotFound } from '../common/dto/exception.dto';
 
 @ApiTags('Users')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -110,8 +110,7 @@ export class UsersController {
     @Body() body: UploadAvatarUserDto,
     @UploadedFile(ImageProcessingPipe) file: FileStorageModel,
   ) {
-    await this.userService.uploadFiled(uuid, file);
-    return { message: `File successfully uploaded` };
+    return await this.userService.uploadFiled(uuid, file);
   }
 
   @Get(':uuid/avatar')

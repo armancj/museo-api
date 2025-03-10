@@ -281,6 +281,7 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NonFunctionProperties } from &#x27;../../common/interfaces/manipulate-properties&#x27;;
 import { UserRoles } from &#x27;../enum/user-roles.enum&#x27;;
+import {InstitutionModel} from &quot;../../address/institutions/entities/institution.model&quot;;
 
 export interface UploadedFile {
   id: string;
@@ -303,6 +304,8 @@ export interface UserModel {
   roles?: UserRoles;
   active?: boolean;
   deleted?: boolean;
+  institutionId?: string;
+  institution?: InstitutionModel;
 }
 
 export type UserPropertiesModel &#x3D; NonFunctionProperties&lt;UserModel&gt;;
