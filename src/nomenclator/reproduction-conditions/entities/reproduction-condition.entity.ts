@@ -6,8 +6,6 @@ export type ReproductionConditionDocument = ReproductionConditionEntity & Docume
 
 @Schema({ collection: 'reproduction-conditions', timestamps: true })
 export class ReproductionConditionEntity {
-  @Prop({ required: true })
-  name: string;
 
   @Prop({ required: true, enum: ReproductionCondition })
   type: ReproductionCondition;

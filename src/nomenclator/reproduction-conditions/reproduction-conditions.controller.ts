@@ -2,12 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { ReproductionConditionsService } from './reproduction-conditions.service';
 import { CreateReproductionConditionDto } from './dto/create-reproduction-condition.dto';
+import { Auth } from 'src/auth/decorator';
+import { UserRoles } from 'src/users/enum/user-roles.enum';
 
 @ApiTags('nomenclator-reproduction-conditions')
 @Controller('nomenclator/reproduction-conditions')
 export class ReproductionConditionsController {
   constructor(private readonly service: ReproductionConditionsService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })  
   @Post()
   @ApiOperation({ summary: 'Create reproduction condition' })
   create(@Body() createDto: CreateReproductionConditionDto) {
@@ -25,13 +30,19 @@ export class ReproductionConditionsController {
   findOne(@Param('uuid') id: string) {
     return this.service.findOne(id);
   }
-
+  
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update reproduction condition' })
   update(@Param('uuid') id: string, @Body() updateDto: CreateReproductionConditionDto) {
     return this.service.update(id, updateDto);
   }
-
+  
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':uuid')
   @ApiOperation({ summary: 'Delete reproduction condition' })
   remove(@Param('uuid') id: string) {

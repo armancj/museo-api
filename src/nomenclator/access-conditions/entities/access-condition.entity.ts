@@ -6,8 +6,6 @@ export type AccessConditionDocument = AccessConditionEntity & Document;
 
 @Schema({ collection: 'access-conditions', timestamps: true })
 export class AccessConditionEntity {
-  @Prop({ required: true })
-  name: string;
 
   @Prop({ required: true, enum: AccessCondition })
   type: AccessCondition;

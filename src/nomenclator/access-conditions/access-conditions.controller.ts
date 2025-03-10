@@ -1,13 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { AccessConditionsService } from './access-conditions.service';
 import { CreateAccessConditionDto } from './dto/create-access-condition.dto';
+import { Auth } from 'src/auth/decorator';
+import { UserRoles } from 'src/users/enum/user-roles.enum';
 
 @ApiTags('nomenclator-access-conditions')
 @Controller('nomenclator/access-conditions')
 export class AccessConditionsController {
   constructor(private readonly service: AccessConditionsService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post()
   @ApiOperation({ summary: 'Create access condition' })
   create(@Body() createDto: CreateAccessConditionDto) {
@@ -21,20 +26,29 @@ export class AccessConditionsController {
   }
 
   @Get(':uuid')
-  @ApiOperation({ summary: 'Get access condition by id' })
-  findOne(@Param('uuid') id: string) {
-    return this.service.findOne(id);
+  @ApiOperation({ summary: 'Get access condition by UUID' })
+  @ApiParam({ name: 'uuid', description: 'Access condition UUID' })
+  findOne(@Param('uuid') uuid: string) {
+    return this.service.findOne(uuid);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update access condition' })
-  update(@Param('uuid') id: string, @Body() updateDto: CreateAccessConditionDto) {
-    return this.service.update(id, updateDto);
+  @ApiParam({ name: 'uuid', description: 'Access condition UUID' })
+  update(@Param('uuid') uuid: string, @Body() updateDto: CreateAccessConditionDto) {
+    return this.service.update(uuid, updateDto);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':uuid')
   @ApiOperation({ summary: 'Delete access condition' })
-  remove(@Param('uuid') id: string) {
-    return this.service.remove(id);
+  @ApiParam({ name: 'uuid', description: 'Access condition UUID' })
+  remove(@Param('uuid') uuid: string) {
+    return this.service.remove(uuid);
   }
 }
