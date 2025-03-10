@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } 
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { AccessConditionsService } from './access-conditions.service';
 import { CreateAccessConditionDto } from './dto/create-access-condition.dto';
-import { Auth } from 'src/auth/decorator';
-import { UserRoles } from 'src/users/enum/user-roles.enum';
+import { Auth } from '../../auth/decorator';
+import { UserRoles } from '../../users/enum/user-roles.enum';
 
 @ApiTags('nomenclator-access-conditions')
 @Controller('nomenclator/access-conditions')

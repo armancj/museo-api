@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { ReproductionConditionsService } from './reproduction-conditions.service';
 import { CreateReproductionConditionDto } from './dto/create-reproduction-condition.dto';
-import { Auth } from 'src/auth/decorator';
-import { UserRoles } from 'src/users/enum/user-roles.enum';
+import { UserRoles } from '../../users/enum/user-roles.enum';
+import { Auth } from '../../auth/decorator';
+
 
 @ApiTags('nomenclator-reproduction-conditions')
 @Controller('nomenclator/reproduction-conditions')
