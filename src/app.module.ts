@@ -15,7 +15,7 @@ import { AddressModule } from './address/address.module';
 import { CategoryMuseumModule } from './nomenclator/institutions/category-museum/category-museum.module';
 import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 import { InstitutionTypesModule } from './nomenclator/institutions/institution-types/institution-types.module';
-
+import { InstitutionsModule } from './address/institutions/institutions.module';
 import { MuseumTypesModule } from './nomenclator/institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './nomenclator/institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './nomenclator/contact-information/phone-numbers/phone-numbers.module';
@@ -33,6 +33,10 @@ import { ExtraInformationModule } from './nomenclator/extra-information/extra-in
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
 import { CommandsModule } from './commands/commands.module';
 import { LoggerModule } from './logger/logger.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { DescriptionInstrumentsModule } from './nomenclator/description-instruments/description-instruments.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { BaseSchema } from './common/schema/base.schema';
 
 @Module({
   imports: [
@@ -49,7 +53,7 @@ import { LoggerModule } from './logger/logger.module';
     NomenclatureModule,
     CommercialRegistrationModule,
     InstitutionTypesModule,
-  
+    InstitutionsModule,
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -66,6 +70,8 @@ import { LoggerModule } from './logger/logger.module';
     CulturalHeritagePropertyModule,
     CommandsModule,
     LoggerModule,
+    MongooseModule.forRoot('mongodb://localhost/nest'),
+    DescriptionInstrumentsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -76,4 +82,14 @@ import { LoggerModule } from './logger/logger.module';
     LoggerInterceptor,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configureSwagger(app: any) {
+    const config = new DocumentBuilder()
+      .setTitle('Museo API')
+      .setDescription('API documentation for Museo')
+      .setVersion('1.0')
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+  }
+}

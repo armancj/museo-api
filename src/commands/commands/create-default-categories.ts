@@ -25,7 +25,7 @@ const defaultCategories: CreateCategoryMuseumDto[] = [
     description: 'Categoría para otras instituciones 2.0',
     active: true,
   },
-  
+
 ];
 
 @Command({

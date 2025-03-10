@@ -15,6 +15,6 @@ import {
   ],
   controllers: [InstitutionsController],
   providers: [InstitutionsService],
-  exports:[InstitutionsService]
+  exports: [InstitutionsService]
 })
-export class InstitutionsModule {}
+export class InstitutionsModule { }

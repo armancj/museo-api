@@ -69,6 +69,12 @@ $ pnpm run command create:default-user
 # Add Museun Categories
 $ pnpm run command create:default-categories
 ```
+
+## Resources Description Instruments
+```bash
+# Add Default Description Instruments
+$ pnpm run command create:default-description-instruments
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
@@ -92,3 +98,4 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+````
