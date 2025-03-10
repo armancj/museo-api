@@ -5,34 +5,36 @@ import { CreateDescriptionInstrumentDto } from '../../nomenclator/description-in
 import { BaseSchema } from '../../common/schema/base.schema';
 
 const defaultDescriptionInstruments: CreateDescriptionInstrumentDto[] = [
-    { name: 'Guía', active: true },
-    { name: 'Inventario', active: true },
-    { name: 'Catálogo', active: true },
-    { name: 'Índice', active: true },
-    { name: 'Web', active: true },
-    { name: 'Aplicación móvil', active: true },
-    { name: 'Multimedia', active: true },
+  { name: 'Guía', active: true },
+  { name: 'Inventario', active: true },
+  { name: 'Catálogo', active: true },
+  { name: 'Índice', active: true },
+  { name: 'Web', active: true },
+  { name: 'Aplicación móvil', active: true },
+  { name: 'Multimedia', active: true },
 ];
 
 @Command({
-    name: 'create:default-description-instruments',
-    description: 'Insert default description instruments',
+  name: 'create:default-description-instruments',
+  description: 'Insert default description instruments',
 })
 export class CreateDefaultDescriptionInstruments extends CommandRunner {
-    private logger = new Logger(`create:default-description-instruments`);
+  private logger = new Logger(`create:default-description-instruments`);
 
-    constructor(private readonly descriptionInstrumentsService: DescriptionInstrumentsService) {
-        super();
-    }
+  constructor(
+    private readonly descriptionInstrumentsService: DescriptionInstrumentsService,
+  ) {
+    super();
+  }
 
-    async run(passedParams: string[], options?: Record<string, any>): Promise<void> {
-        this.logger.log('CreateDefaultDescriptionInstruments', passedParams);
-        await Promise.allSettled(
-            defaultDescriptionInstruments.map((descriptionInstrument) => {
-                return this.descriptionInstrumentsService.create(descriptionInstrument);
-            }),
-        );
+  async run(passedParams: string[]): Promise<void> {
+    this.logger.log('CreateDefaultDescriptionInstruments', passedParams);
+    await Promise.allSettled(
+      defaultDescriptionInstruments.map((descriptionInstrument) => {
+        return this.descriptionInstrumentsService.create(descriptionInstrument);
+      }),
+    );
 
-        this.logger.log(`Creating description instruments successfully`);
-    }
+    this.logger.log(`Creating description instruments successfully`);
+  }
 }

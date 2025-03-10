@@ -37,7 +37,7 @@ export class CategoryMuseumController {
   @Get(':uuid')
   findOne(@Param('uuid') uuid: string) {
     return this.categoryMuseumService.findOne(uuid);
-  } 
+  }
 
   @Auth({
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
