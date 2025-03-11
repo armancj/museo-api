@@ -2,12 +2,19 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AccessConditionsService } from './access-conditions.service';
 import { AccessConditionsController } from './access-conditions.controller';
-import { AccessConditionEntity, AccessConditionSchema } from './entities/access-condition.entity';
+import {
+  AccessConditionSchema,
+  AccessConditionSchemaFactory,
+  AccessConditionNameEntity,
+} from './schema/access-condition.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: AccessConditionEntity.name, schema: AccessConditionSchema },
+      {
+        name: AccessConditionNameEntity,
+        schema: AccessConditionSchemaFactory,
+      },
     ]),
   ],
   controllers: [AccessConditionsController],

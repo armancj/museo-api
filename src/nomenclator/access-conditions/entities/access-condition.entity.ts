@@ -1,17 +1,32 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { AccessConditionModel } from '../model/access-condition.model';
+import { Expose, plainToClass } from 'class-transformer';
 import { AccessCondition } from '../../common/enums/access-condition.enum';
 
-export type AccessConditionDocument = AccessConditionEntity & Document;
+export class AccessConditionEntity implements AccessConditionModel {
+  @Expose()
+  createdAt: Date;
+  
+  deleted: boolean;
 
-@Schema({ collection: 'access-conditions', timestamps: true })
-export class AccessConditionEntity {
+  @Expose()
+  updatedAt: Date;
 
-  @Prop({ required: true, enum: AccessCondition })
+  @Expose()
+  uuid: string;
+
+  @Expose()
   type: AccessCondition;
 
-  @Prop()
-  description?: string;
-}
+  @Expose()
+  description: string;
 
-export const AccessConditionSchema = SchemaFactory.createForClass(AccessConditionEntity);
+  constructor(options: AccessConditionModel) {
+    Object.assign(this as AccessConditionModel, options);
+  }
+
+  static create(options: AccessConditionModel): AccessConditionEntity {
+    return plainToClass(AccessConditionEntity, options, {
+      excludeExtraneousValues: true,
+    });
+  }
+} 
