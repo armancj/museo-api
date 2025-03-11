@@ -4,29 +4,22 @@ import { AccessConditionModel } from '../model/access-condition.model';
 import { BaseSchema, BaseSchemaFactory } from '../../../common/schema/base.schema';
 import { AccessCondition } from '../../common/enums/access-condition.enum';
 
-export type AccessConditionDocument = HydratedDocument<AccessConditionSchema>;
+export type AccessConditionDocument = HydratedDocument<AccessConditionEntity>;
 
-@Schema({
-  collection: 'access-conditions',
-  timestamps: true,
-  toJSON: {
-    transform: (doc, ret) => {
-      delete ret._id;
-      delete ret.__v;
-      return ret;
-    },
-  },
-})
-export class AccessConditionSchema extends BaseSchema implements AccessConditionModel {
+@Schema({})
+export class AccessConditionEntity extends BaseSchema implements AccessConditionModel {
   @Prop({ required: true, enum: AccessCondition })
   type: AccessCondition;
 
   @Prop()
   description?: string;
+
+  @Prop({ default: true })
+  active: boolean;
 }
 
-export const AccessConditionSchemaFactory = SchemaFactory.createForClass(AccessConditionSchema);
+export const AccessConditionSchemaFactory = SchemaFactory.createForClass(AccessConditionEntity);
 AccessConditionSchemaFactory.add(BaseSchemaFactory);
 
 export const AccessConditionNameEntity = 'access_conditions';
-export type AccessConditionMongoModel = Model<AccessConditionDocument>; 
+export type AccessConditionMongoModel = Model<AccessConditionDocument>;
