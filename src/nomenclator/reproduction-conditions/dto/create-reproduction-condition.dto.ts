@@ -3,8 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ReproductionCondition } from '../../common/enums/reproduction-condition.enum';
 
 export class CreateReproductionConditionDto {
-
-
   @ApiProperty({ enum: ReproductionCondition })
   @IsNotEmpty()
   @IsEnum(ReproductionCondition)
