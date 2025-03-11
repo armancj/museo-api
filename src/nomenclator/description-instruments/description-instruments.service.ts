@@ -1,69 +1,41 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateDescriptionInstrumentDto } from './dto/create-description-instrument.dto';
-import { UpdateDescriptionInstrumentDto } from './dto/update-description-instrument.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import {
-  DescriptionInstrument,
-  DescriptionInstrumentDocument,
-} from './schemas/description-instrument.schema';
+import { CreateDescriptionInstrumentDto } from './dto/create-description-instrument.dto';
+import { UpdateDescriptionInstrumentDto } from './dto/update-description-instrument.dto';
+import { DescriptionInstrument, DescriptionInstrumentDocument } from './schemas/description-instrument.schema';
+
 
 @Injectable()
 export class DescriptionInstrumentsService {
   constructor(
-    @InjectModel(DescriptionInstrument.name)
-    private descriptionInstrumentModel: Model<DescriptionInstrumentDocument>,
-  ) {}
+    @InjectModel(DescriptionInstrument.name) private readonly descriptionInstrumentModel: Model<DescriptionInstrumentDocument>,
+  ) { }
 
-  async create(
-    createDescriptionInstrumentDto: CreateDescriptionInstrumentDto,
-  ): Promise<DescriptionInstrument> {
-    const createdDescriptionInstrument = new this.descriptionInstrumentModel(
-      createDescriptionInstrumentDto,
-    );
+  async create(createDescriptionInstrumentDto: CreateDescriptionInstrumentDto): Promise<DescriptionInstrument> {
+    const createdDescriptionInstrument = new this.descriptionInstrumentModel(createDescriptionInstrumentDto);
     return createdDescriptionInstrument.save();
   }
 
   async findAll(): Promise<DescriptionInstrument[]> {
-    return this.descriptionInstrumentModel.find().exec();
+    const descriptionInstruments = await this.descriptionInstrumentModel.find({ deleted: false }).exec();
+    return descriptionInstruments;
   }
 
-  async findOne(id: string): Promise<DescriptionInstrument> {
-    const descriptionInstrument = await this.descriptionInstrumentModel
-      .findById(id)
-      .exec();
-    if (!descriptionInstrument) {
-      throw new NotFoundException(
-        `DescriptionInstrument with ID ${id} not found`,
-      );
-    }
+  async findOne(uuid: string): Promise<DescriptionInstrument> {
+    const descriptionInstrument = await this.descriptionInstrumentModel.findOne({ uuid, deleted: false }).exec();
+    if (!descriptionInstrument) throw new NotFoundException('Description Instrument not found');
     return descriptionInstrument;
   }
 
-  async update(
-    id: string,
-    updateDescriptionInstrumentDto: UpdateDescriptionInstrumentDto,
-  ): Promise<DescriptionInstrument> {
-    const existingDescriptionInstrument = await this.descriptionInstrumentModel
-      .findByIdAndUpdate(id, updateDescriptionInstrumentDto, { new: true })
-      .exec();
-    if (!existingDescriptionInstrument) {
-      throw new NotFoundException(
-        `DescriptionInstrument with ID ${id} not found`,
-      );
-    }
-    return existingDescriptionInstrument;
+  async update(uuid: string, updateDescriptionInstrumentDto: UpdateDescriptionInstrumentDto): Promise<void> {
+    await this.findOne(uuid);
+    await this.descriptionInstrumentModel.updateOne({ uuid }, updateDescriptionInstrumentDto).exec();
   }
 
-  async remove(id: string): Promise<DescriptionInstrument> {
-    const descriptionInstrument = await this.descriptionInstrumentModel
-      .findByIdAndDelete(id)
-      .exec();
-    if (!descriptionInstrument) {
-      throw new NotFoundException(
-        `DescriptionInstrument with ID ${id} not found`,
-      );
-    }
-    return descriptionInstrument;
+  async remove(uuid: string): Promise<void> {
+    const descriptionInstrument = await this.findOne(uuid);
+    const name = `${descriptionInstrument.name}-${descriptionInstrument.uuid}`;
+    await this.descriptionInstrumentModel.updateOne({ uuid, deleted: false }, { deleted: true, name }).exec();
   }
 }

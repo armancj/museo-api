@@ -15,6 +15,9 @@ export class DescriptionInstrument extends BaseSchema {
 
   @Prop({ default: true })
   active: boolean;
+
+  @Prop({ default: false })
+  deleted: boolean;
 }
 
 export const DescriptionInstrumentSchema = SchemaFactory.createForClass(DescriptionInstrument);

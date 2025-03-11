@@ -7,9 +7,7 @@ import { DescriptionInstrument } from './entities/description-instrument.entity'
 import { Auth } from '../../auth/decorator';
 import { UserRoles } from '../../users/enum/user-roles.enum';
 
-
-
-@ApiTags('description-instruments')
+@ApiTags('Description Instruments')
 @Controller('description-instruments')
 export class DescriptionInstrumentsController {
   constructor(private readonly descriptionInstrumentsService: DescriptionInstrumentsService) { }
@@ -32,33 +30,33 @@ export class DescriptionInstrumentsController {
     return this.descriptionInstrumentsService.findAll();
   }
 
-  @Get(':id')
+  @Get(':uuid')
   @ApiOperation({ summary: 'Get a description instrument by ID' })
   @ApiResponse({ status: 200, description: 'Return the description instrument.', type: DescriptionInstrument })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
-  findOne(@Param('id') id: string) {
-    return this.descriptionInstrumentsService.findOne(id);
+  findOne(@Param('uuid') uuid: string) {
+    return this.descriptionInstrumentsService.findOne(uuid);
   }
 
   @Auth({
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
   })
-  @Patch(':id')
+  @Patch(':uuid')
   @ApiOperation({ summary: 'Update a description instrument by ID' })
   @ApiResponse({ status: 200, description: 'The description instrument has been successfully updated.', type: DescriptionInstrument })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
-  update(@Param('id') id: string, @Body() updateDescriptionInstrumentDto: UpdateDescriptionInstrumentDto) {
-    return this.descriptionInstrumentsService.update(id, updateDescriptionInstrumentDto);
+  update(@Param('uuid') uuid: string, @Body() updateDescriptionInstrumentDto: UpdateDescriptionInstrumentDto) {
+    return this.descriptionInstrumentsService.update(uuid, updateDescriptionInstrumentDto);
   }
 
   @Auth({
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
   })
-  @Delete(':id')
+  @Delete(':uuid')
   @ApiOperation({ summary: 'Delete a description instrument by ID' })
   @ApiResponse({ status: 200, description: 'The description instrument has been successfully deleted.', type: DescriptionInstrument })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
-  remove(@Param('id') id: string) {
-    return this.descriptionInstrumentsService.remove(id);
+  remove(@Param('uuid') uuid: string) {
+    return this.descriptionInstrumentsService.remove(uuid);
   }
 }
