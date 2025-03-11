@@ -24,7 +24,6 @@ import { ReproductionConditionsModule } from './reproduction-conditions/reproduc
   imports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -45,7 +44,7 @@ import { ReproductionConditionsModule } from './reproduction-conditions/reproduc
   exports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    
+
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,

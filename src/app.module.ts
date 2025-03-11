@@ -12,7 +12,6 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
 import { AddressModule } from './address/address.module';
-import { InstitutionsModule } from './address/institutions/institutions.module';
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
 import { CommandsModule } from './commands/commands.module';
 import { LoggerModule } from './logger/logger.module';
@@ -22,6 +21,7 @@ import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/nest'),
     EventEmitterModule.forRoot({ global: true }),
     ConfigModule,
     AuthModule,
@@ -31,12 +31,10 @@ import { NomenclatureModule } from './nomenclator/nomenclatureModule';
     FileStorageModule,
     AddressModule,
     SeedModule,
-    InstitutionsModule,
     CulturalHeritagePropertyModule,
     CommandsModule,
     LoggerModule,
     NomenclatureModule,
-    MongooseModule.forRoot('mongodb://localhost/nest'),
     ],
   controllers: [AppController],
   providers: [

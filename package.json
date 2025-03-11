@@ -21,8 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "doc": "compodoc -p tsconfig.json",
     "serve-doc": "compodoc -p tsconfig.json -s",
-    "command": "npx ts-node src/main.ts",
-    "create-access": "npx command create:default-access-conditions"
+    "command": "npx ts-node src/main.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.3",
