@@ -11,17 +11,15 @@ import { UsersModule } from './users/users.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ErrorInterceptor } from './common/interceptors/error.Interceptor';
 import { SeedModule } from './seed/seed.module';
-import { AddressModule } from './address/address.module';
-import { CulturalHeritagePropertyModule } from './cultural-heritage-property/cultural-heritage-property/cultural-heritage-property.module';
+import { AddressModule } from './address';
+import { CulturalHeritagePropertyModule } from './cultural-heritage-property';
 import { CommandsModule } from './commands/commands.module';
 import { LoggerModule } from './logger/logger.module';
-import { MongooseModule } from '@nestjs/mongoose';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nest'),
     EventEmitterModule.forRoot({ global: true }),
     ConfigModule,
     AuthModule,

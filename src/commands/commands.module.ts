@@ -9,8 +9,6 @@ import { DescriptionInstrumentsModule } from '../nomenclator/description-instrum
 import { AccessConditionsModule } from '../nomenclator/access-conditions/access-conditions.module';
 import { CreateDefaultAccessConditions } from './commands/create-default-access-reproduccion';
 
-
-
 @Module({
   imports: [
     CommandRunnerModule,
@@ -26,4 +24,4 @@ import { CreateDefaultAccessConditions } from './commands/create-default-access-
     CreateDefaultAccessConditions,
   ],
 })
-export class CommandsModule { }
+export class CommandsModule {}
