@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
-
 import { CategoryMuseumModule } from './institutions/category-museum/category-museum.module';
 import { InstitutionTypesModule } from './institutions/institution-types/institution-types.module';
-
 import { MuseumTypesModule } from './institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './contact-information/phone-numbers/phone-numbers.module';
@@ -19,6 +17,7 @@ import { ReportsModule } from './reports/reports.module';
 import { ExtraInformationModule } from './extra-information/extra-information.module';
 import { AccessConditionsModule } from './access-conditions/access-conditions.module';
 import { ReproductionConditionsModule } from './reproduction-conditions/reproduction-conditions.module';
+import { DescriptionInstrumentsModule } from './description-instruments/description-instruments.module';
 
 @Module({
   imports: [
@@ -40,6 +39,7 @@ import { ReproductionConditionsModule } from './reproduction-conditions/reproduc
     ExtraInformationModule,
     AccessConditionsModule,
     ReproductionConditionsModule,
+    DescriptionInstrumentsModule,
   ],
   exports: [
     CategoryMuseumModule,

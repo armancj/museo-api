@@ -35,7 +35,7 @@ import { NomenclatureModule } from './nomenclator/nomenclatureModule';
     CommandsModule,
     LoggerModule,
     NomenclatureModule,
-    ],
+  ],
   controllers: [AppController],
   providers: [
     {

@@ -6,7 +6,7 @@ import {
   DescriptionInstrument,
   DescriptionInstrumentSchema,
 } from './schemas/description-instrument.schema';
-import { InstitutionsModule } from '../../address/institutions/institutions.module';
+import { InstitutionsModule } from '../../address';
 
 @Module({
   imports: [
