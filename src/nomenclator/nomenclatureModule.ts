@@ -17,11 +17,13 @@ import { NotesModule } from './notes/notes.module';
 import { CreationDetailsModule } from './creation-details/creation-details.module';
 import { ReportsModule } from './reports/reports.module';
 import { ExtraInformationModule } from './extra-information/extra-information.module';
+import { TypologyModule } from './typology/typology.module';
 
 @Module({
   imports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
+    TypologyModule,
     
     MuseumTypesModule,
     HeritageOfficesModule,
@@ -56,6 +58,7 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    TypologyModule,
   ],
 })
 export class NomenclatureModule {}
