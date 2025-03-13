@@ -6,9 +6,8 @@ import { CategoryMuseumModule } from '../nomenclator/institutions/category-museu
 import { CreateDefaultCategories } from './commands/create-default-categories';
 import { CreateDefaultDescriptionInstruments } from './commands/create-default-description-instruments';
 import { DescriptionInstrumentsModule } from '../nomenclator/description-instruments/description-instruments.module';
-import { BaseSchema } from '../common/schema/base.schema';
-
-
+import { AccessConditionsModule } from '../nomenclator/access-conditions/access-conditions.module';
+import { CreateDefaultAccessConditions } from './commands/create-default-access-reproduccion';
 
 @Module({
   imports: [
@@ -16,11 +15,13 @@ import { BaseSchema } from '../common/schema/base.schema';
     UsersModule,
     CategoryMuseumModule,
     DescriptionInstrumentsModule,
+    AccessConditionsModule,
   ],
   providers: [
     CreateSuperAdmin,
     CreateDefaultCategories,
     CreateDefaultDescriptionInstruments,
+    CreateDefaultAccessConditions,
   ],
 })
-export class CommandsModule { }
+export class CommandsModule {}

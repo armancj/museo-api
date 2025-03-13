@@ -6,7 +6,7 @@ import {
   CategoryMuseumNameEntity,
   CategoryMuseumSchema,
 } from './schema/category-museum.schema';
-import { InstitutionsModule } from '../../../address/institutions/institutions.module';
+import { InstitutionsModule } from '../../../address';
 
 @Module({
   imports: [
@@ -19,4 +19,4 @@ import { InstitutionsModule } from '../../../address/institutions/institutions.m
   providers: [CategoryMuseumService],
   exports: [CategoryMuseumService],
 })
-export class CategoryMuseumModule { }
+export class CategoryMuseumModule {}

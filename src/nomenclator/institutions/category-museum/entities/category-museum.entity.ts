@@ -4,7 +4,7 @@ import { Expose, plainToClass } from 'class-transformer';
 export class CategoryMuseum implements CategoryMuseumModel {
   @Expose()
   createdAt: Date;
-
+  
   deleted: boolean;
 
   @Expose()
