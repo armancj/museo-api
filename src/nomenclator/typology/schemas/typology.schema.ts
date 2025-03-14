@@ -6,7 +6,7 @@ export type TypologyDocument = Typology & Document;
 
 @Schema()
 export class Typology extends BaseSchema {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   name: string;
 
   @Prop()
