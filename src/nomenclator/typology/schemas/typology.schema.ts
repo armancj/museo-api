@@ -18,3 +18,5 @@ export class Typology extends BaseSchema {
 
 export const TypologySchema = SchemaFactory.createForClass(Typology);
 TypologySchema.add(BaseSchemaFactory);
+
+export const TypologyNameEntity = Typology.name;
