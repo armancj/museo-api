@@ -18,6 +18,7 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
 import { AccessConditionsModule } from './access-conditions/access-conditions.module';
 import { ReproductionConditionsModule } from './reproduction-conditions/reproduction-conditions.module';
 import { DescriptionInstrumentsModule } from './description-instruments/description-instruments.module';
+import { ConservationStatusModule } from './conservation-status/conservation-status.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { DescriptionInstrumentsModule } from './description-instruments/descript
     AccessConditionsModule,
     ReproductionConditionsModule,
     DescriptionInstrumentsModule,
+    ConservationStatusModule,
   ],
   exports: [
     CategoryMuseumModule,
@@ -61,6 +63,7 @@ import { DescriptionInstrumentsModule } from './description-instruments/descript
     ExtraInformationModule,
     AccessConditionsModule,
     ReproductionConditionsModule,
+    ConservationStatusModule,
   ],
 })
 export class NomenclatureModule {}
