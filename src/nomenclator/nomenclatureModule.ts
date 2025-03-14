@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
-
 import { CategoryMuseumModule } from './institutions/category-museum/category-museum.module';
 import { InstitutionTypesModule } from './institutions/institution-types/institution-types.module';
-
 import { MuseumTypesModule } from './institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './contact-information/phone-numbers/phone-numbers.module';
@@ -18,13 +16,15 @@ import { CreationDetailsModule } from './creation-details/creation-details.modul
 import { ReportsModule } from './reports/reports.module';
 import { ExtraInformationModule } from './extra-information/extra-information.module';
 import { TypologyModule } from './typology/typology.module';
+import { AccessConditionsModule } from './access-conditions/access-conditions.module';
+import { ReproductionConditionsModule } from './reproduction-conditions/reproduction-conditions.module';
+import { DescriptionInstrumentsModule } from './description-instruments/description-instruments.module';
 
 @Module({
   imports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
     TypologyModule,
-    
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -39,11 +39,14 @@ import { TypologyModule } from './typology/typology.module';
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    AccessConditionsModule,
+    ReproductionConditionsModule,
+    DescriptionInstrumentsModule,
   ],
   exports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    
+
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -59,6 +62,8 @@ import { TypologyModule } from './typology/typology.module';
     ReportsModule,
     ExtraInformationModule,
     TypologyModule,
+    AccessConditionsModule,
+    ReproductionConditionsModule,
   ],
 })
 export class NomenclatureModule {}
