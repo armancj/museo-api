@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
-
 import { CategoryMuseumModule } from './institutions/category-museum/category-museum.module';
 import { InstitutionTypesModule } from './institutions/institution-types/institution-types.module';
-
 import { MuseumTypesModule } from './institutions/museum-types/museum-types.module';
 import { HeritageOfficesModule } from './institutions/heritage-offices/heritage-offices.module';
 import { PhoneNumbersModule } from './contact-information/phone-numbers/phone-numbers.module';
@@ -17,12 +15,17 @@ import { NotesModule } from './notes/notes.module';
 import { CreationDetailsModule } from './creation-details/creation-details.module';
 import { ReportsModule } from './reports/reports.module';
 import { ExtraInformationModule } from './extra-information/extra-information.module';
+import { TypologyModule } from './typology/typology.module';
+import { AccessConditionsModule } from './access-conditions/access-conditions.module';
+import { ReproductionConditionsModule } from './reproduction-conditions/reproduction-conditions.module';
+import { DescriptionInstrumentsModule } from './description-instruments/description-instruments.module';
+import { ConservationStatusModule } from './conservation-status/conservation-status.module';
 
 @Module({
   imports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    
+    TypologyModule,
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -37,11 +40,15 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    AccessConditionsModule,
+    ReproductionConditionsModule,
+    DescriptionInstrumentsModule,
+    ConservationStatusModule,
   ],
   exports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-    
+
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -56,6 +63,10 @@ import { ExtraInformationModule } from './extra-information/extra-information.mo
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    TypologyModule,
+    AccessConditionsModule,
+    ReproductionConditionsModule,
+    ConservationStatusModule,
   ],
 })
 export class NomenclatureModule {}
