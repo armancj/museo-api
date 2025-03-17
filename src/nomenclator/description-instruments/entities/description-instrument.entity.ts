@@ -1,15 +1,28 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { Expose, plainToClass } from 'class-transformer';
 
 export class DescriptionInstrument {
-  @ApiProperty({ example: '123', description: 'The ID of the description instrument' })
-  id: string;
-
-  @ApiProperty({ example: 'Guitar', description: 'The name of the description instrument' })
+  @Expose()
   name: string;
 
-  @ApiProperty({ example: 'A string instrument', description: 'The description of the instrument', required: false })
-  description?: string;
+  @Expose()
+  active: boolean;
 
-  @ApiProperty({ example: true, description: 'The active status of the description instrument', required: false })
-  active?: boolean;
+  @Expose()
+  createdAt: Date;
+
+  @Expose()
+  updatedAt: Date;
+
+  @Expose()
+  uuid: string;
+
+  constructor(options: Partial<DescriptionInstrument>) {
+    Object.assign(this, options);
+  }
+
+  static create(options: Partial<DescriptionInstrument>): DescriptionInstrument {
+    return plainToClass(DescriptionInstrument, options, {
+      excludeExtraneousValues: true,
+    });
+  }
 }
