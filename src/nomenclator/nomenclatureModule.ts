@@ -15,6 +15,7 @@ import { NotesModule } from './notes/notes.module';
 import { CreationDetailsModule } from './creation-details/creation-details.module';
 import { ReportsModule } from './reports/reports.module';
 import { ExtraInformationModule } from './extra-information/extra-information.module';
+import { TypologyModule } from './typology/typology.module';
 import { AccessConditionsModule } from './access-conditions/access-conditions.module';
 import { ReproductionConditionsModule } from './reproduction-conditions/reproduction-conditions.module';
 import { DescriptionInstrumentsModule } from './description-instruments/description-instruments.module';
@@ -23,6 +24,7 @@ import { DescriptionInstrumentsModule } from './description-instruments/descript
   imports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
+    TypologyModule,
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,
@@ -59,6 +61,7 @@ import { DescriptionInstrumentsModule } from './description-instruments/descript
     CreationDetailsModule,
     ReportsModule,
     ExtraInformationModule,
+    TypologyModule,
     AccessConditionsModule,
     ReproductionConditionsModule,
   ],
