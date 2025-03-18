@@ -14,10 +14,11 @@ export class TypologyService {
   constructor(
     @InjectModel(Typology.name)
     private readonly typologyRepository: Model<TypologyDocument>,
-  ) { }
+  ) {}
 
   async create(createTypologyDto: CreateTypologyDto): Promise<TypologyModel> {
-    const createdTypology = await this.typologyRepository.create(createTypologyDto);
+    const createdTypology =
+      await this.typologyRepository.create(createTypologyDto);
     return Typology.create(createdTypology);
   }
 
@@ -32,22 +33,24 @@ export class TypologyService {
   }
 
   async findOne(uuid: string): Promise<TypologyModel> {
-    const typology = await this.typologyRepository.findOne({ uuid, deleted: false }).exec();
+    const typology = await this.typologyRepository
+      .findOne({ uuid, deleted: false })
+      .exec();
     if (!typology) throw new NotFoundException('Typology not found');
     return Typology.create(typology);
   }
 
-  async update(uuid: string, updateTypologyDto: UpdateTypologyDto): Promise<TypologyModel> {
+  async update(uuid: string, updateTypologyDto: UpdateTypologyDto) {
+    await this.findOne(uuid);
     await this.typologyRepository.updateOne({ uuid }, updateTypologyDto).exec();
-    return this.findOne(uuid);
+    return true;
   }
 
   async remove(uuid: string): Promise<void> {
     const typology = await this.findOne(uuid);
     const name = `${typology.name}-${typology.uuid}`;
-    await this.typologyRepository.updateOne(
-      { uuid, deleted: false },
-      { deleted: true, name }
-    ).exec();
+    await this.typologyRepository
+      .updateOne({ uuid, deleted: false }, { deleted: true, name })
+      .exec();
   }
 }

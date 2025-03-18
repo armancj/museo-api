@@ -4,11 +4,15 @@ import {
   BaseSchema,
   BaseSchemaFactory,
 } from '../../../common/schema/base.schema';
+import { DescriptionInstrumentModel } from '../models/description-instrument.model';
 
 export type DescriptionInstrumentDocument = DescriptionInstrument & Document;
 
 @Schema()
-export class DescriptionInstrument extends BaseSchema {
+export class DescriptionInstrument
+  extends BaseSchema
+  implements DescriptionInstrumentModel
+{
   @Prop({ required: true, unique: true })
   name: string;
 
@@ -17,9 +21,6 @@ export class DescriptionInstrument extends BaseSchema {
 
   @Prop({ default: true })
   active: boolean;
-
-  @Prop({ default: false })
-  deleted: boolean;
 }
 
 export const DescriptionInstrumentSchema = SchemaFactory.createForClass(

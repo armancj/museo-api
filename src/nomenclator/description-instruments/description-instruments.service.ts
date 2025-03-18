@@ -30,7 +30,7 @@ export class DescriptionInstrumentsService {
     const descriptionInstruments = await this.descriptionInstrumentModel
       .find({ deleted: false })
       .exec();
-    return DescriptionInstruments.create(descriptionInstruments);
+    return DescriptionInstruments.create(descriptionInstruments).value;
   }
 
   async findOne(uuid: string) {

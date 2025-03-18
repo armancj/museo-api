@@ -1,10 +1,20 @@
-import { Controller, Get, Post, Put, Patch, Delete, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { TypologyService } from './typology.service';
-import { CreateTypologyDto, UpdateTypologyDto } from './dto/typology.dto';
 import { TypologyModel } from './model/typology.model';
 import { PaginationDto } from '../../common/dto/pagination.dto';
-
+import { CreateTypologyDto } from './dto/create-typology.dto';
+import { UpdateTypologyDto } from './dto/update-typology.dto';
 
 @ApiTags('Typology')
 @Controller('typology')
@@ -34,7 +44,7 @@ export class TypologyController {
   update(
     @Param('uuid') uuid: string,
     @Body() updateTypologyDto: UpdateTypologyDto,
-  ): Promise<TypologyModel> {
+  ) {
     return this.typologyService.update(uuid, updateTypologyDto);
   }
 

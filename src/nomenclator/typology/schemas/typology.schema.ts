@@ -1,6 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { BaseSchema, BaseSchemaFactory } from '../../../common/schema/base.schema';
+import {
+  BaseSchema,
+  BaseSchemaFactory,
+} from '../../../common/schema/base.schema';
 
 export type TypologyDocument = Typology & Document;
 
