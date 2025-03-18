@@ -9,6 +9,7 @@ import {
 } from './schemas/description-instrument.schema';
 
 import { DescriptionInstrumentEntity } from './entities/description-instrument.entity';
+import { DescriptionInstruments } from './entities/description-inst.entity';
 
 @Injectable()
 export class DescriptionInstrumentsService {
@@ -17,20 +18,19 @@ export class DescriptionInstrumentsService {
     private readonly descriptionInstrumentModel: Model<DescriptionInstrumentDocument>,
   ) {}
 
-  async create(
-    createDescriptionInstrumentDto: CreateDescriptionInstrumentDto,
-  ): Promise<DescriptionInstrument> {
-    const createdDescriptionInstrument = new this.descriptionInstrumentModel(
-      createDescriptionInstrumentDto,
-    );
-    return createdDescriptionInstrument.save();
+  async create(createDescriptionInstrumentDto: CreateDescriptionInstrumentDto) {
+    const createdDescriptionInstrument =
+      await this.descriptionInstrumentModel.create(
+        createDescriptionInstrumentDto,
+      );
+    return DescriptionInstrumentEntity.create(createdDescriptionInstrument);
   }
 
   async findAll() {
     const descriptionInstruments = await this.descriptionInstrumentModel
       .find({ deleted: false })
       .exec();
-    return descriptionInstruments;
+    return DescriptionInstruments.create(descriptionInstruments);
   }
 
   async findOne(uuid: string) {
