@@ -11,7 +11,6 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { DescriptionInstrumentsService } from './description-instruments.service';
 import { CreateDescriptionInstrumentDto } from './dto/create-description-instrument.dto';
 import { UpdateDescriptionInstrumentDto } from './dto/update-description-instrument.dto';
-import { DescriptionInstrument } from './entities/description-instrument.entity';
 import { Auth } from '../../auth/decorator';
 import { UserRoles } from '../../users/enum/user-roles.enum';
 
@@ -27,11 +26,6 @@ export class DescriptionInstrumentsController {
   })
   @Post()
   @ApiOperation({ summary: 'Create a new description instrument' })
-  @ApiResponse({
-    status: 201,
-    description: 'The description instrument has been successfully created.',
-    type: DescriptionInstrument,
-  })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   create(
     @Body() createDescriptionInstrumentDto: CreateDescriptionInstrumentDto,
@@ -43,22 +37,12 @@ export class DescriptionInstrumentsController {
 
   @Get()
   @ApiOperation({ summary: 'Get all description instruments' })
-  @ApiResponse({
-    status: 200,
-    description: 'Return all description instruments.',
-    type: [DescriptionInstrument],
-  })
   findAll() {
     return this.descriptionInstrumentsService.findAll();
   }
 
   @Get(':uuid')
   @ApiOperation({ summary: 'Get a description instrument by ID' })
-  @ApiResponse({
-    status: 200,
-    description: 'Return the description instrument.',
-    type: DescriptionInstrument,
-  })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
   findOne(@Param('uuid') uuid: string) {
     return this.descriptionInstrumentsService.findOne(uuid);
@@ -69,11 +53,6 @@ export class DescriptionInstrumentsController {
   })
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update a description instrument by ID' })
-  @ApiResponse({
-    status: 200,
-    description: 'The description instrument has been successfully updated.',
-    type: DescriptionInstrument,
-  })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
   update(
     @Param('id') id: string,
@@ -90,11 +69,6 @@ export class DescriptionInstrumentsController {
   })
   @Delete(':uuid')
   @ApiOperation({ summary: 'Delete a description instrument by ID' })
-  @ApiResponse({
-    status: 200,
-    description: 'The description instrument has been successfully deleted.',
-    type: DescriptionInstrument,
-  })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
   remove(@Param('uuid') uuid: string) {
     return this.descriptionInstrumentsService.remove(uuid);

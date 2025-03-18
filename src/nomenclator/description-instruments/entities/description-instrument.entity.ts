@@ -1,6 +1,7 @@
 import { Expose, plainToClass } from 'class-transformer';
+import { DescriptionInstrumentModel } from '../models/description-instrument.model';
 
-export class DescriptionInstrument {
+export class DescriptionInstrumentEntity {
   @Expose()
   name: string;
 
@@ -16,12 +17,14 @@ export class DescriptionInstrument {
   @Expose()
   uuid: string;
 
-  constructor(options: Partial<DescriptionInstrument>) {
+  constructor(options: Partial<DescriptionInstrumentModel>) {
     Object.assign(this, options);
   }
 
-  static create(options: Partial<DescriptionInstrument>): DescriptionInstrument {
-    return plainToClass(DescriptionInstrument, options, {
+  static create(
+    options: Partial<DescriptionInstrumentModel>,
+  ): DescriptionInstrumentEntity {
+    return plainToClass(DescriptionInstrumentEntity, options, {
       excludeExtraneousValues: true,
     });
   }
