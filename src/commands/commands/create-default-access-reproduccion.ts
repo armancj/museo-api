@@ -6,15 +6,13 @@ import { AccessConditionsService } from '../../nomenclator/access-conditions/acc
 
 const defaultAccessConditions: CreateAccessConditionDto[] = [
   {
-   
     type: AccessCondition.FREE,
     description: 'Acceso y reproducción sin restricciones',
   },
   {
-  
     type: AccessCondition.RESTRICTED,
     description: 'Acceso y reproducción que requiere autorización previa',
-  }
+  },
 ];
 
 @Command({
@@ -24,13 +22,21 @@ const defaultAccessConditions: CreateAccessConditionDto[] = [
 export class CreateDefaultAccessConditions extends CommandRunner {
   private logger = new Logger(`create:default-access-conditions`);
 
-  constructor(private readonly accessConditionsService: AccessConditionsService) {
+  constructor(
+    private readonly accessConditionsService: AccessConditionsService,
+  ) {
     super();
   }
 
-  async run(passedParams: string[], options?: Record<string, any>): Promise<void> {
-    this.logger.log('Creating default access conditions...');
-    
+  async run(
+    passedParams: string[],
+    options?: Record<string, any>,
+  ): Promise<void> {
+    this.logger.log('Creating default access conditions...', {
+      passedParams,
+      options,
+    });
+
     await Promise.allSettled(
       defaultAccessConditions.map((condition) => {
         return this.accessConditionsService.create(condition);

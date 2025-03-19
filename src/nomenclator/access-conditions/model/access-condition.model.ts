@@ -1,7 +1,6 @@
-import { BaseModel } from "../../../common/interfaces/base.model";
-import { AccessCondition } from "../../common/enums/access-condition.enum";
+import { BaseModel } from '../../../common/interfaces/base.model';
 
 export interface AccessConditionModel extends BaseModel {
-  type: AccessCondition;
+  type: string;
   description?: string;
-} 
+}

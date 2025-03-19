@@ -5,7 +5,7 @@ import { AccessCondition } from '../../common/enums/access-condition.enum';
 export class AccessConditionEntity implements AccessConditionModel {
   @Expose()
   createdAt: Date;
-  
+
   deleted: boolean;
 
   @Expose()
@@ -15,7 +15,7 @@ export class AccessConditionEntity implements AccessConditionModel {
   uuid: string;
 
   @Expose()
-  type: AccessCondition;
+  type: string;
 
   @Expose()
   description: string;
@@ -29,4 +29,4 @@ export class AccessConditionEntity implements AccessConditionModel {
       excludeExtraneousValues: true,
     });
   }
-} 
+}
