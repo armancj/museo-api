@@ -15,14 +15,12 @@ import { CategoryMuseumModel } from './model/category-museum.model';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { FilterCategoryMuseumDto } from './dto/filter-category-museum.dto';
 import { RootFilterQuery } from 'mongoose';
-import { InstitutionsService } from '../../../address/institutions/institutions.service';
 
 @Injectable()
 export class CategoryMuseumService {
   constructor(
     @InjectModel(CategoryMuseumNameEntity)
     private readonly categoryMuseumRepository: CategoryMuseumMongoModel,
-    private readonly institutionService: InstitutionsService,
   ) {}
 
   async create(createCategoryMuseumDto: CreateCategoryMuseumDto) {
@@ -41,11 +39,11 @@ export class CategoryMuseumService {
 
     if (filter.name) query.name = new RegExp(filter.name, 'i');
 
-    if (filter.instituionUUID) {
-      const institutionCategory = await this.getCategoryByInstitutionId(
-        filter.instituionUUID,
+    if (filter.institutionType) {
+      const categoriesName = await this.getCategoryByInstitutionType(
+        filter.institutionType,
       );
-      query.$and = [institutionCategory];
+      query.$and = [{ name: categoriesName, active: true }];
     }
 
     const categoryMuseums = await this.categoryMuseumRepository
@@ -87,50 +85,34 @@ export class CategoryMuseumService {
       .exec();
   }
 
-  async getCategoryByInstitutionId(
-    institutionId: string,
+  async getCategoryByInstitutionType(
+    institutionType: string,
   ): Promise<RootFilterQuery<CategoryMuseumDocument>> {
-    const institution = await this.institutionService.findByUUID(institutionId);
-    if (!institution) {
-      throw new NotFoundException('Institution not found');
-    }
-    switch (institution.institutionType) {
-      case InstitutionType.MUSEUM:
-        return {
-          name: {
-            $in: ['Categoría Especial', 'Categoría I'],
-          },
-          active: true,
-        };
+    const specialAndCategoryI = { $in: ['Categoría Especial', 'Categoría I'] };
 
-      case InstitutionType.COMPLEX_MUSEUM:
-        return {
-          name: {
-            $in: ['Categoría Especial', 'Categoría I'],
-          },
-          active: true,
-        };
+    const categoryItoIII = {
+      $in: ['Categoría I', 'Categoría II', 'Categoría III'],
+    };
 
-      case InstitutionType.MUSEUM_ROOMS || InstitutionType.EXT_MUSEUM:
-        return {
-          name: {
-            $in: ['Categoría I', 'Categoría II', 'Categoría III'],
-          },
-          active: true,
-        };
+    const defaultFilter = {
+      $nin: [
+        'Categoría Especial',
+        'Categoría I',
+        'Categoría II',
+        'Categoría III',
+      ],
+    };
 
-      default:
-        return {
-          name: {
-            $nin: [
-              'Categoría Especial',
-              'Categoría I',
-              'Categoría II',
-              'Categoría III',
-            ],
-          },
-          active: true,
-        };
-    }
+    const filterMap: Map<
+      InstitutionType | string,
+      RootFilterQuery<CategoryMuseumDocument>
+    > = new Map([
+      [InstitutionType.MUSEUM, specialAndCategoryI],
+      [InstitutionType.COMPLEX_MUSEUM, specialAndCategoryI],
+      [InstitutionType.MUSEUM_ROOMS, categoryItoIII],
+      [InstitutionType.EXT_MUSEUM, categoryItoIII],
+    ]);
+
+    return filterMap.get(institutionType) || defaultFilter;
   }
 }

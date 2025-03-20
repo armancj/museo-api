@@ -2,12 +2,12 @@ import { CreateCategoryMuseumDto } from '../../nomenclator/institutions/category
 import { Command, CommandRunner } from 'nest-commander';
 import { CategoryMuseumService } from '../../nomenclator/institutions/category-museum/category-museum.service';
 import { Logger } from '@nestjs/common';
-import { InstitutionType } from '../../address/institutions/enum/institutions.enum';
 
-const defaultCategories: CreateCategoryMuseumDto[] = [
+export const defaultCategories: CreateCategoryMuseumDto[] = [
   {
     name: 'Categoría Especial',
-    description: 'Solo la pueden ostentar los Museos y los Complejos Museológicos',
+    description:
+      'Solo la pueden ostentar los Museos y los Complejos Museológicos',
     active: true,
   },
   {
@@ -25,7 +25,6 @@ const defaultCategories: CreateCategoryMuseumDto[] = [
     description: 'Categoría para otras instituciones 2.0',
     active: true,
   },
-
 ];
 
 @Command({
@@ -39,7 +38,10 @@ export class CreateDefaultCategories extends CommandRunner {
     super();
   }
 
-  async run(passedParams: string[], options?: Record<string, any>): Promise<void> {
+  async run(
+    passedParams: string[],
+    options?: Record<string, any>,
+  ): Promise<void> {
     this.logger.log('CreateDefaultCategories', passedParams);
     await Promise.allSettled(
       defaultCategories.map((category) => {

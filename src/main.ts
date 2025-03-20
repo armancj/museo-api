@@ -7,8 +7,6 @@ import { LoggerInterceptor } from './common/interceptors/logger.interceptor';
 import { swaggerDocumentation } from './config/swagger.config';
 import { apiEnv } from './config/app.const';
 import { CommandFactory } from 'nest-commander';
-import { InstitutionsModule } from './address/institutions/institutions.module';
-import { BaseSchema } from './common/schema/base.schema';
 
 declare const module: any;
 async function bootstrap() {

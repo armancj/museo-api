@@ -15,7 +15,6 @@ import { AddressModule } from './address';
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property';
 import { CommandsModule } from './commands/commands.module';
 import { LoggerModule } from './logger/logger.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NomenclatureModule } from './nomenclator/nomenclatureModule';
 
 @Module({
@@ -43,14 +42,4 @@ import { NomenclatureModule } from './nomenclator/nomenclatureModule';
     LoggerInterceptor,
   ],
 })
-export class AppModule {
-  configureSwagger(app: any) {
-    const config = new DocumentBuilder()
-      .setTitle('Museo API')
-      .setDescription('API documentation for Museo')
-      .setVersion('1.0')
-      .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api', app, document);
-  }
-}
+export class AppModule {}
