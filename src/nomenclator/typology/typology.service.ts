@@ -27,6 +27,7 @@ export class TypologyService {
   ): Promise<TypologyModel[]> {
     const filter: RootFilterQuery<TypologyModel> = { deleted: false };
 
+    console.log(filterTypologyDto?.active);
     if (filterTypologyDto?.active) filter.active = filterTypologyDto?.active;
 
     const typologies = await this.typologyRepository.find(filter).exec();

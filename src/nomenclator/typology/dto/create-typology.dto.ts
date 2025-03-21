@@ -24,6 +24,7 @@ export class CreateTypologyDto
     example: true,
     description: 'The active status of the typology',
     required: false,
+    type: Boolean,
   })
   @IsBoolean()
   @IsOptional()
