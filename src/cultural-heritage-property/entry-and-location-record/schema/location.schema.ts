@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { LocationModel } from '../models/entry-and-location-record.model';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * Mongoose schema for Location.
@@ -7,54 +8,131 @@ import { LocationModel } from '../models/entry-and-location-record.model';
  */
 @Schema()
 class Location implements LocationModel {
-  /**
-   * The floor where the item is located.
-   * @type {string}
-   */
-  @Prop()
-  floor: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  floor: FieldMetadata<string>;
 
-  /**
-   * The exhibition room where the item is displayed.
-   * @type {string}
-   */
-  @Prop()
-  exhibitionRoom: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  exhibitionRoom: FieldMetadata<string>;
 
-  /**
-   * The storage area where the item is kept.
-   * @type {string}
-   */
-  @Prop()
-  storage: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  storage: FieldMetadata<string>;
 
-  /**
-   * The showcase shelf where the item is exhibited.
-   * @type {string}
-   */
-  @Prop()
-  showcaseShelf: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  showcaseShelf: FieldMetadata<string>;
 
-  /**
-   * The shelf drawer where the item is stored.
-   * @type {string}
-   */
-  @Prop()
-  shelfDrawer: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  shelfDrawer: FieldMetadata<string>;
 
-  /**
-   * The box where the item is kept.
-   * @type {string}
-   */
-  @Prop()
-  box: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  box: FieldMetadata<string>;
 
-  /**
-   * The file folder where the item is archived.
-   * @type {string}
-   */
-  @Prop()
-  fileFolder: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  fileFolder: FieldMetadata<string>;
 }
 
 export const LocationSchema = SchemaFactory.createForClass(Location);

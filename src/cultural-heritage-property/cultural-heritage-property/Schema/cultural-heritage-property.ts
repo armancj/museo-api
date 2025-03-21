@@ -24,7 +24,6 @@ import { DescriptionControlModel } from '../../description-control/models/descri
 import { NotesSchema } from '../../cultural-notes/schema/notes';
 import { NotesModel } from '../../cultural-notes/models/cultural-notes-model';
 import {
-  FieldReviewStatus,
   FieldReviewStatusEntity,
   FieldReviewStatusModel,
 } from '../../field-review-status/schema/field-review-status.schema';

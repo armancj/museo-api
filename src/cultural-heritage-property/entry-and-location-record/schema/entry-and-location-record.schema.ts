@@ -6,6 +6,7 @@ import {
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { LocationSchema } from './location.schema';
 import { LocationModel } from '../models/entry-and-location-record.model';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * Mongoose schema for Entry and Location Record.
@@ -13,75 +14,188 @@ import { LocationModel } from '../models/entry-and-location-record.model';
  */
 @Schema()
 class EntryAndLocationRecord {
-  /**
-   * The heritage type of the item.
-   * @type {HeritageType}
-   */
-  @Prop({ required: true, enum: HeritageType })
-  heritageType: HeritageType;
+  @Prop({
+    type: {
+      value: { type: String, enum: HeritageType },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  heritageType: FieldMetadata<HeritageType>;
 
-  /**
-   * The type of declaration.
-   * @type {string}
-   */
-  @Prop()
-  declarationType: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  declarationType: FieldMetadata<string>;
 
-  /**
-   * The inventory number of the item.
-   * @type {string}
-   */
-  @Prop({ required: true })
-  inventoryNumber: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+    required: true,
+  })
+  inventoryNumber: FieldMetadata<string>;
 
-  /**
-   * The generic classification of the item.
-   * @type {GenericClassification}
-   */
-  @Prop({ required: true, enum: GenericClassification })
-  genericClassification: GenericClassification;
+  @Prop({
+    type: {
+      value: { type: String, enum: GenericClassification },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+    required: true,
+  })
+  genericClassification: FieldMetadata<GenericClassification>;
 
-  /**
-   * Indicates if the item is in the piece inventory.
-   * @type {boolean}
-   */
-  @Prop()
-  pieceInventory: boolean;
+  @Prop({
+    type: {
+      value: { type: Boolean },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: Boolean, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  pieceInventory: FieldMetadata<boolean>;
 
-  /**
-   * Indicates if the item is in the auxiliary inventory.
-   * @type {boolean}
-   */
-  @Prop()
-  auxiliaryInventory: boolean;
+  @Prop({
+    type: {
+      value: { type: Boolean },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: Boolean, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  auxiliaryInventory: FieldMetadata<boolean>;
 
-  /**
-   * The name of the object.
-   * @type {string}
-   */
-  @Prop({ required: true })
-  objectName: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+    required: true,
+  })
+  objectName: FieldMetadata<string>;
 
-  /**
-   * A brief initial description of the item.
-   * @type {string}
-   */
-  @Prop()
-  initialDescription: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  initialDescription: FieldMetadata<string>;
 
-  /**
-   * The method of entry.
-   * @type {string}
-   */
-  @Prop()
-  entryMethod: string;
+  @Prop({
+    type: {
+      value: { type: String },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  entryMethod: FieldMetadata<string>;
 
-  /**
-   * The entry date.
-   * @type {Date}
-   */
-  @Prop()
-  entryDate: Date;
+  @Prop({
+    type: {
+      value: { type: Date },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: Date, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  entryDate: FieldMetadata<Date>;
 
   /**
    * The location details of the item.
@@ -90,12 +204,23 @@ class EntryAndLocationRecord {
   @Prop({ type: LocationSchema })
   objectLocation: LocationModel;
 
-  /**
-   * The type of institution.
-   * @type {InstitutionType}
-   */
-  @Prop({ required: true, enum: InstitutionType })
-  institutionType: InstitutionType;
+  @Prop({
+    type: {
+      value: { type: String, enum: InstitutionType },
+      status: { type: String, default: 'Pending' },
+      history: {
+        type: [
+          {
+            previousValue: { type: String, required: false },
+            modifiedAt: { type: Date },
+            comment: { type: String },
+          },
+        ],
+        default: [],
+      },
+    },
+  })
+  institutionType: FieldMetadata<InstitutionType>;
 }
 
 export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(
