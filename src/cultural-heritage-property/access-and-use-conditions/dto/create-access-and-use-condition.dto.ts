@@ -1,4 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * DTO for creating access and use conditions.
@@ -11,7 +13,8 @@ export class CreateAccessAndUseConditionDto {
    */
   @IsString({ each: true })
   @IsNotEmpty({ each: true })
-  accessConditions: string[];
+  @Type(() => FieldMetadataDto)
+  accessConditions: FieldMetadataDto<string[]>;
 
   /**
    * Conditions related to reproduction permissions.
@@ -19,7 +22,8 @@ export class CreateAccessAndUseConditionDto {
    */
   @IsString({ each: true })
   @IsNotEmpty({ each: true })
-  reproductionConditions: string[];
+  @Type(() => FieldMetadataDto)
+  reproductionConditions: FieldMetadataDto<string[]>;
 
   /**
    * Technical requirements necessary for fulfilling access conditions.
@@ -27,5 +31,6 @@ export class CreateAccessAndUseConditionDto {
    */
   @IsString()
   @IsNotEmpty()
-  technicalRequirements: string;
+  @Type(() => FieldMetadataDto)
+  technicalRequirements: FieldMetadataDto<string>;
 }

@@ -14,6 +14,7 @@ import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { VolumesQuantitiesDto } from './volumes-quantities.dto';
 import { DimensionsDto } from './dimensions.dto';
 import { ExtremeDatesDto } from './extreme-dates.dto';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Data Transfer Object (DTO) for creating a cultural record.
@@ -25,55 +26,63 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
    * Title representing the background context of the cultural record.
    */
   @IsOptional()
+  @Type(() => FieldMetadataDto)
   @IsString()
-  backgroundTitle?: string;
+  backgroundTitle?: FieldMetadataDto<string>;
 
   /**
    * Title representing the section of the cultural record.
    */
   @IsOptional()
   @IsString()
-  sectionTitle?: string;
+  @Type(() => FieldMetadataDto)
+  sectionTitle?: FieldMetadataDto<string>;
 
   /**
    * The main object title for the cultural record.
    */
   @IsString()
-  objectTitle: string;
+  @Type(() => FieldMetadataDto)
+  objectTitle: FieldMetadataDto<string>;
 
   /**
    * Description of the object for the cultural record.
    */
   @IsString()
-  objectDescription: string;
+  @Type(() => FieldMetadataDto)
+  objectDescription: FieldMetadataDto<string>;
 
   /**
    * Onomastic descriptors related to the cultural record.
    */
   @IsOptional()
   @IsString()
-  onomasticDescriptors?: string;
+  @Type(() => FieldMetadataDto)
+  onomasticDescriptors?: FieldMetadataDto<string>;
 
   /**
    * Geographic descriptors related to the cultural record.
    */
   @IsOptional()
+  @Type(() => FieldMetadataDto)
   @IsString()
-  geographicDescriptors?: string;
+  geographicDescriptors?: FieldMetadataDto<string>;
 
   /**
    * Institutional descriptors related to the cultural record.
    */
   @IsOptional()
   @IsString()
-  institutionalDescriptors?: string;
+  @Type(() => FieldMetadataDto)
+  institutionalDescriptors?: FieldMetadataDto<string>;
 
   /**
    * Subject descriptors related to the cultural record.
    */
   @IsOptional()
   @IsString()
-  subjectDescriptors?: string;
+  @Type(() => FieldMetadataDto)
+  subjectDescriptors?: FieldMetadataDto<string>;
 
   /**
    * Extreme dates (start and end) associated with the cultural record.
@@ -81,27 +90,30 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
   @IsOptional()
   @IsObject()
   @ValidateNested()
-  @Type(() => ExtremeDatesDto)
-  extremeDates?: ExtremeDatesDto;
+  @Type(() => FieldMetadataDto)
+  extremeDates?: FieldMetadataDto<ExtremeDatesDto>;
 
   /**
    * The value grade of the cultural record.
    */
   @IsEnum(ValueGrade)
-  valueGrade: ValueGrade;
+  @Type(() => FieldMetadataDto)
+  valueGrade: FieldMetadataDto<ValueGrade>;
 
   /**
    * The description level of the cultural record.
    */
   @IsEnum(DescriptionLevel)
-  descriptionLevel: DescriptionLevel;
+  @Type(() => FieldMetadataDto)
+  descriptionLevel: FieldMetadataDto<DescriptionLevel>;
 
   /**
    * Valuation of the cultural record.
    */
   @IsOptional()
   @IsNumber()
-  valuation?: number;
+  @Type(() => FieldMetadataDto)
+  valuation?: FieldMetadataDto<number>;
 
   /**
    * Volume quantities related to the cultural record.
@@ -125,33 +137,38 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
    */
   @IsArray()
   @IsString({ each: true })
-  languages: string[];
+  @Type(() => FieldMetadataDto)
+  languages: FieldMetadataDto<string[]>;
 
   /**
    * Supports related to the cultural record (e.g., paper, digital).
    */
   @IsArray()
   @IsString({ each: true })
-  supports: string[];
+  @Type(() => FieldMetadataDto)
+  supports: FieldMetadataDto<string[]>;
 
   /**
    * Letters associated with the cultural record.
    */
   @IsArray()
   @IsString({ each: true })
-  letters: string[];
+  @Type(() => FieldMetadataDto)
+  letters: FieldMetadataDto<string[]>;
 
   /**
    * Instruments used in the description of the cultural record.
    */
   @IsArray()
   @IsString({ each: true })
-  descriptionInstrument: string[];
+  @Type(() => FieldMetadataDto)
+  descriptionInstrument: FieldMetadataDto<string[]>;
 
   /**
    * Conservation states of the cultural record.
    */
   @IsArray()
   @IsString({ each: true })
-  conservationState: string[];
+  @Type(() => FieldMetadataDto)
+  conservationState: FieldMetadataDto<string[]>;
 }

@@ -1,5 +1,7 @@
 import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { Type } from 'class-transformer';
 
 /**
  * Data Transfer Object (DTO) for creating associated documentation.
@@ -17,7 +19,8 @@ export class CreateAssociatedDocumentationDto
    */
   @IsString()
   @IsNotEmpty()
-  copiesExistenceAndLocation: string;
+  @Type(() => FieldMetadataDto)
+  copiesExistenceAndLocation: FieldMetadataDto<string>;
 
   /**
    * Indicates the existence and location of original documents.
@@ -28,7 +31,8 @@ export class CreateAssociatedDocumentationDto
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  originalsExistenceAndLocation?: string;
+  @Type(() => FieldMetadataDto)
+  originalsExistenceAndLocation?: FieldMetadataDto<string>;
 
   /**
    * Provides information about related description units.
@@ -39,7 +43,8 @@ export class CreateAssociatedDocumentationDto
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  relatedDescriptionUnits?: string;
+  @Type(() => FieldMetadataDto)
+  relatedDescriptionUnits?: FieldMetadataDto<string>;
 
   /**
    * Contains information about related publications.
@@ -49,5 +54,6 @@ export class CreateAssociatedDocumentationDto
    */
   @IsString()
   @IsNotEmpty()
-  relatedPublicationsInformation: string;
+  @Type(() => FieldMetadataDto)
+  relatedPublicationsInformation: FieldMetadataDto<string>;
 }

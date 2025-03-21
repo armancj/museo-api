@@ -1,5 +1,7 @@
 import { NotesModel } from '../models/cultural-notes-model';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { Type } from 'class-transformer';
 
 /**
  * DTO for creating a cultural note.
@@ -17,5 +19,6 @@ export class CreateCulturalNoteDto implements NotesModel {
   @IsString()
   @IsOptional()
   @IsNotEmpty()
-  notes?: string;
+  @Type(() => FieldMetadataDto)
+  notes?: FieldMetadataDto<string>;
 }
