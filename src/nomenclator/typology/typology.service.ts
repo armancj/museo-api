@@ -22,7 +22,10 @@ export class TypologyService {
     return Typology.create(createdTypology);
   }
 
-  async findAll(pagination?: PaginationDto): Promise<TypologyModel[]> {
+  async findAll(filter: {
+    pagination?: PaginationDto;
+  }): Promise<TypologyModel[]> {
+    const { pagination } = filter;
     const { limit = 10, offset = 0 } = pagination || {};
     const typologies = await this.typologyRepository
       .find({ deleted: false })

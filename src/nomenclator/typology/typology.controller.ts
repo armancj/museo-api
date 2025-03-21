@@ -29,8 +29,8 @@ export class TypologyController {
 
   @Get()
   @ApiOperation({ summary: 'Get all typologies' })
-  findAll(@Query() pagination: PaginationDto): Promise<TypologyModel[]> {
-    return this.typologyService.findAll(pagination);
+  findAll(): Promise<TypologyModel[]> {
+    return this.typologyService.findAll({});
   }
 
   @Get(':uuid')
