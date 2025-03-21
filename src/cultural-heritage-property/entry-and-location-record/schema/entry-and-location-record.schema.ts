@@ -7,194 +7,84 @@ import { InstitutionType } from '../../../address/institutions/enum/institutions
 import { LocationSchema } from './location.schema';
 import { LocationModel } from '../models/entry-and-location-record.model';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { propTypeMongo } from '../../util/prop-type-mongo.function';
 
 /**
- * Mongoose schema for Entry and Location Record.
- * @schema EntryAndLocationRecord
+ * Represents the record of an entry and its location.
+ * This class contains metadata fields describing various properties related to heritage inventory and entry details.
  */
 @Schema()
 class EntryAndLocationRecord {
-  @Prop({
-    type: {
-      value: { type: String, enum: HeritageType },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+      enum: HeritageType,
+    }),
+  )
   heritageType: FieldMetadata<HeritageType>;
 
-  @Prop({
-    type: {
-      value: { type: String },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
   declarationType: FieldMetadata<string>;
 
-  @Prop({
-    type: {
-      value: { type: String },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-    required: true,
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
   inventoryNumber: FieldMetadata<string>;
 
-  @Prop({
-    type: {
-      value: { type: String, enum: GenericClassification },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-    required: true,
-  })
+  @Prop(
+    propTypeMongo({
+      type: GenericClassification,
+      enum: HeritageType,
+    }),
+  )
   genericClassification: FieldMetadata<GenericClassification>;
 
-  @Prop({
-    type: {
-      value: { type: Boolean },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: Boolean, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: Boolean,
+    }),
+  )
   pieceInventory: FieldMetadata<boolean>;
 
-  @Prop({
-    type: {
-      value: { type: Boolean },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: Boolean, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: Boolean,
+    }),
+  )
   auxiliaryInventory: FieldMetadata<boolean>;
 
-  @Prop({
-    type: {
-      value: { type: String },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-    required: true,
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
   objectName: FieldMetadata<string>;
 
-  @Prop({
-    type: {
-      value: { type: String },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
   initialDescription: FieldMetadata<string>;
 
-  @Prop({
-    type: {
-      value: { type: String },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
   entryMethod: FieldMetadata<string>;
 
-  @Prop({
-    type: {
-      value: { type: Date },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: Date, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: Date,
+    }),
+  )
   entryDate: FieldMetadata<Date>;
 
   /**
@@ -204,25 +94,21 @@ class EntryAndLocationRecord {
   @Prop({ type: LocationSchema })
   objectLocation: LocationModel;
 
-  @Prop({
-    type: {
-      value: { type: String, enum: InstitutionType },
-      status: { type: String, default: 'Pending' },
-      history: {
-        type: [
-          {
-            previousValue: { type: String, required: false },
-            modifiedAt: { type: Date },
-            comment: { type: String },
-          },
-        ],
-        default: [],
-      },
-    },
-  })
+  @Prop(
+    propTypeMongo({
+      type: String,
+      enum: InstitutionType,
+    }),
+  )
   institutionType: FieldMetadata<InstitutionType>;
 }
 
+/**
+ * EntryAndLocationRecordSchema is a schema object created using the SchemaFactory.
+ * It represents the database schema for the EntryAndLocationRecord entity.
+ * This schema is used for mapping and validating EntryAndLocationRecord-related data
+ * when interacting with the database.
+ */
 export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(
   EntryAndLocationRecord,
 );
