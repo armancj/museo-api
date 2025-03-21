@@ -13,7 +13,6 @@ import { AccessAndUseConditionsModule } from '../access-and-use-conditions/acces
 import { AssociatedDocumentationModule } from '../associated-documentation/associated-documentation.module';
 import { DescriptionControlModule } from '../description-control/description-control.module';
 import { CulturalNotesModule } from '../cultural-notes/cultural-notes.module';
-import {FieldReviewStatusModule} from "../field-review-status/field-review-status.module";
 
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import {FieldReviewStatusModule} from "../field-review-status/field-review-statu
     AssociatedDocumentationModule,
     DescriptionControlModule,
     CulturalNotesModule,
-    FieldReviewStatusModule,
   ],
   controllers: [CulturalHeritagePropertyController],
   providers: [CulturalHeritagePropertyService],
