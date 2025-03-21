@@ -15,6 +15,7 @@ import { TypologyModel } from './model/typology.model';
 import { PaginationDto } from '../../common/dto/pagination.dto';
 import { CreateTypologyDto } from './dto/create-typology.dto';
 import { UpdateTypologyDto } from './dto/update-typology.dto';
+import { FilterTypologyDto } from './dto/filter-typology.dto';
 
 @ApiTags('Typology')
 @Controller('typology')
@@ -29,8 +30,10 @@ export class TypologyController {
 
   @Get()
   @ApiOperation({ summary: 'Get all typologies' })
-  findAll(): Promise<TypologyModel[]> {
-    return this.typologyService.findAll({});
+  findAll(
+    @Query() filterTypologyDto: FilterTypologyDto,
+  ): Promise<TypologyModel[]> {
+    return this.typologyService.findAll(filterTypologyDto);
   }
 
   @Get(':uuid')
