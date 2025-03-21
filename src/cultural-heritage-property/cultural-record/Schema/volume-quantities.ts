@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { VolumeQuantitiesModel } from '../models/cultural-record';
+import { propTypeMongo } from '../../util/prop-type-mongo.function';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * Mongoose schema for representing volume quantities.
@@ -10,40 +12,80 @@ import { VolumeQuantitiesModel } from '../models/cultural-record';
 @Schema()
 class VolumeQuantities implements VolumeQuantitiesModel {
   /** Number of files (optional) */
-  @Prop()
-  file?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  file?: FieldMetadata<number>;
 
   /** Number of pages (optional) */
-  @Prop()
-  pages?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  pages?: FieldMetadata<number>;
 
   /** Number of books (optional) */
-  @Prop()
-  books?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  books?: FieldMetadata<number>;
 
   /** Number of physical objects (optional) */
-  @Prop()
-  objects?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  objects?: FieldMetadata<number>;
 
   /** Number of photos (optional) */
-  @Prop()
-  photos?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  photos?: FieldMetadata<number>;
 
   /** Number of engravings (optional) */
-  @Prop()
-  engravings?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  engravings?: FieldMetadata<number>;
 
   /** Number of slides (optional) */
-  @Prop()
-  slides?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  slides?: FieldMetadata<number>;
 
   /** Number of negatives (optional) */
-  @Prop()
-  negatives?: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
+  negatives?: FieldMetadata<number>;
 
   /** Number of maps, plans, or sketches (optional) */
   @Prop()
-  mapsPlansSketches?: number;
+  mapsPlansSketches?: FieldMetadata<number>;
 }
 
 /**
