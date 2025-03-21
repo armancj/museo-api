@@ -1,117 +1,100 @@
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { NonFunctionProperties } from '../../../common/interfaces/manipulate-properties';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
- * Interface for volume quantities.
- *
- * Represents the quantities of various types of physical and digital volumes.
+ * Interface representing a model for volume quantities information.
  */
 export interface VolumeQuantitiesModel {
-  /** Number of files (optional) */
-  file?: number;
-
-  /** Number of pages (optional) */
-  pages?: number;
-
-  /** Number of books (optional) */
-  books?: number;
-
-  /** Number of physical objects (optional) */
-  objects?: number;
-
-  /** Number of photographs (optional) */
-  photos?: number;
-
-  /** Number of engravings (optional) */
-  engravings?: number;
-
-  /** Number of slides (optional) */
-  slides?: number;
-
-  /** Number of negatives (optional) */
-  negatives?: number;
-
-  /** Number of maps, plans, or sketches (optional) */
-  mapsPlansSketches?: number;
+  file?: FieldMetadata<number>;
+  pages?: FieldMetadata<number>;
+  books?: FieldMetadata<number>;
+  objects?: FieldMetadata<number>;
+  photos?: FieldMetadata<number>;
+  engravings?: FieldMetadata<number>;
+  slides?: FieldMetadata<number>;
+  negatives?: FieldMetadata<number>;
+  mapsPlansSketches?: FieldMetadata<number>;
 }
 
 /**
- * Interface for dimensions of objects.
+ * Represents a model for dimensions and measurements.
  *
- * Represents physical dimensions and provides methods for calculations.
+ * This interface is designed to encapsulate various attributes of an object,
+ * such as its dimensions in centimeters, area in square meters, volume in
+ * cubic meters, and weight in kilograms. Each property is associated with
+ * additional metadata.
+ *
+ * Properties:
+ * - `heightCms`: The height of the object in centimeters.
+ * - `widthCms`: The width of the object in centimeters.
+ * - `lengthCms`: The length of the object in centimeters.
+ * - `squareMeters`: The area of the object in square meters.
+ * - `cubicMeters`: The volume of the object in cubic meters.
+ * - `weightKg`: The weight of the object in kilograms.
+ *
+ * Optional fields may be provided based on the applicability to the specific object.
  */
 export interface DimensionsModel {
-  /** Height in centimeters (optional) */
-  heightCms?: number;
-
-  /** Width in centimeters (optional) */
-  widthCms?: number;
-
-  /** Length in centimeters (optional) */
-  lengthCms?: number;
-
-  /** Area in square meters (optional) */
-  squareMeters?: number;
-
-  /** Volume in cubic meters (optional) */
-  cubicMeters?: number;
-
-  /** Weight in kilograms (optional) */
-  weightKg?: number;
-
-  /** Method to calculate square meters based on dimensions */
-  calculateSquareMeters: () => number;
-
-  /** Method to calculate cubic meters based on dimensions */
-  calculateCubicMeters: () => number;
+  heightCms?: FieldMetadata<number>;
+  widthCms?: FieldMetadata<number>;
+  lengthCms?: FieldMetadata<number>;
+  squareMeters?: FieldMetadata<number>;
+  cubicMeters?: FieldMetadata<number>;
+  weightKg?: FieldMetadata<number>;
 }
 
 /**
- * Type alias for dimension properties excluding functions.
+ * Represents a type definition for the properties of a `DimensionsModel` object,
+ * excluding any function properties. This type is used to model attributes
+ * related to dimensions while omitting any methods or functions present in
+ * the original `DimensionsModel`.
+ *
+ * It is derived using the `NonFunctionProperties` utility type to isolate
+ * only non-function members of `DimensionsModel`.
  */
 export type DimensionsPropertiesModel = NonFunctionProperties<DimensionsModel>;
 
 /**
- * Interface for a cultural record.
- *
- * Represents a comprehensive cultural record including titles, descriptors, quantities, dimensions, and more.
+ * Represents the data structure for a cultural record.
+ * It contains various metadata fields for describing a cultural object and its associated information.
  */
 export interface CulturalRecordModel {
   /** Title of the background associated with the cultural record (optional) */
-  backgroundTitle?: string;
+  backgroundTitle?: FieldMetadata<string>;
 
   /** Title of the section within the cultural record (optional) */
-  sectionTitle?: string;
+  sectionTitle?: FieldMetadata<string>;
 
   /** Title of the cultural object */
-  objectTitle: string;
+  objectTitle: FieldMetadata<string>;
 
   /** Description of the cultural object */
-  objectDescription: string;
+  objectDescription: FieldMetadata<string>;
 
   /** Onomastic descriptors associated with the cultural record (optional) */
-  onomasticDescriptors?: string;
+  onomasticDescriptors?: FieldMetadata<string>;
 
   /** Geographic descriptors (optional) */
-  geographicDescriptors?: string;
+  geographicDescriptors?: FieldMetadata<string>;
 
   /** Institutional descriptors (optional) */
-  institutionalDescriptors?: string;
+  institutionalDescriptors?: FieldMetadata<string>;
 
   /** Subject descriptors (optional) */
-  subjectDescriptors?: string;
+  subjectDescriptors?: FieldMetadata<string>;
 
   /** Extreme dates for the cultural record (optional) */
-  extremeDates?: { start: Date; end: Date };
+  extremeDates?: FieldMetadata<{ start: Date; end: Date }>;
 
   /** Value grade of the cultural object */
-  valueGrade: ValueGrade;
+  valueGrade: FieldMetadata<ValueGrade>;
 
   /** Description level of the cultural object */
-  descriptionLevel: DescriptionLevel;
+  descriptionLevel: FieldMetadata<DescriptionLevel>;
 
   /** Valuation of the cultural object (optional) */
-  valuation?: number;
+  valuation?: FieldMetadata<number>;
 
   /** Volume quantities associated with the cultural record */
   volumesQuantities: VolumeQuantitiesModel;
@@ -119,24 +102,21 @@ export interface CulturalRecordModel {
   /** Dimensions associated with the cultural record */
   dimensions: DimensionsPropertiesModel;
 
-  /** Languages represented in the cultural record */
-  languages: string[];
-
-  /** Supports available for the cultural record */
-  supports: string[];
-
-  /** Associated letters with the cultural record */
-  letters: string[];
-
-  /** Instruments used for describing the cultural object */
-  descriptionInstrument: string[];
-
-  /** State of conservation of the cultural object */
-  conservationState: string[];
+  languages: FieldMetadata<string[]>;
+  supports: FieldMetadata<string[]>;
+  letters: FieldMetadata<string[]>;
+  descriptionInstrument: FieldMetadata<string[]>;
+  conservationState: FieldMetadata<string[]>;
 }
 
 /**
- * Type alias for non-function properties of a cultural record.
+ * Represents a model type that includes non-function properties of the `CulturalRecordModel`.
+ * The `CulturalPropertiesModel` type is derived by extracting only the properties of the
+ * `CulturalRecordModel` that are not functions, thus creating a type definition for the
+ * data structure meant to encapsulate the relevant cultural record information.
+ *
+ * This type is intended to define a structural interface for objects handling cultural properties,
+ * excluding any methods or functions that might exist within the `CulturalRecordModel`.
  */
 export type CulturalPropertiesModel =
   NonFunctionProperties<CulturalRecordModel>;

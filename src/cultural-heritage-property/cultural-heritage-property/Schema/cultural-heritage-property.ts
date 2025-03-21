@@ -26,8 +26,8 @@ import { NotesModel } from '../../cultural-notes/models/cultural-notes-model';
 import {
   FieldReviewStatus,
   FieldReviewStatusEntity,
-  FieldReviewStatusModel
-} from "../../field-review-status/schema/field-review-status.schema";
+  FieldReviewStatusModel,
+} from '../../field-review-status/schema/field-review-status.schema';
 
 export type CulturalHeritagePropertyDocument =
   HydratedDocument<CulturalHeritageProperty>;
@@ -66,12 +66,8 @@ export class CulturalHeritageProperty extends BaseSchema {
   @Type(() => Institution)
   institution: Institution;
 
-
-  @Prop()
+  @Prop({ type: [String], default: [] })
   fieldReviewStatusIds: string[];
-
-  @Type(() => FieldReviewStatus)
-  fieldReviewStatus: FieldReviewStatus;
 }
 
 export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(
@@ -93,14 +89,16 @@ CulturalHeritagePropertySchema.virtual('fieldReviewStatus', {
 });
 
 CulturalHeritagePropertySchema.pre('save', async function (next) {
-  const culturalHeritageProperty = this as HydratedDocument<CulturalHeritageProperty>;
+  const culturalHeritageProperty =
+    this as HydratedDocument<CulturalHeritageProperty>;
 
   if (!culturalHeritageProperty.fieldReviewStatusIds) {
     culturalHeritageProperty.fieldReviewStatusIds = [];
   }
 
   const fieldsToReview = ['notes', 'entryAndLocation', 'producerAuthor'];
-  const FieldReviewStatusModel = culturalHeritageProperty.model<FieldReviewStatusModel>('FieldReviewStatus');
+  const FieldReviewStatusModel =
+    culturalHeritageProperty.model<FieldReviewStatusModel>('FieldReviewStatus');
 
   for (const field of fieldsToReview) {
     if (culturalHeritageProperty.isModified(field)) {
@@ -120,7 +118,9 @@ CulturalHeritagePropertySchema.pre('save', async function (next) {
           culturalHeritageProperty: culturalHeritageProperty._id,
         });
 
-        culturalHeritageProperty.fieldReviewStatusIds.push(newReviewStatus.uuid);
+        culturalHeritageProperty.fieldReviewStatusIds.push(
+          newReviewStatus.uuid,
+        );
       } else {
         existingReviewStatus.previousValue = existingReviewStatus.currentValue;
         existingReviewStatus.currentValue = culturalHeritageProperty[field];
@@ -131,8 +131,6 @@ CulturalHeritagePropertySchema.pre('save', async function (next) {
   }
   next();
 });
-
-
 
 CulturalHeritagePropertySchema.add(BaseSchemaFactory);
 

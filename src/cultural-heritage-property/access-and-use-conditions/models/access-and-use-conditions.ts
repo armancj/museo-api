@@ -1,13 +1,11 @@
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+
 /**
- * Interface representing the model for access and use conditions.
+ * Represents the model for access and use conditions of a resource, including
+ * access conditions, reproduction conditions, and any technical requirements.
  */
 export interface AccessAndUseConditionsModel {
-  /** List of conditions required for accessing the resource. */
-  accessConditions: string[];
-
-  /** List of conditions required for reproducing the resource. */
-  reproductionConditions: string[];
-
-  /** Technical requirements needed for accessing the resource. */
-  technicalRequirements: string;
+  accessConditions: FieldMetadata<string[]>;
+  reproductionConditions: FieldMetadata<string[]>;
+  technicalRequirements: FieldMetadata<string>;
 }

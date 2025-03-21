@@ -1,13 +1,18 @@
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+
+/**
+ * Represents a record model for a producer or author with associated metadata.
+ */
 export interface ProducerAuthorRecordModel {
-  producerAuthorNames: string;
-  street: string;
-  number: string;
-  betweenStreet1: string;
-  betweenStreet2: string;
-  district: string;
-  locality: string;
-  municipality: string;
-  province: string;
-  institutionalHistory?: string;
-  objectEntryHistory?: string;
+  producerAuthorNames: FieldMetadata<string>;
+  street: FieldMetadata<string>;
+  number: FieldMetadata<string>;
+  betweenStreet1: FieldMetadata<string>;
+  betweenStreet2: FieldMetadata<string>;
+  district: FieldMetadata<string>;
+  locality: FieldMetadata<string>;
+  municipality: FieldMetadata<string>;
+  province: FieldMetadata<string>;
+  institutionalHistory?: FieldMetadata<string>;
+  objectEntryHistory?: FieldMetadata<string>;
 }

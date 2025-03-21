@@ -1,36 +1,17 @@
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+
 /**
- * Interface representing the structure of associated documentation data.
+ * Represents a model for associated documentation within a system.
+ *
+ * This interface provides metadata for various document-related fields.
+ * It includes information about the existence and location of originals and copies,
+ * as well as related description units and related publication information.
+ *
+ * Each field may include additional metadata details encapsulated within the FieldMetadata type.
  */
 export interface AssociatedDocumentationModel {
-  /**
-   * Indicates the existence and location of original documents.
-   *
-   * This property is optional.
-   * @type {string}
-   */
-  originalsExistenceAndLocation?: string;
-
-  /**
-   * Indicates the existence and location of copies.
-   *
-   * This property is required.
-   * @type {string}
-   */
-  copiesExistenceAndLocation: string;
-
-  /**
-   * Provides information about related description units.
-   *
-   * This property is optional.
-   * @type {string}
-   */
-  relatedDescriptionUnits?: string;
-
-  /**
-   * Contains information about related publications.
-   *
-   * This property is optional.
-   * @type {string}
-   */
-  relatedPublicationsInformation?: string;
+  originalsExistenceAndLocation?: FieldMetadata<string>;
+  copiesExistenceAndLocation: FieldMetadata<string>;
+  relatedDescriptionUnits?: FieldMetadata<string>;
+  relatedPublicationsInformation?: FieldMetadata<string>;
 }
