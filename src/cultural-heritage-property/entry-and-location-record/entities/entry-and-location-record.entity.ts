@@ -5,24 +5,25 @@ import {
 } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { LocationEntity } from './location.entity';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Class representing an Entry and Location Record.
  * @implements {EntryAndLocationRecordModel}
  */
 export class EntryAndLocationRecord implements EntryAndLocationRecordModel {
-  auxiliaryInventory: boolean;
-  declarationType: string;
-  entryDate: Date;
-  entryMethod: string;
-  genericClassification: GenericClassification;
-  heritageType: HeritageType;
-  initialDescription: string;
-  institutionType: InstitutionType;
-  inventoryNumber: string;
+  auxiliaryInventory: FieldMetadataDto<boolean>;
+  declarationType: FieldMetadataDto<string>;
+  entryDate: FieldMetadataDto<Date>;
+  entryMethod: FieldMetadataDto<string>;
+  genericClassification: FieldMetadataDto<GenericClassification>;
+  heritageType: FieldMetadataDto<HeritageType>;
+  initialDescription: FieldMetadataDto<string>;
+  institutionType: FieldMetadataDto<InstitutionType>;
+  inventoryNumber: FieldMetadataDto<string>;
   objectLocation: LocationEntity;
-  objectName: string;
-  pieceInventory: boolean;
+  objectName: FieldMetadataDto<string>;
+  pieceInventory: FieldMetadataDto<boolean>;
 
   /**
    * Creates an instance of EntryAndLocationRecord.

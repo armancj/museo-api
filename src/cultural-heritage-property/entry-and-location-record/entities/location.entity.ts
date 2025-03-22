@@ -1,17 +1,18 @@
 import { LocationModel } from '../models/entry-and-location-record.model';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Entity representing a Location.
  * @implements {LocationModel}
  */
 export class LocationEntity implements LocationModel {
-  box: string;
-  exhibitionRoom: string;
-  fileFolder: string;
-  floor: string;
-  shelfDrawer: string;
-  showcaseShelf: string;
-  storage: string;
+  box: FieldMetadataDto<string>;
+  exhibitionRoom: FieldMetadataDto<string>;
+  fileFolder: FieldMetadataDto<string>;
+  floor: FieldMetadataDto<string>;
+  shelfDrawer: FieldMetadataDto<string>;
+  showcaseShelf: FieldMetadataDto<string>;
+  storage: FieldMetadataDto<string>;
 
   /**
    * Creates an instance of LocationEntity.
