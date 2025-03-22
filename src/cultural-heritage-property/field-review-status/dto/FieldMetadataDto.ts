@@ -19,7 +19,7 @@ export class FieldMetadataDto<T> {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ChangeHistoryDto)
-  history: Array<ChangeHistoryDto<any>>;
+  history: Array<ChangeHistoryDto<T>>;
 }
 
 /**
