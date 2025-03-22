@@ -1,7 +1,10 @@
 import { TestDataModel } from '../model/test-data.model';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDto } from '../field-review-status/dto/field-metadata.dto';
 
 export class TestDatum {
-  test: string;
+  @ApiProperty({ type: () => FieldMetadataDto })
+  test: FieldMetadataDto<string>;
 
   constructor(options: Partial<TestDataModel> = {}) {
     this.test = options.name;
