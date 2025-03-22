@@ -1,4 +1,5 @@
 import { NotesModel } from '../models/cultural-notes-model';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Entity representing a cultural note.
@@ -10,7 +11,7 @@ export class CulturalNoteEntity implements NotesModel {
   /**
    * Content of the cultural note.
    */
-  notes: string;
+  notes: FieldMetadataDto<string>;
 
   /**
    * Constructor to initialize a `CulturalNoteEntity`.
