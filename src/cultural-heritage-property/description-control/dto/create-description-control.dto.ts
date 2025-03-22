@@ -1,6 +1,7 @@
 import { IsDate, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { DescriptionControlModel } from '../models/description-control-model';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Data Transfer Object for creating a Description Control.
@@ -12,15 +13,16 @@ export class CreateDescriptionControlDto implements DescriptionControlModel {
    * Must be a valid Date object.
    */
   @IsDate()
-  @Type(() => Date)
-  descriptionDateTime: Date;
+  @Type(() => FieldMetadataDto)
+  descriptionDateTime: FieldMetadataDto<Date>;
 
   /**
    * Identifier of the person who made the description.
    * Must be a non-empty string.
    */
   @IsString()
-  descriptionMadeBy: string;
+  @Type(() => FieldMetadataDto)
+  descriptionMadeBy: FieldMetadataDto<string>;
 
   /**
    * Date and time when the description was reviewed.
@@ -28,12 +30,14 @@ export class CreateDescriptionControlDto implements DescriptionControlModel {
    */
   @IsDate()
   @Type(() => Date)
-  reviewDateTime: Date;
+  @Type(() => FieldMetadataDto)
+  reviewDateTime: FieldMetadataDto<Date>;
 
   /**
    * Identifier of the person who reviewed the description.
-   * Must be a non-empty string.
+   * Must be a non-empty FieldMetadataDto<string>.
    */
   @IsString()
-  reviewedBy: string;
+  @Type(() => FieldMetadataDto)
+  reviewedBy: FieldMetadataDto<string>;
 }
