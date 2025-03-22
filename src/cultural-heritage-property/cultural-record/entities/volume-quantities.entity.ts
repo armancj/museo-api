@@ -1,4 +1,5 @@
 import { VolumeQuantitiesModel } from '../models/cultural-record';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Entity representing the quantities related to volumes (files, pages, books, etc.).
@@ -6,15 +7,15 @@ import { VolumeQuantitiesModel } from '../models/cultural-record';
  * This entity models the quantities for different volume-related properties such as files, books, etc.
  */
 export class VolumeQuantitiesEntity implements VolumeQuantitiesModel {
-  file?: number;
-  pages?: number;
-  books?: number;
-  objects?: number;
-  photos?: number;
-  engravings?: number;
-  slides?: number;
-  negatives?: number;
-  mapsPlansSketches?: number;
+  file?: FieldMetadataDto<number>;
+  pages?: FieldMetadataDto<number>;
+  books?: FieldMetadataDto<number>;
+  objects?: FieldMetadataDto<number>;
+  photos?: FieldMetadataDto<number>;
+  engravings?: FieldMetadataDto<number>;
+  slides?: FieldMetadataDto<number>;
+  negatives?: FieldMetadataDto<number>;
+  mapsPlansSketches?: FieldMetadataDto<number>;
 
   constructor(option: Partial<VolumeQuantitiesModel>) {
     this.file = option.file;
