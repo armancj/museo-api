@@ -75,6 +75,6 @@ CulturalHeritagePropertySchema.virtual('institution', {
 
 CulturalHeritagePropertySchema.add(BaseSchemaFactory);
 
-export const CulturalHeritagePropertyEntity = 'CulturalHeritageProperty';
+export const CulturalHeritagePropertyEntity = 'cultural-heritage-property';
 export type CulturalHeritagePropertyModel =
   Model<CulturalHeritagePropertyDocument>;

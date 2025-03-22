@@ -24,5 +24,5 @@ export const CategoryMuseumSchema =
   SchemaFactory.createForClass(CategoryMuseum);
 CategoryMuseumSchema.add(BaseSchemaFactory);
 
-export const CategoryMuseumNameEntity = 'category_museums';
+export const CategoryMuseumNameEntity = 'category-museums';
 export type CategoryMuseumMongoModel = Model<CategoryMuseumDocument>;

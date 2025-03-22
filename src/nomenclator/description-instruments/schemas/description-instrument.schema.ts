@@ -26,4 +26,6 @@ export class DescriptionInstrument
 export const DescriptionInstrumentSchema = SchemaFactory.createForClass(
   DescriptionInstrument,
 );
+
+export const DescriptionInstrumentNameEntity = 'description-instrument';
 DescriptionInstrumentSchema.add(BaseSchemaFactory);
