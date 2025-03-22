@@ -15,57 +15,64 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
- * DTO for creating an entry and location record.
- * @typedef {Object} CreateEntryAndLocationRecordDto
- * @property {boolean} auxiliaryInventory - Indicates if the item is in the auxiliary inventory.
- * @property {string} declarationType - The type of declaration.
- * @property {Date} entryDate - The entry date.
- * @property {string} entryMethod - The method of entry.
- * @property {GenericClassification} genericClassification - The generic classification of the item.
- * @property {HeritageType} heritageType - The heritage type of the item.
- * @property {string} initialDescription - A brief initial description of the item.
- * @property {InstitutionType} institutionType - The type of institution.
- * @property {string} inventoryNumber - The inventory number.
- * @property {CreateLocationDto} objectLocation - The location details of the item.
- * @property {string} objectName - The name of the object.
- * @property {boolean} pieceInventory - Indicates if the item is in the piece inventory.
+ * Represents a data transfer object (DTO) for creating an entry and location record.
+ * This class implements the `EntryAndLocationRecordModel` interface and encompasses
+ * various properties needed to describe and validate data for an entry and its associated
+ * location record.
+ *
+ * Each property corresponds to specific metadata fields and includes validation rules
+ * to ensure the integrity of the data. These rules leverage decorators like `IsBoolean`,
+ * `IsString`, `IsNotEmpty`, `IsDate`, and enumerators to enforce compliance with the expected format.
+ *
+ * The class also utilizes the `Type` decorator for defining transformation types to maintain
+ * consistency within nested objects and complex data types.
  */
 export class CreateEntryAndLocationRecordDto
   implements EntryAndLocationRecordModel
 {
   @IsBoolean()
-  auxiliaryInventory: boolean;
+  @Type(() => FieldMetadataDto)
+  auxiliaryInventory: FieldMetadataDto<boolean>;
 
   @IsString()
   @IsNotEmpty()
-  declarationType: string;
+  @Type(() => FieldMetadataDto)
+  declarationType: FieldMetadataDto<string>;
 
   @IsDate()
-  entryDate: Date;
+  @Type(() => FieldMetadataDto)
+  entryDate: FieldMetadataDto<Date>;
 
   @IsString()
   @IsNotEmpty()
-  entryMethod: string;
+  @Type(() => FieldMetadataDto)
+  entryMethod: FieldMetadataDto<string>;
 
   @IsEnum(GenericClassification)
-  genericClassification: GenericClassification;
+  @Type(() => FieldMetadataDto)
+  genericClassification: FieldMetadataDto<GenericClassification>;
 
   @IsEnum(HeritageType)
-  heritageType: HeritageType;
+  @Type(() => FieldMetadataDto)
+  heritageType: FieldMetadataDto<HeritageType>;
 
   @IsString()
   @IsNotEmpty()
   @Length(10, 200)
-  initialDescription: string;
+  @Type(() => FieldMetadataDto)
+  initialDescription: FieldMetadataDto<string>;
 
   @IsEnum(InstitutionType)
-  institutionType: InstitutionType;
+  @Type(() => FieldMetadataDto)
+  institutionType: FieldMetadataDto<InstitutionType>;
 
   @IsString()
   @IsNotEmpty()
-  inventoryNumber: string;
+  @Type(() => FieldMetadataDto)
+  inventoryNumber: FieldMetadataDto<string>;
 
   @ValidateNested()
   @Type(() => CreateLocationDto)
@@ -73,8 +80,10 @@ export class CreateEntryAndLocationRecordDto
 
   @IsString()
   @IsNotEmpty()
-  objectName: string;
+  @Type(() => FieldMetadataDto)
+  objectName: FieldMetadataDto<string>;
 
   @IsBoolean()
-  pieceInventory: boolean;
+  @Type(() => FieldMetadataDto)
+  pieceInventory: FieldMetadataDto<boolean>;
 }
