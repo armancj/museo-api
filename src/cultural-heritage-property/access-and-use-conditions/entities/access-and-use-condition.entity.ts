@@ -1,3 +1,4 @@
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 import { AccessAndUseConditionsModel } from '../models/access-and-use-conditions';
 
 /**
@@ -8,13 +9,13 @@ import { AccessAndUseConditionsModel } from '../models/access-and-use-conditions
  */
 export class AccessAndUseCondition implements AccessAndUseConditionsModel {
   /** List of access conditions. */
-  accessConditions: string[];
+  accessConditions: FieldMetadataDto<string[]>;
 
   /** List of reproduction conditions. */
-  reproductionConditions: string[];
+  reproductionConditions: FieldMetadataDto<string[]>;
 
   /** Technical requirements needed for access. */
-  technicalRequirements: string;
+  technicalRequirements: FieldMetadataDto<string>;
 
   /**
    * Constructor for the `AccessAndUseCondition` class.
