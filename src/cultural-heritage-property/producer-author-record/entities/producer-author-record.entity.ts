@@ -1,17 +1,18 @@
 import { ProducerAuthorRecordModel } from '../models/producer-author-record.models';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 export class ProducerAuthorRecord implements ProducerAuthorRecordModel {
-  betweenStreet1: string;
-  betweenStreet2: string;
-  district: string;
-  institutionalHistory: string;
-  locality: string;
-  municipality: string;
-  number: string;
-  objectEntryHistory: string;
-  producerAuthorNames: string;
-  province: string;
-  street: string;
+  betweenStreet1: FieldMetadataDto<string>;
+  betweenStreet2: FieldMetadataDto<string>;
+  district: FieldMetadataDto<string>;
+  institutionalHistory: FieldMetadataDto<string>;
+  locality: FieldMetadataDto<string>;
+  municipality: FieldMetadataDto<string>;
+  number: FieldMetadataDto<string>;
+  objectEntryHistory: FieldMetadataDto<string>;
+  producerAuthorNames: FieldMetadataDto<string>;
+  province: FieldMetadataDto<string>;
+  street: FieldMetadataDto<string>;
 
   constructor(option: Partial<ProducerAuthorRecordModel>) {
     this.betweenStreet1 = option.betweenStreet1;
