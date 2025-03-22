@@ -1,16 +1,17 @@
 import { DimensionsModel } from '../models/cultural-record';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 /**
  * Entity representing the dimensions of an object (height, width, weight, etc.).
  *
  * This entity models the dimensions of a cultural property, including height, weight, area, and volume.
  */
 export class DimensionsEntity implements DimensionsModel {
-  heightCms?: number;
-  widthCms?: number;
-  lengthCms?: number;
-  squareMeters?: number;
-  cubicMeters?: number;
-  weightKg?: number;
+  heightCms?: FieldMetadataDto<number>;
+  widthCms?: FieldMetadataDto<number>;
+  lengthCms?: FieldMetadataDto<number>;
+  squareMeters?: FieldMetadataDto<number>;
+  cubicMeters?: FieldMetadataDto<number>;
+  weightKg?: FieldMetadataDto<number>;
 
   constructor(option: Partial<DimensionsModel>) {
     this.heightCms = option.heightCms;
@@ -37,11 +38,16 @@ export class DimensionsEntity implements DimensionsModel {
    *
    * @returns The calculated square meters, or 0 if heightCms or widthCms is missing.
    */
-  calculateSquareMeters(): number {
+  calculateSquareMeters(): FieldMetadataDto<number> {
+    const calculateSquareMeters = new FieldMetadataDto<number>();
+
     if (this.heightCms && this.widthCms) {
-      return (this.heightCms * this.widthCms) / 10000; // Convert from cm² to m²
+      calculateSquareMeters.value =
+        (this.heightCms.value * this.widthCms.value) / 10000;
+      return calculateSquareMeters; // Convert from cm² to m²
     }
-    return 0; // If heightCms or widthCms is missing, return 0
+    calculateSquareMeters.value = 0;
+    return calculateSquareMeters; // If heightCms or widthCms is missing, return 0
   }
 
   /**
@@ -50,10 +56,15 @@ export class DimensionsEntity implements DimensionsModel {
    *
    * @returns The calculated cubic meters, or 0 if any of the dimensions are missing.
    */
-  calculateCubicMeters(): number {
+  calculateCubicMeters(): FieldMetadataDto<number> {
+    const calculateCubicMeter = new FieldMetadataDto<number>();
     if (this.heightCms && this.widthCms && this.lengthCms) {
-      return (this.heightCms * this.widthCms * this.lengthCms) / 1000000;
+      calculateCubicMeter.value =
+        (this.heightCms.value * this.widthCms.value * this.lengthCms.value) /
+        1000000;
+      return calculateCubicMeter;
     }
-    return 0; // If any dimension is missing, return 0
+    calculateCubicMeter.value = 0;
+    return calculateCubicMeter; // If any dimension is missing, return 0
   }
 }
