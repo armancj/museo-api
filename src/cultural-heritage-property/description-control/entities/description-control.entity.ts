@@ -1,4 +1,5 @@
 import { DescriptionControlModel } from '../models/description-control-model';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Class representing a Description Control.
@@ -8,22 +9,22 @@ export class DescriptionControl implements DescriptionControlModel {
   /**
    * Identifier of the person who made the description.
    */
-  descriptionMadeBy: string;
+  descriptionMadeBy: FieldMetadataDto<string>;
 
   /**
    * Date and time when the description was made.
    */
-  descriptionDateTime: Date;
+  descriptionDateTime: FieldMetadataDto<Date>;
 
   /**
    * Identifier of the person who reviewed the description.
    */
-  reviewedBy: string;
+  reviewedBy: FieldMetadataDto<string>;
 
   /**
    * Date and time when the description was reviewed.
    */
-  reviewDateTime: Date;
+  reviewDateTime: FieldMetadataDto<Date>;
 
   constructor(option: DescriptionControlModel) {
     this.descriptionMadeBy = option.descriptionMadeBy;
