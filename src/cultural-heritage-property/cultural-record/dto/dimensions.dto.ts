@@ -1,5 +1,7 @@
 import { DimensionsPropertiesModel } from '../models/cultural-record';
 import { IsOptional, IsNumber, Min } from 'class-validator';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { Type } from 'class-transformer';
 
 /**
  * Data Transfer Object for Dimensions.
@@ -13,7 +15,8 @@ export class DimensionsDto implements DimensionsPropertiesModel {
   @IsOptional()
   @IsNumber()
   @Min(0)
-  heightCms?: number;
+  @Type(() => FieldMetadataDto)
+  heightCms?: FieldMetadataDto<number>;
 
   /**
    * Width in centimeters (optional).
@@ -21,8 +24,9 @@ export class DimensionsDto implements DimensionsPropertiesModel {
    */
   @IsOptional()
   @IsNumber()
+  @Type(() => FieldMetadataDto)
   @Min(0)
-  widthCms?: number;
+  widthCms?: FieldMetadataDto<number>;
 
   /**
    * Length in centimeters (optional).
@@ -31,7 +35,8 @@ export class DimensionsDto implements DimensionsPropertiesModel {
   @IsOptional()
   @IsNumber()
   @Min(0)
-  lengthCms?: number;
+  @Type(() => FieldMetadataDto)
+  lengthCms?: FieldMetadataDto<number>;
 
   /**
    * Weight in kilograms (optional).
@@ -40,5 +45,6 @@ export class DimensionsDto implements DimensionsPropertiesModel {
   @IsOptional()
   @IsNumber()
   @Min(0)
-  weightKg?: number;
+  @Type(() => FieldMetadataDto)
+  weightKg?: FieldMetadataDto<number>;
 }

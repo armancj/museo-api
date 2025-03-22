@@ -1,5 +1,7 @@
 import { IsOptional, IsInt, Min } from 'class-validator';
 import { VolumeQuantitiesModel } from '../models/cultural-record';
+import { Type } from 'class-transformer';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Data Transfer Object for Volume Quantities.
@@ -13,7 +15,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  books?: number;
+  @Type(() => FieldMetadataDto)
+  books?: FieldMetadataDto<number>;
 
   /**
    * Number of engravings (optional).
@@ -22,7 +25,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  engravings?: number;
+  @Type(() => FieldMetadataDto)
+  engravings?: FieldMetadataDto<number>;
 
   /**
    * Number of files (optional).
@@ -31,7 +35,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  file?: number;
+  @Type(() => FieldMetadataDto)
+  file?: FieldMetadataDto<number>;
 
   /**
    * Number of maps, plans, or sketches (optional).
@@ -40,7 +45,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  mapsPlansSketches?: number;
+  @Type(() => FieldMetadataDto)
+  mapsPlansSketches?: FieldMetadataDto<number>;
 
   /**
    * Number of negatives (optional).
@@ -49,7 +55,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  negatives?: number;
+  @Type(() => FieldMetadataDto)
+  negatives?: FieldMetadataDto<number>;
 
   /**
    * Number of objects (optional).
@@ -58,7 +65,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  objects?: number;
+  @Type(() => FieldMetadataDto)
+  objects?: FieldMetadataDto<number>;
 
   /**
    * Number of pages (optional).
@@ -67,7 +75,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  pages?: number;
+  @Type(() => FieldMetadataDto)
+  pages?: FieldMetadataDto<number>;
 
   /**
    * Number of photos (optional).
@@ -76,7 +85,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  photos?: number;
+  @Type(() => FieldMetadataDto)
+  photos?: FieldMetadataDto<number>;
 
   /**
    * Number of slides (optional).
@@ -85,5 +95,6 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
   @IsOptional()
   @IsInt()
   @Min(0)
-  slides?: number;
+  @Type(() => FieldMetadataDto)
+  slides?: FieldMetadataDto<number>;
 }
