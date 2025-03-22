@@ -1,5 +1,5 @@
 import { DimensionsModel } from '../models/cultural-record';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 /**
  * Entity representing the dimensions of an object (height, width, weight, etc.).
  *

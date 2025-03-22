@@ -39,8 +39,8 @@ class EntryAndLocationRecord {
 
   @Prop(
     propTypeMongo({
-      type: GenericClassification,
-      enum: HeritageType,
+      type: String,
+      enum: GenericClassification,
     }),
   )
   genericClassification: FieldMetadata<GenericClassification>;

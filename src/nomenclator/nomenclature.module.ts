@@ -48,7 +48,6 @@ import { ConservationStatusModule } from './conservation-status/conservation-sta
   exports: [
     CategoryMuseumModule,
     InstitutionTypesModule,
-
     MuseumTypesModule,
     HeritageOfficesModule,
     PhoneNumbersModule,

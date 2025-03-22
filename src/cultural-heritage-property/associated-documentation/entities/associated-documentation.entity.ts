@@ -1,5 +1,5 @@
 import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Entity class for representing associated documentation.

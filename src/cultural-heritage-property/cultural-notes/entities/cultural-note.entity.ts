@@ -1,5 +1,5 @@
 import { NotesModel } from '../models/cultural-notes-model';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Entity representing a cultural note.

@@ -1,7 +1,7 @@
 import { IsOptional, IsInt, Min } from 'class-validator';
 import { VolumeQuantitiesModel } from '../models/cultural-record';
 import { Type } from 'class-transformer';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Data Transfer Object for Volume Quantities.

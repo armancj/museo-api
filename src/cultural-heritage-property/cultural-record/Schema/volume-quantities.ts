@@ -84,7 +84,12 @@ class VolumeQuantities implements VolumeQuantitiesModel {
   negatives?: FieldMetadata<number>;
 
   /** Number of maps, plans, or sketches (optional) */
-  @Prop()
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      required: false,
+    }),
+  )
   mapsPlansSketches?: FieldMetadata<number>;
 }
 

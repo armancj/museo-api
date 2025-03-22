@@ -6,7 +6,6 @@ import {
   DescriptionInstrumentNameEntity,
   DescriptionInstrumentSchema,
 } from './schemas/description-instrument.schema';
-import { InstitutionsModule } from '../../address';
 
 @Module({
   imports: [
@@ -16,7 +15,6 @@ import { InstitutionsModule } from '../../address';
         schema: DescriptionInstrumentSchema,
       },
     ]),
-    InstitutionsModule,
   ],
   controllers: [DescriptionInstrumentsController],
   providers: [DescriptionInstrumentsService],

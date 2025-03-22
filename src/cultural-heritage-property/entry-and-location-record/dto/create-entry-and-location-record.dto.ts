@@ -15,7 +15,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Represents a data transfer object (DTO) for creating an entry and location record.

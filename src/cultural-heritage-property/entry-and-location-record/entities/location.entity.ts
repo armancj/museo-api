@@ -1,5 +1,5 @@
 import { LocationModel } from '../models/entry-and-location-record.model';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Entity representing a Location.

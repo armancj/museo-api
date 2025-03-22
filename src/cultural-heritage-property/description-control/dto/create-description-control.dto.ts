@@ -1,7 +1,7 @@
 import { IsDate, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { DescriptionControlModel } from '../models/description-control-model';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Data Transfer Object for creating a Description Control.

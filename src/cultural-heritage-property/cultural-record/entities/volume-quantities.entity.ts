@@ -1,5 +1,5 @@
 import { VolumeQuantitiesModel } from '../models/cultural-record';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Entity representing the quantities related to volumes (files, pages, books, etc.).

@@ -1,7 +1,7 @@
 import { LocationModel } from '../models/entry-and-location-record.model';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Data Transfer Object (DTO) for creating a new location.

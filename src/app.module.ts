@@ -15,7 +15,7 @@ import { AddressModule } from './address';
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property';
 import { CommandsModule } from './commands/commands.module';
 import { LoggerModule } from './logger/logger.module';
-import { NomenclatureModule } from './nomenclator/nomenclatureModule';
+import { NomenclatureModule } from './nomenclator/nomenclature.module';
 
 @Module({
   imports: [

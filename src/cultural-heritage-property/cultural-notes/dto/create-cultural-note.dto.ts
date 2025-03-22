@@ -1,6 +1,6 @@
 import { NotesModel } from '../models/cultural-notes-model';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { Type } from 'class-transformer';
 
 /**

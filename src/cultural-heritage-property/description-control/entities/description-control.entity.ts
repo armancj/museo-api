@@ -1,5 +1,5 @@
 import { DescriptionControlModel } from '../models/description-control-model';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Class representing a Description Control.

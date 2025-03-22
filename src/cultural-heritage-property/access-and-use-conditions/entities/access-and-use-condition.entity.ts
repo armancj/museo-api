@@ -1,4 +1,4 @@
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { AccessAndUseConditionsModel } from '../models/access-and-use-conditions';
 
 /**

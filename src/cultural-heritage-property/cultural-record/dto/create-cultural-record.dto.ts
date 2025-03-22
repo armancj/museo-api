@@ -14,7 +14,7 @@ import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { VolumesQuantitiesDto } from './volumes-quantities.dto';
 import { DimensionsDto } from './dimensions.dto';
 import { ExtremeDatesDto } from './extreme-dates.dto';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Data Transfer Object (DTO) for creating a cultural record.

@@ -2,7 +2,7 @@ import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { CulturalRecordModel } from '../models/cultural-record';
 import { VolumeQuantitiesEntity } from './volume-quantities.entity';
 import { DimensionsEntity } from './dimensions.entity';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 /**
  * Entity class representing a cultural record.

@@ -1,6 +1,6 @@
 import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { Type } from 'class-transformer';
 
 /**

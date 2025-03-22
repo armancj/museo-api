@@ -1,6 +1,6 @@
 import { DimensionsPropertiesModel } from '../models/cultural-record';
 import { IsOptional, IsNumber, Min } from 'class-validator';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { Type } from 'class-transformer';
 
 /**

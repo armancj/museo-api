@@ -1,5 +1,5 @@
 import { ProducerAuthorRecordModel } from '../models/producer-author-record.models';
-import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
+import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 
 export class ProducerAuthorRecord implements ProducerAuthorRecordModel {
   betweenStreet1: FieldMetadataDto<string>;
