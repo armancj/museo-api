@@ -1,4 +1,5 @@
 import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Entity class for representing associated documentation.
@@ -14,28 +15,28 @@ export class AssociatedDocumentationEntity
    *
    * @type {string}
    */
-  copiesExistenceAndLocation: string;
+  copiesExistenceAndLocation: FieldMetadataDto<string>;
 
   /**
    * Indicates the existence and location of original documents.
    *
    * @type {string}
    */
-  originalsExistenceAndLocation: string;
+  originalsExistenceAndLocation: FieldMetadataDto<string>;
 
   /**
    * Provides information about related description units.
    *
    * @type {string}
    */
-  relatedDescriptionUnits: string;
+  relatedDescriptionUnits: FieldMetadataDto<string>;
 
   /**
    * Contains information about related publications.
    *
    * @type {string}
    */
-  relatedPublicationsInformation: string;
+  relatedPublicationsInformation: FieldMetadataDto<string>;
 
   /**
    * Constructor for creating an instance of `AssociatedDocumentationEntity`.
