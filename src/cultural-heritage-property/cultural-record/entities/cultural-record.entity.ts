@@ -1,8 +1,8 @@
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { CulturalRecordModel } from '../models/cultural-record';
-import { ExtremeDatesEntity } from './extreme-dates.entity';
-import { VolumeQuantitiesEntity } from "./volume-quantities.entity";
-import { DimensionsEntity } from "./dimensions.entity";
+import { VolumeQuantitiesEntity } from './volume-quantities.entity';
+import { DimensionsEntity } from './dimensions.entity';
+import { FieldMetadataDto } from '../../field-review-status/dto/FieldMetadataDto';
 
 /**
  * Entity class representing a cultural record.
@@ -13,34 +13,34 @@ import { DimensionsEntity } from "./dimensions.entity";
  */
 export class CulturalRecordEntity implements CulturalRecordModel {
   /** Title of the cultural object */
-  objectTitle: string;
+  objectTitle: FieldMetadataDto<string>;
 
   /** Description of the cultural object */
-  objectDescription: string;
+  objectDescription: FieldMetadataDto<string>;
 
   /** Onomastic descriptors associated with the cultural object (optional) */
-  onomasticDescriptors?: string;
+  onomasticDescriptors?: FieldMetadataDto<string>;
 
   /** Geographic descriptors (optional) */
-  geographicDescriptors?: string;
+  geographicDescriptors?: FieldMetadataDto<string>;
 
   /** Institutional descriptors (optional) */
-  institutionalDescriptors?: string;
+  institutionalDescriptors?: FieldMetadataDto<string>;
 
   /** Subject descriptors (optional) */
-  subjectDescriptors?: string;
+  subjectDescriptors?: FieldMetadataDto<string>;
 
   /** Extreme start and end dates associated with the cultural record (optional) */
-  extremeDates?: { start: Date; end: Date };
+  extremeDates?: FieldMetadataDto<{ start: Date; end: Date }>;
 
   /** Grade value of the cultural object */
-  valueGrade: ValueGrade;
+  valueGrade: FieldMetadataDto<ValueGrade>;
 
   /** Level of description for the cultural object */
-  descriptionLevel: DescriptionLevel;
+  descriptionLevel: FieldMetadataDto<DescriptionLevel>;
 
   /** Valuation of the cultural object (optional) */
-  valuation?: number;
+  valuation?: FieldMetadataDto<number>;
 
   /** Volumes and quantities associated with the cultural record */
   volumesQuantities: VolumeQuantitiesEntity;
@@ -49,25 +49,25 @@ export class CulturalRecordEntity implements CulturalRecordModel {
   dimensions: DimensionsEntity;
 
   /** Languages spoken or used in the cultural object */
-  languages: string[];
+  languages: FieldMetadataDto<string[]>;
 
   /** Supports available for the cultural object */
-  supports: string[];
+  supports: FieldMetadataDto<string[]>;
 
   /** Letters associated with the cultural object */
-  letters: string[];
+  letters: FieldMetadataDto<string[]>;
 
   /** Instruments used for describing the cultural object */
-  descriptionInstrument: string[];
+  descriptionInstrument: FieldMetadataDto<string[]>;
 
   /** State of conservation of the cultural object */
-  conservationState: string[];
+  conservationState: FieldMetadataDto<string[]>;
 
   /** Title of the background section */
-  backgroundTitle: string;
+  backgroundTitle: FieldMetadataDto<string>;
 
   /** Title of the section */
-  sectionTitle: string;
+  sectionTitle: FieldMetadataDto<string>;
 
   /**
    * Constructor to initialize properties of CulturalRecordEntity.
@@ -81,7 +81,7 @@ export class CulturalRecordEntity implements CulturalRecordModel {
     this.geographicDescriptors = option.geographicDescriptors;
     this.institutionalDescriptors = option.institutionalDescriptors;
     this.subjectDescriptors = option.subjectDescriptors;
-    this.extremeDates = ExtremeDatesEntity.create(option.extremeDates);
+    this.extremeDates = option.extremeDates;
     this.valueGrade = option.valueGrade;
     this.descriptionLevel = option.descriptionLevel;
     this.valuation = option.valuation;
@@ -95,13 +95,13 @@ export class CulturalRecordEntity implements CulturalRecordModel {
       this.dimensions = DimensionsEntity.create(option.dimensions);
     }
 
-    this.languages = option.languages || [];
-    this.supports = option.supports || [];
-    this.letters = option.letters || [];
-    this.descriptionInstrument = option.descriptionInstrument || [];
-    this.conservationState = option.conservationState || [];
-    this.backgroundTitle = option.backgroundTitle || '';
-    this.sectionTitle = option.sectionTitle || '';
+    this.languages = option.languages;
+    this.supports = option.supports;
+    this.letters = option.letters;
+    this.descriptionInstrument = option.descriptionInstrument;
+    this.conservationState = option.conservationState;
+    this.backgroundTitle = option.backgroundTitle;
+    this.sectionTitle = option.sectionTitle;
   }
 
   /**
