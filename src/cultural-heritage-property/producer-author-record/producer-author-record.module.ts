@@ -6,13 +6,15 @@ import {
   CulturalHeritagePropertyEntity,
   CulturalHeritagePropertySchema,
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],
