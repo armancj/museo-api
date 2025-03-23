@@ -29,7 +29,7 @@ export class TestDataController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.testDataService.findOne(+id);
+    return this.testDataService.findOne(id);
   }
 
   @Patch(':id')
@@ -37,11 +37,11 @@ export class TestDataController {
     @Param('id') id: string,
     @Body() updateTestDatumDto: UpdateTestDatumDto,
   ) {
-    return this.testDataService.update(+id, updateTestDatumDto);
+    return this.testDataService.update(id, updateTestDatumDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.testDataService.remove(+id);
+    return this.testDataService.remove(id);
   }
 }

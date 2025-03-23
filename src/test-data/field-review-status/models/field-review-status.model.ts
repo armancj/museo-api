@@ -12,6 +12,8 @@ export interface FieldMetadata<T> {
   /** Comentarios realizados durante el proceso de revisión */
   comments?: string;
 
+  modifiedBy: string;
+
   /** Historial de cambios realizados en el campo */
   history: Array<{
     /** Quién realizó el cambio */
@@ -25,5 +27,7 @@ export interface FieldMetadata<T> {
 
     /** Comentario asociado al cambio */
     comment?: string;
+
+    status: 'To Review' | 'Reviewed' | 'Has Issue';
   }>;
 }

@@ -39,12 +39,15 @@ export function propTypeMongo({
         ...(enumProp ? { enum: enumProp } : {}),
       },
       status: { type: String, default: defaultStatus },
+      modifiedBy: { type: String },
       history: {
         type: [
           {
             previousValue: { type, required: false },
             modifiedAt: { type: Date },
             comment: { type: String },
+            modifiedBy: { type: String },
+            status: { type: String, default: defaultStatus },
           },
         ],
         default: defaultHistory,

@@ -2,12 +2,13 @@ import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { ChangeHistoryDto } from './change-history.dto';
+import { FieldMetadata } from '../models/field-review-status.model';
 
 /**
  * DTO para representar metadatos de campos revisables.
  * @template T - Tipo de valor del campo.
  */
-export class FieldMetadataDto<T> {
+export class FieldMetadataDto<T> implements FieldMetadata<T> {
   @ApiProperty({})
   @IsNotEmpty()
   value: T;
@@ -20,6 +21,10 @@ export class FieldMetadataDto<T> {
   @ApiProperty()
   @IsString()
   comments?: string;
+
+  @ApiProperty()
+  @IsString()
+  modifiedBy: string;
 
   @ApiProperty({
     type: () => [ChangeHistoryDto],
