@@ -7,11 +7,12 @@ export interface FieldMetadata<T> {
   value: T;
 
   /** Estado de revisión del campo */
-  status: 'To Review' | 'Reviewed' | 'Has Issue';
+  status: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
 
   /** Comentarios realizados durante el proceso de revisión */
-  comments?: string;
+  comment?: string;
 
+  modifiedBy: string;
 
   /** Historial de cambios realizados en el campo */
   history: Array<{
@@ -26,5 +27,7 @@ export interface FieldMetadata<T> {
 
     /** Comentario asociado al cambio */
     comment?: string;
+
+    status: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
   }>;
 }

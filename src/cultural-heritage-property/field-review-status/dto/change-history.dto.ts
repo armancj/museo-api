@@ -21,4 +21,9 @@ export class ChangeHistoryDto {
   @ApiProperty({ required: false })
   @IsString()
   comment?: string;
+
+  @ApiProperty({ enum: ['To Review', 'Reviewed', 'Has Issue'] })
+  @IsString()
+  @IsNotEmpty()
+  status: 'To Review' | 'Reviewed' | 'Has Issue';
 }

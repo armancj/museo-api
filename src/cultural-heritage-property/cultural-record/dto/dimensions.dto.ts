@@ -1,7 +1,9 @@
 import { DimensionsPropertiesModel } from '../models/cultural-record';
-import { IsOptional, IsNumber, Min } from 'class-validator';
-import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
+import { IsOptional, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForNumberWithoutHistory } from '../../field-review-status/dto/create.dto';
 
 /**
  * Data Transfer Object for Dimensions.
@@ -12,39 +14,39 @@ export class DimensionsDto implements DimensionsPropertiesModel {
    * Height in centimeters (optional).
    * Must be a non-negative number.
    */
+  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  @Type(() => FieldMetadataDto)
-  heightCms?: FieldMetadataDto<number>;
+  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
+  @ValidateNested()
+  heightCms?: FieldMetadata<number>;
 
   /**
    * Width in centimeters (optional).
    * Must be a non-negative number.
    */
+  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
   @IsOptional()
-  @IsNumber()
-  @Type(() => FieldMetadataDto)
-  @Min(0)
-  widthCms?: FieldMetadataDto<number>;
+  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
+  @ValidateNested()
+  widthCms?: FieldMetadata<number>;
 
   /**
    * Length in centimeters (optional).
    * Must be a non-negative number.
    */
+  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  @Type(() => FieldMetadataDto)
-  lengthCms?: FieldMetadataDto<number>;
+  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
+  @ValidateNested()
+  lengthCms?: FieldMetadata<number>;
 
   /**
    * Weight in kilograms (optional).
    * Must be a non-negative number.
    */
+  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  @Type(() => FieldMetadataDto)
-  weightKg?: FieldMetadataDto<number>;
+  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
+  @ValidateNested()
+  weightKg?: FieldMetadata<number>;
 }

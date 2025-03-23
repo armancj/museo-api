@@ -1,10 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
-
-import { TestDataModel } from '../model/test-data.model';
 import { BaseSchema, BaseSchemaFactory } from '../../common/schema/base.schema';
+import { TestDataModel } from '../model/test-data.model';
 import { propTypeMongo } from '../../cultural-heritage-property/util/prop-type-mongo.function';
-import { FieldMetadata } from '../field-review-status/models/field-review-status.model';
+import { FieldMetadata } from '../../cultural-heritage-property/field-review-status/models/field-review-status.model';
 
 export type TestDataDocument = HydratedDocument<TestData>;
 

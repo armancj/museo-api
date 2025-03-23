@@ -9,16 +9,18 @@ import {
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { CulturalNoteEntity } from './entities/cultural-note.entity';
 import { CulturalNotesEntity } from './entities/cultural-notes.entity';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 @Module({
   imports: [
     /**
      * Imports the Mongoose module with the cultural heritage property schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],

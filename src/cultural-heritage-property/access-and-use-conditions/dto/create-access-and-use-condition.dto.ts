@@ -1,6 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  FieldMetadataDtoForStringArrayWithoutHistory,
+  FieldMetadataDtoForStringWithoutHistory,
+} from '../../field-review-status/dto/create.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * DTO for creating access and use conditions.
@@ -11,26 +16,26 @@ export class CreateAccessAndUseConditionDto {
    * Conditions related to access permissions.
    * Each string in the array should specify a distinct access condition.
    */
-  @IsString({ each: true })
-  @IsNotEmpty({ each: true })
-  @Type(() => FieldMetadataDto)
-  accessConditions: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringArrayWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringArrayWithoutHistory)
+  @ValidateNested()
+  accessConditions: FieldMetadata<string[]>;
 
   /**
    * Conditions related to reproduction permissions.
    * Ensure each entry in the array specifies a clear reproduction condition.
    */
-  @IsString({ each: true })
-  @IsNotEmpty({ each: true })
-  @Type(() => FieldMetadataDto)
-  reproductionConditions: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringArrayWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringArrayWithoutHistory)
+  @ValidateNested()
+  reproductionConditions: FieldMetadata<string[]>;
 
   /**
    * Technical requirements necessary for fulfilling access conditions.
    * A singular string that specifies the technical prerequisites.
    */
-  @IsString()
-  @IsNotEmpty()
-  @Type(() => FieldMetadataDto)
-  technicalRequirements: FieldMetadataDto<string>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  technicalRequirements: FieldMetadata<string>;
 }

@@ -39,6 +39,7 @@ export function propTypeMongo({
         ...(enumProp ? { enum: enumProp } : {}),
       },
       status: { type: String, default: defaultStatus },
+      comment: { type: String, default: 'No hay Comentario' },
       modifiedBy: { type: String },
       history: {
         type: [

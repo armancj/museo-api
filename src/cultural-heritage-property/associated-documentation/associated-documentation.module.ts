@@ -9,6 +9,7 @@ import {
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { AssociatedDocumentationEntity } from './entities/associated-documentation.entity';
 import { AssociatedDocumentationsEntity } from './entities/associated-documentations.entity';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 /**
  * Module that manages associated documentation.
@@ -22,10 +23,11 @@ import { AssociatedDocumentationsEntity } from './entities/associated-documentat
     /**
      * Imports the Mongoose module with the cultural heritage property schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],

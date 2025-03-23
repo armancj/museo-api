@@ -29,7 +29,7 @@ import { TestDataModule } from './test-data/test-data.module';
     FileStorageModule,
     AddressModule,
     SeedModule,
-    //CulturalHeritagePropertyModule,
+    CulturalHeritagePropertyModule,
     CommandsModule,
     LoggerModule,
     NomenclatureModule,

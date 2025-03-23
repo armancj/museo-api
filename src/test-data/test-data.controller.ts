@@ -19,6 +19,7 @@ export class TestDataController {
 
   @Post()
   create(@Body() createTestDatumDto: CreateTestDatumDto) {
+    createTestDatumDto.name.modifiedBy = 'test1';
     return this.testDataService.create(createTestDatumDto);
   }
 
@@ -37,6 +38,7 @@ export class TestDataController {
     @Param('id') id: string,
     @Body() updateTestDatumDto: UpdateTestDatumDto,
   ) {
+    updateTestDatumDto.name.modifiedBy = 'test2';
     return this.testDataService.update(id, updateTestDatumDto);
   }
 

@@ -8,6 +8,7 @@ import {
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { AccessAndUseCondition } from './entities/access-and-use-condition.entity';
 import { AccessAndUseConditionsEntity } from './entities/access-and-use-conditions.entity';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 /**
  * Module for managing access and use conditions of cultural heritage properties.
@@ -17,10 +18,11 @@ import { AccessAndUseConditionsEntity } from './entities/access-and-use-conditio
     /**
      * Imports the Mongoose module with the cultural heritage property schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],

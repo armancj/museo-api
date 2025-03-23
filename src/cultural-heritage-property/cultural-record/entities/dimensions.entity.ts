@@ -1,25 +1,43 @@
 import { DimensionsModel } from '../models/cultural-record';
-import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForNumber } from '../../field-review-status/dto/field-metadata-string.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
 /**
  * Entity representing the dimensions of an object (height, width, weight, etc.).
  *
  * This entity models the dimensions of a cultural property, including height, weight, area, and volume.
  */
 export class DimensionsEntity implements DimensionsModel {
-  heightCms?: FieldMetadataDto<number>;
-  widthCms?: FieldMetadataDto<number>;
-  lengthCms?: FieldMetadataDto<number>;
-  squareMeters?: FieldMetadataDto<number>;
-  cubicMeters?: FieldMetadataDto<number>;
-  weightKg?: FieldMetadataDto<number>;
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  heightCms?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  widthCms?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  lengthCms?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  squareMeters?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  cubicMeters?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  weightKg?: FieldMetadata<number>;
 
   constructor(option: Partial<DimensionsModel>) {
-    this.heightCms = option.heightCms;
-    this.widthCms = option.widthCms;
-    this.lengthCms = option.lengthCms;
-    this.squareMeters = this.calculateSquareMeters();
-    this.cubicMeters = this.calculateCubicMeters();
-    this.weightKg = option.weightKg;
+    this.heightCms = FieldReviewStatusEntity.create(option.heightCms);
+    this.widthCms = FieldReviewStatusEntity.create(option.widthCms);
+    this.lengthCms = FieldReviewStatusEntity.create(option.lengthCms);
+    this.squareMeters = FieldReviewStatusEntity.create(
+      this.calculateSquareMeters(),
+    );
+    this.cubicMeters = FieldReviewStatusEntity.create(
+      this.calculateCubicMeters(),
+    );
+    this.weightKg = FieldReviewStatusEntity.create(option.weightKg);
   }
 
   /**
@@ -38,8 +56,10 @@ export class DimensionsEntity implements DimensionsModel {
    *
    * @returns The calculated square meters, or 0 if heightCms or widthCms is missing.
    */
-  calculateSquareMeters(): FieldMetadataDto<number> {
-    const calculateSquareMeters = new FieldMetadataDto<number>();
+  calculateSquareMeters(): FieldMetadata<number> {
+    const calculateSquareMeters: FieldMetadata<number> = {
+      value: 0,
+    } as FieldMetadata<number>;
 
     if (this.heightCms && this.widthCms) {
       calculateSquareMeters.value =
@@ -56,8 +76,11 @@ export class DimensionsEntity implements DimensionsModel {
    *
    * @returns The calculated cubic meters, or 0 if any of the dimensions are missing.
    */
-  calculateCubicMeters(): FieldMetadataDto<number> {
-    const calculateCubicMeter = new FieldMetadataDto<number>();
+  calculateCubicMeters(): FieldMetadata<number> {
+    const calculateCubicMeter: FieldMetadata<number> = {
+      value: 0,
+    } as FieldMetadata<number>;
+
     if (this.heightCms && this.widthCms && this.lengthCms) {
       calculateCubicMeter.value =
         (this.heightCms.value * this.widthCms.value * this.lengthCms.value) /

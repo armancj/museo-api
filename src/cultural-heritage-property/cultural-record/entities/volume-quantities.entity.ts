@@ -1,5 +1,8 @@
 import { VolumeQuantitiesModel } from '../models/cultural-record';
-import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForNumber } from '../../field-review-status/dto/field-metadata-string.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
 
 /**
  * Entity representing the quantities related to volumes (files, pages, books, etc.).
@@ -7,26 +10,45 @@ import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.d
  * This entity models the quantities for different volume-related properties such as files, books, etc.
  */
 export class VolumeQuantitiesEntity implements VolumeQuantitiesModel {
-  file?: FieldMetadataDto<number>;
-  pages?: FieldMetadataDto<number>;
-  books?: FieldMetadataDto<number>;
-  objects?: FieldMetadataDto<number>;
-  photos?: FieldMetadataDto<number>;
-  engravings?: FieldMetadataDto<number>;
-  slides?: FieldMetadataDto<number>;
-  negatives?: FieldMetadataDto<number>;
-  mapsPlansSketches?: FieldMetadataDto<number>;
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  file?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  pages?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  books?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  objects?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  photos?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  engravings?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  slides?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  negatives?: FieldMetadata<number>;
+
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  mapsPlansSketches?: FieldMetadata<number>;
 
   constructor(option: Partial<VolumeQuantitiesModel>) {
-    this.file = option.file;
-    this.pages = option.pages;
-    this.books = option.books;
-    this.objects = option.objects;
-    this.photos = option.photos;
-    this.engravings = option.engravings;
-    this.slides = option.slides;
-    this.negatives = option.negatives;
-    this.mapsPlansSketches = option.mapsPlansSketches;
+    this.file = FieldReviewStatusEntity.create(option.file);
+    this.pages = FieldReviewStatusEntity.create(option.pages);
+    this.books = FieldReviewStatusEntity.create(option.books);
+    this.objects = FieldReviewStatusEntity.create(option.objects);
+    this.photos = FieldReviewStatusEntity.create(option.photos);
+    this.engravings = FieldReviewStatusEntity.create(option.engravings);
+    this.slides = FieldReviewStatusEntity.create(option.slides);
+    this.negatives = FieldReviewStatusEntity.create(option.negatives);
+    this.mapsPlansSketches = FieldReviewStatusEntity.create(
+      option.mapsPlansSketches,
+    );
   }
 
   /**

@@ -2,7 +2,16 @@ import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { CulturalRecordModel } from '../models/cultural-record';
 import { VolumeQuantitiesEntity } from './volume-quantities.entity';
 import { DimensionsEntity } from './dimensions.entity';
-import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  FieldMetadataDtoForArrayString,
+  FieldMetadataDtoForEnum, FieldMetadataDtoForNumber,
+  FieldMetadataDtoForString,
+} from '../../field-review-status/dto/field-metadata-string.dto';
+import { FieldMetadataDtoForDate } from '../dto/create-cultural-record.dto';
+import { createDto } from '../../field-review-status/dto/create.dto';
+import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
 
 /**
  * Entity class representing a cultural record.
@@ -13,34 +22,44 @@ import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.d
  */
 export class CulturalRecordEntity implements CulturalRecordModel {
   /** Title of the cultural object */
-  objectTitle: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  objectTitle: FieldMetadata<string>;
 
   /** Description of the cultural object */
-  objectDescription: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  objectDescription: FieldMetadata<string>;
 
   /** Onomastic descriptors associated with the cultural object (optional) */
-  onomasticDescriptors?: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  onomasticDescriptors?: FieldMetadata<string>;
 
   /** Geographic descriptors (optional) */
-  geographicDescriptors?: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  geographicDescriptors?: FieldMetadata<string>;
 
   /** Institutional descriptors (optional) */
-  institutionalDescriptors?: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  institutionalDescriptors?: FieldMetadata<string>;
 
   /** Subject descriptors (optional) */
-  subjectDescriptors?: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  subjectDescriptors?: FieldMetadata<string>;
 
   /** Extreme start and end dates associated with the cultural record (optional) */
-  extremeDates?: FieldMetadataDto<{ start: Date; end: Date }>;
+  @ApiProperty({ type: FieldMetadataDtoForDate })
+  extremeDates?: FieldMetadata<{ start: Date; end: Date }>;
 
   /** Grade value of the cultural object */
-  valueGrade: FieldMetadataDto<ValueGrade>;
+  @ApiProperty({ type: FieldMetadataDtoForEnum(ValueGrade) })
+  valueGrade: FieldMetadata<ValueGrade>;
 
   /** Level of description for the cultural object */
-  descriptionLevel: FieldMetadataDto<DescriptionLevel>;
+  @ApiProperty({ type: FieldMetadataDtoForEnum(DescriptionLevel) })
+  descriptionLevel: FieldMetadata<DescriptionLevel>;
 
   /** Valuation of the cultural object (optional) */
-  valuation?: FieldMetadataDto<number>;
+  @ApiProperty({ type: FieldMetadataDtoForNumber })
+  valuation?: FieldMetadata<number>;
 
   /** Volumes and quantities associated with the cultural record */
   volumesQuantities: VolumeQuantitiesEntity;
@@ -49,25 +68,32 @@ export class CulturalRecordEntity implements CulturalRecordModel {
   dimensions: DimensionsEntity;
 
   /** Languages spoken or used in the cultural object */
-  languages: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: FieldMetadataDtoForArrayString })
+  languages: FieldMetadata<string[]>;
 
   /** Supports available for the cultural object */
-  supports: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: FieldMetadataDtoForArrayString })
+  supports: FieldMetadata<string[]>;
 
   /** Letters associated with the cultural object */
-  letters: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: FieldMetadataDtoForArrayString })
+  letters: FieldMetadata<string[]>;
 
   /** Instruments used for describing the cultural object */
-  descriptionInstrument: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: FieldMetadataDtoForArrayString })
+  descriptionInstrument: FieldMetadata<string[]>;
 
   /** State of conservation of the cultural object */
-  conservationState: FieldMetadataDto<string[]>;
+  @ApiProperty({ type: FieldMetadataDtoForArrayString })
+  conservationState: FieldMetadata<string[]>;
 
   /** Title of the background section */
-  backgroundTitle: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForArrayString })
+  backgroundTitle: FieldMetadata<string>;
 
   /** Title of the section */
-  sectionTitle: FieldMetadataDto<string>;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  sectionTitle: FieldMetadata<string>;
 
   /**
    * Constructor to initialize properties of CulturalRecordEntity.
@@ -75,16 +101,28 @@ export class CulturalRecordEntity implements CulturalRecordModel {
    * @param option - Partial data to initialize a cultural record.
    */
   constructor(option: Partial<CulturalRecordModel>) {
-    this.objectTitle = option.objectTitle;
-    this.objectDescription = option.objectDescription;
-    this.onomasticDescriptors = option.onomasticDescriptors;
-    this.geographicDescriptors = option.geographicDescriptors;
-    this.institutionalDescriptors = option.institutionalDescriptors;
-    this.subjectDescriptors = option.subjectDescriptors;
-    this.extremeDates = option.extremeDates;
-    this.valueGrade = option.valueGrade;
-    this.descriptionLevel = option.descriptionLevel;
-    this.valuation = option.valuation;
+    this.objectTitle = FieldReviewStatusEntity.create(option.objectTitle);
+    this.objectDescription = FieldReviewStatusEntity.create(
+      option.objectDescription,
+    );
+    this.onomasticDescriptors = FieldReviewStatusEntity.create(
+      option.onomasticDescriptors,
+    );
+    this.geographicDescriptors = FieldReviewStatusEntity.create(
+      option.geographicDescriptors,
+    );
+    this.institutionalDescriptors = FieldReviewStatusEntity.create(
+      option.institutionalDescriptors,
+    );
+    this.subjectDescriptors = FieldReviewStatusEntity.create(
+      option.subjectDescriptors,
+    );
+    this.extremeDates = FieldReviewStatusEntity.create(option.extremeDates);
+    this.valueGrade = FieldReviewStatusEntity.create(option.valueGrade);
+    this.descriptionLevel = FieldReviewStatusEntity.create(
+      option.descriptionLevel,
+    );
+    this.valuation = FieldReviewStatusEntity.create(option.valuation);
 
     if (option.volumesQuantities) {
       this.volumesQuantities = VolumeQuantitiesEntity.create(
@@ -95,13 +133,19 @@ export class CulturalRecordEntity implements CulturalRecordModel {
       this.dimensions = DimensionsEntity.create(option.dimensions);
     }
 
-    this.languages = option.languages;
-    this.supports = option.supports;
-    this.letters = option.letters;
-    this.descriptionInstrument = option.descriptionInstrument;
-    this.conservationState = option.conservationState;
-    this.backgroundTitle = option.backgroundTitle;
-    this.sectionTitle = option.sectionTitle;
+    this.languages = FieldReviewStatusEntity.create(option.languages);
+    this.supports = FieldReviewStatusEntity.create(option.supports);
+    this.letters = FieldReviewStatusEntity.create(option.letters);
+    this.descriptionInstrument = FieldReviewStatusEntity.create(
+      option.descriptionInstrument,
+    );
+    this.conservationState = FieldReviewStatusEntity.create(
+      option.conservationState,
+    );
+    this.backgroundTitle = FieldReviewStatusEntity.create(
+      option.backgroundTitle,
+    );
+    this.sectionTitle = FieldReviewStatusEntity.create(option.sectionTitle);
   }
 
   /**

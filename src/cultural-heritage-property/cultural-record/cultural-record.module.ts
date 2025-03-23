@@ -9,6 +9,7 @@ import {
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { CulturalRecordsEntity } from './entities/cultural-records.entity';
 import { CulturalRecordEntity } from './entities/cultural-record.entity';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 /**
  * Module that manages cultural records, including volume quantities, dimensions, and other associated data.
@@ -21,10 +22,11 @@ import { CulturalRecordEntity } from './entities/cultural-record.entity';
     /**
      * Imports the Mongoose module with the cultural heritage property schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],

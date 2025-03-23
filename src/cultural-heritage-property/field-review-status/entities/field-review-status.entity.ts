@@ -11,13 +11,13 @@ export class FieldReviewStatusEntity<T> implements FieldMetadata<T> {
     previousValue: T;
     modifiedAt: Date;
     comment?: string;
-    status: 'To Review' | 'Reviewed' | 'Has Issue';
+    status: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
   }>;
 
   @ApiProperty({
-    enum: ['To Review', 'Reviewed', 'Has Issue'],
+    enum: ['Pending', 'To Review', 'Reviewed', 'Has Issue'],
   })
-  status: 'To Review' | 'Reviewed' | 'Has Issue';
+  status: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
 
   @ApiProperty()
   value: T;
@@ -32,19 +32,19 @@ export class FieldReviewStatusEntity<T> implements FieldMetadata<T> {
     type: String,
     required: false,
   })
-  comments?: string;
+  comment?: string;
 
   constructor(option: FieldMetadata<T>) {
     this.value = option.value;
     this.modifiedBy = option.modifiedBy;
-    this.comments = option.comments || '';
+    this.comment = option.comment || '';
     this.status = option.status || 'To Review';
     this.history = option.history.map((history) => {
       return {
         previousValue: history.previousValue,
         modifiedBy: history.modifiedBy,
         modifiedAt: history.modifiedAt,
-        comments: history.comment,
+        comment: history.comment,
         status: history.status,
       };
     });
