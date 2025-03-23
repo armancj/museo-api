@@ -1,6 +1,7 @@
 import { OmitType } from '@nestjs/swagger';
 import {
-  FieldMetadataDtoForArrayString,
+  FieldMetadataDtoForArrayString, FieldMetadataDtoForBoolean,
+  FieldMetadataDtoForDate,
   FieldMetadataDtoForNumber,
   FieldMetadataDtoForString,
 } from './field-metadata-string.dto';
@@ -17,6 +18,14 @@ export const FieldMetadataDtoForStringWithoutHistory = createDto(
 
 export const FieldMetadataDtoForNumberWithoutHistory = createDto(
   FieldMetadataDtoForNumber,
+);
+
+export const FieldMetadataDtoForDateWithoutHistory = createDto(
+  FieldMetadataDtoForDate,
+);
+
+export const FieldMetadataDtoForBooleanWithoutHistory = createDto(
+  FieldMetadataDtoForBoolean,
 );
 
 export const FieldMetadataDtoForStringArrayWithoutHistory = createDto(

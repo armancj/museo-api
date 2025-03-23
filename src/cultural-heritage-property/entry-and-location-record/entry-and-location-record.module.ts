@@ -9,6 +9,7 @@ import {
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { EntryAndLocationRecord } from './entities/entry-and-location-record.entity';
 import { EntryAndLocationRecordsEntity } from './entities/entry-and-location-records.entity';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 /**
  * Module that manages entry and location records.
@@ -21,10 +22,11 @@ import { EntryAndLocationRecordsEntity } from './entities/entry-and-location-rec
     /**
      * Imports the Mongoose module with the cultural heritage property schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],

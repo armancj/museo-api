@@ -1,4 +1,6 @@
 import {
+  IsBoolean,
+  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -15,6 +17,16 @@ export const FieldMetadataDtoForString = createFieldMetadataDto<string>({
 export const FieldMetadataDtoForNumber = createFieldMetadataDto<string>({
   options: { type: 'number' },
   decorators: [IsNumber(), IsNotEmpty(), IsPositive()],
+});
+
+export const FieldMetadataDtoForBoolean = createFieldMetadataDto<string>({
+  options: { type: 'boolean' },
+  decorators: [IsBoolean(), IsNotEmpty()],
+});
+
+export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
+  options: { type: () => Date },
+  decorators: [IsDate(), IsNotEmpty()],
 });
 
 export const FieldMetadataDtoForArrayString = createFieldMetadataDto<string>({

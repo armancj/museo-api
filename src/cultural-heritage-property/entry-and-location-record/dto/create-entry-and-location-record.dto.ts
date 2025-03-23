@@ -5,17 +5,29 @@ import {
 } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { CreateLocationDto } from './create-location.dto';
-import {
-  IsBoolean,
-  IsDate,
-  IsEnum,
-  IsNotEmpty,
-  IsString,
-  Length,
-  ValidateNested,
-} from 'class-validator';
+import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  createDto,
+  FieldMetadataDtoForBooleanWithoutHistory,
+  FieldMetadataDtoForDateWithoutHistory,
+  FieldMetadataDtoForStringWithoutHistory,
+} from '../../field-review-status/dto/create.dto';
+import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
+
+export const FieldMetadataDtoEnumInstitutionType = createDto(
+  FieldMetadataDtoForEnum(InstitutionType),
+);
+
+export const FieldMetadataDtoEnumHeritageType = createDto(
+  FieldMetadataDtoForEnum(HeritageType),
+);
+
+export const FieldMetadataDtoEnumGenericClassification = createDto(
+  FieldMetadataDtoForEnum(GenericClassification),
+);
 
 /**
  * Represents a data transfer object (DTO) for creating an entry and location record.
@@ -33,57 +45,62 @@ import { FieldMetadataDto } from '../../field-review-status/dto/field-metadata.d
 export class CreateEntryAndLocationRecordDto
   implements EntryAndLocationRecordModel
 {
-  @IsBoolean()
-  @Type(() => FieldMetadataDto)
-  auxiliaryInventory: FieldMetadataDto<boolean>;
+  @ApiProperty({ type: () => FieldMetadataDtoForBooleanWithoutHistory })
+  @Type(() => FieldMetadataDtoForBooleanWithoutHistory)
+  @ValidateNested()
+  auxiliaryInventory: FieldMetadata<boolean>;
 
-  @IsString()
-  @IsNotEmpty()
-  @Type(() => FieldMetadataDto)
-  declarationType: FieldMetadataDto<string>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  declarationType: FieldMetadata<string>;
 
-  @IsDate()
-  @Type(() => FieldMetadataDto)
-  entryDate: FieldMetadataDto<Date>;
+  @ApiProperty({ type: () => FieldMetadataDtoForDateWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  entryDate: FieldMetadata<Date>;
 
-  @IsString()
-  @IsNotEmpty()
-  @Type(() => FieldMetadataDto)
-  entryMethod: FieldMetadataDto<string>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  entryMethod: FieldMetadata<string>;
 
-  @IsEnum(GenericClassification)
-  @Type(() => FieldMetadataDto)
-  genericClassification: FieldMetadataDto<GenericClassification>;
+  @ApiProperty({ type: () => FieldMetadataDtoEnumGenericClassification })
+  @Type(() => FieldMetadataDtoEnumGenericClassification)
+  @ValidateNested()
+  genericClassification: FieldMetadata<GenericClassification>;
 
-  @IsEnum(HeritageType)
-  @Type(() => FieldMetadataDto)
-  heritageType: FieldMetadataDto<HeritageType>;
+  @ApiProperty({ type: () => FieldMetadataDtoEnumHeritageType })
+  @Type(() => FieldMetadataDtoEnumHeritageType)
+  @ValidateNested()
+  heritageType: FieldMetadata<HeritageType>;
 
-  @IsString()
-  @IsNotEmpty()
-  @Length(10, 200)
-  @Type(() => FieldMetadataDto)
-  initialDescription: FieldMetadataDto<string>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  initialDescription: FieldMetadata<string>;
 
-  @IsEnum(InstitutionType)
-  @Type(() => FieldMetadataDto)
-  institutionType: FieldMetadataDto<InstitutionType>;
+  @ApiProperty({ type: () => FieldMetadataDtoEnumInstitutionType })
+  @Type(() => FieldMetadataDtoEnumInstitutionType)
+  @ValidateNested()
+  institutionType: FieldMetadata<InstitutionType>;
 
-  @IsString()
-  @IsNotEmpty()
-  @Type(() => FieldMetadataDto)
-  inventoryNumber: FieldMetadataDto<string>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  inventoryNumber: FieldMetadata<string>;
 
   @ValidateNested()
   @Type(() => CreateLocationDto)
   objectLocation: CreateLocationDto;
 
-  @IsString()
-  @IsNotEmpty()
-  @Type(() => FieldMetadataDto)
-  objectName: FieldMetadataDto<string>;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  objectName: FieldMetadata<string>;
 
-  @IsBoolean()
-  @Type(() => FieldMetadataDto)
-  pieceInventory: FieldMetadataDto<boolean>;
+  @ApiProperty({ type: () => FieldMetadataDtoForBooleanWithoutHistory })
+  @Type(() => FieldMetadataDtoForBooleanWithoutHistory)
+  @ValidateNested()
+  pieceInventory: FieldMetadata<boolean>;
 }

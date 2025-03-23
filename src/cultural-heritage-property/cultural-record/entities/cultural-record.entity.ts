@@ -10,7 +10,6 @@ import {
   FieldMetadataDtoForString,
 } from '../../field-review-status/dto/field-metadata-string.dto';
 import { FieldMetadataDtoForDate } from '../dto/create-cultural-record.dto';
-import { createDto } from '../../field-review-status/dto/create.dto';
 import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
 
 /**

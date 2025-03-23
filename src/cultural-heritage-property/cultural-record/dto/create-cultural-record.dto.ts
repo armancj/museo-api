@@ -1,8 +1,4 @@
-import {
-  IsOptional,
-  IsObject,
-  ValidateNested,
-} from 'class-validator';
+import { IsOptional, IsObject, ValidateNested } from 'class-validator';
 import { CulturalPropertiesModel } from '../models/cultural-record';
 
 import { Type } from 'class-transformer';
@@ -13,7 +9,8 @@ import { ExtremeDatesDto } from './extreme-dates.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   createDto,
-  FieldMetadataDtoForNumberWithoutHistory, FieldMetadataDtoForStringArrayWithoutHistory,
+  FieldMetadataDtoForNumberWithoutHistory,
+  FieldMetadataDtoForStringArrayWithoutHistory,
   FieldMetadataDtoForStringWithoutHistory,
 } from '../../field-review-status/dto/create.dto';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';

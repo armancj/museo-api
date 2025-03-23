@@ -3,13 +3,13 @@ import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { DescriptionControlService } from './description-control.service';
 import { DescriptionControlController } from './description-control.controller';
 import { CommonRecordService } from '../shared/common-record-service.service';
-import { ExtendedDescriptionControlEntity } from './entities/extended-description-control.entity';
 import {
   CulturalHeritagePropertyEntity,
   CulturalHeritagePropertySchema,
 } from '../cultural-heritage-property/Schema/cultural-heritage-property';
-import { DescriptionControl } from "./entities/description-control.entity";
-import { DescriptionControlsEntity } from "./entities/description-controls.entity";
+import { DescriptionControl } from './entities/description-control.entity';
+import { DescriptionControlsEntity } from './entities/description-controls.entity';
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 /**
  * Module that manages description controls, including operations for maintaining audit records.
@@ -21,10 +21,11 @@ import { DescriptionControlsEntity } from "./entities/description-controls.entit
     /**
      * Imports the Mongoose module with the description control schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () =>
+          applyCommonHooksSchema(CulturalHeritagePropertySchema),
       },
     ]),
   ],
