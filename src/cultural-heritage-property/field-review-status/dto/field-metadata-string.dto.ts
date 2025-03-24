@@ -4,19 +4,19 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
-  IsPositive,
   IsString,
+  Min,
 } from 'class-validator';
 import { createFieldMetadataDto } from './field-metadata.dto';
 
 export const FieldMetadataDtoForString = createFieldMetadataDto<string>({
-  options: { type: 'string' },
+  options: { type: 'string', default: 'Here is a text' },
   decorators: [IsString(), IsNotEmpty()],
 });
 
 export const FieldMetadataDtoForNumber = createFieldMetadataDto<string>({
-  options: { type: 'number' },
-  decorators: [IsNumber(), IsNotEmpty(), IsPositive()],
+  options: { type: 'number', default: 0 },
+  decorators: [IsNumber(), IsNotEmpty(), Min(0)],
 });
 
 export const FieldMetadataDtoForBoolean = createFieldMetadataDto<string>({
@@ -30,7 +30,7 @@ export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
 });
 
 export const FieldMetadataDtoForArrayString = createFieldMetadataDto<string>({
-  options: { type: 'string', isArray: true },
+  options: { type: 'string', isArray: true, default: ['Here is a text'] },
   decorators: [IsString({ each: true }), IsNotEmpty({ each: true })],
 });
 

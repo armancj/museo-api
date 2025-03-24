@@ -1,15 +1,12 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AssociatedDocumentationService } from './associated-documentation.service';
 import { AssociatedDocumentationController } from './associated-documentation.controller';
-import { getModelToken, MongooseModule } from '@nestjs/mongoose';
-import {
-  CulturalHeritagePropertyEntity,
-  CulturalHeritagePropertySchema,
-} from '../cultural-heritage-property/Schema/cultural-heritage-property';
+import { getModelToken } from '@nestjs/mongoose';
+import { CulturalHeritagePropertyEntity } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { AssociatedDocumentationEntity } from './entities/associated-documentation.entity';
 import { AssociatedDocumentationsEntity } from './entities/associated-documentations.entity';
-import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
+import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cultural-heritage-property.module';
 
 /**
  * Module that manages associated documentation.
@@ -20,16 +17,7 @@ import { applyCommonHooksSchema } from '../field-review-status/schema/apply-comm
  */
 @Module({
   imports: [
-    /**
-     * Imports the Mongoose module with the cultural heritage property schema.
-     */
-    MongooseModule.forFeatureAsync([
-      {
-        name: CulturalHeritagePropertyEntity,
-        useFactory: () =>
-          applyCommonHooksSchema(CulturalHeritagePropertySchema),
-      },
-    ]),
+    forwardRef(() => CulturalHeritagePropertyModule), // Usar forwardRef para evitar una dependencia circular
   ],
   controllers: [AssociatedDocumentationController],
   providers: [

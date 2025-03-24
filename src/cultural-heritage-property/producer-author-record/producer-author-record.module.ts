@@ -1,22 +1,11 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ProducerAuthorRecordService } from './producer-author-record.service';
 import { ProducerAuthorRecordController } from './producer-author-record.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import {
-  CulturalHeritagePropertyEntity,
-  CulturalHeritagePropertySchema,
-} from '../cultural-heritage-property/Schema/cultural-heritage-property';
-import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
+import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cultural-heritage-property.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeatureAsync([
-      {
-        name: CulturalHeritagePropertyEntity,
-        useFactory: () =>
-          applyCommonHooksSchema(CulturalHeritagePropertySchema),
-      },
-    ]),
+    forwardRef(() => CulturalHeritagePropertyModule), // Usar forwardRef para evitar una dependencia circular
   ],
   controllers: [ProducerAuthorRecordController],
   providers: [ProducerAuthorRecordService],

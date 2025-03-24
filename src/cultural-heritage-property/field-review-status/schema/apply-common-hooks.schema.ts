@@ -1,30 +1,6 @@
 import { Schema } from 'mongoose';
 
 export function applyCommonHooksSchema(schema: Schema): Schema {
-  schema.pre('save', function (next) {
-    const current = this as any;
-    Object.keys(current.toObject()).forEach((key) => {
-      const field = current[key];
-
-      if (field && field.value !== undefined && field.history !== undefined) {
-        if (!field.history) {
-          field.history = [];
-        }
-
-        if (current.isModified(`${key}.value`)) {
-          field.history.push({
-            previousValue: field.value,
-            modifiedBy: field.modifiedBy,
-            modifiedAt: new Date(),
-            comment: field.comment || '',
-          });
-        }
-      }
-    });
-
-    next();
-  });
-
   schema.pre('updateOne', async function (next) {
     const filter = this.getFilter();
     const update = this.getUpdate();
