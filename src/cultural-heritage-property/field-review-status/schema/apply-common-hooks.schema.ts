@@ -30,6 +30,7 @@ export function applyCommonHooksSchema(schema: Schema): Schema {
     const update = this.getUpdate();
     const model = this.model;
 
+    console.log('here');
     const document = await model.findOne(filter);
 
     if (document) {
