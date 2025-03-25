@@ -1,6 +1,7 @@
 import { OmitType } from '@nestjs/swagger';
 import {
-  FieldMetadataDtoForArrayString, FieldMetadataDtoForBoolean,
+  FieldMetadataDtoForArrayString,
+  FieldMetadataDtoForBoolean,
   FieldMetadataDtoForDate,
   FieldMetadataDtoForNumber,
   FieldMetadataDtoForString,

@@ -10,7 +10,7 @@ import {
 import { createFieldMetadataDto } from './field-metadata.dto';
 
 export const FieldMetadataDtoForString = createFieldMetadataDto<string>({
-  options: { type: 'string', default: 'Here is a text' },
+  options: { type: 'string', default: 'Here is a text', isArray: false },
   decorators: [IsString(), IsNotEmpty()],
 });
 
