@@ -10,7 +10,7 @@ import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
 import { ApiPropertyOptions } from '@nestjs/swagger/dist/decorators/api-property.decorator';
-import { FieldMetadata } from '../models/field-review-status.model';
+import { FieldMetadata, StatusObject } from '../models/field-review-status.model';
 import { ChangeHistoryDto } from './change-history.dto';
 
 type Metadata = {
@@ -37,7 +37,7 @@ export function createFieldMetadataDto<T>({
         'Status must be one of the following: To Review, Reviewed, Has Issue',
     })
     @IsNotEmpty()
-    status: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
+    status: StatusObject;
 
     @ApiProperty()
     @IsString()

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
+import { StatusObject } from '../models/field-review-status.model';
 
 /**
  * DTO para representar la entrada del historial de cambios en los metadatos.
@@ -25,5 +26,5 @@ export class ChangeHistoryDto {
   @ApiProperty({ enum: ['To Review', 'Reviewed', 'Has Issue'] })
   @IsString()
   @IsNotEmpty()
-  status: 'To Review' | 'Reviewed' | 'Has Issue';
+  status: StatusObject;
 }
