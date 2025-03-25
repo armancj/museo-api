@@ -6,29 +6,21 @@ import {
 } from '../models/field-review-status.model';
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 
-interface AccessAndUseConditions {
-  accessConditions: FieldMetadata<string[]>;
-  reproductionConditions: FieldMetadata<string[]>;
-  technicalRequirements: FieldMetadata<string>;
-}
-
 interface UpdateDto {
-  $set: {
-    accessAndUseConditions: AccessAndUseConditions;
-  };
+  $set: CulturalPropertyModel;
 }
 
-function updateFieldWithHistory<T>(
-  currentField: FieldMetadata<T>,
-  newField: FieldMetadata<T>,
-): FieldMetadata<T> {
+function updateFieldWithHistory(
+  currentField: FieldMetadata<any>,
+  newField: FieldMetadata<any>,
+): FieldMetadata<any> {
   const history = currentField.history || [];
   if (
     newField.value !== currentField.value ||
     newField.status !== currentField.status ||
     newField.comment !== currentField.comment
   ) {
-    const historyEntry: HistoryItem<T> = {
+    const historyEntry: HistoryItem<any> = {
       previousValue: newField.value,
       modifiedBy: newField.modifiedBy || '',
       modifiedAt: new Date(),
@@ -46,52 +38,35 @@ function updateFieldWithHistory<T>(
 
 export function applyCommonHooksSchema(schema: Schema): Schema {
   schema.pre('findOneAndUpdate', async function (next) {
-    console.log('=== Entering findOneAndUpdate Hook ===');
-    const filter = this.getFilter();
-    const update: UpdateDto = this.getUpdate() as UpdateDto;
-    const model = this.model;
-
-    console.log('Filter:', filter);
-    console.log('Update', update);
-
-    const accessAndUseConditions = update.$set.accessAndUseConditions;
-
-    if (accessAndUseConditions) {
-      const existingDoc = (await model
-        .findOne(filter)
+    const update = (this.getUpdate() as UpdateDto)?.$set.accessAndUseConditions;
+    if (update) {
+      const doc = (await this.model
+        .findOne(this.getFilter())
         .lean()
         .exec()) as unknown as CulturalPropertyModel;
-
-      console.log('Existing Document:', {
-        existingDoc,
-        accessAndUseConditions: existingDoc.accessAndUseConditions,
-      });
-
-      if (!existingDoc) {
-        console.log('No document found for the given filter.');
-        next();
-        return;
+      if (doc) {
+        doc.accessAndUseConditions =
+          doc?.accessAndUseConditions ||
+          ({
+            accessConditions: {},
+            reproductionConditions: {},
+            technicalRequirements: {},
+          } as any);
+        [
+          'accessConditions',
+          'reproductionConditions',
+          'technicalRequirements',
+        ].forEach((key) => {
+          if (update[key])
+            update[key] = updateFieldWithHistory(
+              doc.accessAndUseConditions[key],
+              update[key],
+            );
+        });
+        this.setUpdate({ $set: { accessAndUseConditions: update } });
       }
-
-      if (accessAndUseConditions.accessConditions) {
-        accessAndUseConditions.accessConditions = updateFieldWithHistory(
-          existingDoc.accessAndUseConditions.accessConditions,
-          accessAndUseConditions.accessConditions,
-        );
-      }
-
-      this.setUpdate({
-        $set: {
-          accessAndUseConditions,
-        },
-      });
-    } else {
-      console.log('AccessAndUseConditions is not defined.');
     }
-
-    console.log('=== Exiting findOneAndUpdate Hook ===\n');
     next();
   });
-
   return schema;
 }
