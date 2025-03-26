@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsBoolean,
   IsDate,
   IsEnum,
@@ -31,7 +32,7 @@ export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
 
 export const FieldMetadataDtoForArrayString = createFieldMetadataDto<string>({
   options: { type: 'string', isArray: true, default: ['Here is a text'] },
-  decorators: [IsString({ each: true }), IsNotEmpty({ each: true })],
+  decorators: [IsString({ each: true }), IsNotEmpty({ each: true }), IsArray()],
 });
 
 export const FieldMetadataDtoForEnum = (enumValues: any) =>
