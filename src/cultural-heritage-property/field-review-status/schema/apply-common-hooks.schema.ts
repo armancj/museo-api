@@ -11,7 +11,14 @@ interface UpdateDto {
 }
 
 function updateFieldWithHistory(
-  currentField: FieldMetadata<any>,
+  currentField: FieldMetadata<any> = {
+    value: null,
+    history: [],
+    status: { status: 'Pending' },
+    modifiedBy: '',
+    comment: '',
+  },
+
   newField: FieldMetadata<any>,
 ): FieldMetadata<any> {
   console.log('\n>>> updateFieldWithHistory: Inicio de la función');
