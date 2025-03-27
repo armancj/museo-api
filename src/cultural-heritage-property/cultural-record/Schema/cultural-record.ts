@@ -84,7 +84,7 @@ export class CulturalRecord implements CulturalPropertiesModel {
   /** Languages associated with the cultural record */
   @Prop(
     propTypeMongo({
-      type: String,
+      type: [String],
     }),
   )
   languages: FieldMetadata<string[]>;
@@ -156,7 +156,7 @@ export class CulturalRecord implements CulturalPropertiesModel {
   /** Value grade of the cultural object, using an enumerated type */
   @Prop(
     propTypeMongo({
-      type: Number,
+      type: String,
       enum: ValueGrade,
     }),
   )

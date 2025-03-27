@@ -1,4 +1,4 @@
-import { IsOptional, IsObject, ValidateNested } from 'class-validator';
+import { IsOptional, IsObject, ValidateNested, IsEnum, IsString, IsNotEmpty, IsNumber } from 'class-validator';
 import { CulturalPropertiesModel } from '../models/cultural-record';
 
 import { Type } from 'class-transformer';
@@ -30,8 +30,14 @@ export const FieldMetadataDtoEnumValueGrade = createDto(
   FieldMetadataDtoForEnum(ValueGrade),
 );
 
+const FieldMetadataDtoForEnumNumber = (enumValues: any) =>
+  createFieldMetadataDto<number>({
+    options: { type: 'number', enum: enumValues },
+    decorators: [IsEnum(enumValues), IsNumber(), IsNotEmpty()],
+  });
+
 export const FieldMetadataDtoEnumDescriptionLevel = createDto(
-  FieldMetadataDtoForEnum(DescriptionLevel),
+  FieldMetadataDtoForEnumNumber(DescriptionLevel),
 );
 /**
  * Data Transfer Object (DTO) for creating a cultural record.
