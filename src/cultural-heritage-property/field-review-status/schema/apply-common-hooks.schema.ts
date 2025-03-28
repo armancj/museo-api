@@ -38,6 +38,26 @@ function updateFieldWithHistory(
   };
 }
 
+function applyEmbeddedChanges(updatedEmbedded, currentEmbedded) {
+  Object.keys(updatedEmbedded).forEach((fieldKey) => {
+    const currentField = currentEmbedded[fieldKey] || {
+      value: null,
+      history: [],
+      status: {status: 'Pending'},
+      modifiedBy: '',
+      comment: '',
+    };
+    const updatedField = updatedEmbedded[fieldKey];
+
+    if (updatedField) {
+      updatedEmbedded[fieldKey] = updateFieldWithHistory(
+          currentField,
+          updatedField,
+      );
+    }
+  });
+}
+
 export function applyCommonHooksSchema(schema: Schema): Schema {
   schema.pre('findOneAndUpdate', async function (next) {
     const update = (this.getUpdate() as UpdateDto)?.$set;
@@ -51,23 +71,7 @@ export function applyCommonHooksSchema(schema: Schema): Schema {
       const updatedEmbedded = update[key];
 
       if (typeof updatedEmbedded === 'object') {
-        Object.keys(updatedEmbedded).forEach((fieldKey) => {
-          const currentField = currentEmbedded[fieldKey] || {
-            value: null,
-            history: [],
-            status: { status: 'Pending' },
-            modifiedBy: '',
-            comment: '',
-          };
-          const updatedField = updatedEmbedded[fieldKey];
-
-          if (updatedField) {
-            updatedEmbedded[fieldKey] = updateFieldWithHistory(
-              currentField,
-              updatedField,
-            );
-          }
-        });
+        applyEmbeddedChanges(updatedEmbedded, currentEmbedded);
 
         this.setUpdate({
           $set: {

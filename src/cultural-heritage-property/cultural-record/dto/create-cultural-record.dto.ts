@@ -1,10 +1,8 @@
-import { IsOptional, IsObject, ValidateNested, IsEnum, IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsOptional, IsObject, ValidateNested, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
 import { CulturalPropertiesModel } from '../models/cultural-record';
-
 import { Type } from 'class-transformer';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { VolumesQuantitiesDto } from './volumes-quantities.dto';
-import { DimensionsDto } from './dimensions.dto';
 import { ExtremeDatesDto } from './extreme-dates.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import {
@@ -17,15 +15,13 @@ import { FieldMetadata } from '../../field-review-status/models/field-review-sta
 import { createFieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
 import {MetadataExtremeDatesDto} from "./metadata-extreme-dates.dto";
+import {MetadataDimensionsDto} from "./metadata-dimensions.dto";
 
 export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
   options: { type: ExtremeDatesDto },
   decorators: [ValidateNested()],
 });
 
-export const FieldMetadataDtoForDateWithoutHistory = createDto(
-  FieldMetadataDtoForDate,
-);
 
 export const FieldMetadataDtoEnumValueGrade = createDto(
   FieldMetadataDtoForEnum(ValueGrade),
@@ -163,9 +159,8 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
    */
   @IsObject()
   @ValidateNested()
-  @Type(() => DimensionsDto)
-  @IsObject()
-  dimensions: DimensionsDto;
+  @Type(() => MetadataDimensionsDto)
+  dimensions: MetadataDimensionsDto;
 
   /**
    * Languages used in the cultural record.

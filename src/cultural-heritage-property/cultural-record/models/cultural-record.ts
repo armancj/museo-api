@@ -6,15 +6,15 @@ import { FieldMetadata } from '../../field-review-status/models/field-review-sta
  * Interface representing a model for volume quantities information.
  */
 export interface VolumeQuantitiesModel {
-  file?: FieldMetadata<number>;
-  pages?: FieldMetadata<number>;
-  books?: FieldMetadata<number>;
-  objects?: FieldMetadata<number>;
-  photos?: FieldMetadata<number>;
-  engravings?: FieldMetadata<number>;
-  slides?: FieldMetadata<number>;
-  negatives?: FieldMetadata<number>;
-  mapsPlansSketches?: FieldMetadata<number>;
+  file?: number;
+  pages?: number;
+  books?: number;
+  objects?: number;
+  photos?: number;
+  engravings?: number;
+  slides?: number;
+  negatives?: number;
+  mapsPlansSketches?: number;
 }
 
 /**
@@ -36,12 +36,12 @@ export interface VolumeQuantitiesModel {
  * Optional fields may be provided based on the applicability to the specific object.
  */
 export interface DimensionsModel {
-  heightCms?: FieldMetadata<number>;
-  widthCms?: FieldMetadata<number>;
-  lengthCms?: FieldMetadata<number>;
-  squareMeters?: FieldMetadata<number>;
-  cubicMeters?: FieldMetadata<number>;
-  weightKg?: FieldMetadata<number>;
+  heightCms?: number;
+  widthCms?: number;
+  lengthCms?: number;
+  squareMeters?: number;
+  cubicMeters?: number;
+  weightKg?: number;
 }
 
 /**
@@ -97,10 +97,10 @@ export interface CulturalRecordModel {
   valuation?: FieldMetadata<number>;
 
   /** Volume quantities associated with the cultural record */
-  volumesQuantities: VolumeQuantitiesModel;
+  volumesQuantities: FieldMetadata<VolumeQuantitiesModel>;
 
   /** Dimensions associated with the cultural record */
-  dimensions: DimensionsPropertiesModel;
+  dimensions: FieldMetadata<DimensionsPropertiesModel>;
 
   languages: FieldMetadata<string[]>;
   supports: FieldMetadata<string[]>;
