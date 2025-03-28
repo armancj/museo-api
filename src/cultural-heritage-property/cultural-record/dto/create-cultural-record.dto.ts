@@ -16,6 +16,7 @@ import {
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { createFieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
+import {MetadataExtremeDatesDto} from "./metadata-extreme-dates.dto";
 
 export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
   options: { type: ExtremeDatesDto },
@@ -118,9 +119,9 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
   /**
    * Extreme dates (start and end) associated with the cultural record.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForDateWithoutHistory })
+  @ApiProperty({ type: () => MetadataExtremeDatesDto })
   @IsOptional()
-  @Type(() => FieldMetadataDtoForDateWithoutHistory)
+  @Type(() => MetadataExtremeDatesDto)
   @ValidateNested()
   extremeDates?: FieldMetadata<ExtremeDatesDto>;
 
