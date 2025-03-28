@@ -4,6 +4,7 @@ import { UpdateAssociatedDocumentationDto } from './dto/update-associated-docume
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { AssociatedDocumentationEntity } from './entities/associated-documentation.entity';
 import { AssociatedDocumentationsEntity } from './entities/associated-documentations.entity';
+import {User} from "../../users/entities/user.entity";
 @Injectable()
 export class AssociatedDocumentationService {
   constructor(
@@ -18,11 +19,9 @@ export class AssociatedDocumentationService {
   create(
     uuid: string,
     createAssociatedDocumentationDto: CreateAssociatedDocumentationDto,
+    user: User,
   ) {
-    return this.commonRecordService.create(
-      uuid,
-      createAssociatedDocumentationDto,
-    );
+    return this.commonRecordService.create(uuid, createAssociatedDocumentationDto, user);
   }
 
   findAll() {

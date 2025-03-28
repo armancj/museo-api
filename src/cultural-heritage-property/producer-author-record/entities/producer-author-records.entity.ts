@@ -3,7 +3,7 @@ import { ProducerAuthorRecord } from './producer-author-record.entity';
 import { ExtendedProducerAuthorRecord } from './extended-producer-author-record.entity';
 
 export class ProducerAuthorRecords {
-  private constructor(public value: CulturalPropertyModel[]) {}
+    public constructor(public value: CulturalPropertyModel[]) {}
 
   public static create(
     value: CulturalPropertyModel[],

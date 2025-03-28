@@ -13,7 +13,10 @@ import { CreateEntryAndLocationRecordDto } from './dto/create-entry-and-location
 import { UpdateEntryAndLocationRecordDto } from './dto/update-entry-and-location-record.dto';
 import { EntryAndLocationRecord } from './entities/entry-and-location-record.entity';
 import { LocationEntity } from './entities/location.entity';
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
+@Auth()
 @ApiTags('EntryLocationRecord')
 @Controller('entry-and-location-record')
 export class EntryAndLocationRecordController {
@@ -26,6 +29,7 @@ export class EntryAndLocationRecordController {
    *
    * @param uuid The uuid of the entry and location record to update or create.
    * @param createEntryAndLocationRecordDto The data to create or update an entry and location record.
+   * @param user
    * @returns The created or updated entry and location record entity.
    */
   @Put(':uuid')
@@ -42,10 +46,12 @@ export class EntryAndLocationRecordController {
   createOrUpdate(
     @Param('uuid') uuid: string,
     @Body() createEntryAndLocationRecordDto: CreateEntryAndLocationRecordDto,
+    @CurrentUser() user: User,
   ) {
     return this.entryAndLocationRecordService.create(
       uuid,
       createEntryAndLocationRecordDto,
+      user
     );
   }
 
