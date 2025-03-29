@@ -29,7 +29,7 @@ import {ProducerAuthorRecord} from "./entities/producer-author-record.entity";
               producerAuthorRecordModel,
               ProducerAuthorRecord,
               ProducerAuthorRecords,
-              'producerAuthorRecord',
+              'producerAuthor',
           ),
       inject: [getModelToken(CulturalHeritagePropertyEntity)],
     }
