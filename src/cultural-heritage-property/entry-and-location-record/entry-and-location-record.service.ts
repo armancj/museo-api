@@ -4,7 +4,7 @@ import { CreateEntryAndLocationRecordDto } from './dto/create-entry-and-location
 import { UpdateEntryAndLocationRecordDto } from './dto/update-entry-and-location-record.dto';
 import { EntryAndLocationRecord } from './entities/entry-and-location-record.entity';
 import { EntryAndLocationRecordsEntity } from './entities/entry-and-location-records.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Injectable()
 export class EntryAndLocationRecordService {
