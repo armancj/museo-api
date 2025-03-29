@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { LocationModel } from '../models/entry-and-location-record.model';
-import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
-import { propTypeMongo } from '../../util/prop-type-mongo.function';
 
 /**
  * Mongoose schema for Location.
@@ -9,54 +7,26 @@ import { propTypeMongo } from '../../util/prop-type-mongo.function';
  */
 @Schema()
 class Location implements LocationModel {
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  floor: FieldMetadata<string>;
+  @Prop()
+  floor: string;
 
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  exhibitionRoom: FieldMetadata<string>;
+  @Prop()
+  exhibitionRoom: string;
 
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  storage: FieldMetadata<string>;
+  @Prop()
+  storage: string;
 
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  showcaseShelf: FieldMetadata<string>;
+  @Prop()
+  showcaseShelf: string;
 
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  shelfDrawer: FieldMetadata<string>;
+  @Prop()
+  shelfDrawer: string;
 
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  box: FieldMetadata<string>;
+  @Prop()
+  box: string;
 
-  @Prop(
-    propTypeMongo({
-      type: String,
-    }),
-  )
-  fileFolder: FieldMetadata<string>;
+  @Prop()
+  fileFolder: string;
 }
 
 export const LocationSchema = SchemaFactory.createForClass(Location);

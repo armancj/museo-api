@@ -1,4 +1,4 @@
-import { EntryAndLocationRecordModel } from '../models/entry-and-location-record.model';
+import {EntryAndLocationRecordModel, LocationModel} from '../models/entry-and-location-record.model';
 import {
   GenericClassification,
   HeritageType,
@@ -13,6 +13,7 @@ import {
 } from '../../field-review-status/dto/field-metadata-string.dto';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
+import {MetadataObjectLocationDto} from "../dto/metadata-object-location.dto";
 
 /**
  * Class representing an Entry and Location Record.
@@ -46,7 +47,8 @@ export class EntryAndLocationRecord implements EntryAndLocationRecordModel {
   @ApiProperty({ type: () => FieldMetadataDtoForString })
   inventoryNumber: FieldMetadata<string>;
 
-  objectLocation: LocationEntity;
+  @ApiProperty({ type: () => MetadataObjectLocationDto })
+  objectLocation: FieldMetadata<LocationModel>;
 
   @ApiProperty({ type: () => FieldMetadataDtoForString })
   objectName: FieldMetadata<string>;
@@ -83,7 +85,7 @@ export class EntryAndLocationRecord implements EntryAndLocationRecordModel {
     this.pieceInventory = FieldReviewStatusEntity.create(option.pieceInventory);
     this.objectName = FieldReviewStatusEntity.create(option.objectName);
     if (option.objectLocation)
-      this.objectLocation = LocationEntity.create(option.objectLocation);
+      this.objectLocation = FieldReviewStatusEntity.create(option.objectLocation);
   }
 
   /**

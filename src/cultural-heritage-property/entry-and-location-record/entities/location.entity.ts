@@ -9,39 +9,32 @@ import { FieldReviewStatusEntity } from '../../field-review-status/entities/fiel
  * @implements {LocationModel}
  */
 export class LocationEntity implements LocationModel {
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  box: FieldMetadata<string>;
+  box: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  exhibitionRoom: FieldMetadata<string>;
+  exhibitionRoom: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  fileFolder: FieldMetadata<string>;
+  fileFolder: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  floor: FieldMetadata<string>;
-
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  shelfDrawer: FieldMetadata<string>;
-
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  showcaseShelf: FieldMetadata<string>;
-
-  @ApiProperty({ type: () => FieldMetadataDtoForString })
-  storage: FieldMetadata<string>;
+  floor: string;
+  
+  shelfDrawer: string;
+  
+  showcaseShelf: string;
+  
+  storage: string;
 
   /**
    * Creates an instance of LocationEntity.
    * @param {Partial<LocationModel>} option - The initialization options.
    */
   constructor(option: LocationModel) {
-    this.box = FieldReviewStatusEntity.create(option.box);
-    this.exhibitionRoom = FieldReviewStatusEntity.create(option.exhibitionRoom);
-    this.fileFolder = FieldReviewStatusEntity.create(option.fileFolder);
-    this.floor = FieldReviewStatusEntity.create(option.floor);
-    this.shelfDrawer = FieldReviewStatusEntity.create(option.shelfDrawer);
-    this.showcaseShelf = FieldReviewStatusEntity.create(option.showcaseShelf);
-    this.storage = FieldReviewStatusEntity.create(option.storage);
+    this.box = option.box;
+    this.exhibitionRoom = option.exhibitionRoom;
+    this.fileFolder = option.fileFolder;
+    this.floor = option.floor;
+    this.shelfDrawer = option.shelfDrawer;
+    this.showcaseShelf = option.showcaseShelf;
+    this.storage = option.storage;
   }
 
   /**

@@ -44,16 +44,6 @@ export interface DimensionsModel {
   weightKg?: number;
 }
 
-/**
- * Represents a type definition for the properties of a `DimensionsModel` object,
- * excluding any function properties. This type is used to model attributes
- * related to dimensions while omitting any methods or functions present in
- * the original `DimensionsModel`.
- *
- * It is derived using the `NonFunctionProperties` utility type to isolate
- * only non-function members of `DimensionsModel`.
- */
-export type DimensionsPropertiesModel = NonFunctionProperties<DimensionsModel>;
 
 /**
  * Represents the data structure for a cultural record.
@@ -100,7 +90,7 @@ export interface CulturalRecordModel {
   volumesQuantities: FieldMetadata<VolumeQuantitiesModel>;
 
   /** Dimensions associated with the cultural record */
-  dimensions: FieldMetadata<DimensionsPropertiesModel>;
+  dimensions: FieldMetadata<DimensionsModel>;
 
   languages: FieldMetadata<string[]>;
   supports: FieldMetadata<string[]>;

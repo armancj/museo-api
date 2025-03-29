@@ -16,6 +16,8 @@ import { createFieldMetadataDto } from '../../field-review-status/dto/field-meta
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
 import {MetadataExtremeDatesDto} from "./metadata-extreme-dates.dto";
 import {MetadataDimensionsDto} from "./metadata-dimensions.dto";
+import {DimensionsDto} from "./dimensions.dto";
+import {MetadataVolumesQuantitiesDto} from "./metadata-volumes-quantities.dto";
 
 export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
   options: { type: ExtremeDatesDto },
@@ -149,18 +151,20 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
   /**
    * Volume quantities related to the cultural record.
    */
+  @ApiProperty({ type: () => MetadataVolumesQuantitiesDto })
   @IsObject()
   @ValidateNested()
-  @Type(() => VolumesQuantitiesDto)
-  volumesQuantities: VolumesQuantitiesDto;
+  @Type(() => MetadataVolumesQuantitiesDto)
+  volumesQuantities: FieldMetadata<VolumesQuantitiesDto>;
 
   /**
    * Dimensions related to the cultural record.
    */
+  @ApiProperty({ type: () => MetadataDimensionsDto })
   @IsObject()
   @ValidateNested()
   @Type(() => MetadataDimensionsDto)
-  dimensions: MetadataDimensionsDto;
+  dimensions: FieldMetadata<DimensionsDto>;
 
   /**
    * Languages used in the cultural record.

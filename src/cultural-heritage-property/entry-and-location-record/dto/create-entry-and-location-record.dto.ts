@@ -1,4 +1,4 @@
-import { EntryAndLocationRecordModel } from '../models/entry-and-location-record.model';
+import {EntryAndLocationRecordModel, LocationModel} from '../models/entry-and-location-record.model';
 import {
   GenericClassification,
   HeritageType,
@@ -16,6 +16,7 @@ import {
   FieldMetadataDtoForStringWithoutHistory,
 } from '../../field-review-status/dto/create.dto';
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
+import {MetadataObjectLocationDto} from "./metadata-object-location.dto";
 
 export const FieldMetadataDtoEnumInstitutionType = createDto(
   FieldMetadataDtoForEnum(InstitutionType),
@@ -90,9 +91,9 @@ export class CreateEntryAndLocationRecordDto
   @ValidateNested()
   inventoryNumber: FieldMetadata<string>;
 
+  @Type(() => MetadataObjectLocationDto)
   @ValidateNested()
-  @Type(() => CreateLocationDto)
-  objectLocation: CreateLocationDto;
+  objectLocation: FieldMetadata<LocationModel>;
 
   @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
   @Type(() => FieldMetadataDtoForStringWithoutHistory)

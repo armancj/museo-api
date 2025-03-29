@@ -1,9 +1,5 @@
 import { LocationModel } from '../models/entry-and-location-record.model';
-import { ValidateNested } from 'class-validator';
-import { Type } from 'class-transformer';
-import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
-import { ApiProperty } from '@nestjs/swagger';
-import { FieldMetadataDtoForStringWithoutHistory } from '../../field-review-status/dto/create.dto';
+import {IsNotEmpty, IsString} from 'class-validator';
 
 /**
  * Data Transfer Object (DTO) for creating a new location.
@@ -22,38 +18,31 @@ import { FieldMetadataDtoForStringWithoutHistory } from '../../field-review-stat
  * the property type, facilitating validation and serialization.
  */
 export class CreateLocationDto implements LocationModel {
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  box: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  box: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  exhibitionRoom: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  exhibitionRoom: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  fileFolder: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  fileFolder: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  floor: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  floor: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  shelfDrawer: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  shelfDrawer: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  showcaseShelf: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  showcaseShelf: string;
 
-  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
-  @ValidateNested()
-  storage: FieldMetadata<string>;
+  @IsString()
+  @IsNotEmpty()
+  storage: string;
 }

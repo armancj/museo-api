@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   CulturalPropertiesModel,
-  DimensionsPropertiesModel,
+  DimensionsModel,
   VolumeQuantitiesModel,
 } from '../models/cultural-record';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
@@ -50,12 +50,20 @@ export class CulturalRecord implements CulturalPropertiesModel {
   descriptionLevel: FieldMetadata<DescriptionLevel>;
 
   /** Physical dimensions associated with the cultural record */
-  @Prop({ type: DimensionsSchema })
-  dimensions: DimensionsPropertiesModel;
+  @Prop(
+      propTypeMongo({
+        type: DimensionsSchema,
+      }),
+  )
+  dimensions: FieldMetadata<DimensionsModel>;
 
   /** Quantities of several volumes such as books or photos */
-  @Prop({ type: VolumeQuantitiesSchema })
-  volumesQuantities: VolumeQuantitiesModel;
+  @Prop(
+      propTypeMongo({
+        type: VolumeQuantitiesSchema,
+      }),
+  )
+  volumesQuantities: FieldMetadata<VolumeQuantitiesModel>;
 
   /** Extreme start and end dates associated with the cultural record */
   @Prop(

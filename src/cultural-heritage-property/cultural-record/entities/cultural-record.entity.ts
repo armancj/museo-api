@@ -61,10 +61,12 @@ export class CulturalRecordEntity implements CulturalRecordModel {
   valuation?: FieldMetadata<number>;
 
   /** Volumes and quantities associated with the cultural record */
-  volumesQuantities: VolumeQuantitiesEntity;
+  @ApiProperty()
+  volumesQuantities: FieldMetadata<VolumeQuantitiesEntity>;
 
   /** Dimensions associated with the cultural record */
-  dimensions: DimensionsEntity;
+  @ApiProperty()
+  dimensions: FieldMetadata<DimensionsEntity>;
 
   /** Languages spoken or used in the cultural object */
   @ApiProperty({ type: FieldMetadataDtoForArrayString })
@@ -124,12 +126,12 @@ export class CulturalRecordEntity implements CulturalRecordModel {
     this.valuation = FieldReviewStatusEntity.create(option.valuation);
 
     if (option.volumesQuantities) {
-      this.volumesQuantities = VolumeQuantitiesEntity.create(
+      this.volumesQuantities = FieldReviewStatusEntity.create(
         option.volumesQuantities,
       );
     }
     if (option.dimensions) {
-      this.dimensions = DimensionsEntity.create(option.dimensions);
+      this.dimensions = FieldReviewStatusEntity.create(option.dimensions);
     }
 
     this.languages = FieldReviewStatusEntity.create(option.languages);

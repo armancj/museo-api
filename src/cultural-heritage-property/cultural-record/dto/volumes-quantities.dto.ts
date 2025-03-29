@@ -1,9 +1,5 @@
-import { IsOptional, ValidateNested } from 'class-validator';
+import {IsNumber, IsOptional, Min} from 'class-validator';
 import { VolumeQuantitiesModel } from '../models/cultural-record';
-import { Type } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
-import { FieldMetadataDtoForNumberWithoutHistory } from '../../field-review-status/dto/create.dto';
-import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * Data Transfer Object for Volume Quantities.
@@ -14,89 +10,80 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of books (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  books?: FieldMetadata<number>;
+  @Min(0)
+  books?: number;
 
   /**
    * Number of engravings (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  engravings?: FieldMetadata<number>;
+  @Min(0)
+  engravings?: number;
 
   /**
    * Number of files (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  file?: FieldMetadata<number>;
+  @Min(0)
+  file?: number;
 
   /**
    * Number of maps, plans, or sketches (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  mapsPlansSketches?: FieldMetadata<number>;
+  @Min(0)
+  mapsPlansSketches?: number;
 
   /**
    * Number of negatives (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  negatives?: FieldMetadata<number>;
+  @Min(0)
+  negatives?: number;
 
   /**
    * Number of objects (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  objects?: FieldMetadata<number>;
+  @Min(0)
+  objects?: number;
 
   /**
    * Number of pages (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  pages?: FieldMetadata<number>;
+  @Min(0)
+  pages?: number;
 
   /**
    * Number of photos (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  photos?: FieldMetadata<number>;
+  @Min(0)
+  photos?: number;
 
   /**
    * Number of slides (optional).
    * Must be a non-negative integer.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoForNumberWithoutHistory })
+  @IsNumber()
   @IsOptional()
-  @Type(() => FieldMetadataDtoForNumberWithoutHistory)
-  @ValidateNested()
-  slides?: FieldMetadata<number>;
+  @Min(0)
+  slides?: number;
 }

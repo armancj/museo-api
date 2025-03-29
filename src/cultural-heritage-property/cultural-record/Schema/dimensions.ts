@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { DimensionsPropertiesModel } from '../models/cultural-record';
-import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
-import { propTypeMongo } from '../../util/prop-type-mongo.function';
+import {DimensionsModel} from "../models/cultural-record";
 
 /**
  * Mongoose schema for dimensions of a cultural object.
@@ -9,42 +7,22 @@ import { propTypeMongo } from '../../util/prop-type-mongo.function';
  * Represents various physical properties related to size and weight.
  */
 @Schema()
-class Dimensions implements DimensionsPropertiesModel {
+class Dimensions implements DimensionsModel {
   /** Height of the object in centimeters (optional) */
-  @Prop(
-    propTypeMongo({
-      type: Number,
-      required: false,
-    }),
-  )
-  heightCms?: FieldMetadata<number>;
+  @Prop()
+  heightCms?: number;
 
   /** Width of the object in centimeters (optional) */
-  @Prop(
-    propTypeMongo({
-      type: Number,
-      required: false,
-    }),
-  )
-  widthCms?: FieldMetadata<number>;
+  @Prop()
+  widthCms?: number;
 
   /** Length of the object in centimeters (optional) */
-  @Prop(
-    propTypeMongo({
-      type: Number,
-      required: false,
-    }),
-  )
-  lengthCms?: FieldMetadata<number>;
+  @Prop()
+  lengthCms?: number;
 
   /** Weight of the object in kilograms */
-  @Prop(
-    propTypeMongo({
-      type: Number,
-      required: false,
-    }),
-  )
-  weightKg: FieldMetadata<number>;
+  @Prop()
+  weightKg: number;
 }
 
 /**

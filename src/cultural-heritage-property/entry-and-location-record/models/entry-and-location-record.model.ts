@@ -20,13 +20,13 @@ import { FieldMetadata } from '../../field-review-status/models/field-review-sta
  * - fileFolder: Metadata for categorizing or identifying a file or folder.
  */
 export interface LocationModel {
-  floor: FieldMetadata<string>;
-  exhibitionRoom: FieldMetadata<string>;
-  storage: FieldMetadata<string>;
-  showcaseShelf: FieldMetadata<string>;
-  shelfDrawer: FieldMetadata<string>;
-  box: FieldMetadata<string>;
-  fileFolder: FieldMetadata<string>;
+  floor: string;
+  exhibitionRoom: string;
+  storage: string;
+  showcaseShelf: string;
+  shelfDrawer: string;
+  box: string;
+  fileFolder: string;
 }
 
 /**
@@ -61,6 +61,6 @@ export interface EntryAndLocationRecordModel {
   entryMethod: FieldMetadata<string>;
   entryDate: FieldMetadata<Date>;
 
-  objectLocation: LocationModel;
+  objectLocation: FieldMetadata<LocationModel>;
   institutionType: FieldMetadata<InstitutionType>;
 }
