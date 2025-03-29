@@ -4,7 +4,7 @@ import { CreateDescriptionControlDto } from './dto/create-description-control.dt
 import { UpdateDescriptionControlDto } from './dto/update-description-control.dto';
 import { DescriptionControl } from './entities/description-control.entity';
 import { DescriptionControlsEntity } from './entities/description-controls.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Injectable()
 export class DescriptionControlService {
