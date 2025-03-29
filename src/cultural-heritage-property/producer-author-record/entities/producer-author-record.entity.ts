@@ -5,37 +5,37 @@ import { FieldMetadataDtoForString } from '../../field-review-status/dto/field-m
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ProducerAuthorRecord implements ProducerAuthorRecordModel {
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   betweenStreet1: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   betweenStreet2: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   district: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   institutionalHistory: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   locality: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   municipality: FieldMetadata<string>;
 
   @ApiProperty({ type: FieldMetadataDtoForString })
   number: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   objectEntryHistory: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   producerAuthorNames: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   province: FieldMetadata<string>;
 
-  @ApiProperty({ type: FieldMetadataDtoForString })
+  @ApiProperty({ type: () => FieldMetadataDtoForString })
   street: FieldMetadata<string>;
 
   constructor(option: Partial<ProducerAuthorRecordModel>) {
