@@ -1,10 +1,10 @@
-import {Inject, Injectable, NotFoundException} from '@nestjs/common';
+import {Inject, Injectable } from '@nestjs/common';
 import { CreateProducerAuthorRecordDto } from './dto/create-producer-author-record.dto';
 import { ProducerAuthorRecord } from './entities/producer-author-record.entity';
 import { ProducerAuthorRecordModel } from './models/producer-author-record.models';
 import { ProducerAuthorRecords } from './entities/producer-author-records.entity';
 import { User } from '../../users/entities/user.entity';
-import {CommonRecordService} from "../shared/common-record-service.service";
+import {CommonRecordService} from '../shared/common-record-service.service';
 
 @Injectable()
 export class ProducerAuthorRecordService {
