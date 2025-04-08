@@ -43,7 +43,7 @@ function applyEmbeddedChanges(updatedEmbedded, currentEmbedded) {
     const currentField = currentEmbedded[fieldKey] || {
       value: null,
       history: [],
-      status: {status: 'Pending'},
+      status: { status: 'Pending' },
       modifiedBy: '',
       comment: '',
     };
@@ -51,8 +51,8 @@ function applyEmbeddedChanges(updatedEmbedded, currentEmbedded) {
 
     if (updatedField) {
       updatedEmbedded[fieldKey] = updateFieldWithHistory(
-          currentField,
-          updatedField,
+        currentField,
+        updatedField,
       );
     }
   });
