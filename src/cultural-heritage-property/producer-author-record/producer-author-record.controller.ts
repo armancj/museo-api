@@ -13,7 +13,10 @@ import { ProducerAuthorRecordService } from './producer-author-record.service';
 import { CreateProducerAuthorRecordDto } from './dto/create-producer-author-record.dto';
 import { UpdateProducerAuthorRecordDto } from './dto/update-producer-author-record.dto';
 import { ApiTags } from '@nestjs/swagger';
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
+@Auth()
 @ApiTags('ProducerAuthorRecord')
 @Controller('producer-author-record')
 export class ProducerAuthorRecordController {
@@ -25,10 +28,12 @@ export class ProducerAuthorRecordController {
   create(
     @Param('uuid') uuid: string,
     @Body() createProducerAuthorRecordDto: CreateProducerAuthorRecordDto,
+    @CurrentUser() user: User,
   ) {
     return this.producerAuthorRecordService.create(
       uuid,
       createProducerAuthorRecordDto,
+      user
     );
   }
 

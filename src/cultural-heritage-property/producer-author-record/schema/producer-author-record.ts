@@ -1,39 +1,86 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ProducerAuthorRecordModel } from '../models/producer-author-record.models';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { propTypeMongo } from '../../util/prop-type-mongo.function';
+
 @Schema()
 class ProducerAuthorRecord implements ProducerAuthorRecordModel {
-  @Prop()
-  producerAuthorNames: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  producerAuthorNames: FieldMetadata<string>;
 
-  @Prop()
-  street: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  street: FieldMetadata<string>;
 
-  @Prop()
-  number: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  number: FieldMetadata<string>;
 
-  @Prop()
-  betweenStreet1: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  betweenStreet1: FieldMetadata<string>;
 
-  @Prop()
-  betweenStreet2: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  betweenStreet2: FieldMetadata<string>;
 
-  @Prop()
-  district: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  district: FieldMetadata<string>;
 
-  @Prop()
-  locality: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  locality: FieldMetadata<string>;
 
-  @Prop()
-  municipality: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  municipality: FieldMetadata<string>;
 
-  @Prop()
-  province: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  province: FieldMetadata<string>;
 
-  @Prop()
-  institutionalHistory?: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  institutionalHistory?: FieldMetadata<string>;
 
-  @Prop()
-  objectEntryHistory?: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  objectEntryHistory?: FieldMetadata<string>;
 }
 
 export const ProducerAuthorRecordSchema =

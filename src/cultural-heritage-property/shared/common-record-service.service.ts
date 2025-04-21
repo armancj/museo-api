@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { User } from '../../users/entities/user.entity';
 
 /**
  * Generic service for handling CRUD operations on a MongoDB model with embedded data.
@@ -36,10 +37,12 @@ export class CommonRecordService<
    * Creates a new record by updating the embedded field in the document.
    *
    * @param uuid - Unique identifier of the document.
-   * @param createDto - Data transfer object for creating a new record.
+   * @param createDto
+   * @param user
    * @returns A promise that resolves to the created `RecordEntity`.
    */
-  async create(uuid: string, createDto: CreateDto): Promise<RecordEntity> {
+  async create(uuid: string, createDto: CreateDto, user: User): Promise<RecordEntity> {
+    this.updateFieldMetadataModifiedBy(createDto, user.uuid);
     return this.updateRecord(uuid, createDto);
   }
 
@@ -131,5 +134,29 @@ export class CommonRecordService<
     return this.singleEntityClass['create'](
       updatedRecord[this.embeddedFieldName],
     );
+  }
+
+
+  /**
+   * Función genérica que busca y actualiza los campos `modifiedBy`
+   * dentro de campos de tipo `FieldMetadata` de un objeto dado.
+   * @param obj - El objeto en el que se buscarán los campos.
+   * @param modifiedBy - El valor del `modifiedBy` que se establecerá.
+   */
+  private updateFieldMetadataModifiedBy<T>(
+      obj: Record<string, any>,
+      modifiedBy: string,
+  ): void {
+    Object.keys(obj).forEach((key) => {
+      const field = obj[key];
+
+      if (field && typeof field === 'object' && 'value' in field && 'status' in field) {
+        field.modifiedBy = modifiedBy;
+      }
+
+      if (typeof field === 'object' && !Array.isArray(field)) {
+        this.updateFieldMetadataModifiedBy(field, modifiedBy);
+      }
+    });
   }
 }

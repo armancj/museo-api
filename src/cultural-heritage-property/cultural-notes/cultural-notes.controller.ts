@@ -17,6 +17,8 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
 /**
  * Controller to manage cultural notes.
@@ -24,6 +26,7 @@ import {
  * This controller handles CRUD operations for cultural notes associated with
  * a specific UUID. Operations include creating, retrieving, updating, and deleting notes.
  */
+@Auth()
 @ApiTags('cultural-notes') // Swagger decorator for grouping in Swagger UI
 @Controller('cultural-notes')
 export class CulturalNotesController {
@@ -37,6 +40,7 @@ export class CulturalNotesController {
    *
    * @param uuid The UUID of the cultural property
    * @param createCulturalNoteDto The data to create the cultural note
+   * @param user
    * @returns The created cultural note
    */
   @ApiOperation({ summary: 'Create a new cultural note for a specific UUID' })
@@ -51,8 +55,9 @@ export class CulturalNotesController {
   create(
     @Param('uuid') uuid: string,
     @Body() createCulturalNoteDto: CreateCulturalNoteDto,
+    @CurrentUser() user: User,
   ) {
-    return this.culturalNotesService.create(uuid, createCulturalNoteDto);
+    return this.culturalNotesService.create(uuid, createCulturalNoteDto, user);
   }
 
   /**
@@ -62,6 +67,7 @@ export class CulturalNotesController {
    *
    * @returns A list of cultural notes
    */
+  @Auth()
   @ApiOperation({ summary: 'Get all cultural notes' })
   @ApiResponse({
     status: 200,

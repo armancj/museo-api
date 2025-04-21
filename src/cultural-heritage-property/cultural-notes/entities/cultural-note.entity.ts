@@ -1,4 +1,8 @@
 import { NotesModel } from '../models/cultural-notes-model';
+import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForString } from '../../field-review-status/dto/field-metadata-string.dto';
 
 /**
  * Entity representing a cultural note.
@@ -10,7 +14,8 @@ export class CulturalNoteEntity implements NotesModel {
   /**
    * Content of the cultural note.
    */
-  notes: string;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  notes: FieldMetadata<string>;
 
   /**
    * Constructor to initialize a `CulturalNoteEntity`.
@@ -18,7 +23,7 @@ export class CulturalNoteEntity implements NotesModel {
    * @param option - Partial data based on the `NotesModel` to create a new instance.
    */
   constructor(option: Partial<NotesModel>) {
-    this.notes = option.notes;
+    this.notes = FieldReviewStatusEntity.create(option.notes);
   }
 
   /**

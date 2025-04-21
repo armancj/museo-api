@@ -1,13 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   CulturalPropertiesModel,
-  DimensionsPropertiesModel,
+  DimensionsModel,
   VolumeQuantitiesModel,
 } from '../models/cultural-record';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
 import { DimensionsSchema } from './dimensions';
 import { VolumeQuantitiesSchema } from './volume-quantities';
 import { ExtremeDatesSchema } from './extreme-dates.schema';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { propTypeMongo } from '../../util/prop-type-mongo.function';
 
 /**
  * Mongoose schema for a Cultural Record, representing detailed information about cultural properties.
@@ -15,80 +17,158 @@ import { ExtremeDatesSchema } from './extreme-dates.schema';
 @Schema()
 export class CulturalRecord implements CulturalPropertiesModel {
   /** Title of the background associated with the cultural record */
-  @Prop()
-  backgroundTitle: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  backgroundTitle: FieldMetadata<string>;
 
   /** State of conservation of the cultural object */
-  @Prop()
-  conservationState: string[];
+  @Prop(
+    propTypeMongo({
+      type: [String],
+    }),
+  )
+  conservationState: FieldMetadata<string[]>;
 
   /** Instruments used for describing the cultural object */
-  @Prop()
-  descriptionInstrument: string[];
+  @Prop(
+    propTypeMongo({
+      type: [String],
+    }),
+  )
+  descriptionInstrument: FieldMetadata<string[]>;
 
   /** Description level of the cultural object, using an enumerated type */
-  @Prop({ required: true, enum: DescriptionLevel })
-  descriptionLevel: DescriptionLevel;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+      enum: DescriptionLevel,
+    }),
+  )
+  descriptionLevel: FieldMetadata<DescriptionLevel>;
 
   /** Physical dimensions associated with the cultural record */
-  @Prop({ type: DimensionsSchema })
-  dimensions: DimensionsPropertiesModel;
+  @Prop(
+      propTypeMongo({
+        type: DimensionsSchema,
+      }),
+  )
+  dimensions: FieldMetadata<DimensionsModel>;
 
   /** Quantities of several volumes such as books or photos */
-  @Prop({ type: VolumeQuantitiesSchema })
-  volumesQuantities: VolumeQuantitiesModel;
+  @Prop(
+      propTypeMongo({
+        type: VolumeQuantitiesSchema,
+      }),
+  )
+  volumesQuantities: FieldMetadata<VolumeQuantitiesModel>;
 
   /** Extreme start and end dates associated with the cultural record */
-  @Prop({ type: ExtremeDatesSchema })
-  extremeDates: { start: Date; end: Date };
+  @Prop(
+    propTypeMongo({
+      type: ExtremeDatesSchema,
+    }),
+  )
+  extremeDates: FieldMetadata<{ start: Date; end: Date }>;
 
   /** Geographic descriptors associated with the cultural record */
-  @Prop()
-  geographicDescriptors: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  geographicDescriptors: FieldMetadata<string>;
 
   /** Institutional descriptors associated with the cultural record */
-  @Prop()
-  institutionalDescriptors: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  institutionalDescriptors: FieldMetadata<string>;
 
   /** Languages associated with the cultural record */
-  @Prop()
-  languages: string[];
+  @Prop(
+    propTypeMongo({
+      type: [String],
+    }),
+  )
+  languages: FieldMetadata<string[]>;
 
   /** Letters associated with the cultural record */
-  @Prop()
-  letters: string[];
+  @Prop(
+    propTypeMongo({
+      type: [String],
+    }),
+  )
+  letters: FieldMetadata<string[]>;
 
   /** Description of the cultural object */
-  @Prop()
-  objectDescription: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  objectDescription: FieldMetadata<string>;
 
   /** Title of the cultural object */
-  @Prop()
-  objectTitle: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  objectTitle: FieldMetadata<string>;
 
   /** Onomastic descriptors for the cultural record */
-  @Prop()
-  onomasticDescriptors: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  onomasticDescriptors: FieldMetadata<string>;
 
   /** Title of the section within the cultural record */
-  @Prop()
-  sectionTitle: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  sectionTitle: FieldMetadata<string>;
 
   /** Subject descriptors for the cultural object */
-  @Prop()
-  subjectDescriptors: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  subjectDescriptors: FieldMetadata<string>;
 
   /** Supports available for the cultural record */
-  @Prop()
-  supports: string[];
+  @Prop(
+    propTypeMongo({
+      type: [String],
+    }),
+  )
+  supports: FieldMetadata<string[]>;
 
   /** Valuation of the cultural object */
-  @Prop()
-  valuation: number;
+  @Prop(
+    propTypeMongo({
+      type: Number,
+    }),
+  )
+  valuation: FieldMetadata<number>;
 
   /** Value grade of the cultural object, using an enumerated type */
-  @Prop({ required: true, enum: ValueGrade })
-  valueGrade: ValueGrade;
+  @Prop(
+    propTypeMongo({
+      type: String,
+      enum: ValueGrade,
+    }),
+  )
+  valueGrade: FieldMetadata<ValueGrade>;
 }
 
 /**

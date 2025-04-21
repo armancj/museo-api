@@ -1,28 +1,18 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AccessAndUseConditionsController } from './access-and-use-conditions.controller';
 import { CommonRecordService } from '../shared/common-record-service.service';
-import { getModelToken, MongooseModule } from '@nestjs/mongoose';
-import {
-  CulturalHeritagePropertyEntity,
-  CulturalHeritagePropertySchema,
-} from '../cultural-heritage-property/Schema/cultural-heritage-property';
+import { getModelToken } from '@nestjs/mongoose';
+import { CulturalHeritagePropertyEntity } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { AccessAndUseCondition } from './entities/access-and-use-condition.entity';
 import { AccessAndUseConditionsEntity } from './entities/access-and-use-conditions.entity';
+import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cultural-heritage-property.module';
 
 /**
  * Module for managing access and use conditions of cultural heritage properties.
  */
 @Module({
   imports: [
-    /**
-     * Imports the Mongoose module with the cultural heritage property schema.
-     */
-    MongooseModule.forFeature([
-      {
-        name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
-      },
-    ]),
+    forwardRef(() => CulturalHeritagePropertyModule), // Usar forwardRef para evitar una dependencia circular
   ],
   controllers: [AccessAndUseConditionsController],
   providers: [

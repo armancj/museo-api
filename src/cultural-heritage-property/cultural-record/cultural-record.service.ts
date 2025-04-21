@@ -4,6 +4,7 @@ import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto';
 import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto';
 import { CulturalRecordEntity } from './entities/cultural-record.entity';
 import { CulturalRecordsEntity } from './entities/cultural-records.entity';
+import {User} from "../../users/entities/user.entity";
 
 @Injectable()
 export class CulturalRecordService {
@@ -22,10 +23,11 @@ export class CulturalRecordService {
    *
    * @param uuid The UUID for the new cultural record.
    * @param createCulturalRecordDto Data to create the cultural record.
+   * @param user
    * @returns The created cultural record.
    */
-  create(uuid: string, createCulturalRecordDto: CreateCulturalRecordDto) {
-    return this.commonRecordService.create(uuid, createCulturalRecordDto);
+  create(uuid: string, createCulturalRecordDto: CreateCulturalRecordDto, user: User) {
+    return this.commonRecordService.create(uuid, createCulturalRecordDto, user);
   }
 
   /**

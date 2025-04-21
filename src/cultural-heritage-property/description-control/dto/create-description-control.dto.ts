@@ -1,6 +1,12 @@
-import { IsDate, IsString } from 'class-validator';
+import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { DescriptionControlModel } from '../models/description-control-model';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  FieldMetadataDtoForDateWithoutHistory,
+  FieldMetadataDtoForStringWithoutHistory,
+} from '../../field-review-status/dto/create.dto';
 
 /**
  * Data Transfer Object for creating a Description Control.
@@ -11,29 +17,35 @@ export class CreateDescriptionControlDto implements DescriptionControlModel {
    * Date and time when the description was made.
    * Must be a valid Date object.
    */
-  @IsDate()
-  @Type(() => Date)
-  descriptionDateTime: Date;
+  @ApiProperty({ type: () => FieldMetadataDtoForDateWithoutHistory })
+  @Type(() => FieldMetadataDtoForDateWithoutHistory)
+  @ValidateNested()
+  descriptionDateTime: FieldMetadata<Date>;
 
   /**
    * Identifier of the person who made the description.
    * Must be a non-empty string.
    */
-  @IsString()
-  descriptionMadeBy: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  descriptionMadeBy: FieldMetadata<string>;
 
   /**
    * Date and time when the description was reviewed.
    * Must be a valid Date object.
    */
-  @IsDate()
-  @Type(() => Date)
-  reviewDateTime: Date;
+  @ApiProperty({ type: () => FieldMetadataDtoForDateWithoutHistory })
+  @Type(() => FieldMetadataDtoForDateWithoutHistory)
+  @ValidateNested()
+  reviewDateTime: FieldMetadata<Date>;
 
   /**
    * Identifier of the person who reviewed the description.
-   * Must be a non-empty string.
+   * Must be a non-empty FieldMetadataDto<string>.
    */
-  @IsString()
-  reviewedBy: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  reviewedBy: FieldMetadata<string>;
 }

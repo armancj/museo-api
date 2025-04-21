@@ -4,8 +4,8 @@ import { Model } from 'mongoose';
 import { CreateDescriptionInstrumentDto } from './dto/create-description-instrument.dto';
 import { UpdateDescriptionInstrumentDto } from './dto/update-description-instrument.dto';
 import {
-  DescriptionInstrument,
   DescriptionInstrumentDocument,
+  DescriptionInstrumentNameEntity,
 } from './schemas/description-instrument.schema';
 
 import { DescriptionInstrumentEntity } from './entities/description-instrument.entity';
@@ -14,7 +14,7 @@ import { DescriptionInstruments } from './entities/description-inst.entity';
 @Injectable()
 export class DescriptionInstrumentsService {
   constructor(
-    @InjectModel(DescriptionInstrument.name)
+    @InjectModel(DescriptionInstrumentNameEntity)
     private readonly descriptionInstrumentModel: Model<DescriptionInstrumentDocument>,
   ) {}
 

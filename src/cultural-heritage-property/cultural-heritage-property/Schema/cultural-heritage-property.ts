@@ -23,11 +23,6 @@ import { DescriptionControlSchema } from '../../description-control/schema/descr
 import { DescriptionControlModel } from '../../description-control/models/description-control-model';
 import { NotesSchema } from '../../cultural-notes/schema/notes';
 import { NotesModel } from '../../cultural-notes/models/cultural-notes-model';
-import {
-  FieldReviewStatus,
-  FieldReviewStatusEntity,
-  FieldReviewStatusModel,
-} from '../../field-review-status/schema/field-review-status.schema';
 
 export type CulturalHeritagePropertyDocument =
   HydratedDocument<CulturalHeritageProperty>;
@@ -42,7 +37,7 @@ export class CulturalHeritageProperty extends BaseSchema {
   @Prop({ type: EntryAndLocationRecordSchema })
   entryAndLocation: EntryAndLocationRecordModel;
 
-  @Prop({ type: ProducerAuthorRecordSchema, default: undefined })
+  @Prop({ type: ProducerAuthorRecordSchema })
   producerAuthor: ProducerAuthorRecordModel;
 
   @Prop({ type: CulturalRecordSchema })
@@ -65,9 +60,6 @@ export class CulturalHeritageProperty extends BaseSchema {
 
   @Type(() => Institution)
   institution: Institution;
-
-  @Prop({ type: [String], default: [] })
-  fieldReviewStatusIds: string[];
 }
 
 export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(
@@ -81,59 +73,8 @@ CulturalHeritagePropertySchema.virtual('institution', {
   justOne: true,
 });
 
-CulturalHeritagePropertySchema.virtual('fieldReviewStatus', {
-  ref: FieldReviewStatusEntity,
-  localField: 'fieldReviewStatusIds',
-  foreignField: 'uuid',
-  justOne: false,
-});
-
-CulturalHeritagePropertySchema.pre('save', async function (next) {
-  const culturalHeritageProperty =
-    this as HydratedDocument<CulturalHeritageProperty>;
-
-  if (!culturalHeritageProperty.fieldReviewStatusIds) {
-    culturalHeritageProperty.fieldReviewStatusIds = [];
-  }
-
-  const fieldsToReview = ['notes', 'entryAndLocation', 'producerAuthor'];
-  const FieldReviewStatusModel =
-    culturalHeritageProperty.model<FieldReviewStatusModel>('FieldReviewStatus');
-
-  for (const field of fieldsToReview) {
-    if (culturalHeritageProperty.isModified(field)) {
-      const existingReviewStatus = await FieldReviewStatusModel.findOne({
-        fieldName: field,
-        culturalHeritageProperty: culturalHeritageProperty._id,
-      }).exec();
-
-      if (!existingReviewStatus) {
-        const newReviewStatus = await FieldReviewStatusModel.create({
-          isUnderReview: true,
-          isApproved: false,
-          currentValue: culturalHeritageProperty[field],
-          previousValue: null,
-          modifiedBy: 'system',
-          fieldName: field,
-          culturalHeritageProperty: culturalHeritageProperty._id,
-        });
-
-        culturalHeritageProperty.fieldReviewStatusIds.push(
-          newReviewStatus.uuid,
-        );
-      } else {
-        existingReviewStatus.previousValue = existingReviewStatus.currentValue;
-        existingReviewStatus.currentValue = culturalHeritageProperty[field];
-        existingReviewStatus.modifiedBy = 'system';
-        await existingReviewStatus.save();
-      }
-    }
-  }
-  next();
-});
-
 CulturalHeritagePropertySchema.add(BaseSchemaFactory);
 
-export const CulturalHeritagePropertyEntity = 'CulturalHeritageProperty';
+export const CulturalHeritagePropertyEntity = 'cultural-heritage-property';
 export type CulturalHeritagePropertyModel =
   Model<CulturalHeritagePropertyDocument>;

@@ -1,4 +1,4 @@
-import { IsOptional, IsInt, Min } from 'class-validator';
+import {IsNumber, IsOptional, Min} from 'class-validator';
 import { VolumeQuantitiesModel } from '../models/cultural-record';
 
 /**
@@ -10,8 +10,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of books (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   books?: number;
 
@@ -19,8 +19,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of engravings (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   engravings?: number;
 
@@ -28,8 +28,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of files (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   file?: number;
 
@@ -37,8 +37,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of maps, plans, or sketches (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   mapsPlansSketches?: number;
 
@@ -46,8 +46,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of negatives (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   negatives?: number;
 
@@ -55,8 +55,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of objects (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   objects?: number;
 
@@ -64,8 +64,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of pages (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   pages?: number;
 
@@ -73,8 +73,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of photos (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   photos?: number;
 
@@ -82,8 +82,8 @@ export class VolumesQuantitiesDto implements VolumeQuantitiesModel {
    * Number of slides (optional).
    * Must be a non-negative integer.
    */
+  @IsNumber()
   @IsOptional()
-  @IsInt()
   @Min(0)
   slides?: number;
 }

@@ -3,17 +3,18 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DescriptionInstrumentsService } from './description-instruments.service';
 import { DescriptionInstrumentsController } from './description-instruments.controller';
 import {
-  DescriptionInstrument,
+  DescriptionInstrumentNameEntity,
   DescriptionInstrumentSchema,
 } from './schemas/description-instrument.schema';
-import { InstitutionsModule } from '../../address';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: DescriptionInstrument.name, schema: DescriptionInstrumentSchema },
+      {
+        name: DescriptionInstrumentNameEntity,
+        schema: DescriptionInstrumentSchema,
+      },
     ]),
-    InstitutionsModule,
   ],
   controllers: [DescriptionInstrumentsController],
   providers: [DescriptionInstrumentsService],

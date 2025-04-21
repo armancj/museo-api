@@ -13,17 +13,19 @@ import { AccessAndUseConditionsModule } from '../access-and-use-conditions/acces
 import { AssociatedDocumentationModule } from '../associated-documentation/associated-documentation.module';
 import { DescriptionControlModule } from '../description-control/description-control.module';
 import { CulturalNotesModule } from '../cultural-notes/cultural-notes.module';
-import {FieldReviewStatusModule} from "../field-review-status/field-review-status.module";
+import { applyCommonHooksSchema } from '../field-review-status/schema/apply-common-hooks.schema';
 
 @Module({
   imports: [
     /**
      * Imports the Mongoose module with the cultural heritage property schema.
      */
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
         name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
+        useFactory: () => {
+          return applyCommonHooksSchema(CulturalHeritagePropertySchema); // Aplica los hooks al esquema
+        },
       },
     ]),
     EntryAndLocationRecordModule,
@@ -33,9 +35,9 @@ import {FieldReviewStatusModule} from "../field-review-status/field-review-statu
     AssociatedDocumentationModule,
     DescriptionControlModule,
     CulturalNotesModule,
-    FieldReviewStatusModule,
   ],
   controllers: [CulturalHeritagePropertyController],
   providers: [CulturalHeritagePropertyService],
+  exports: [MongooseModule],
 })
 export class CulturalHeritagePropertyModule {}

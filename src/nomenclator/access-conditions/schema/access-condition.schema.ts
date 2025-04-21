@@ -28,5 +28,5 @@ export const AccessConditionSchemaFactory = SchemaFactory.createForClass(
 );
 AccessConditionSchemaFactory.add(BaseSchemaFactory);
 
-export const AccessConditionNameEntity = 'access_conditions';
+export const AccessConditionNameEntity = 'access-conditions';
 export type AccessConditionMongoModel = Model<AccessConditionDocument>;

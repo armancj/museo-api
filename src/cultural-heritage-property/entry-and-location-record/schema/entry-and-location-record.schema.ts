@@ -6,82 +6,86 @@ import {
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { LocationSchema } from './location.schema';
 import { LocationModel } from '../models/entry-and-location-record.model';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { propTypeMongo } from '../../util/prop-type-mongo.function';
 
 /**
- * Mongoose schema for Entry and Location Record.
- * @schema EntryAndLocationRecord
+ * Represents the record of an entry and its location.
+ * This class contains metadata fields describing various properties related to heritage inventory and entry details.
  */
 @Schema()
 class EntryAndLocationRecord {
-  /**
-   * The heritage type of the item.
-   * @type {HeritageType}
-   */
-  @Prop({ required: true, enum: HeritageType })
-  heritageType: HeritageType;
+  @Prop(
+    propTypeMongo({
+      type: String,
+      enum: HeritageType,
+    }),
+  )
+  heritageType: FieldMetadata<HeritageType>;
 
-  /**
-   * The type of declaration.
-   * @type {string}
-   */
-  @Prop()
-  declarationType: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  declarationType: FieldMetadata<string>;
 
-  /**
-   * The inventory number of the item.
-   * @type {string}
-   */
-  @Prop({ required: true })
-  inventoryNumber: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  inventoryNumber: FieldMetadata<string>;
 
-  /**
-   * The generic classification of the item.
-   * @type {GenericClassification}
-   */
-  @Prop({ required: true, enum: GenericClassification })
-  genericClassification: GenericClassification;
+  @Prop(
+    propTypeMongo({
+      type: String,
+      enum: GenericClassification,
+    }),
+  )
+  genericClassification: FieldMetadata<GenericClassification>;
 
-  /**
-   * Indicates if the item is in the piece inventory.
-   * @type {boolean}
-   */
-  @Prop()
-  pieceInventory: boolean;
+  @Prop(
+    propTypeMongo({
+      type: Boolean,
+    }),
+  )
+  pieceInventory: FieldMetadata<boolean>;
 
-  /**
-   * Indicates if the item is in the auxiliary inventory.
-   * @type {boolean}
-   */
-  @Prop()
-  auxiliaryInventory: boolean;
+  @Prop(
+    propTypeMongo({
+      type: Boolean,
+    }),
+  )
+  auxiliaryInventory: FieldMetadata<boolean>;
 
-  /**
-   * The name of the object.
-   * @type {string}
-   */
-  @Prop({ required: true })
-  objectName: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  objectName: FieldMetadata<string>;
 
-  /**
-   * A brief initial description of the item.
-   * @type {string}
-   */
-  @Prop()
-  initialDescription: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  initialDescription: FieldMetadata<string>;
 
-  /**
-   * The method of entry.
-   * @type {string}
-   */
-  @Prop()
-  entryMethod: string;
+  @Prop(
+    propTypeMongo({
+      type: String,
+    }),
+  )
+  entryMethod: FieldMetadata<string>;
 
-  /**
-   * The entry date.
-   * @type {Date}
-   */
-  @Prop()
-  entryDate: Date;
+  @Prop(
+    propTypeMongo({
+      type: Date,
+    }),
+  )
+  entryDate: FieldMetadata<Date>;
 
   /**
    * The location details of the item.
@@ -90,14 +94,21 @@ class EntryAndLocationRecord {
   @Prop({ type: LocationSchema })
   objectLocation: LocationModel;
 
-  /**
-   * The type of institution.
-   * @type {InstitutionType}
-   */
-  @Prop({ required: true, enum: InstitutionType })
-  institutionType: InstitutionType;
+  @Prop(
+    propTypeMongo({
+      type: String,
+      enum: InstitutionType,
+    }),
+  )
+  institutionType: FieldMetadata<InstitutionType>;
 }
 
+/**
+ * EntryAndLocationRecordSchema is a schema object created using the SchemaFactory.
+ * It represents the database schema for the EntryAndLocationRecord entity.
+ * This schema is used for mapping and validating EntryAndLocationRecord-related data
+ * when interacting with the database.
+ */
 export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(
   EntryAndLocationRecord,
 );

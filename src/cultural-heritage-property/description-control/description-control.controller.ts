@@ -19,14 +19,16 @@ import {
 import { DescriptionControlService } from './description-control.service';
 import { CreateDescriptionControlDto } from './dto/create-description-control.dto';
 import { UpdateDescriptionControlDto } from './dto/update-description-control.dto';
-import { DescriptionControlsEntity } from './entities/description-controls.entity';
 import {ExtendedDescriptionControlEntity} from "./entities/extended-description-control.entity";
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
 /**
  * Controller for managing description controls.
  *
  * Provides endpoints to create, retrieve, update, and delete description control records.
  */
+@Auth()
 @ApiTags('Description Control')
 @Controller('description-control')
 export class DescriptionControlController {
@@ -39,6 +41,7 @@ export class DescriptionControlController {
    *
    * @param uuid - Unique identifier for the description control.
    * @param createDescriptionControlDto - DTO with the data required to create a description control.
+   * @param user
    * @returns The newly created description control record.
    */
   @ApiOperation({ summary: 'Create a description control' })
@@ -55,10 +58,12 @@ export class DescriptionControlController {
   create(
     @Param('uuid') uuid: string,
     @Body() createDescriptionControlDto: CreateDescriptionControlDto,
+    @CurrentUser() user: User,
   ) {
     return this.descriptionControlService.create(
       uuid,
       createDescriptionControlDto,
+        user
     );
   }
 

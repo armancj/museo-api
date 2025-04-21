@@ -24,10 +24,13 @@ import { UpdateAccessAndUseConditionDto } from './dto/update-access-and-use-cond
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { AccessAndUseCondition } from './entities/access-and-use-condition.entity';
 import { AccessAndUseConditionsEntity } from './entities/access-and-use-conditions.entity';
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
 /**
  * Controller for managing access and use conditions.
  */
+@Auth()
 @ApiTags('access-conditions')
 @Controller('access-and-use-conditions')
 export class AccessAndUseConditionsController {
@@ -45,6 +48,7 @@ export class AccessAndUseConditionsController {
    * Creates or replaces an access condition.
    * @param uuid - Unique identifier of the resource.
    * @param createAccessAndUseConditionDto - Data transfer object for creation.
+   * @param user
    */
   @Put(':uuid')
   @ApiOperation({ summary: 'Create or replace an access condition' })
@@ -57,11 +61,9 @@ export class AccessAndUseConditionsController {
   create(
     @Param('uuid') uuid: string,
     @Body() createAccessAndUseConditionDto: CreateAccessAndUseConditionDto,
+    @CurrentUser() user: User,
   ) {
-    return this.accessAndUseConditionsService.create(
-      uuid,
-      createAccessAndUseConditionDto,
-    );
+    return this.accessAndUseConditionsService.create(uuid, createAccessAndUseConditionDto, user);
   }
 
   /**

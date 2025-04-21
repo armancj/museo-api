@@ -1,4 +1,5 @@
 import { VolumeQuantitiesModel } from '../models/cultural-record';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * Entity representing the quantities related to volumes (files, pages, books, etc.).
@@ -6,14 +7,31 @@ import { VolumeQuantitiesModel } from '../models/cultural-record';
  * This entity models the quantities for different volume-related properties such as files, books, etc.
  */
 export class VolumeQuantitiesEntity implements VolumeQuantitiesModel {
+  @ApiProperty()
   file?: number;
+
+  @ApiProperty()
   pages?: number;
+
+  @ApiProperty()
   books?: number;
+
+  @ApiProperty()
   objects?: number;
+
+  @ApiProperty()
   photos?: number;
+
+  @ApiProperty()
   engravings?: number;
+
+  @ApiProperty()
   slides?: number;
+
+  @ApiProperty()
   negatives?: number;
+
+  @ApiProperty()
   mapsPlansSketches?: number;
 
   constructor(option: Partial<VolumeQuantitiesModel>) {

@@ -1,26 +1,16 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CulturalNotesService } from './cultural-notes.service';
 import { CulturalNotesController } from './cultural-notes.controller';
-import { getModelToken, MongooseModule } from '@nestjs/mongoose';
-import {
-  CulturalHeritagePropertyEntity,
-  CulturalHeritagePropertySchema,
-} from '../cultural-heritage-property/Schema/cultural-heritage-property';
+import { getModelToken } from '@nestjs/mongoose';
+import { CulturalHeritagePropertyEntity } from '../cultural-heritage-property/Schema/cultural-heritage-property';
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { CulturalNoteEntity } from './entities/cultural-note.entity';
 import { CulturalNotesEntity } from './entities/cultural-notes.entity';
+import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cultural-heritage-property.module';
 
 @Module({
   imports: [
-    /**
-     * Imports the Mongoose module with the cultural heritage property schema.
-     */
-    MongooseModule.forFeature([
-      {
-        name: CulturalHeritagePropertyEntity,
-        schema: CulturalHeritagePropertySchema,
-      },
-    ]),
+    forwardRef(() => CulturalHeritagePropertyModule), // Usar forwardRef para evitar una dependencia circular
   ],
   controllers: [CulturalNotesController],
   providers: [

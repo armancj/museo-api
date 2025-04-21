@@ -1,5 +1,9 @@
 import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsOptional, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForStringWithoutHistory } from '../../field-review-status/dto/create.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * Data Transfer Object (DTO) for creating associated documentation.
@@ -15,9 +19,10 @@ export class CreateAssociatedDocumentationDto
    * @type {string}
    * @remarks This field is required.
    */
-  @IsString()
-  @IsNotEmpty()
-  copiesExistenceAndLocation: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  copiesExistenceAndLocation: FieldMetadata<string>;
 
   /**
    * Indicates the existence and location of original documents.
@@ -25,10 +30,11 @@ export class CreateAssociatedDocumentationDto
    * @type {string | undefined}
    * @optional This field is optional but must be a non-empty string if provided.
    */
-  @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  originalsExistenceAndLocation?: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  originalsExistenceAndLocation?: FieldMetadata<string>;
 
   /**
    * Provides information about related description units.
@@ -36,10 +42,11 @@ export class CreateAssociatedDocumentationDto
    * @type {string | undefined}
    * @optional This field is optional but must be a non-empty string if provided.
    */
-  @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  relatedDescriptionUnits?: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  relatedDescriptionUnits?: FieldMetadata<string>;
 
   /**
    * Contains information about related publications.
@@ -47,7 +54,8 @@ export class CreateAssociatedDocumentationDto
    * @type {string}
    * @remarks This field is required.
    */
-  @IsString()
-  @IsNotEmpty()
-  relatedPublicationsInformation: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  relatedPublicationsInformation: FieldMetadata<string>;
 }

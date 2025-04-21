@@ -4,31 +4,33 @@ import { CreateDescriptionControlDto } from './dto/create-description-control.dt
 import { UpdateDescriptionControlDto } from './dto/update-description-control.dto';
 import { DescriptionControl } from './entities/description-control.entity';
 import { DescriptionControlsEntity } from './entities/description-controls.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Injectable()
 export class DescriptionControlService {
-  constructor(
-    @Inject('DESCRIPTION_CONTROL_SERVICE')
-    private readonly commonRecordService: CommonRecordService<
-      any,
-      CreateDescriptionControlDto,
-      DescriptionControl,
-      DescriptionControlsEntity
-    >,
-  ) {}
+    constructor(
+        @Inject('DESCRIPTION_CONTROL_SERVICE')
+        private readonly commonRecordService: CommonRecordService<
+            any,
+            CreateDescriptionControlDto,
+            DescriptionControl,
+            DescriptionControlsEntity
+        >,
+    ) {
+    }
 
-  /**
-   * Creates a new description control record, associating it with a UUID.
-   *
-   * @param uuid - The UUID to associate with the new description control.
-   * @param createDescriptionControlDto - Data transfer object containing the description control details.
-   * @returns {Promise<DescriptionControl>} - Promise resolving to the created description control.
-   */
-  create(
-    uuid: string,
-    createDescriptionControlDto: CreateDescriptionControlDto,
+    /**
+     * Creates a new description control record, associating it with a UUID.
+     *
+     * @param uuid - The UUID to associate with the new description control.
+     * @param createDescriptionControlDto - Data transfer object containing the description control details.
+     * @param user
+     * @returns {Promise<DescriptionControl>} - Promise resolving to the created description control.
+     */
+    create(
+        uuid: string, createDescriptionControlDto: CreateDescriptionControlDto, user: User,
   ): Promise<DescriptionControl> {
-    return this.commonRecordService.create(uuid, createDescriptionControlDto);
+    return this.commonRecordService.create(uuid, createDescriptionControlDto, user);
   }
 
   /**

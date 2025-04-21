@@ -1,4 +1,8 @@
 import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
+import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForString } from '../../field-review-status/dto/field-metadata-string.dto';
 
 /**
  * Entity class for representing associated documentation.
@@ -14,28 +18,32 @@ export class AssociatedDocumentationEntity
    *
    * @type {string}
    */
-  copiesExistenceAndLocation: string;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  copiesExistenceAndLocation: FieldMetadata<string>;
 
   /**
    * Indicates the existence and location of original documents.
    *
    * @type {string}
    */
-  originalsExistenceAndLocation: string;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  originalsExistenceAndLocation: FieldMetadata<string>;
 
   /**
    * Provides information about related description units.
    *
    * @type {string}
    */
-  relatedDescriptionUnits: string;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  relatedDescriptionUnits: FieldMetadata<string>;
 
   /**
    * Contains information about related publications.
    *
    * @type {string}
    */
-  relatedPublicationsInformation: string;
+  @ApiProperty({ type: FieldMetadataDtoForString })
+  relatedPublicationsInformation: FieldMetadata<string>;
 
   /**
    * Constructor for creating an instance of `AssociatedDocumentationEntity`.
@@ -43,10 +51,18 @@ export class AssociatedDocumentationEntity
    * @param option Partial data to initialize the entity.
    */
   constructor(option: Partial<AssociatedDocumentationModel>) {
-    this.copiesExistenceAndLocation = option.copiesExistenceAndLocation;
-    this.originalsExistenceAndLocation = option.originalsExistenceAndLocation;
-    this.relatedDescriptionUnits = option.relatedDescriptionUnits;
-    this.relatedPublicationsInformation = option.relatedPublicationsInformation;
+    this.copiesExistenceAndLocation = FieldReviewStatusEntity.create(
+      option.copiesExistenceAndLocation,
+    );
+    this.originalsExistenceAndLocation = FieldReviewStatusEntity.create(
+      option.originalsExistenceAndLocation,
+    );
+    this.relatedDescriptionUnits = FieldReviewStatusEntity.create(
+      option.relatedDescriptionUnits,
+    );
+    this.relatedPublicationsInformation = FieldReviewStatusEntity.create(
+      option.relatedPublicationsInformation,
+    );
   }
 
   /**

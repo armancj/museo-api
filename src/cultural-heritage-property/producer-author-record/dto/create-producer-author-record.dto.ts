@@ -1,50 +1,65 @@
 import { ProducerAuthorRecordModel } from '../models/producer-author-record.models';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForStringWithoutHistory } from '../../field-review-status/dto/create.dto';
+import { Type } from 'class-transformer';
+import { ValidateNested } from 'class-validator';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 export class CreateProducerAuthorRecordDto
   implements ProducerAuthorRecordModel
 {
-  @IsString()
-  @IsNotEmpty()
-  betweenStreet1: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  betweenStreet1: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  betweenStreet2: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  betweenStreet2: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  district: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  district: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  institutionalHistory: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  institutionalHistory: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  locality: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  locality: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  municipality: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  municipality: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  number: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  number: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  objectEntryHistory: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  objectEntryHistory: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  producerAuthorNames: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  producerAuthorNames: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  province: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  province: FieldMetadata<string>;
 
-  @IsString()
-  @IsNotEmpty()
-  street: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  street: FieldMetadata<string>;
 }

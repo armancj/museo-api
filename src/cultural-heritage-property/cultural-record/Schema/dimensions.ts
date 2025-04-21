@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { DimensionsPropertiesModel } from '../models/cultural-record';
+import {DimensionsModel} from "../models/cultural-record";
 
 /**
  * Mongoose schema for dimensions of a cultural object.
@@ -7,7 +7,7 @@ import { DimensionsPropertiesModel } from '../models/cultural-record';
  * Represents various physical properties related to size and weight.
  */
 @Schema()
-class Dimensions implements DimensionsPropertiesModel {
+class Dimensions implements DimensionsModel {
   /** Height of the object in centimeters (optional) */
   @Prop()
   heightCms?: number;

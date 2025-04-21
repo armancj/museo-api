@@ -1,11 +1,11 @@
-import { DimensionsPropertiesModel } from '../models/cultural-record';
-import { IsOptional, IsNumber, Min } from 'class-validator';
+import { DimensionsModel } from '../models/cultural-record';
+import {IsNumber, IsOptional, Min} from 'class-validator';
 
 /**
  * Data Transfer Object for Dimensions.
  * This DTO represents various dimensional measurements and calculation methods.
  */
-export class DimensionsDto implements DimensionsPropertiesModel {
+export class DimensionsDto implements DimensionsModel {
   /**
    * Height in centimeters (optional).
    * Must be a non-negative number.

@@ -13,11 +13,14 @@ import { AssociatedDocumentationService } from './associated-documentation.servi
 import { CreateAssociatedDocumentationDto } from './dto/create-associated-documentation.dto';
 import { UpdateAssociatedDocumentationDto } from './dto/update-associated-documentation.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
 /**
  * Controller for managing associated documentation.
  * Provides endpoints for creating, retrieving, updating, and deleting documentation data.
  */
+@Auth()
 @ApiTags('AssociatedDocumentation')
 @Controller('associated-documentation')
 export class AssociatedDocumentationController {
@@ -46,10 +49,12 @@ export class AssociatedDocumentationController {
   create(
     @Param('uuid') uuid: string,
     @Body() createAssociatedDocumentationDto: CreateAssociatedDocumentationDto,
+    @CurrentUser() user: User,
   ) {
     return this.associatedDocumentationService.create(
       uuid,
       createAssociatedDocumentationDto,
+        user
     );
   }
 

@@ -1,5 +1,9 @@
 import { NotesModel } from '../models/cultural-notes-model';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsOptional, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
+import { FieldMetadataDtoForStringWithoutHistory } from '../../field-review-status/dto/create.dto';
+import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
 /**
  * DTO for creating a cultural note.
@@ -14,8 +18,9 @@ export class CreateCulturalNoteDto implements NotesModel {
    * @type {string}
    * @optional
    */
-  @IsString()
   @IsOptional()
-  @IsNotEmpty()
-  notes?: string;
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
+  @ValidateNested()
+  notes?: FieldMetadata<string>;
 }

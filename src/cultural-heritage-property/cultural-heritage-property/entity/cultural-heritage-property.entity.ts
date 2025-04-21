@@ -30,8 +30,6 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
   uuid: string;
 
-
-
   constructor(option: CulturalPropertyModel) {
     this.createdAt = option.createdAt;
     this.deleted = option.deleted;
@@ -55,7 +53,9 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
       this.culturalRecord = CulturalRecordEntity.create(option.culturalRecord);
 
     if (option.entryAndLocation)
-      this.entryAndLocation = option.entryAndLocation;
+      this.entryAndLocation = EntryAndLocationRecord.create(
+        option.entryAndLocation,
+      );
 
     if (option.descriptionControl)
       this.descriptionControl = DescriptionControl.create(

@@ -13,7 +13,10 @@ import { CreateCulturalRecordDto } from './dto/create-cultural-record.dto';
 import { UpdateCulturalRecordDto } from './dto/update-cultural-record.dto';
 import { CulturalRecordEntity } from './entities/cultural-record.entity';
 import { ExtendedCulturalRecordEntity } from './entities/extended-cultural-record.entity';
+import {Auth, CurrentUser} from "../../auth/decorator";
+import {User} from "../../users/entities/user.entity";
 
+@Auth()
 @ApiTags('CulturalRecord')
 @Controller('cultural-record')
 export class CulturalRecordController {
@@ -24,6 +27,7 @@ export class CulturalRecordController {
    *
    * @param uuid The UUID of the cultural record to update or create.
    * @param createCulturalRecordDto The data to create or update a cultural record.
+   * @param user
    * @returns The created or updated cultural record entity.
    */
   @Put(':uuid')
@@ -38,8 +42,9 @@ export class CulturalRecordController {
   createOrUpdate(
     @Param('uuid') uuid: string,
     @Body() createCulturalRecordDto: CreateCulturalRecordDto,
+    @CurrentUser() user: User,
   ) {
-    return this.culturalRecordService.create(uuid, createCulturalRecordDto);
+    return this.culturalRecordService.create(uuid, createCulturalRecordDto, user);
   }
 
   /**

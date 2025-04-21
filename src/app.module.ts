@@ -15,7 +15,8 @@ import { AddressModule } from './address';
 import { CulturalHeritagePropertyModule } from './cultural-heritage-property';
 import { CommandsModule } from './commands/commands.module';
 import { LoggerModule } from './logger/logger.module';
-import { NomenclatureModule } from './nomenclator/nomenclatureModule';
+import { NomenclatureModule } from './nomenclator/nomenclature.module';
+import { TestDataModule } from './test-data/test-data.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { NomenclatureModule } from './nomenclator/nomenclatureModule';
     CommandsModule,
     LoggerModule,
     NomenclatureModule,
+    TestDataModule,
   ],
   controllers: [AppController],
   providers: [

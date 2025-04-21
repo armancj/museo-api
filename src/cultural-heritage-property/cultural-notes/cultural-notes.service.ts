@@ -4,6 +4,7 @@ import { CreateCulturalNoteDto } from './dto/create-cultural-note.dto';
 import { UpdateCulturalNoteDto } from './dto/update-cultural-note.dto';
 import { CulturalNoteEntity } from './entities/cultural-note.entity';
 import { CulturalNotesEntity } from './entities/cultural-notes.entity';
+import {User} from "../../users/entities/user.entity";
 
 /**
  * Service to manage cultural notes.
@@ -30,8 +31,8 @@ export class CulturalNotesService {
    * @param commonDto The data used to create the cultural note
    * @returns The created cultural note
    */
-  create(uuid: string, commonDto: CreateCulturalNoteDto) {
-    return this.commonRecordService.create(uuid, commonDto);
+  create(uuid: string, commonDto: CreateCulturalNoteDto, user: User) {
+    return this.commonRecordService.create(uuid, commonDto, user);
   }
 
   /**
