@@ -1,6 +1,6 @@
-import { CreateCategoryMuseumDto } from '../../nomenclator/institutions/category-museum/dto/create-category-museum.dto';
+import { CreateCategoryMuseumDto } from '../../nomenclator/category-museum/dto/create-category-museum.dto';
 import { Command, CommandRunner } from 'nest-commander';
-import { CategoryMuseumService } from '../../nomenclator/institutions/category-museum/category-museum.service';
+import { CategoryMuseumService } from '../../nomenclator/category-museum/category-museum.service';
 import { Logger } from '@nestjs/common';
 
 export const defaultCategories: CreateCategoryMuseumDto[] = [

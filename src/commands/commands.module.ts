@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { CreateSuperAdmin } from './commands/create-super-admin';
 import { UsersModule } from '../users/users.module';
 import { CommandRunnerModule } from 'nest-commander';
-import { CategoryMuseumModule } from '../nomenclator/institutions/category-museum/category-museum.module';
 import { CreateDefaultCategories } from './commands/create-default-categories';
 import { CreateDefaultDescriptionInstruments } from './commands/create-default-description-instruments';
 import { DescriptionInstrumentsModule } from '../nomenclator/description-instruments/description-instruments.module';
 import { AccessConditionsModule } from '../nomenclator/access-conditions/access-conditions.module';
 import { CreateDefaultAccessConditions } from './commands/create-default-access-reproduccion';
+import { CategoryMuseumModule } from '../nomenclator/category-museum/category-museum.module';
 
 @Module({
   imports: [
