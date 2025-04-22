@@ -14,8 +14,7 @@ import { UpdateFundTitleDto } from './dto/update-fund-title.dto';
 import { FilterFundTitleDto } from './dto/filter-fund-title.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-//@ApiTags('fund-title')
-@ApiTags('[Nomenclator] fund-title')
+@ApiTags('fund-title')
 @Controller('fund-title')
 export class FundTitleController {
   constructor(private readonly fundTitleService: FundTitleService) {}
