@@ -22,7 +22,5 @@ export class FundTitleEntity extends BaseSchema {
   description: string;
 }
 
-export const FundTitleSchema = SchemaFactory.createForClass(
-  FundTitleEntity,
-);
+export const FundTitleSchema = SchemaFactory.createForClass(FundTitleEntity);
 FundTitleSchema.add(BaseSchemaFactory);

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { ReproductionConditionsService } from './reproduction-conditions.service';
 import { CreateReproductionConditionDto } from './dto/create-reproduction-condition.dto';
@@ -12,7 +20,7 @@ export class ReproductionConditionsController {
 
   @Auth({
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
-  })  
+  })
   @Post()
   @ApiOperation({ summary: 'Create reproduction condition' })
   create(@Body() createDto: CreateReproductionConditionDto) {
@@ -31,17 +39,20 @@ export class ReproductionConditionsController {
   findOne(@Param('uuid') uuid: string) {
     return this.service.findOne(uuid);
   }
-  
+
   @Auth({
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
   })
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update reproduction condition' })
   @ApiParam({ name: 'uuid', description: 'Reproduction condition UUID' })
-  update(@Param('uuid') uuid: string, @Body() updateDto: CreateReproductionConditionDto) {
+  update(
+    @Param('uuid') uuid: string,
+    @Body() updateDto: CreateReproductionConditionDto,
+  ) {
     return this.service.update(uuid, updateDto);
   }
-  
+
   @Auth({
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
   })
