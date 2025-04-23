@@ -9,4 +9,4 @@ export class CreateConservationStatusDto {
   @IsNotEmpty()
   @IsString()
   description: string;
-} 
+}
