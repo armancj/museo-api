@@ -5,4 +5,4 @@ export class FilterConservationStatusDto {
   @IsOptional()
   @IsEnum(ConservationStatus)
   name?: ConservationStatus;
-} 
+}

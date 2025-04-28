@@ -117,6 +117,12 @@ $ pnpm run command create:default-fund-titles
 # Add Default Entry Forms
 $ pnpm run command create:default-entry-forms
 ```
+
+## Resources Conservation Statuses
+```bash
+# Add Default Conservation Statuses
+$ pnpm run command create:default-conservation-statuses
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
