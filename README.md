@@ -105,6 +105,12 @@ $ pnpm run command create:default-heritage-types
 # Add Default Generic Classifications
 $ pnpm run command create:default-generic-classifications
 ```
+
+## Resources Fund Titles
+```bash
+# Add Default Fund Titles
+$ pnpm run command create:default-fund-titles
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.

@@ -16,6 +16,8 @@ import { HeritageTypeModule } from '../nomenclator/heritage-type/heritage-type.m
 import { CreateDefaultHeritageTypes } from './commands/create-default-heritage-types';
 import { GenericClassificationModule } from '../nomenclator/generic-classification/generic-classification.module';
 import { CreateDefaultGenericClassifications } from './commands/create-default-generic-classifications';
+import { FundTitleModule } from '../nomenclator/fund-title/fund-title.module';
+import { CreateDefaultFundTitles } from './commands/create-default-fund-titles';
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { CreateDefaultGenericClassifications } from './commands/create-default-g
     ValueGradeModule,
     HeritageTypeModule,
     GenericClassificationModule,
+    FundTitleModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -38,6 +41,7 @@ import { CreateDefaultGenericClassifications } from './commands/create-default-g
     CreateDefaultValueGrades,
     CreateDefaultHeritageTypes,
     CreateDefaultGenericClassifications,
+    CreateDefaultFundTitles,
   ],
 })
 export class CommandsModule {}
