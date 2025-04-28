@@ -111,6 +111,12 @@ $ pnpm run command create:default-generic-classifications
 # Add Default Fund Titles
 $ pnpm run command create:default-fund-titles
 ```
+
+## Resources Entry Forms
+```bash
+# Add Default Entry Forms
+$ pnpm run command create:default-entry-forms
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
