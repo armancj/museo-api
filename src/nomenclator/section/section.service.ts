@@ -15,17 +15,16 @@ export class SectionService {
   ) {}
 
   async create(createSectionDto: CreateSectionDto) {
-    const createdSection = await this.sectionRepository.create(
-      createSectionDto,
-    );
+    const createdSection =
+      await this.sectionRepository.create(createSectionDto);
     const entity = SectionEntity.create(createdSection);
-    
+
     return {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       uuid: entity.uuid,
       name: entity.name,
-      description: entity.description
+      description: entity.description,
     };
   }
 
@@ -36,11 +35,9 @@ export class SectionService {
       query.name = filter.name;
     }
 
-    const sections = await this.sectionRepository
-      .find(query)
-      .exec();
+    const sections = await this.sectionRepository.find(query).exec();
 
-    return sections.map(section => SectionEntity.create(section));
+    return sections.map((section) => SectionEntity.create(section));
   }
 
   async findOne(uuid: string) {
@@ -52,9 +49,7 @@ export class SectionService {
   }
 
   private async getSection(filter: Partial<SectionEntity>) {
-    const section = await this.sectionRepository
-      .findOne(filter)
-      .exec();
+    const section = await this.sectionRepository.findOne(filter).exec();
     if (!section) {
       throw new NotFoundException('Section not found');
     }
@@ -63,9 +58,7 @@ export class SectionService {
 
   async update(uuid: string, updateSectionDto: UpdateSectionDto) {
     await this.findOne(uuid);
-    await this.sectionRepository
-      .updateOne({ uuid }, updateSectionDto)
-      .exec();
+    await this.sectionRepository.updateOne({ uuid }, updateSectionDto).exec();
   }
 
   async remove(uuid: string) {

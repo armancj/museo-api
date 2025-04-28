@@ -32,7 +32,7 @@ export const defaultCategories: CreateCategoryMuseumDto[] = [
   description: 'Insert default categories based on institution type',
 })
 export class CreateDefaultCategories extends CommandRunner {
-  private logger = new Logger(`create:default-categories`);
+  private readonly logger = new Logger(`create:default-categories`);
 
   constructor(private readonly categoryService: CategoryMuseumService) {
     super();

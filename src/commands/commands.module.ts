@@ -8,6 +8,8 @@ import { DescriptionInstrumentsModule } from '../nomenclator/description-instrum
 import { AccessConditionsModule } from '../nomenclator/access-conditions/access-conditions.module';
 import { CreateDefaultAccessConditions } from './commands/create-default-access-reproduccion';
 import { CategoryMuseumModule } from '../nomenclator/category-museum/category-museum.module';
+import { SectionModule } from '../nomenclator/section/section.module';
+import { CreateDefaultSections } from './commands/create-default-sections';
 
 @Module({
   imports: [
@@ -16,12 +18,14 @@ import { CategoryMuseumModule } from '../nomenclator/category-museum/category-mu
     CategoryMuseumModule,
     DescriptionInstrumentsModule,
     AccessConditionsModule,
+    SectionModule,
   ],
   providers: [
     CreateSuperAdmin,
     CreateDefaultCategories,
     CreateDefaultDescriptionInstruments,
     CreateDefaultAccessConditions,
+    CreateDefaultSections,
   ],
 })
 export class CommandsModule {}
