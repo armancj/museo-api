@@ -10,6 +10,8 @@ import { CreateDefaultAccessConditions } from './commands/create-default-access-
 import { CategoryMuseumModule } from '../nomenclator/category-museum/category-museum.module';
 import { SectionModule } from '../nomenclator/section/section.module';
 import { CreateDefaultSections } from './commands/create-default-sections';
+import { ValueGradeModule } from '../nomenclator/value-grade/value-grade.module';
+import { CreateDefaultValueGrades } from './commands/create-default-value-grades';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { CreateDefaultSections } from './commands/create-default-sections';
     DescriptionInstrumentsModule,
     AccessConditionsModule,
     SectionModule,
+    ValueGradeModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -26,6 +29,7 @@ import { CreateDefaultSections } from './commands/create-default-sections';
     CreateDefaultDescriptionInstruments,
     CreateDefaultAccessConditions,
     CreateDefaultSections,
+    CreateDefaultValueGrades,
   ],
 })
 export class CommandsModule {}

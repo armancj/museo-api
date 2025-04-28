@@ -1,10 +1,9 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { ValueGrade } from '../enum/value-grade.enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateValueGradeDto {
   @IsNotEmpty()
-  @IsEnum(ValueGrade)
-  name: ValueGrade;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
   @IsString()

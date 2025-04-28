@@ -1,10 +1,9 @@
 import { BaseEntity } from '../../../common/entity/base.entity';
-import { ValueGrade } from '../enum/value-grade.enum';
 import { Expose, plainToClass } from 'class-transformer';
 
 export class ValueGradeEntity extends BaseEntity {
   @Expose()
-  name: ValueGrade;
+  name: string;
 
   @Expose()
   description: string;

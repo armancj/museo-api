@@ -1,8 +1,6 @@
-import { IsEnum, IsOptional } from 'class-validator';
-import { ValueGrade } from '../enum/value-grade.enum';
+import { PickType } from '@nestjs/swagger';
+import { UpdateValueGradeDto } from './update-value-grade.dto';
 
-export class FilterValueGradeDto {
-  @IsOptional()
-  @IsEnum(ValueGrade)
-  name?: ValueGrade;
-}
+export class FilterValueGradeDto extends PickType(UpdateValueGradeDto, [
+  'name',
+] as const) {}
