@@ -4,7 +4,7 @@ import { Expose, plainToClass } from 'class-transformer';
 
 export class HeritageTypeEntity extends BaseEntity {
   @Expose()
-  name: HeritageType;
+  name: string;
 
   @Expose()
   description: string;

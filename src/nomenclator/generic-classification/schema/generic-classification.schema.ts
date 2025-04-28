@@ -6,17 +6,15 @@ import {
 } from '../../../common/schema/base.schema';
 import { GenericClassification } from '../enum/generic-classification.enum';
 
-export type GenericClassificationDocument = GenericClassificationEntity & Document;
-export type GenericClassificationMongoModel = Model<GenericClassificationDocument>;
+export type GenericClassificationDocument = GenericClassificationEntity &
+  Document;
+export type GenericClassificationMongoModel =
+  Model<GenericClassificationDocument>;
 
 @Schema({ collection: 'generic-classification' })
 export class GenericClassificationEntity extends BaseSchema {
-  @Prop({
-    type: String,
-    enum: GenericClassification,
-    required: true,
-  })
-  name: GenericClassification;
+  @Prop({ required: true, unique: true })
+  name: string;
 
   @Prop({ required: true })
   description: string;

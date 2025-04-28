@@ -93,6 +93,18 @@ $ pnpm run command create:default-sections
 # Add Default Museum Value Grades
 $ pnpm run command create:default-value-grades
 ```
+
+## Resources Heritage Types
+```bash
+# Add Default Heritage Types
+$ pnpm run command create:default-heritage-types
+```
+
+## Resources Generic Classifications
+```bash
+# Add Default Generic Classifications
+$ pnpm run command create:default-generic-classifications
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.

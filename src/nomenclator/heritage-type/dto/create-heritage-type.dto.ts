@@ -1,10 +1,9 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { HeritageType } from '../enum/heritage-type.enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateHeritageTypeDto {
   @IsNotEmpty()
-  @IsEnum(HeritageType)
-  name: HeritageType;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
   @IsString()

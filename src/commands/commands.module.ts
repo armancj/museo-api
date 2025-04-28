@@ -12,6 +12,10 @@ import { SectionModule } from '../nomenclator/section/section.module';
 import { CreateDefaultSections } from './commands/create-default-sections';
 import { ValueGradeModule } from '../nomenclator/value-grade/value-grade.module';
 import { CreateDefaultValueGrades } from './commands/create-default-value-grades';
+import { HeritageTypeModule } from '../nomenclator/heritage-type/heritage-type.module';
+import { CreateDefaultHeritageTypes } from './commands/create-default-heritage-types';
+import { GenericClassificationModule } from '../nomenclator/generic-classification/generic-classification.module';
+import { CreateDefaultGenericClassifications } from './commands/create-default-generic-classifications';
 
 @Module({
   imports: [
@@ -22,6 +26,8 @@ import { CreateDefaultValueGrades } from './commands/create-default-value-grades
     AccessConditionsModule,
     SectionModule,
     ValueGradeModule,
+    HeritageTypeModule,
+    GenericClassificationModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -30,6 +36,8 @@ import { CreateDefaultValueGrades } from './commands/create-default-value-grades
     CreateDefaultAccessConditions,
     CreateDefaultSections,
     CreateDefaultValueGrades,
+    CreateDefaultHeritageTypes,
+    CreateDefaultGenericClassifications,
   ],
 })
 export class CommandsModule {}
