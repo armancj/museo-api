@@ -3,6 +3,7 @@
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
@@ -58,84 +59,99 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
-## Resources User
+## Setup Default Resources
+
+These commands populate the database with initial default data required for the application to function correctly (e.g.,
+super admin user, standard nomenclatures). Run these after setting up your database connection.
+
+    ### Add All Default Resources (Recommended)
+
+    This command runs all the individual default resource creation scripts sequentially. It's the easiest way to set up the initial data.
+
 ```bash
-# Add Super Admin
+# Add all default data (User, Categories, Instruments, Conditions, etc.)
+$ pnpm run create:all-defaults
+```
+
+### Add Individual Default Resources (Optional)
+
+If you need to add specific resources individually (e.g., after clearing a collection or for specific testing), you can
+use the following commands:
+
+```bash
+# Add Super Admin User
 $ pnpm run command create:default-user
 ```
 
-## Resources Museun Categories
 ```bash
-# Add Museun Categories
+# Add Museum Categories
 $ pnpm run command create:default-categories
 ```
 
-## Resources Description Instruments
 ```bash
-# Add Default Description Instruments
+# Add Description Instruments
 $ pnpm run command create:default-description-instruments
 ```
 
-## Resources Access Reproduction
 ```bash
-# Add Default  Access Reproduction
+# Add Access Conditions/Reproduction
 $ pnpm run command create:default-access-conditions
 ```
 
-## Resources Sections
 ```bash
-# Add Default Museum Sections
+# Add Museum Sections
 $ pnpm run command create:default-sections
 ```
 
-## Resources Value Grades
 ```bash
-# Add Default Museum Value Grades
+# Add Museum Value Grades
 $ pnpm run command create:default-value-grades
 ```
 
-## Resources Heritage Types
 ```bash
-# Add Default Heritage Types
+# Add Heritage Types
 $ pnpm run command create:default-heritage-types
 ```
 
-## Resources Generic Classifications
 ```bash
-# Add Default Generic Classifications
+# Add Generic Classifications
 $ pnpm run command create:default-generic-classifications
-```
+``` 
 
-## Resources Fund Titles
 ```bash
-# Add Default Fund Titles
+# Add Fund Titles
 $ pnpm run command create:default-fund-titles
-```
+``` 
 
-## Resources Entry Forms
 ```bash
-# Add Default Entry Forms
+# Add Entry Forms
 $ pnpm run command create:default-entry-forms
 ```
 
-## Resources Conservation Statuses
 ```bash
-# Add Default Conservation Statuses
+# Add Conservation Statuses
 $ pnpm run command create:default-conservation-statuses
 ```
+
+## Useful NestJS Resources
+
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
 - For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
 - To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Visualize your application graph and interact with the NestJS application in real-time
+  using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our
+  official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework)
+  and [LinkedIn](https://linkedin.com/company/nestjs).
 - Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If
+you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 
@@ -147,3 +163,4 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 ````
+Now you have the `create:all-defaults` script in your `package.json` and an updated `README.md` that explains how to use it and lists the individual commands correctly according to your project's setup.
