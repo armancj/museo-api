@@ -5,7 +5,10 @@ import { CreateGenericClassificationDto } from './dto/create-generic-classificat
 import { UpdateGenericClassificationDto } from './dto/update-generic-classification.dto';
 import { FilterGenericClassificationDto } from './dto/filter-generic-classification.dto';
 import { GenericClassificationEntity } from './entities/generic-classification.entity';
-import { GenericClassificationDocument, GenericClassificationMongoModel } from './schema/generic-classification.schema';
+import {
+  GenericClassificationDocument,
+  GenericClassificationMongoModel,
+} from './schema/generic-classification.schema';
 
 @Injectable()
 export class GenericClassificationService {
@@ -15,22 +18,25 @@ export class GenericClassificationService {
   ) {}
 
   async create(createGenericClassificationDto: CreateGenericClassificationDto) {
-    const createdClassification = await this.genericClassificationRepository.create(
-      createGenericClassificationDto,
-    );
+    const createdClassification =
+      await this.genericClassificationRepository.create(
+        createGenericClassificationDto,
+      );
     const entity = GenericClassificationEntity.create(createdClassification);
-    
+
     return {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       uuid: entity.uuid,
       name: entity.name,
-      description: entity.description
+      description: entity.description,
     };
   }
 
   async findAll(filter?: FilterGenericClassificationDto) {
-    const query: RootFilterQuery<GenericClassificationDocument> = { deleted: false };
+    const query: RootFilterQuery<GenericClassificationDocument> = {
+      deleted: false,
+    };
 
     if (filter?.name) {
       query.name = filter.name;
@@ -40,7 +46,9 @@ export class GenericClassificationService {
       .find(query)
       .exec();
 
-    return classifications.map(classification => GenericClassificationEntity.create(classification));
+    return classifications.map((classification) =>
+      GenericClassificationEntity.create(classification),
+    );
   }
 
   async findOne(uuid: string) {
@@ -51,7 +59,9 @@ export class GenericClassificationService {
     return GenericClassificationEntity.create(classification);
   }
 
-  private async getGenericClassification(filter: Partial<GenericClassificationEntity>) {
+  private async getGenericClassification(
+    filter: Partial<GenericClassificationEntity>,
+  ) {
     const classification = await this.genericClassificationRepository
       .findOne(filter)
       .exec();
@@ -61,7 +71,10 @@ export class GenericClassificationService {
     return classification;
   }
 
-  async update(uuid: string, updateGenericClassificationDto: UpdateGenericClassificationDto) {
+  async update(
+    uuid: string,
+    updateGenericClassificationDto: UpdateGenericClassificationDto,
+  ) {
     await this.findOne(uuid);
     await this.genericClassificationRepository
       .updateOne({ uuid }, updateGenericClassificationDto)

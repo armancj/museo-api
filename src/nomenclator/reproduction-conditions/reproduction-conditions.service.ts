@@ -1,56 +1,64 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import {
-  ReproductionConditionDocument,
   ReproductionConditionMongoModel,
   ReproductionConditionNameEntity,
 } from './schema/reproduction-condition.schema';
 import { CreateReproductionConditionDto } from './dto/create-reproduction-condition.dto';
 import { ReproductionConditionEntity } from './entities/reproduction-condition.entity';
 import { ReproductionConditionsEntity } from './entities/reproduction-conditions.entity';
+import { UpdatedReproductionConditionDto } from './dto/updated-reproduction-condition.dto';
 
 @Injectable()
 export class ReproductionConditionsService {
   constructor(
     @InjectModel(ReproductionConditionNameEntity)
-    private reproductionConditionModel: ReproductionConditionMongoModel,
+    private readonly reproductionConditionModel: ReproductionConditionMongoModel,
   ) {}
 
-  async create(createDto: CreateReproductionConditionDto): Promise<ReproductionConditionEntity> {
+  async create(createDto: CreateReproductionConditionDto) {
     const created = new this.reproductionConditionModel(createDto);
     const result = await created.save();
     return ReproductionConditionEntity.create(result.toJSON());
   }
 
-  async findAll(): Promise<ReproductionConditionsEntity> {
-    const results = await this.reproductionConditionModel.find({ deleted: false }).exec();
-    return ReproductionConditionsEntity.create(results.map(doc => doc.toJSON()));
-  }
-
-  async findOne(uuid: string): Promise<ReproductionConditionEntity> {
-    const result = await this.reproductionConditionModel.findOne({ uuid, deleted: false }).exec();
-    return result ? ReproductionConditionEntity.create(result.toJSON()) : null;
-  }
-
-  async update(uuid: string, updateDto: CreateReproductionConditionDto): Promise<ReproductionConditionEntity> {
-    const result = await this.reproductionConditionModel
-      .findOneAndUpdate(
-        { uuid, deleted: false },
-        { ...updateDto, updatedAt: new Date() },
-        { new: true }
-      )
+  async findAll() {
+    const results = await this.reproductionConditionModel
+      .find({ deleted: false })
       .exec();
-    return result ? ReproductionConditionEntity.create(result.toJSON()) : null;
+    return ReproductionConditionsEntity.create(results).value;
   }
 
-  async remove(uuid: string): Promise<ReproductionConditionEntity> {
+  async findOne(uuid: string) {
     const result = await this.reproductionConditionModel
-      .findOneAndUpdate(
+      .findOne({ uuid, deleted: false })
+      .exec();
+    if (!result)
+      throw new NotFoundException('Reproduction condition not found');
+    return ReproductionConditionEntity.create(result);
+  }
+
+  async update(uuid: string, updateDto: UpdatedReproductionConditionDto) {
+    const result = await this.reproductionConditionModel
+      .updateOne({ uuid }, { ...updateDto, updatedAt: new Date() })
+      .exec();
+
+    if (result.modifiedCount === 0)
+      throw new NotFoundException('Reproduction condition not updated');
+    return true;
+  }
+
+  async remove(uuid: string) {
+    const result = await this.reproductionConditionModel
+      .updateOne(
         { uuid, deleted: false },
         { deleted: true, updatedAt: new Date() },
-        { new: true }
       )
       .exec();
-    return result ? ReproductionConditionEntity.create(result.toJSON()) : null;
+
+    if (result.modifiedCount === 0)
+      throw new NotFoundException('Reproduction condition not remove');
+
+    return true;
   }
 }

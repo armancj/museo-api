@@ -8,7 +8,7 @@ import { ExtendedCulturalRecordEntity } from './extended-cultural-record.entity'
  * Represents a collection or list of cultural records.
  */
 export class CulturalRecordsEntity {
-  public constructor(public records: CulturalPropertyModel[]) {}
+  public constructor(public records: ExtendedCulturalRecordEntity[]) {}
 
   /**
    * Factory method to create a collection of CulturalRecordEntity instances.

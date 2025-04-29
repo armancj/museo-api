@@ -13,7 +13,7 @@ export class CulturalNotesEntity {
    *
    * @param value - Array of `CulturalPropertyModel` containing cultural properties with potential notes.
    */
-  public constructor(public value: CulturalPropertyModel[]) {}
+  public constructor(public value: ExtendedCulturalNoteEntity[]) {}
 
   /**
    * Factory method to create an array of `ExtendedCulturalNoteEntity`.

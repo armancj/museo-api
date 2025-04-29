@@ -5,7 +5,6 @@ import {
   BaseSchema,
   BaseSchemaFactory,
 } from '../../../common/schema/base.schema';
-import { ReproductionCondition } from '../../common/enums/reproduction-condition.enum';
 
 export type ReproductionConditionDocument =
   HydratedDocument<ReproductionConditionEntity>;
@@ -15,8 +14,8 @@ export class ReproductionConditionEntity
   extends BaseSchema
   implements ReproductionConditionModel
 {
-  @Prop({ required: true, enum: ReproductionCondition })
-  type: ReproductionCondition;
+  @Prop({ required: true, unique: true })
+  name: string;
 
   @Prop()
   description?: string;

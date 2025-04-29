@@ -1,7 +1,6 @@
-import { BaseModel } from "../../../common/interfaces/base.model";
-import { ReproductionCondition } from "../../common/enums/reproduction-condition.enum";
+import { BaseModel } from '../../../common/interfaces/base.model';
 
 export interface ReproductionConditionModel extends BaseModel {
-  type: ReproductionCondition;
+  name: string;
   description?: string;
 }

@@ -1,6 +1,7 @@
 import { DescriptionControlModel } from '../models/description-control-model';
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { DescriptionControl } from './description-control.entity';
+import { ExtendedDescriptionControlEntity } from './extended-description-control.entity';
 
 /**
  * Entity for a collection of description control records.
@@ -8,7 +9,7 @@ import { DescriptionControl } from './description-control.entity';
  * Represents a collection or list of description control records.
  */
 export class DescriptionControlsEntity {
-  public constructor(public value: CulturalPropertyModel[]) {}
+  public constructor(public value: ExtendedDescriptionControlEntity[]) {}
 
   /**
    * Factory method to create a collection of DescriptionControl instances.

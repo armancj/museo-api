@@ -1,6 +1,5 @@
 import { AccessConditionModel } from '../model/access-condition.model';
 import { Expose, plainToClass } from 'class-transformer';
-import { AccessCondition } from '../../common/enums/access-condition.enum';
 
 export class AccessConditionEntity implements AccessConditionModel {
   @Expose()
