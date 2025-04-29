@@ -133,6 +133,11 @@ $ pnpm run command create:default-entry-forms
 $ pnpm run command create:default-conservation-statuses
 ```
 
+```bash
+# Add Reproduction Conditions
+$ pnpm run command create:default-reproduction-conditions
+```
+
 ## Useful NestJS Resources
 
 Check out a few resources that may come in handy when working with NestJS:
