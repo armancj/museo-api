@@ -2,7 +2,6 @@ import { Command, CommandRunner } from 'nest-commander';
 import { DescriptionInstrumentsService } from '../../nomenclator/description-instruments/description-instruments.service';
 import { Logger } from '@nestjs/common';
 import { CreateDescriptionInstrumentDto } from '../../nomenclator/description-instruments/dto/create-description-instrument.dto';
-import { BaseSchema } from '../../common/schema/base.schema';
 
 const defaultDescriptionInstruments: CreateDescriptionInstrumentDto[] = [
   { name: 'Guía', active: true },

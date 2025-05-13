@@ -11,7 +11,7 @@ export class AccessAndUseConditionsEntity {
    *
    * @param value - Array of `CulturalPropertyModel` instances containing cultural properties data.
    */
-  public constructor(public value: CulturalPropertyModel[]) {}
+  public constructor(public value: AccessAndUseCondition[]) {}
 
   /**
    * Factory method to create an array of `ExtendedAccessAndUseConditionEntity`.

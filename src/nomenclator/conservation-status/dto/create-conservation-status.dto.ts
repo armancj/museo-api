@@ -1,10 +1,9 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { ConservationStatus } from '../enum/conservation-status.enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateConservationStatusDto {
   @IsNotEmpty()
-  @IsEnum(ConservationStatus)
-  name: ConservationStatus;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
   @IsString()

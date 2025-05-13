@@ -17,11 +17,17 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('generic-classification')
 @Controller('generic-classification')
 export class GenericClassificationController {
-  constructor(private readonly genericClassificationService: GenericClassificationService) {}
+  constructor(
+    private readonly genericClassificationService: GenericClassificationService,
+  ) {}
 
   @Post()
-  create(@Body() createGenericClassificationDto: CreateGenericClassificationDto) {
-    return this.genericClassificationService.create(createGenericClassificationDto);
+  create(
+    @Body() createGenericClassificationDto: CreateGenericClassificationDto,
+  ) {
+    return this.genericClassificationService.create(
+      createGenericClassificationDto,
+    );
   }
 
   @Get()
@@ -39,7 +45,10 @@ export class GenericClassificationController {
     @Param('uuid') uuid: string,
     @Body() updateGenericClassificationDto: UpdateGenericClassificationDto,
   ) {
-    return this.genericClassificationService.update(uuid, updateGenericClassificationDto);
+    return this.genericClassificationService.update(
+      uuid,
+      updateGenericClassificationDto,
+    );
   }
 
   @Delete(':uuid')

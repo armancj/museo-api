@@ -18,6 +18,10 @@ import { GenericClassificationModule } from '../nomenclator/generic-classificati
 import { CreateDefaultGenericClassifications } from './commands/create-default-generic-classifications';
 import { FundTitleModule } from '../nomenclator/fund-title/fund-title.module';
 import { CreateDefaultFundTitles } from './commands/create-default-fund-titles';
+import { EntryFormModule } from '../nomenclator/entry-form/entry-form.module';
+import { CreateDefaultEntryForms } from './commands/create-default-entry-forms';
+import { ConservationStatusModule } from '../nomenclator/conservation-status/conservation-status.module';
+import { CreateDefaultConservationStatuses } from './commands/create-default-conservation-statuses';
 
 @Module({
   imports: [
@@ -31,6 +35,8 @@ import { CreateDefaultFundTitles } from './commands/create-default-fund-titles';
     HeritageTypeModule,
     GenericClassificationModule,
     FundTitleModule,
+    EntryFormModule,
+    ConservationStatusModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -42,6 +48,8 @@ import { CreateDefaultFundTitles } from './commands/create-default-fund-titles';
     CreateDefaultHeritageTypes,
     CreateDefaultGenericClassifications,
     CreateDefaultFundTitles,
+    CreateDefaultEntryForms,
+    CreateDefaultConservationStatuses,
   ],
 })
 export class CommandsModule {}

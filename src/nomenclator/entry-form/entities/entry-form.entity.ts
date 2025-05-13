@@ -1,10 +1,9 @@
 import { BaseEntity } from '../../../common/entity/base.entity';
-import { EntryForm } from '../enum/entry-form.enum';
 import { Expose, plainToClass } from 'class-transformer';
 
 export class EntryFormEntity extends BaseEntity {
   @Expose()
-  name: EntryForm;
+  name: string;
 
   @Expose()
   description: string;

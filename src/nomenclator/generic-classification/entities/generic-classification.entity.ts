@@ -1,5 +1,4 @@
 import { BaseEntity } from '../../../common/entity/base.entity';
-import { GenericClassification } from '../enum/generic-classification.enum';
 import { Expose, plainToClass } from 'class-transformer';
 
 export class GenericClassificationEntity extends BaseEntity {

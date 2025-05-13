@@ -2,7 +2,7 @@ import { CulturalPropertyModel } from '../models/cultural-property.model';
 import { CulturalHeritageProperty } from './cultural-heritage-property.entity';
 
 export class CulturalHeritagePropertiesEntity {
-  private constructor(public value: CulturalPropertyModel[]) {}
+  private constructor(public value: CulturalHeritageProperty[]) {}
 
   static create(value: CulturalPropertyModel[]): CulturalHeritageProperty[] {
     if (!Array.isArray(value))

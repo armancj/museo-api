@@ -4,7 +4,6 @@ import {
   BaseSchema,
   BaseSchemaFactory,
 } from '../../../common/schema/base.schema';
-import { GenericClassification } from '../enum/generic-classification.enum';
 
 export type GenericClassificationDocument = GenericClassificationEntity &
   Document;

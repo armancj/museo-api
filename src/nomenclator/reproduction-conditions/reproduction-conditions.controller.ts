@@ -12,6 +12,7 @@ import { ReproductionConditionsService } from './reproduction-conditions.service
 import { CreateReproductionConditionDto } from './dto/create-reproduction-condition.dto';
 import { UserRoles } from '../../users/enum/user-roles.enum';
 import { Auth } from '../../auth/decorator';
+import { UpdatedReproductionConditionDto } from './dto/updated-reproduction-condition.dto';
 
 @ApiTags('nomenclator-reproduction-conditions')
 @Controller('nomenclator/reproduction-conditions')
@@ -28,7 +29,6 @@ export class ReproductionConditionsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all reproduction conditions' })
   findAll() {
     return this.service.findAll();
   }
@@ -45,10 +45,9 @@ export class ReproductionConditionsController {
   })
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update reproduction condition' })
-  @ApiParam({ name: 'uuid', description: 'Reproduction condition UUID' })
   update(
     @Param('uuid') uuid: string,
-    @Body() updateDto: CreateReproductionConditionDto,
+    @Body() updateDto: UpdatedReproductionConditionDto,
   ) {
     return this.service.update(uuid, updateDto);
   }
@@ -58,7 +57,6 @@ export class ReproductionConditionsController {
   })
   @Delete(':uuid')
   @ApiOperation({ summary: 'Delete reproduction condition' })
-  @ApiParam({ name: 'uuid', description: 'Reproduction condition UUID' })
   remove(@Param('uuid') uuid: string) {
     return this.service.remove(uuid);
   }

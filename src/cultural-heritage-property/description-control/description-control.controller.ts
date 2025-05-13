@@ -19,9 +19,9 @@ import {
 import { DescriptionControlService } from './description-control.service';
 import { CreateDescriptionControlDto } from './dto/create-description-control.dto';
 import { UpdateDescriptionControlDto } from './dto/update-description-control.dto';
-import {ExtendedDescriptionControlEntity} from "./entities/extended-description-control.entity";
-import {Auth, CurrentUser} from "../../auth/decorator";
-import {User} from "../../users/entities/user.entity";
+import { ExtendedDescriptionControlEntity } from './entities/extended-description-control.entity';
+import { Auth, CurrentUser } from '../../auth/decorator';
+import { User } from '../../users/entities/user.entity';
 
 /**
  * Controller for managing description controls.
@@ -63,7 +63,7 @@ export class DescriptionControlController {
     return this.descriptionControlService.create(
       uuid,
       createDescriptionControlDto,
-        user
+      user,
     );
   }
 
@@ -76,7 +76,7 @@ export class DescriptionControlController {
   @ApiResponse({
     status: 200,
     description: 'List of description controls retrieved successfully.',
-    type: [ExtendedDescriptionControlEntity]
+    type: [ExtendedDescriptionControlEntity],
   })
   @Get()
   findAll() {

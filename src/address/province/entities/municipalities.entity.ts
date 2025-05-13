@@ -5,7 +5,7 @@ import {
 import { Municipality } from './municipality.entity';
 
 export class Municipalities {
-  private constructor(public value: MunicipalityModel[]) {}
+  private constructor(public value: Municipality[]) {}
 
   public static create(value: MunicipalityPropertiesModel[]): Municipalities {
     if (!Array.isArray(value))
