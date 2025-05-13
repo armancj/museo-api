@@ -11,18 +11,13 @@ export type HeritageTypeMongoModel = Model<HeritageTypeDocument>;
 
 @Schema({ collection: 'heritage-type' })
 export class HeritageTypeEntity extends BaseSchema {
-  @Prop({
-    type: String,
-    enum: HeritageType,
-    required: true,
-  })
-  name: HeritageType;
+  @Prop({ required: true, unique: true })
+  name: string;
 
   @Prop({ required: true })
   description: string;
 }
 
-export const HeritageTypeSchema = SchemaFactory.createForClass(
-  HeritageTypeEntity,
-);
+export const HeritageTypeSchema =
+  SchemaFactory.createForClass(HeritageTypeEntity);
 HeritageTypeSchema.add(BaseSchemaFactory);

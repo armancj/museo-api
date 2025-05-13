@@ -1,8 +1,6 @@
-import { IsEnum, IsOptional } from 'class-validator';
-import { HeritageType } from '../enum/heritage-type.enum';
+import { PickType } from '@nestjs/swagger';
+import { UpdateHeritageTypeDto } from './update-heritage-type.dto';
 
-export class FilterHeritageTypeDto {
-  @IsOptional()
-  @IsEnum(HeritageType)
-  name?: HeritageType;
-}
+export class FilterHeritageTypeDto extends PickType(UpdateHeritageTypeDto, [
+  'name',
+] as const) {}

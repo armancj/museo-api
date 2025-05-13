@@ -20,7 +20,7 @@ const defaultAccessConditions: CreateAccessConditionDto[] = [
   description: 'Insert default access and reproduction conditions',
 })
 export class CreateDefaultAccessConditions extends CommandRunner {
-  private logger = new Logger(`create:default-access-conditions`);
+  private readonly logger = new Logger(`create:default-access-conditions`);
 
   constructor(
     private readonly accessConditionsService: AccessConditionsService,

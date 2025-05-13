@@ -11,18 +11,12 @@ export type SectionMongoModel = Model<SectionDocument>;
 
 @Schema({ collection: 'section' })
 export class SectionEntity extends BaseSchema {
-  @Prop({
-    type: String,
-    enum: Section,
-    required: true,
-  })
-  name: Section;
+  @Prop({ required: true, unique: true })
+  name: string;
 
   @Prop({ required: true })
   description: string;
 }
 
-export const SectionSchema = SchemaFactory.createForClass(
-  SectionEntity,
-);
+export const SectionSchema = SchemaFactory.createForClass(SectionEntity);
 SectionSchema.add(BaseSchemaFactory);

@@ -1,10 +1,9 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { FundTitle } from '../enum/fund-title.enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateFundTitleDto {
   @IsNotEmpty()
-  @IsEnum(FundTitle)
-  name: FundTitle;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
   @IsString()

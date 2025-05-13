@@ -5,7 +5,10 @@ import { CreateFundTitleDto } from './dto/create-fund-title.dto';
 import { UpdateFundTitleDto } from './dto/update-fund-title.dto';
 import { FilterFundTitleDto } from './dto/filter-fund-title.dto';
 import { FundTitleEntity } from './entities/fund-title.entity';
-import { FundTitleDocument, FundTitleMongoModel } from './schema/fund-title.schema';
+import {
+  FundTitleDocument,
+  FundTitleMongoModel,
+} from './schema/fund-title.schema';
 
 @Injectable()
 export class FundTitleService {
@@ -15,17 +18,16 @@ export class FundTitleService {
   ) {}
 
   async create(createFundTitleDto: CreateFundTitleDto) {
-    const createdFundTitle = await this.fundTitleRepository.create(
-      createFundTitleDto,
-    );
+    const createdFundTitle =
+      await this.fundTitleRepository.create(createFundTitleDto);
     const entity = FundTitleEntity.create(createdFundTitle);
-    
+
     return {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       uuid: entity.uuid,
       name: entity.name,
-      description: entity.description
+      description: entity.description,
     };
   }
 
@@ -36,11 +38,9 @@ export class FundTitleService {
       query.name = filter.name;
     }
 
-    const fundTitles = await this.fundTitleRepository
-      .find(query)
-      .exec();
+    const fundTitles = await this.fundTitleRepository.find(query).exec();
 
-    return fundTitles.map(fundTitle => FundTitleEntity.create(fundTitle));
+    return fundTitles.map((fundTitle) => FundTitleEntity.create(fundTitle));
   }
 
   async findOne(uuid: string) {
@@ -52,9 +52,7 @@ export class FundTitleService {
   }
 
   private async getFundTitle(filter: Partial<FundTitleEntity>) {
-    const fundTitle = await this.fundTitleRepository
-      .findOne(filter)
-      .exec();
+    const fundTitle = await this.fundTitleRepository.findOne(filter).exec();
     if (!fundTitle) {
       throw new NotFoundException('Fund title not found');
     }

@@ -4,12 +4,14 @@ import { Expose, plainToClass } from 'class-transformer';
 
 export class GenericClassificationEntity extends BaseEntity {
   @Expose()
-  name: GenericClassification;
+  name: string;
 
   @Expose()
   description: string;
 
-  static create(data: Partial<GenericClassificationEntity>): GenericClassificationEntity {
+  static create(
+    data: Partial<GenericClassificationEntity>,
+  ): GenericClassificationEntity {
     return plainToClass(GenericClassificationEntity, data, {
       excludeExtraneousValues: true,
     });

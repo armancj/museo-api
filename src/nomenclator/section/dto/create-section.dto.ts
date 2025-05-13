@@ -1,10 +1,9 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { Section } from '../enum/section.enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateSectionDto {
   @IsNotEmpty()
-  @IsEnum(Section)
-  name: Section;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
   @IsString()

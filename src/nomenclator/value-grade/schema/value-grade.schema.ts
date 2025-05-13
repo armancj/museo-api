@@ -11,18 +11,12 @@ export type ValueGradeMongoModel = Model<ValueGradeDocument>;
 
 @Schema({ collection: 'value-grade' })
 export class ValueGradeEntity extends BaseSchema {
-  @Prop({
-    type: String,
-    enum: ValueGrade,
-    required: true,
-  })
-  name: ValueGrade;
+  @Prop({ required: true, unique: true })
+  name: string;
 
   @Prop({ required: true })
   description: string;
 }
 
-export const ValueGradeSchema = SchemaFactory.createForClass(
-  ValueGradeEntity,
-);
+export const ValueGradeSchema = SchemaFactory.createForClass(ValueGradeEntity);
 ValueGradeSchema.add(BaseSchemaFactory);

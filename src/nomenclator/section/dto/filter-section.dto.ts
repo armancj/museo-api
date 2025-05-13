@@ -1,8 +1,6 @@
-import { IsEnum, IsOptional } from 'class-validator';
-import { Section } from '../enum/section.enum';
+import { PartialType, PickType } from '@nestjs/swagger';
+import { CreateSectionDto } from './create-section.dto';
 
-export class FilterSectionDto {
-  @IsOptional()
-  @IsEnum(Section)
-  name?: Section;
-}
+export class FilterSectionDto extends PartialType(
+  PickType(CreateSectionDto, ['name'] as const),
+) {}

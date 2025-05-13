@@ -1,10 +1,9 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { GenericClassification } from '../enum/generic-classification.enum';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateGenericClassificationDto {
   @IsNotEmpty()
-  @IsEnum(GenericClassification)
-  name: GenericClassification;
+  @IsString()
+  name: string;
 
   @IsNotEmpty()
   @IsString()

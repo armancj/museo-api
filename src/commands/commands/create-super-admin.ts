@@ -23,7 +23,7 @@ const defaultUserData: CreateUserDto = {
   description: 'Insert Super Admin data in bd',
 })
 export class CreateSuperAdmin extends CommandRunner {
-  private logger = new Logger(`create:default-user`);
+  private readonly logger = new Logger(`create:default-user`);
 
   constructor(private readonly userService: UsersService) {
     super();

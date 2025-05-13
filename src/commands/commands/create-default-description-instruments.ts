@@ -19,7 +19,9 @@ const defaultDescriptionInstruments: CreateDescriptionInstrumentDto[] = [
   description: 'Insert default description instruments',
 })
 export class CreateDefaultDescriptionInstruments extends CommandRunner {
-  private logger = new Logger(`create:default-description-instruments`);
+  private readonly logger = new Logger(
+    `create:default-description-instruments`,
+  );
 
   constructor(
     private readonly descriptionInstrumentsService: DescriptionInstrumentsService,

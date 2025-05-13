@@ -1,13 +1,13 @@
 export enum GenericClassification {
-  DOCUMENT = 'Document',
-  BOOK = 'Book',
-  MANUSCRIPT = 'Manuscript',
-  PHOTOGRAPH = 'Photograph',
-  MAP = 'Map',
-  ARTWORK = 'Artwork',
-  ARTIFACT = 'Artifact',
+  DOCUMENT = 'Documento',
+  BOOK = 'Libro',
+  MANUSCRIPT = 'Manuscrito',
+  PHOTOGRAPH = 'Fotografía',
+  MAP = 'Mapa',
+  ARTWORK = 'Obra de Arte',
+  ARTIFACT = 'Artefacto',
   AUDIO = 'Audio',
   VIDEO = 'Video',
   DIGITAL = 'Digital',
-  OTHER = 'Other'
+  OTHER = 'Otro',
 }

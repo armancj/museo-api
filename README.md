@@ -81,6 +81,36 @@ $ pnpm run command create:default-description-instruments
 # Add Default  Access Reproduction
 $ pnpm run command create:default-access-conditions
 ```
+
+## Resources Sections
+```bash
+# Add Default Museum Sections
+$ pnpm run command create:default-sections
+```
+
+## Resources Value Grades
+```bash
+# Add Default Museum Value Grades
+$ pnpm run command create:default-value-grades
+```
+
+## Resources Heritage Types
+```bash
+# Add Default Heritage Types
+$ pnpm run command create:default-heritage-types
+```
+
+## Resources Generic Classifications
+```bash
+# Add Default Generic Classifications
+$ pnpm run command create:default-generic-classifications
+```
+
+## Resources Fund Titles
+```bash
+# Add Default Fund Titles
+$ pnpm run command create:default-fund-titles
+```
 Check out a few resources that may come in handy when working with NestJS:
 
 - Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
