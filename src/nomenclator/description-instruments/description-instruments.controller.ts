@@ -55,11 +55,11 @@ export class DescriptionInstrumentsController {
   @ApiOperation({ summary: 'Update a description instrument by ID' })
   @ApiResponse({ status: 404, description: 'Description instrument not found' })
   update(
-    @Param('id') id: string,
+    @Param('uuid') uuid: string,
     @Body() updateDescriptionInstrumentDto: UpdateDescriptionInstrumentDto,
   ) {
     return this.descriptionInstrumentsService.update(
-      id,
+      uuid,
       updateDescriptionInstrumentDto,
     );
   }

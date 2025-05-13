@@ -5,7 +5,11 @@ import { CreateConservationStatusDto } from './dto/create-conservation-status.dt
 import { UpdateConservationStatusDto } from './dto/update-conservation-status.dto';
 import { FilterConservationStatusDto } from './dto/filter-conservation-status.dto';
 import { ConservationStatusEntity } from './entities/conservation-status.entity';
-import { ConservationStatusDocument, ConservationStatusMongoModel } from './schema/conservation-status.schema';
+import {
+  ConservationStatusDocument,
+  ConservationStatusMongoModel,
+} from './schema/conservation-status.schema';
+import { x } from 'joi';
 
 @Injectable()
 export class ConservationStatusService {
@@ -19,28 +23,28 @@ export class ConservationStatusService {
       createConservationStatusDto,
     );
     const entity = ConservationStatusEntity.create(createdStatus);
-    
+
     return {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       uuid: entity.uuid,
       name: entity.name,
-      description: entity.description
+      description: entity.description,
     };
   }
 
   async findAll(filter?: FilterConservationStatusDto) {
-    const query: RootFilterQuery<ConservationStatusDocument> = { deleted: false };
+    const query: RootFilterQuery<ConservationStatusDocument> = {
+      deleted: false,
+    };
 
     if (filter?.name) {
       query.name = filter.name;
     }
 
-    const statuses = await this.conservationStatusRepository
-      .find(query)
-      .exec();
+    const statuses = await this.conservationStatusRepository.find(query).exec();
 
-    return statuses.map(status => ConservationStatusEntity.create(status));
+    return statuses.map((status) => ConservationStatusEntity.create(status));
   }
 
   async findOne(uuid: string) {
@@ -51,7 +55,9 @@ export class ConservationStatusService {
     return ConservationStatusEntity.create(status);
   }
 
-  private async getConservationStatus(filter: Partial<ConservationStatusEntity>) {
+  private async getConservationStatus(
+    filter: Partial<ConservationStatusEntity>,
+  ) {
     const status = await this.conservationStatusRepository
       .findOne(filter)
       .exec();
@@ -61,7 +67,10 @@ export class ConservationStatusService {
     return status;
   }
 
-  async update(uuid: string, updateConservationStatusDto: UpdateConservationStatusDto) {
+  async update(
+    uuid: string,
+    updateConservationStatusDto: UpdateConservationStatusDto,
+  ) {
     await this.findOne(uuid);
     await this.conservationStatusRepository
       .updateOne({ uuid }, updateConservationStatusDto)
@@ -75,4 +84,4 @@ export class ConservationStatusService {
       .updateOne({ uuid, deleted: false }, { deleted: true, name })
       .exec();
   }
-} 
+}

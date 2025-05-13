@@ -1,7 +1,9 @@
 import { Expose, plainToClass } from 'class-transformer';
 import { DescriptionInstrumentModel } from '../models/description-instrument.model';
 
-export class DescriptionInstrumentEntity {
+export class DescriptionInstrumentEntity
+  implements Omit<DescriptionInstrumentModel, 'deleted'>
+{
   @Expose()
   name: string;
 
@@ -16,6 +18,9 @@ export class DescriptionInstrumentEntity {
 
   @Expose()
   uuid: string;
+
+  @Expose()
+  description: string;
 
   constructor(options: Partial<DescriptionInstrumentModel>) {
     Object.assign(this, options);

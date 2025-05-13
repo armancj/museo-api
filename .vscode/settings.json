@@ -1,7 +1,0 @@
-{
-    "bitoAI.codeCompletion.enableAutoCompletion": false,
-    "CodeGPT.apiKey": "LM Studio",
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "javascript.preferences.importModuleSpecifier": "relative",
-    "typescript.preferences.importModuleSpecifier": "relative"
-}

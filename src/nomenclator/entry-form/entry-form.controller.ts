@@ -14,7 +14,8 @@ import { UpdateEntryFormDto } from './dto/update-entry-form.dto';
 import { FilterEntryFormDto } from './dto/filter-entry-form.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('entry-form')
+//@ApiTags('entry-form')
+@ApiTags('[Nomenclator] other')
 @Controller('entry-form')
 export class EntryFormController {
   constructor(private readonly entryFormService: EntryFormService) {}

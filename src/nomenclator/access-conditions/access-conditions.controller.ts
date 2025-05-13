@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { AccessConditionsService } from './access-conditions.service';
 import { CreateAccessConditionDto } from './dto/create-access-condition.dto';
@@ -38,7 +46,10 @@ export class AccessConditionsController {
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update access condition' })
   @ApiParam({ name: 'uuid', description: 'Access condition UUID' })
-  update(@Param('uuid') uuid: string, @Body() updateDto: CreateAccessConditionDto) {
+  update(
+    @Param('uuid') uuid: string,
+    @Body() updateDto: CreateAccessConditionDto,
+  ) {
     return this.service.update(uuid, updateDto);
   }
 
