@@ -22,6 +22,8 @@ import { EntryFormModule } from '../nomenclator/entry-form/entry-form.module';
 import { CreateDefaultEntryForms } from './commands/create-default-entry-forms';
 import { ConservationStatusModule } from '../nomenclator/conservation-status/conservation-status.module';
 import { CreateDefaultConservationStatuses } from './commands/create-default-conservation-statuses';
+import { ReproductionConditionsModule } from '../nomenclator/reproduction-conditions/reproduction-conditions.module';
+import { CreateDefaultReproductionConditions } from './commands/create-default-reproduction-conditions';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { CreateDefaultConservationStatuses } from './commands/create-default-con
     FundTitleModule,
     EntryFormModule,
     ConservationStatusModule,
+    ReproductionConditionsModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -50,6 +53,7 @@ import { CreateDefaultConservationStatuses } from './commands/create-default-con
     CreateDefaultFundTitles,
     CreateDefaultEntryForms,
     CreateDefaultConservationStatuses,
+    CreateDefaultReproductionConditions,
   ],
 })
 export class CommandsModule {}
