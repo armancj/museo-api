@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import {LoggerModule as LoggerPino} from 'nestjs-pino'
-import {PinoConfigService} from "./pino-config.service";
-import {ConfigService} from "@nestjs/config";
-import {createPinoOptions} from "./pino.config";
+import { LoggerModule as LoggerPino } from 'nestjs-pino'
+import { PinoConfigService } from "./pino-config.service";
+import { ConfigService } from "@nestjs/config";
+import { createPinoOptions } from "./pino.config";
+import { ErrorLoggerService } from './error-logger.service';
 
 @Module({
     imports: [
@@ -10,10 +11,10 @@ import {createPinoOptions} from "./pino.config";
             providers: undefined,
             imports: undefined,
             useFactory: (config: ConfigService) => createPinoOptions(config),
-            inject:[ConfigService]
+            inject: [ConfigService]
         })
     ],
-    providers: [PinoConfigService],
-    exports: [PinoConfigService]
+    providers: [PinoConfigService, ErrorLoggerService],
+    exports: [PinoConfigService, ErrorLoggerService]
 })
 export class LoggerModule {}
