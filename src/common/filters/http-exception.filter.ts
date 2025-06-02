@@ -3,7 +3,6 @@ import {
   Catch,
   ArgumentsHost,
   HttpException,
-  HttpStatus,
   Logger,
   Inject,
 } from '@nestjs/common';
@@ -16,7 +15,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
 
   constructor(
-    @Inject(ErrorLoggerService) private readonly errorLogger: ErrorLoggerService
+    @Inject(ErrorLoggerService)
+    private readonly errorLogger: ErrorLoggerService,
   ) {}
 
   catch(exception: HttpException, host: ArgumentsHost) {
@@ -38,7 +38,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message = exceptionObj.message || exception.message;
       errorType = exceptionObj.error;
 
-      // Ensure message is always an array for consistency
+      // Ensure the message is always an array for consistency
       if (typeof message === 'string') {
         message = [message];
       }
@@ -52,14 +52,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
       message,
       request.url,
       request.method,
-      errorType
+      errorType,
     );
 
     // Log the error with enhanced context
     this.errorLogger.logError(exception, request, {
       statusCode,
       errorType,
-      timestamp: errorResponse.timestamp
+      timestamp: errorResponse.timestamp,
     });
 
     // Send the response

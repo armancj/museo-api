@@ -25,6 +25,7 @@
     "create:all-defaults": "npm run command create:default-user && npm run command create:default-categories && npm run command create:default-description-instruments && npm run command create:default-access-conditions && npm run command create:default-sections && npm run command create:default-value-grades && npm run command create:default-heritage-types && npm run command create:default-generic-classifications && npm run command create:default-fund-titles && npm run command create:default-entry-forms && npm run command create:default-conservation-statuses && npm run command create:default-reproduction-conditions"
   },
   "dependencies": {
+    "@nestjs/cache-manager": "^3.0.1",
     "@nestjs/common": "^11.0.12",
     "@nestjs/config": "^4.0.1",
     "@nestjs/core": "^11.0.12",
@@ -35,6 +36,7 @@
     "@nestjs/platform-express": "^11.0.12",
     "@nestjs/swagger": "^11.0.7",
     "bcrypt": "^5.1.1",
+    "cache-manager": "^6.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "handlebars": "^4.7.8",
