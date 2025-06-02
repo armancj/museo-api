@@ -9,15 +9,15 @@ This document contains a comprehensive list of improvement tasks for the Museo A
    - [x] Standardize error responses across the application
    - [x] Add error logging with appropriate context
 
-2. [ ] Enhance modularity and separation of concerns
-   - [ ] Review module boundaries and ensure proper encapsulation
-   - [ ] Extract cross-cutting concerns into dedicated modules
-   - [ ] Implement proper dependency injection patterns
+2. [x] Enhance modularity and separation of concerns
+   - [x] Review module boundaries and ensure proper encapsulation
+   - [x] Extract cross-cutting concerns into dedicated modules
+   - [x] Implement proper dependency injection patterns
 
-3. [ ] Implement a caching strategy
-   - [ ] Identify cacheable resources (e.g., nomenclature data)
-   - [ ] Implement Redis or in-memory caching
-   - [ ] Add cache invalidation mechanisms
+3. [x] Implement a caching strategy
+   - [x] Identify cacheable resources (e.g., nomenclature data)
+   - [x] Implement Redis or in-memory caching
+   - [x] Add cache invalidation mechanisms
 
 4. [ ] Improve configuration management
    - [ ] Move all configuration to environment variables with proper validation
