@@ -6,12 +6,14 @@ import {
   CategoryMuseumNameEntity,
   CategoryMuseumSchema,
 } from './schema/category-museum.schema';
+import { CacheModule } from '../../cache/cache.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: CategoryMuseumNameEntity, schema: CategoryMuseumSchema },
     ]),
+    CacheModule,
   ],
   controllers: [CategoryMuseumController],
   providers: [CategoryMuseumService],
