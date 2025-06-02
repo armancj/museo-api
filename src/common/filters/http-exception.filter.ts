@@ -5,12 +5,20 @@ import {
   HttpException,
   HttpStatus,
   Logger,
+  Inject,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { ErrorResponseDto } from '../dto/error-response.dto';
+import { ErrorLoggerService } from '../../logger/error-logger.service';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  logger = new Logger(HttpExceptionFilter.name);
+  private readonly logger = new Logger(HttpExceptionFilter.name);
+
+  constructor(
+    @Inject(ErrorLoggerService) private readonly errorLogger: ErrorLoggerService
+  ) {}
+
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -19,29 +27,42 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const statusCode = exception.getStatus();
     const exceptionResponse = exception.getResponse();
 
-    let error: object;
-    if (statusCode < HttpStatus.INTERNAL_SERVER_ERROR)
-      error =
-        typeof response === 'string'
-          ? { message: [exceptionResponse] }
-          : (exceptionResponse as object);
-    if (statusCode >= HttpStatus.INTERNAL_SERVER_ERROR)
-      error = { message: [exception.message] };
+    // Extract message and error from exception response
+    let message: string | string[];
+    let errorType: string | undefined;
 
-    const responseError = {
+    if (typeof exceptionResponse === 'string') {
+      message = exceptionResponse;
+    } else if (typeof exceptionResponse === 'object') {
+      const exceptionObj = exceptionResponse as Record<string, any>;
+      message = exceptionObj.message || exception.message;
+      errorType = exceptionObj.error;
+
+      // Ensure message is always an array for consistency
+      if (typeof message === 'string') {
+        message = [message];
+      }
+    } else {
+      message = exception.message;
+    }
+
+    // Create standardized error response
+    const errorResponse = new ErrorResponseDto(
       statusCode,
-      ...error,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-      method: request.method,
-    };
+      message,
+      request.url,
+      request.method,
+      errorType
+    );
 
-    const messageError = Object.keys(responseError)
-      .map((key) => `${key}: ${responseError[key]}`)
-      .join(', ');
+    // Log the error with enhanced context
+    this.errorLogger.logError(exception, request, {
+      statusCode,
+      errorType,
+      timestamp: errorResponse.timestamp
+    });
 
-    this.logger.error(messageError);
-
-    response.status(statusCode).json(responseError);
+    // Send the response
+    response.status(statusCode).json(errorResponse);
   }
 }
