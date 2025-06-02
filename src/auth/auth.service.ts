@@ -28,8 +28,20 @@ import { AuthVerifyCodeDto } from './dto/auth-verify-code.dto';
 import { AuthChangePasswordDto } from './dto/auth-change-password.dto';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
 
+/**
+ * Service responsible for authentication-related functionality
+ * including user login, token generation, password reset, and user profile management.
+ */
 @Injectable()
 export class AuthService {
+  /**
+   * Creates an instance of the AuthService
+   *
+   * @param jwtService - Service for JWT token generation and validation
+   * @param configService - Service for accessing application configuration
+   * @param authRepository - Repository for auth-related data operations
+   * @param eventEmitter - Event emitter for handling asynchronous events
+   */
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
@@ -37,6 +49,13 @@ export class AuthService {
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
 
+  /**
+   * Authenticates a user based on email/mobile and password
+   *
+   * @param loginDto - The login credentials containing email/mobile and password
+   * @returns The authenticated user entity
+   * @throws UnauthorizedException if credentials are invalid
+   */
   async getAuthenticatedUser({ email, password }: LoginDto): Promise<User> {
     const filter = isEmail(email) ? { email } : { mobile: email };
     const user = await this.getOneUserRepo(filter);
@@ -47,10 +66,7 @@ export class AuthService {
   }
 
   private async getOneUserRepo(filter: Partial<UserModel>): Promise<UserModel> {
-    const userObservable = await this.eventEmitter.emitAsync<
-      UserModel,
-      UserModel
-    >({
+    const userObservable = this.eventEmitter.emitAsync<UserModel, UserModel>({
       event: EventEmitter.userFound,
       exception: UnauthorizedAuthException,
       values: { ...filter, deleted: false, active: true },
@@ -67,7 +83,7 @@ export class AuthService {
       lastName: user.lastName,
       municipal: user.municipal,
       nationality: user.nationality,
-      province: user.province
+      province: user.province,
     };
     const refresh_token = await this.getJwtRefreshToken(payload);
     await this.setCurrentRefreshToken(refresh_token, user.uuid, payload);
@@ -108,10 +124,7 @@ export class AuthService {
     uuid: string,
     editProfileDto: EditProfileDto,
   ): Promise<boolean> {
-    const userObservable = await this.eventEmitter.emitAsync<
-      UpdatedUser,
-      boolean
-    >({
+    const userObservable = this.eventEmitter.emitAsync<UpdatedUser, boolean>({
       event: EventEmitter.userUpdated,
       exception: UnauthorizedAuthException,
       values: { filter: { uuid }, updateUserDto: editProfileDto },
@@ -142,7 +155,7 @@ export class AuthService {
     const code = this.generateRandomFiveDigitNumber();
     const expireCodeDate = Date.now();
 
-    const sendEmailObservable = await this.eventEmitter.emitAsync<
+    const sendEmailObservable = this.eventEmitter.emitAsync<
       SendCodeBody,
       unknown
     >({
