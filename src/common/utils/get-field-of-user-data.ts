@@ -57,7 +57,7 @@ interface InstitutionLocationFields {
 }
 
 /**
- * Applies location constraints based on user role
+ * Applies location constraints based on a user role
  */
 function applyLocationConstraints(
   role: UserRoles,
@@ -99,9 +99,11 @@ function applyLocationConstraints(
  * @throws ForbiddenException if the user doesn't have permission to create the specified role
  */
 export function getFieldOfUserData(
-  user: User,
+  user: User | undefined,
   rest: Partial<UserModel>,
 ): Partial<UserModel> {
+  if (!user) return rest;
+
   // Check role creation permissions
   if (rest.roles && !canCreateRole(user?.roles as UserRoles, rest.roles)) {
     throw new ForbiddenException(
@@ -109,7 +111,7 @@ export function getFieldOfUserData(
     );
   }
 
-  // Apply location constraints based on role
+  // Apply location constraints based on a role
   applyLocationConstraints(user?.roles as UserRoles, user, rest);
 
   return rest;
