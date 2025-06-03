@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
-import { UserModel, UserPropertiesModel } from '../models/user.model';
+import { UserModel } from '../models/user.model';
 import { UploadedFileEmbed } from './uploaded-file.embed';
 import { UserRoles } from '../enum/user-roles.enum';
 import {
@@ -28,13 +28,13 @@ export class User implements UserModel {
   lastName: string;
 
   @Prop()
-  nationality?: string | null;
+  nationality?: string;
 
   @Prop()
   address?: string;
 
   @Prop()
-  province?: string | null;
+  province?: string;
 
   @Prop({ type: String, unique: true, sparse: true })
   email: string;
@@ -58,10 +58,10 @@ export class User implements UserModel {
   roles?: UserRoles;
 
   @Prop()
-  municipal: string | null;
+  municipal: string;
 
   @Prop()
-  institutionId?: string | null;
+  institutionId?: string;
 
   @Type(() => Institution)
   institution?: Institution;
@@ -78,14 +78,14 @@ UserSchema.virtual('institution', {
 
 UserSchema.pre('save', function (next) {
   if (this.roles === UserRoles.superAdmin) {
-    this.nationality = null;
-    this.province = null;
-    this.municipal = null;
-    this.institutionId = null;
+    this.nationality = null as any;
+    this.province = null as any;
+    this.municipal = null as any;
+    this.institutionId = null as any;
   }
   if (this.roles === UserRoles.administrator) {
-    this.municipal = null;
-    this.institutionId = null;
+    this.municipal = null as any;
+    this.institutionId = null as any;
   }
   next();
 });
