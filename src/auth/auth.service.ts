@@ -65,6 +65,14 @@ export class AuthService {
     return User.create(user);
   }
 
+  /**
+   * Retrieves a single user from the repository based on the provided filter
+   *
+   * @param filter - Partial user model to filter by (e.g., email, uuid)
+   * @returns Promise resolving to the found user model
+   * @throws UnauthorizedAuthException if user cannot be found or is unauthorized
+   * @private
+   */
   private async getOneUserRepo(filter: Partial<UserModel>): Promise<UserModel> {
     const userObservable = this.eventEmitter.emitAsync<UserModel, UserModel>({
       event: EventEmitter.userFound,

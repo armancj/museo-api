@@ -123,7 +123,15 @@ export class UsersService {
     await Promise.all(validationPromises);
   }
 
-  async uploadFiled(uuid: string, file: FileStorageModel) {
+  /**
+   * Uploads an avatar file for a user
+   *
+   * @param uuid - The unique identifier of the user
+   * @param file - The file to upload as the user's avatar
+   * @returns Object containing success message and avatar information
+   * @throws NotFoundException if the user is not found
+   */
+  async uploadFile(uuid: string, file: FileStorageModel) {
     try {
       const user = await this.findOne({ uuid });
 
@@ -168,7 +176,7 @@ export class UsersService {
   }
 
   private async getFileMetadata(id: string): Promise<FileMetadataModel> {
-    const fileObservable = await this.eventEmitter.emitAsync<
+    const fileObservable = this.eventEmitter.emitAsync<
       string,
       FileMetadataModel
     >({
@@ -180,10 +188,7 @@ export class UsersService {
   }
 
   private async getFileChunksUintArray(id: string): Promise<Uint8Array[]> {
-    const fileObservable = await this.eventEmitter.emitAsync<
-      string,
-      Uint8Array[]
-    >({
+    const fileObservable = this.eventEmitter.emitAsync<string, Uint8Array[]>({
       event: EventEmitter.fileChunksUintArray,
       exception: UnauthorizedAuthException,
       values: id,
