@@ -18,8 +18,18 @@ import { InterceptorsModule } from './common/interceptors/interceptors.module';
 import { CacheModule } from './cache/cache.module';
 
 /**
- * Main application module that imports all feature modules.
- * Cross-cutting concerns like interceptors are encapsulated in their own modules.
+ * Main application module that imports all feature modules and configures the application.
+ *
+ * This module serves as the root module of the NestJS application and is responsible for:
+ * - Importing and organizing all feature modules
+ * - Setting up cross-cutting concerns like interceptors, logging, and caching
+ * - Configuring global providers and controllers
+ *
+ * The module structure follows domain-driven design principles, with each domain
+ * encapsulated in its own module with clear boundaries and responsibilities.
+ *
+ * Cross-cutting concerns are encapsulated in their own modules to promote separation
+ * of concerns and maintainability.
  */
 @Module({
   imports: [
