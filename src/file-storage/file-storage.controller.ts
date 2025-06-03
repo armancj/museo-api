@@ -18,6 +18,7 @@ import { FileStorageServiceModel } from './model/file-storage-service.model';
 import { FileUploadDto } from './dto/media-file-metadata';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
+import { Request, Response } from 'express';
 
 @ApiTags('FileStorage')
 @Controller('file-storage')
@@ -58,7 +59,11 @@ export class FileStorageController {
   }
 
   @Get(':id')
-  async getFile(@Param('id') fileId: string, @Req() req, @Res() res) {
+  async getFile(
+    @Param('id') fileId: string,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
     try {
       const file = await this.storageService.getFileMetadataById(fileId);
       const fileStream = await this.storageService.getFileStream(fileId);

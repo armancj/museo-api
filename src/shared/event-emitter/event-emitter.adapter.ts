@@ -14,6 +14,7 @@ import { ProvinceModel } from '../../address/province/entities/province.model';
 import { Province } from '../../address/province/entities/province.entity';
 import { ProvinceNotFoundException } from './exception/province-not-found.exception';
 import { MunicipalityNotFoundException } from './exception/municipality-not-found.exception';
+import { HttpExceptionOptions } from '@nestjs/common/exceptions/http.exception';
 
 type ExceptionConstructor<T extends HttpException> = new (...args: any[]) => T;
 interface EmitParams<T> {
@@ -64,17 +65,14 @@ export class EventEmitter2Adapter {
         }
         throw new InternalServerErrorException(
           'An unexpected error occurred',
-          err,
+          err as HttpExceptionOptions,
         );
       }),
     );
   }
 
   async checkCountryExists(name: string) {
-    const countryObserver = await this.emitAsync<
-      Partial<CountryModel>,
-      Country
-    >({
+    const countryObserver = this.emitAsync<Partial<CountryModel>, Country>({
       event: EventEmitter.countryFound,
       values: { name, deleted: false },
       exception: CountryNotFoundException,
@@ -84,10 +82,7 @@ export class EventEmitter2Adapter {
   }
 
   async checkProvinceExists(name: string) {
-    const provinceObserver = await this.emitAsync<
-      Partial<ProvinceModel>,
-      Province
-    >({
+    const provinceObserver = this.emitAsync<Partial<ProvinceModel>, Province>({
       event: EventEmitter.provinceFound,
       values: { name, deleted: false },
       exception: ProvinceNotFoundException,
@@ -97,7 +92,7 @@ export class EventEmitter2Adapter {
   }
 
   async checkMunicipalityExists(name: string) {
-    const MunicipalityObserver = await this.emitAsync<
+    const MunicipalityObserver = this.emitAsync<
       Partial<ProvinceModel>,
       Province
     >({

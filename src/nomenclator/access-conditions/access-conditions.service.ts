@@ -32,7 +32,7 @@ export class AccessConditionsService {
       .value as AccessConditionEntity[];
   }
 
-  async findOne(uuid: string): Promise<AccessConditionEntity> {
+  async findOne(uuid: string): Promise<AccessConditionEntity | null> {
     const result = await this.accessConditionModel
       .findOne({ uuid, deleted: false })
       .exec();
@@ -42,7 +42,7 @@ export class AccessConditionsService {
   async update(
     uuid: string,
     updateDto: CreateAccessConditionDto,
-  ): Promise<AccessConditionEntity> {
+  ): Promise<AccessConditionEntity | null> {
     const result = await this.accessConditionModel
       .findOneAndUpdate(
         { uuid, deleted: false },
@@ -53,7 +53,7 @@ export class AccessConditionsService {
     return result ? AccessConditionEntity.create(result.toJSON()) : null;
   }
 
-  async remove(uuid: string): Promise<AccessConditionEntity> {
+  async remove(uuid: string): Promise<AccessConditionEntity | null> {
     const result = await this.accessConditionModel
       .findOneAndUpdate(
         { uuid, deleted: false },

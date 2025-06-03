@@ -32,15 +32,20 @@ export class AccessAndUseCondition implements AccessAndUseConditionsModel {
    * @param option - Partial object of type `AccessAndUseConditionsModel` to initialize the properties.
    */
   constructor(option: Partial<AccessAndUseConditionsModel>) {
-    this.accessConditions = FieldReviewStatusEntity.create(
-      option.accessConditions,
-    );
-    this.reproductionConditions = FieldReviewStatusEntity.create(
-      option.reproductionConditions,
-    );
-    this.technicalRequirements = FieldReviewStatusEntity.create(
-      option.technicalRequirements,
-    );
+    if (option.accessConditions)
+      this.accessConditions = FieldReviewStatusEntity.create(
+        option.accessConditions,
+      );
+
+    if (option.reproductionConditions)
+      this.reproductionConditions = FieldReviewStatusEntity.create(
+        option.reproductionConditions,
+      );
+
+    if (option.technicalRequirements)
+      this.technicalRequirements = FieldReviewStatusEntity.create(
+        option.technicalRequirements,
+      );
   }
 
   /**

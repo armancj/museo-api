@@ -29,6 +29,9 @@ export class MongoGridConnection implements OnModuleInit, OnModuleDestroy {
 
   private async connectToMongo(): Promise<void> {
     const uri = this.configService.get<string>(apiEnv.database.uri);
+
+    if (!uri) throw new Error('Database uri is not defined');
+
     this.client = await MongoClient.connect(uri, {});
     this.db = this.client.db();
     this.gridFSBucket = new GridFSBucket(this.db);

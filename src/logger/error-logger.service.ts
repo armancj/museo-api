@@ -10,18 +10,22 @@ export class ErrorLoggerService {
 
   /**
    * Logs an error with enhanced context information.
-   * 
+   *
    * @param error The error object to log
    * @param request The request object associated with the error
    * @param additionalContext Optional additional context to include in the log
    */
-  logError(error: Error | unknown, request?: Request, additionalContext?: Record<string, any>): void {
+  logError(
+    error: Error | unknown,
+    request?: Request,
+    additionalContext?: Record<string, any>,
+  ): void {
     // Extract basic error information
     const errorInfo = this.extractErrorInfo(error);
-    
+
     // Extract request information if available
     const requestInfo = request ? this.extractRequestInfo(request) : undefined;
-    
+
     // Combine all context information
     const logContext = {
       ...errorInfo,
@@ -32,7 +36,7 @@ export class ErrorLoggerService {
     // Log the error with context
     this.logger.error(
       `Error: ${errorInfo.message}`,
-      JSON.stringify(logContext, null, 2)
+      JSON.stringify(logContext, null, 2),
     );
   }
 
@@ -47,7 +51,7 @@ export class ErrorLoggerService {
         stack: error.stack,
       };
     }
-    
+
     return {
       message: String(error),
     };
@@ -74,7 +78,7 @@ export class ErrorLoggerService {
    */
   private sanitizeHeaders(headers: Record<string, any>): Record<string, any> {
     const sanitized = { ...headers };
-    
+
     // Remove sensitive headers
     const sensitiveHeaders = ['authorization', 'cookie', 'x-auth-token'];
     for (const header of sensitiveHeaders) {
@@ -82,7 +86,7 @@ export class ErrorLoggerService {
         sanitized[header] = '[REDACTED]';
       }
     }
-    
+
     return sanitized;
   }
 }

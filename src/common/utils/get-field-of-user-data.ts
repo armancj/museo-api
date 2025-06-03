@@ -112,7 +112,7 @@ export function getFieldOfUserData(
   }
 
   // Apply location constraints based on a role
-  applyLocationConstraints(user?.roles as UserRoles, user, rest);
+  applyLocationConstraints(user?.roles as UserRoles, user, rest as any);
 
   return rest;
 }

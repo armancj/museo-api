@@ -38,7 +38,8 @@ export class TestDataController {
     @Param('id') id: string,
     @Body() updateTestDatumDto: UpdateTestDatumDto,
   ) {
-    updateTestDatumDto.name.modifiedBy = 'test2';
+    if (updateTestDatumDto?.name?.modifiedBy)
+      updateTestDatumDto.name.modifiedBy = 'test2';
     return this.testDataService.update(id, updateTestDatumDto);
   }
 

@@ -6,7 +6,8 @@ import { FieldMetadata } from '../../field-review-status/models/field-review-sta
 import { ApiProperty } from '@nestjs/swagger';
 import {
   FieldMetadataDtoForArrayString,
-  FieldMetadataDtoForEnum, FieldMetadataDtoForNumber,
+  FieldMetadataDtoForEnum,
+  FieldMetadataDtoForNumber,
   FieldMetadataDtoForString,
 } from '../../field-review-status/dto/field-metadata-string.dto';
 import { FieldMetadataDtoForDate } from '../dto/create-cultural-record.dto';
@@ -84,7 +85,7 @@ export class CulturalRecordEntity implements CulturalRecordModel {
   @ApiProperty({ type: FieldMetadataDtoForArrayString })
   descriptionInstrument: FieldMetadata<string[]>;
 
-  /** State of conservation of the cultural object */
+  /** State-of-the-art conservation. */
   @ApiProperty({ type: FieldMetadataDtoForArrayString })
   conservationState: FieldMetadata<string[]>;
 
@@ -102,28 +103,47 @@ export class CulturalRecordEntity implements CulturalRecordModel {
    * @param option - Partial data to initialize a cultural record.
    */
   constructor(option: Partial<CulturalRecordModel>) {
-    this.objectTitle = FieldReviewStatusEntity.create(option.objectTitle);
-    this.objectDescription = FieldReviewStatusEntity.create(
-      option.objectDescription,
-    );
-    this.onomasticDescriptors = FieldReviewStatusEntity.create(
-      option.onomasticDescriptors,
-    );
-    this.geographicDescriptors = FieldReviewStatusEntity.create(
-      option.geographicDescriptors,
-    );
-    this.institutionalDescriptors = FieldReviewStatusEntity.create(
-      option.institutionalDescriptors,
-    );
-    this.subjectDescriptors = FieldReviewStatusEntity.create(
-      option.subjectDescriptors,
-    );
-    this.extremeDates = FieldReviewStatusEntity.create(option.extremeDates);
-    this.valueGrade = FieldReviewStatusEntity.create(option.valueGrade);
-    this.descriptionLevel = FieldReviewStatusEntity.create(
-      option.descriptionLevel,
-    );
-    this.valuation = FieldReviewStatusEntity.create(option.valuation);
+    if (option.objectTitle)
+      this.objectTitle = FieldReviewStatusEntity.create(option.objectTitle);
+
+    if (option.objectDescription)
+      this.objectDescription = FieldReviewStatusEntity.create(
+        option.objectDescription,
+      );
+
+    if (option.onomasticDescriptors)
+      this.onomasticDescriptors = FieldReviewStatusEntity.create(
+        option.onomasticDescriptors,
+      );
+
+    if (option.geographicDescriptors)
+      this.geographicDescriptors = FieldReviewStatusEntity.create(
+        option.geographicDescriptors,
+      );
+
+    if (option.institutionalDescriptors)
+      this.institutionalDescriptors = FieldReviewStatusEntity.create(
+        option.institutionalDescriptors,
+      );
+
+    if (option.subjectDescriptors)
+      this.subjectDescriptors = FieldReviewStatusEntity.create(
+        option.subjectDescriptors,
+      );
+
+    if (option.extremeDates)
+      this.extremeDates = FieldReviewStatusEntity.create(option.extremeDates);
+
+    if (option.valueGrade)
+      this.valueGrade = FieldReviewStatusEntity.create(option.valueGrade);
+
+    if (option.descriptionLevel)
+      this.descriptionLevel = FieldReviewStatusEntity.create(
+        option.descriptionLevel,
+      );
+
+    if (option.valuation)
+      this.valuation = FieldReviewStatusEntity.create(option.valuation);
 
     if (option.volumesQuantities) {
       this.volumesQuantities = FieldReviewStatusEntity.create(
@@ -134,19 +154,45 @@ export class CulturalRecordEntity implements CulturalRecordModel {
       this.dimensions = FieldReviewStatusEntity.create(option.dimensions);
     }
 
-    this.languages = FieldReviewStatusEntity.create(option.languages);
-    this.supports = FieldReviewStatusEntity.create(option.supports);
-    this.letters = FieldReviewStatusEntity.create(option.letters);
-    this.descriptionInstrument = FieldReviewStatusEntity.create(
-      option.descriptionInstrument,
-    );
-    this.conservationState = FieldReviewStatusEntity.create(
-      option.conservationState,
-    );
-    this.backgroundTitle = FieldReviewStatusEntity.create(
-      option.backgroundTitle,
-    );
-    this.sectionTitle = FieldReviewStatusEntity.create(option.sectionTitle);
+    if (option.languages)
+      this.languages = FieldReviewStatusEntity.create(option.languages);
+
+    if (option.supports)
+      this.supports = FieldReviewStatusEntity.create(option.supports);
+
+    if (option.letters)
+      this.letters = FieldReviewStatusEntity.create(option.letters);
+
+    if (option.descriptionInstrument)
+      this.descriptionInstrument = FieldReviewStatusEntity.create(
+        option.descriptionInstrument,
+      );
+
+    if (option.conservationState)
+      this.conservationState = FieldReviewStatusEntity.create(
+        option.conservationState,
+      );
+
+    if (option.letters)
+      this.letters = FieldReviewStatusEntity.create(option.letters);
+
+    if (option.descriptionInstrument)
+      this.descriptionInstrument = FieldReviewStatusEntity.create(
+        option.descriptionInstrument,
+      );
+
+    if (option.conservationState)
+      this.conservationState = FieldReviewStatusEntity.create(
+        option.conservationState,
+      );
+
+    if (option.backgroundTitle)
+      this.backgroundTitle = FieldReviewStatusEntity.create(
+        option.backgroundTitle,
+      );
+
+    if (option.sectionTitle)
+      this.sectionTitle = FieldReviewStatusEntity.create(option.sectionTitle);
   }
 
   /**

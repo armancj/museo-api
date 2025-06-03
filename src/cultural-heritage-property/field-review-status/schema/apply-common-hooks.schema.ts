@@ -4,12 +4,9 @@ import {
   HistoryItem,
   StatusObject,
 } from '../models/field-review-status.model';
-import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { isEqual } from 'lodash';
 
-interface UpdateDto {
-  $set: Partial<CulturalPropertyModel>;
-}
+type GenericObject = { [key: string]: any };
 
 function updateFieldWithHistory(
   currentField: FieldMetadata<any>,
@@ -38,7 +35,7 @@ function updateFieldWithHistory(
   };
 }
 
-function applyEmbeddedChanges(updatedEmbedded, currentEmbedded) {
+function applyEmbeddedChanges(updatedEmbedded: any, currentEmbedded: any) {
   Object.keys(updatedEmbedded).forEach((fieldKey) => {
     const currentField = currentEmbedded[fieldKey] || {
       value: null,
@@ -60,10 +57,13 @@ function applyEmbeddedChanges(updatedEmbedded, currentEmbedded) {
 
 export function applyCommonHooksSchema(schema: Schema): Schema {
   schema.pre('findOneAndUpdate', async function (next) {
-    const update = (this.getUpdate() as UpdateDto)?.$set;
+    const update = (this.getUpdate() as GenericObject)?.$set;
     if (!update) return next();
 
-    const doc = await this.model.findOne(this.getFilter()).lean().exec();
+    const doc = (await this.model
+      .findOne(this.getFilter())
+      .lean()
+      .exec()) as GenericObject;
     if (!doc) return next();
 
     for (const key of Object.keys(update)) {

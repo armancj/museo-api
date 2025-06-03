@@ -9,7 +9,7 @@ export class TestDatum {
   test: FieldMetadata<string>;
   uuid: string;
   constructor(options: Partial<TestDataModel> = {}) {
-    this.test = FieldReviewStatusEntity.create(options.name);
+    if (options.name) this.test = FieldReviewStatusEntity.create(options.name);
     this.uuid = (options as any).uuid;
   }
 }
