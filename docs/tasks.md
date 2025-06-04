@@ -51,10 +51,10 @@ This document contains a comprehensive list of improvement tasks for the Museo A
    - [x] Remove any usage of 'any' type
    - [x] Add proper type definitions for all functions and variables
 
-10. [ ] Add code quality tools
-    - [ ] Set up SonarQube or similar code quality monitoring
-    - [ ] Configure linting rules to enforce best practices
-    - [ ] Add pre-commit hooks for code quality checks
+10. [x] Add code quality tools
+    - [x] Set up SonarQube or similar code quality monitoring
+    - [x] Configure linting rules to enforce best practices
+    - [x] Add pre-commit hooks for code quality checks
 
 ## Testing
 

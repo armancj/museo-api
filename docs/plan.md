@@ -43,7 +43,7 @@ This plan outlines all the improvements needed to align the project with modern 
 ### ✅ Phase 1: Setup & Structure
 - [ ] Migrate to domain-based modular folder structure
 - [ ] Remove dead code, unused files and inline console logs
-- [ ] Setup ESLint + Prettier + commit hooks
+- [x] Setup ESLint + Prettier + commit hooks
 
 ### ✅ Phase 2: DTOs & Validation
 - [ ] Create DTOs for all controllers
