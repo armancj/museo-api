@@ -1,25 +1,47 @@
 import { HttpStatus } from "@nestjs/common";
+import { ErrorResponseDto } from "./error-response.dto";
 
-export class Unauthorized {
-  'statusCode' = 401;
-  'message' = 'Unauthorized';
-  'timestamp' = '2023-10-14T15:00:53.687Z';
-  'path' = '/auth/profile';
-  'method' = 'GET';
-}
-export class Forbidden {
-  'statusCode' = 403;
-  'message' = 'Forbidden resource';
-  'error': 'Forbidden';
-  'timestamp' = '2023-10-14T15:00:53.687Z';
-  'path' = '/auth/profile';
-  'method' = 'GET';
+/**
+ * @deprecated Use ErrorResponseDto.unauthorized() instead
+ */
+export class Unauthorized extends ErrorResponseDto {
+  constructor(path: string = '/auth/profile', method: string = 'GET') {
+    super(
+      HttpStatus.UNAUTHORIZED,
+      'Unauthorized',
+      path,
+      method,
+      'Unauthorized'
+    );
+  }
 }
 
-export class NotFound {
-  'statusCode' = HttpStatus.NOT_FOUND;
-  'message' = 'Not found resource';
-  'error': 'NotFound ';
-  'timestamp' = new Date(Date.now()).toISOString();
-  'method' = 'GET';
+/**
+ * @deprecated Use ErrorResponseDto.forbidden() instead
+ */
+export class Forbidden extends ErrorResponseDto {
+  constructor(path: string = '/auth/profile', method: string = 'GET') {
+    super(
+      HttpStatus.FORBIDDEN,
+      'Forbidden resource',
+      path,
+      method,
+      'Forbidden'
+    );
+  }
+}
+
+/**
+ * @deprecated Use ErrorResponseDto.notFound() instead
+ */
+export class NotFound extends ErrorResponseDto {
+  constructor(path: string = '', method: string = 'GET') {
+    super(
+      HttpStatus.NOT_FOUND,
+      'Not found resource',
+      path,
+      method,
+      'Not Found'
+    );
+  }
 }

@@ -28,8 +28,20 @@ import { AuthVerifyCodeDto } from './dto/auth-verify-code.dto';
 import { AuthChangePasswordDto } from './dto/auth-change-password.dto';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
 
+/**
+ * Service responsible for authentication-related functionality
+ * including user login, token generation, password reset, and user profile management.
+ */
 @Injectable()
 export class AuthService {
+  /**
+   * Creates an instance of the AuthService
+   *
+   * @param jwtService - Service for JWT token generation and validation
+   * @param configService - Service for accessing application configuration
+   * @param authRepository - Repository for auth-related data operations
+   * @param eventEmitter - Event emitter for handling asynchronous events
+   */
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
@@ -37,6 +49,13 @@ export class AuthService {
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
 
+  /**
+   * Authenticates a user based on email/mobile and password
+   *
+   * @param loginDto - The login credentials containing email/mobile and password
+   * @returns The authenticated user entity
+   * @throws UnauthorizedException if credentials are invalid
+   */
   async getAuthenticatedUser({ email, password }: LoginDto): Promise<User> {
     const filter = isEmail(email) ? { email } : { mobile: email };
     const user = await this.getOneUserRepo(filter);
@@ -46,11 +65,16 @@ export class AuthService {
     return User.create(user);
   }
 
+  /**
+   * Retrieves a single user from the repository based on the provided filter
+   *
+   * @param filter - Partial user model to filter by (e.g., email, uuid)
+   * @returns Promise resolving to the found user model
+   * @throws UnauthorizedAuthException if user cannot be found or is unauthorized
+   * @private
+   */
   private async getOneUserRepo(filter: Partial<UserModel>): Promise<UserModel> {
-    const userObservable = await this.eventEmitter.emitAsync<
-      UserModel,
-      UserModel
-    >({
+    const userObservable = this.eventEmitter.emitAsync<UserModel, UserModel>({
       event: EventEmitter.userFound,
       exception: UnauthorizedAuthException,
       values: { ...filter, deleted: false, active: true },
@@ -60,14 +84,14 @@ export class AuthService {
 
   async login(user: User): Promise<LoginResponseDto> {
     const payload: JwtPayload = {
-      roles: user.roles,
+      roles: user.roles as string,
       uuid: user.uuid,
       email: user.email,
       name: user.name,
       lastName: user.lastName,
       municipal: user.municipal,
-      nationality: user.nationality,
-      province: user.province
+      nationality: user.nationality as string,
+      province: user.province as string,
     };
     const refresh_token = await this.getJwtRefreshToken(payload);
     await this.setCurrentRefreshToken(refresh_token, user.uuid, payload);
@@ -108,10 +132,7 @@ export class AuthService {
     uuid: string,
     editProfileDto: EditProfileDto,
   ): Promise<boolean> {
-    const userObservable = await this.eventEmitter.emitAsync<
-      UpdatedUser,
-      boolean
-    >({
+    const userObservable = this.eventEmitter.emitAsync<UpdatedUser, boolean>({
       event: EventEmitter.userUpdated,
       exception: UnauthorizedAuthException,
       values: { filter: { uuid }, updateUserDto: editProfileDto },
@@ -119,7 +140,13 @@ export class AuthService {
     return firstValueFrom(userObservable);
   }
 
-  async getTokenAuthRefreshById({ uuid }: JwtPayload) {
+  /**
+   * Retrieves the authentication token for a user by UUID
+   *
+   * @param payload - JWT payload containing the user's UUID
+   * @returns Promise resolving to the authentication token or null if not found
+   */
+  async getTokenAuthRefreshById({ uuid }: JwtPayload): Promise<any | null> {
     const auth = await this.authRepository.findOneAuth({ uuid });
     if (auth) return auth;
     return null;
@@ -131,18 +158,27 @@ export class AuthService {
     return array[0] % 100000;
   }
 
+  /**
+   * Initiates the password recovery process for a user
+   *
+   * @param forgotPasswordDto - DTO containing the email for password recovery
+   * @returns Promise resolving to a boolean indicating success
+   * @throws NotFoundException if the email is not found
+   * @throws BadRequestException if the user cannot be updated in the auth repository
+   * @throws SendEmailAuthException if the email cannot be sent
+   */
   async forgotPassword({ email }: ForgotPasswordDto): Promise<boolean> {
     const user = await this.getOneUserRepo({
       email,
       active: true,
       deleted: false,
     }).catch(() => null);
-    if (!user) throw new NotFoundException('Email not found');
+    if (!user) throw new NotFoundException('User with this email not found');
 
     const code = this.generateRandomFiveDigitNumber();
     const expireCodeDate = Date.now();
 
-    const sendEmailObservable = await this.eventEmitter.emitAsync<
+    const sendEmailObservable = this.eventEmitter.emitAsync<
       SendCodeBody,
       unknown
     >({
@@ -157,38 +193,56 @@ export class AuthService {
       { uuid: user.uuid, code, email, expireCodeDate },
     );
     if (!auth)
-      throw new BadRequestException('Failed to update user in auth repo');
+      throw new BadRequestException(
+        'Failed to update user in authentication repository',
+      );
     return true;
   }
 
+  /**
+   * Verifies a code sent to a user's email
+   *
+   * @param authVerifyCodeDto - DTO containing the code and email to verify
+   * @returns Promise resolving to a boolean indicating success
+   * @throws BadRequestException if the code is invalid or expired
+   */
   async verifyCode({ code, email }: AuthVerifyCodeDto): Promise<boolean> {
     const userAuth = await this.authRepository.findOneAuth({ code, email });
 
     if (!userAuth) {
-      throw new BadRequestException('Invalid code.');
+      throw new BadRequestException('Invalid verification code.');
     }
 
     if (userAuth.isCodeExpired()) {
-      throw new BadRequestException('The code has expired.');
+      throw new BadRequestException('The verification code has expired.');
     }
 
     return true;
   }
 
+  /**
+   * Changes a user's password using a verification code
+   *
+   * @param authChangePasswordDto - DTO containing the code, email, and new password
+   * @returns Promise resolving to a boolean indicating success
+   * @throws BadRequestException if the verification code is invalid
+   */
   async changePassword(
     authChangePasswordDto: AuthChangePasswordDto,
-  ): Promise<void> {
+  ): Promise<boolean> {
     const { code, email, newPassword: password } = authChangePasswordDto;
 
     const userAuth = await this.authRepository.findOneAuth({ code, email });
 
     if (!userAuth) {
-      throw new BadRequestException('Failed.');
+      throw new BadRequestException('Invalid verification code or email.');
     }
 
     this.eventEmitter.emit<UpdatedUser>({
       event: EventEmitter.userUpdated,
       values: { filter: { email }, updateUserDto: { password } },
     });
+
+    return true;
   }
 }

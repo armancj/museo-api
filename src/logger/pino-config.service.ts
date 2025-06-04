@@ -1,24 +1,21 @@
-import {Inject, Injectable} from '@nestjs/common';
-import {Params, PARAMS_PROVIDER_TOKEN, PinoLogger} from 'nestjs-pino'
+import { Inject, Injectable } from '@nestjs/common';
+import { Params, PARAMS_PROVIDER_TOKEN, PinoLogger } from 'nestjs-pino';
 
 @Injectable()
 export class PinoConfigService extends PinoLogger {
+  constructor(@Inject(PARAMS_PROVIDER_TOKEN) params: Params) {
+    super(params);
+  }
 
-    constructor(
-        @Inject(PARAMS_PROVIDER_TOKEN) params: Params
-    ){
-        super(params);
-    }
+  debug(obj: unknown, msg?: string, ...args: unknown[]) {
+    super.debug(obj, msg, ...args);
+  }
 
-    debug(obj: unknown, msg?: string, ...args) {
-        super.debug(obj, msg, ...args);
-    }
+  info(obj: unknown, msg?: string, ...args: unknown[]) {
+    this.logger.info(obj, msg, ...args);
+  }
 
-    info(obj: unknown, msg?: string, ...args) {
-        this.logger.info(obj, msg, ...args)
-    }
-
-    error(obj: unknown, msg?: string, ...args) {
-        super.error(obj, msg, ...args);
-    }
+  error(obj: unknown, msg?: string, ...args: unknown[]) {
+    super.error(obj, msg, ...args);
+  }
 }

@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../../users/entities/user.entity';
+import { WithStaticCreate } from '../../common/interfaces/instantiable';
+import { FieldMetadata } from '../field-review-status/models/field-review-status.model';
 
 /**
  * Generic service for handling CRUD operations on a MongoDB model with embedded data.
@@ -28,8 +30,14 @@ export class CommonRecordService<
    */
   constructor(
     @InjectModel('') private readonly model: Model<T>,
-    private readonly singleEntityClass: new (...args: any[]) => RecordEntity,
-    private readonly bulkEntityClass: new (...args: any[]) => RecordsEntity,
+    private readonly singleEntityClass: WithStaticCreate<
+      RecordEntity,
+      Partial<unknown>
+    >,
+    private readonly bulkEntityClass: WithStaticCreate<
+      RecordsEntity[],
+      unknown[]
+    >,
     private readonly embeddedFieldName: string,
   ) {}
 
@@ -41,8 +49,15 @@ export class CommonRecordService<
    * @param user
    * @returns A promise that resolves to the created `RecordEntity`.
    */
-  async create(uuid: string, createDto: CreateDto, user: User): Promise<RecordEntity> {
-    this.updateFieldMetadataModifiedBy(createDto, user.uuid);
+  async create(
+    uuid: string,
+    createDto: CreateDto,
+    user: User,
+  ): Promise<RecordEntity> {
+    this.updateFieldMetadataModifiedBy(
+      createDto as Record<string, unknown>,
+      user.uuid,
+    );
     return this.updateRecord(uuid, createDto);
   }
 
@@ -53,7 +68,7 @@ export class CommonRecordService<
    */
   async findAll(): Promise<RecordsEntity[]> {
     const records = await this.model.find({ deleted: false }).lean().exec();
-    return this.bulkEntityClass['create'](records);
+    return this.bulkEntityClass.create(records);
   }
 
   /**
@@ -64,10 +79,10 @@ export class CommonRecordService<
    * @throws {NotFoundException} If the record or embedded data is not found.
    */
   async findOne(uuid: string): Promise<RecordEntity> {
-    const record = await this.model
+    const record = (await this.model
       .findOne({ uuid, deleted: false })
       .lean()
-      .exec();
+      .exec()) as any;
     if (!record) throw new NotFoundException('Not Found record');
 
     const embeddedData = record[this.embeddedFieldName];
@@ -76,7 +91,7 @@ export class CommonRecordService<
         `Not Found data for ${this.embeddedFieldName}`,
       );
 
-    return this.singleEntityClass['create'](embeddedData);
+    return this.singleEntityClass.create(embeddedData);
   }
 
   /**
@@ -120,22 +135,21 @@ export class CommonRecordService<
     uuid: string,
     updateDto: Partial<CreateDto>,
   ): Promise<RecordEntity> {
-    const updatedRecord = await this.model
+    const updatedRecord = (await this.model
       .findOneAndUpdate(
         { uuid, deleted: false },
         { $set: { [this.embeddedFieldName]: updateDto } as any },
         { new: true },
       )
       .lean()
-      .exec();
+      .exec()) as any;
 
     if (!updatedRecord) throw new NotFoundException('Not Found record');
 
-    return this.singleEntityClass['create'](
+    return (this.singleEntityClass as any)['create'](
       updatedRecord[this.embeddedFieldName],
     );
   }
-
 
   /**
    * Función genérica que busca y actualiza los campos `modifiedBy`
@@ -143,19 +157,32 @@ export class CommonRecordService<
    * @param obj - El objeto en el que se buscarán los campos.
    * @param modifiedBy - El valor del `modifiedBy` que se establecerá.
    */
-  private updateFieldMetadataModifiedBy<T>(
-      obj: Record<string, any>,
-      modifiedBy: string,
+  private updateFieldMetadataModifiedBy(
+    obj: Record<string, any>,
+    modifiedBy: string,
   ): void {
     Object.keys(obj).forEach((key) => {
       const field = obj[key];
 
-      if (field && typeof field === 'object' && 'value' in field && 'status' in field) {
-        field.modifiedBy = modifiedBy;
+      if (
+        field &&
+        typeof field === 'object' &&
+        'value' in (field as object) &&
+        'status' in (field as object)
+      ) {
+        // This is likely a FieldMetadata object
+        (field as FieldMetadata<unknown>).modifiedBy = modifiedBy;
       }
 
-      if (typeof field === 'object' && !Array.isArray(field)) {
-        this.updateFieldMetadataModifiedBy(field, modifiedBy);
+      if (
+        typeof field === 'object' &&
+        !Array.isArray(field) &&
+        field !== null
+      ) {
+        this.updateFieldMetadataModifiedBy(
+          field as Record<string, unknown>,
+          modifiedBy,
+        );
       }
     });
   }

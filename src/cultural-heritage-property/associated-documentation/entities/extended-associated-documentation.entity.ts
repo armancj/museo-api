@@ -23,7 +23,7 @@ export class ExtendedAssociatedDocumentationEntity extends AssociatedDocumentati
     option: Partial<AssociatedDocumentationModel & { uuid: string }>,
   ) {
     super(option);
-    this.uuid = option.uuid;
+    if (option.uuid) this.uuid = option.uuid;
   }
 
   /**

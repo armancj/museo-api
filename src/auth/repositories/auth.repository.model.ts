@@ -13,7 +13,7 @@ export interface AuthRepositoryModel {
    * @returns {Maybe<AuthModel>}
    * @param {Partial<AuthModel>} filter
    */
-  findOneAuth(filter: Partial<AuthModel>): Promise<AuthModel>;
+  findOneAuth(filter: Partial<AuthModel>): Promise<AuthModel | null>;
 
   /**
    * Update one user
@@ -24,7 +24,7 @@ export interface AuthRepositoryModel {
   updateOneAuth(
     filter: Partial<AuthModel>,
     options: Partial<UpdateOptions>,
-  ): Promise<AuthModel>;
+  ): Promise<AuthModel | null>;
 
   createAuth(authModel: AuthModel): Promise<AuthModel>;
 }

@@ -1,10 +1,10 @@
 export function isDeepEqual(
-  a: NonNullable<unknown>,
-  b: NonNullable<unknown>,
+  a: { [key: string]: unknown },
+  b: { [key: string]: unknown },
   keys: string[],
 ) {
-  const aFiltered = {};
-  const bFiltered = {};
+  const aFiltered: { [key: string]: unknown } = {};
+  const bFiltered: { [key: string]: unknown } = {};
 
   keys.forEach((key) => {
     if (key in a && key in b) {

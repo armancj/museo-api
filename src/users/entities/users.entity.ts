@@ -17,6 +17,9 @@ export class Users {
 
   findUserByEmail(email: string): User {
     const user = this.value.find((user) => user.email === email);
+
+    if (!user) throw new Error('User not found');
+
     return User.create(user);
   }
 

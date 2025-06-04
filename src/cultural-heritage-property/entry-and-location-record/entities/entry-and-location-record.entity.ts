@@ -1,4 +1,7 @@
-import {EntryAndLocationRecordModel, LocationModel} from '../models/entry-and-location-record.model';
+import {
+  EntryAndLocationRecordModel,
+  LocationModel,
+} from '../models/entry-and-location-record.model';
 import {
   GenericClassification,
   HeritageType,
@@ -13,7 +16,7 @@ import {
 } from '../../field-review-status/dto/field-metadata-string.dto';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
-import {MetadataObjectLocationDto} from "../dto/metadata-object-location.dto";
+import { MetadataObjectLocationDto } from '../dto/metadata-object-location.dto';
 
 /**
  * Class representing an Entry and Location Record.
@@ -61,31 +64,46 @@ export class EntryAndLocationRecord implements EntryAndLocationRecordModel {
    * @param {Partial<EntryAndLocationRecordModel>} option - The initialization options.
    */
   constructor(option: Partial<EntryAndLocationRecordModel>) {
-    this.auxiliaryInventory = FieldReviewStatusEntity.create(
-      option.auxiliaryInventory,
-    );
-    this.declarationType = FieldReviewStatusEntity.create(
-      option.declarationType,
-    );
-    this.entryDate = FieldReviewStatusEntity.create(option.entryDate);
-    this.entryMethod = FieldReviewStatusEntity.create(option.entryMethod);
-    this.genericClassification = FieldReviewStatusEntity.create(
-      option.genericClassification,
-    );
-    this.heritageType = FieldReviewStatusEntity.create(option.heritageType);
-    this.initialDescription = FieldReviewStatusEntity.create(
-      option.initialDescription,
-    );
-    this.institutionType = FieldReviewStatusEntity.create(
-      option.institutionType,
-    );
-    this.inventoryNumber = FieldReviewStatusEntity.create(
-      option.inventoryNumber,
-    );
-    this.pieceInventory = FieldReviewStatusEntity.create(option.pieceInventory);
-    this.objectName = FieldReviewStatusEntity.create(option.objectName);
+    if (option.auxiliaryInventory)
+      this.auxiliaryInventory = FieldReviewStatusEntity.create(
+        option.auxiliaryInventory,
+      );
+    if (option.declarationType)
+      this.declarationType = FieldReviewStatusEntity.create(
+        option.declarationType,
+      );
+    if (option.entryDate)
+      this.entryDate = FieldReviewStatusEntity.create(option.entryDate);
+    if (option.entryMethod)
+      this.entryMethod = FieldReviewStatusEntity.create(option.entryMethod);
+    if (option.genericClassification)
+      this.genericClassification = FieldReviewStatusEntity.create(
+        option.genericClassification,
+      );
+    if (option.heritageType)
+      this.heritageType = FieldReviewStatusEntity.create(option.heritageType);
+    if (option.initialDescription)
+      this.initialDescription = FieldReviewStatusEntity.create(
+        option.initialDescription,
+      );
+    if (option.institutionType)
+      this.institutionType = FieldReviewStatusEntity.create(
+        option.institutionType,
+      );
+    if (option.inventoryNumber)
+      this.inventoryNumber = FieldReviewStatusEntity.create(
+        option.inventoryNumber,
+      );
+    if (option.pieceInventory)
+      this.pieceInventory = FieldReviewStatusEntity.create(
+        option.pieceInventory,
+      );
+    if (option.objectName)
+      this.objectName = FieldReviewStatusEntity.create(option.objectName);
     if (option.objectLocation)
-      this.objectLocation = FieldReviewStatusEntity.create(option.objectLocation);
+      this.objectLocation = FieldReviewStatusEntity.create(
+        option.objectLocation,
+      );
   }
 
   /**

@@ -51,18 +51,25 @@ export class AssociatedDocumentationEntity
    * @param option Partial data to initialize the entity.
    */
   constructor(option: Partial<AssociatedDocumentationModel>) {
-    this.copiesExistenceAndLocation = FieldReviewStatusEntity.create(
-      option.copiesExistenceAndLocation,
-    );
-    this.originalsExistenceAndLocation = FieldReviewStatusEntity.create(
-      option.originalsExistenceAndLocation,
-    );
-    this.relatedDescriptionUnits = FieldReviewStatusEntity.create(
-      option.relatedDescriptionUnits,
-    );
-    this.relatedPublicationsInformation = FieldReviewStatusEntity.create(
-      option.relatedPublicationsInformation,
-    );
+    if (option.copiesExistenceAndLocation)
+      this.copiesExistenceAndLocation = FieldReviewStatusEntity.create(
+        option.copiesExistenceAndLocation,
+      );
+
+    if (option.originalsExistenceAndLocation)
+      this.originalsExistenceAndLocation = FieldReviewStatusEntity.create(
+        option.originalsExistenceAndLocation,
+      );
+
+    if (option.relatedDescriptionUnits)
+      this.relatedDescriptionUnits = FieldReviewStatusEntity.create(
+        option.relatedDescriptionUnits,
+      );
+
+    if (option.relatedPublicationsInformation)
+      this.relatedPublicationsInformation = FieldReviewStatusEntity.create(
+        option.relatedPublicationsInformation,
+      );
   }
 
   /**

@@ -19,7 +19,7 @@ export class ExtendedCulturalRecordEntity extends CulturalRecordEntity {
    */
   constructor(option: Partial<CulturalRecordModel & { uuid: string }>) {
     super(option);
-    this.uuid = option.uuid;
+    if (option.uuid) this.uuid = option.uuid;
   }
 
   /**
