@@ -6,7 +6,7 @@ export class ExtendedProducerAuthorRecord extends ProducerAuthorRecord {
 
   constructor(option: Partial<ProducerAuthorRecordModel & { uuid: string }>) {
     super(option);
-    this.uuid = option.uuid;
+    if (option.uuid) this.uuid = option.uuid;
   }
   static create(
     option: Partial<ProducerAuthorRecordModel & { uuid: string }>,

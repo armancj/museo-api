@@ -35,9 +35,9 @@ export class ProvinceService {
 
   async findOne(uuid: string, filter?: UpdateProvinceDto): Promise<Province> {
     const province = await this.getOneProvince({
+      ...(filter as ProvinceModel),
       uuid,
       deleted: false,
-      ...(filter as ProvinceModel),
     });
 
     return Province.create(province);

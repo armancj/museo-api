@@ -17,13 +17,13 @@ export interface UserModel {
   passwordHashed: string;
   avatar?: UploadedFile;
   address?: string;
-  nationality?: string;
-  province?: string;
-  municipal?: string;
+  nationality?: string | null;
+  province?: string | null;
+  municipal?: string | null;
   roles?: UserRoles;
   active?: boolean;
   deleted?: boolean;
-  institutionId?: string;
+  institutionId?: string | null;
   institution?: InstitutionModel;
 }
 

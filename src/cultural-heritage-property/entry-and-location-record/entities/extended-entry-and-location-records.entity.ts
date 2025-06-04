@@ -19,7 +19,7 @@ export class ExtendedEntryAndLocationRecordsEntity extends EntryAndLocationRecor
    */
   constructor(option: Partial<EntryAndLocationRecordModel & { uuid: string }>) {
     super(option);
-    this.uuid = option.uuid;
+    if (option.uuid) this.uuid = option.uuid;
   }
 
   /**

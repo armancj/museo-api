@@ -7,7 +7,7 @@ export interface FileStorageRepositoryModel {
   uploadFile(
     file: Express.Multer.File,
     filename: string,
-    metadata: MediaFileMetadata,
+    metadata?: MediaFileMetadata,
   ): Promise<FileStorageModel>;
 
   getFileMetadataById(id: string): Promise<FileMetadataModel>;

@@ -6,7 +6,7 @@ import { registerAs } from '@nestjs/config';
  */
 export default registerAs('development', () => ({
   app: {
-    port: parseInt(process.env.APP_PORT, 10) || 3000,
+    port: parseInt(process.env.APP_PORT ?? '3000', 10),
     hostname: process.env.APP_HOST || 'localhost',
   },
   database: {
@@ -20,7 +20,7 @@ export default registerAs('development', () => ({
   },
   email: {
     host: process.env.EMAIL_HOST,
-    port: parseInt(process.env.EMAIL_PORT, 10) || 465,
+    port: parseInt(process.env.EMAIL_PORT ?? '465', 10),
     secure: process.env.EMAIL_SECURE === 'true',
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,

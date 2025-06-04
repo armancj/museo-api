@@ -39,23 +39,38 @@ export class ProducerAuthorRecord implements ProducerAuthorRecordModel {
   street: FieldMetadata<string>;
 
   constructor(option: Partial<ProducerAuthorRecordModel>) {
-    this.betweenStreet1 = FieldReviewStatusEntity.create(option.betweenStreet1);
-    this.betweenStreet2 = FieldReviewStatusEntity.create(option.betweenStreet2);
-    this.district = FieldReviewStatusEntity.create(option.district);
-    this.institutionalHistory = FieldReviewStatusEntity.create(
-      option.institutionalHistory,
-    );
-    this.locality = FieldReviewStatusEntity.create(option.locality);
-    this.municipality = FieldReviewStatusEntity.create(option.municipality);
-    this.number = FieldReviewStatusEntity.create(option.number);
-    this.objectEntryHistory = FieldReviewStatusEntity.create(
-      option.objectEntryHistory,
-    );
-    this.producerAuthorNames = FieldReviewStatusEntity.create(
-      option.producerAuthorNames,
-    );
-    this.province = FieldReviewStatusEntity.create(option.province);
-    this.street = FieldReviewStatusEntity.create(option.street);
+    if (option.betweenStreet1)
+      this.betweenStreet1 = FieldReviewStatusEntity.create(
+        option.betweenStreet1,
+      );
+    if (option.betweenStreet2)
+      this.betweenStreet2 = FieldReviewStatusEntity.create(
+        option.betweenStreet2,
+      );
+    if (option.district)
+      this.district = FieldReviewStatusEntity.create(option.district);
+    if (option.institutionalHistory)
+      this.institutionalHistory = FieldReviewStatusEntity.create(
+        option.institutionalHistory,
+      );
+    if (option.locality)
+      this.locality = FieldReviewStatusEntity.create(option.locality);
+    if (option.municipality)
+      this.municipality = FieldReviewStatusEntity.create(option.municipality);
+    if (option.number)
+      this.number = FieldReviewStatusEntity.create(option.number);
+    if (option.objectEntryHistory)
+      this.objectEntryHistory = FieldReviewStatusEntity.create(
+        option.objectEntryHistory,
+      );
+    if (option.producerAuthorNames)
+      this.producerAuthorNames = FieldReviewStatusEntity.create(
+        option.producerAuthorNames,
+      );
+    if (option.province)
+      this.province = FieldReviewStatusEntity.create(option.province);
+    if (option.street)
+      this.street = FieldReviewStatusEntity.create(option.street);
   }
 
   static create(option: ProducerAuthorRecordModel): ProducerAuthorRecord {

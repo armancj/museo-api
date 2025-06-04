@@ -53,23 +53,28 @@ export class UserMongoRepository {
     projection: ProjectionType<UserModel> = {},
     { page = 1, perPage = 10 }: FindAllDto,
   ): Promise<{ users: Users; totalElement: number; totalPage: number }> {
-    let paginator: Paginator;
-    if (perPage) paginator = new Paginator({ page: +page, perPage: +perPage });
     const filterMongo: FilterQuery<UserModel> = { ...filter };
 
-    const usersMongo = await this.userMongoModel
+    const shouldPaginate = perPage && perPage > 0;
+    const skip = shouldPaginate ? (page - 1) * perPage : undefined;
+    const limit = shouldPaginate ? perPage : undefined;
+
+    const query = this.userMongoModel
       .find(filterMongo, projection)
       .populate(this.POPULATE)
-      .lean()
-      .skip(paginator.skip)
-      .limit(paginator.limit)
-      .exec();
+      .lean();
+
+    if (shouldPaginate) {
+      query.skip(skip!).limit(limit!);
+    }
+
+    const usersMongo = await query.exec();
 
     const totalElement = await this.userMongoModel
       .countDocuments(filterMongo)
       .exec();
 
-    const totalPage = paginator.getTotalPage(totalElement);
+    const totalPage = shouldPaginate ? Math.ceil(totalElement / perPage) : 1;
 
     return { users: Users.create(usersMongo), totalElement, totalPage };
   }
@@ -79,7 +84,7 @@ export class UserMongoRepository {
     filter: Partial<UserModel> = {},
     projection: ProjectionType<UserModel> = {},
     options: QueryOptions<UserModel> & { lean: true },
-  ): Promise<UserModel> {
+  ): Promise<UserModel | null> {
     const filterMongo: RootFilterQuery<UserModel> = { ...filter };
 
     const user = await this.userMongoModel
@@ -92,7 +97,7 @@ export class UserMongoRepository {
 
   async updatedOne(
     filter: Partial<UserModel> = {},
-    update?: UpdateQuery<UserModel>,
+    update: UpdateQuery<UserModel> = {},
   ): Promise<boolean> {
     const filterMongo: RootFilterQuery<UserModel> = { ...filter };
     await this.checkInstitution(update);
@@ -124,13 +129,13 @@ export class UserMongoRepository {
     )
       return;
 
-    const institution: InstitutionModel = await this.institutionDocumentModel
+    const institution: InstitutionModel = (await this.institutionDocumentModel
       .findOne({
         uuid: createUserDto.institutionId,
         deleted: false,
       })
       .lean()
-      .exec();
+      .exec()) as InstitutionModel;
 
     if (!institution) {
       throw new UnauthorizedException(

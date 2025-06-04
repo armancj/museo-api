@@ -77,7 +77,7 @@ export class UsersService {
 
     const userData = getFieldOfUserData(user, rest as createUserModel);
 
-    if (user.roles !== UserRoles.superAdmin) await this.validationData(rest);
+    if (user?.roles !== UserRoles.superAdmin) await this.validationData(rest);
 
     const updateUser: Partial<UserModel> = { ...userData } as UserModel;
     if (password) updateUser.passwordHashed = await hashedPassword(password);
@@ -128,10 +128,13 @@ export class UsersService {
    *
    * @param uuid - The unique identifier of the user
    * @param file - The file to upload as the user's avatar
-   * @returns Object containing success message and avatar information
+   * @returns Promise resolving to an object with a success message and avatar information
    * @throws NotFoundException if the user is not found
    */
-  async uploadFile(uuid: string, file: FileStorageModel) {
+  async uploadFile(
+    uuid: string,
+    file: FileStorageModel,
+  ): Promise<{ message: string; avatar: UploadedFile }> {
     try {
       const user = await this.findOne({ uuid });
 
@@ -140,14 +143,14 @@ export class UsersService {
         await this.handleFileDeletion(user.avatar.id);
       }
 
-      // Create new avatar
+      // Create a new avatar
       const avatar: UploadedFile = {
         id: file.id,
         nameFile: file.filename,
       };
 
       await this.updateUserAvatar(uuid, avatar);
-      return { message: `File successfully uploaded`, avatar };
+      return { message: 'Avatar file successfully uploaded', avatar };
     } catch (e) {
       await this.handleFileDeletion(file.id);
       throw e;
@@ -165,7 +168,14 @@ export class UsersService {
     });
   }
 
-  async streamFile(uuid: string) {
+  /**
+   * Streams a user's avatar file
+   *
+   * @param uuid - The unique identifier of the user
+   * @returns Promise resolving to an object with the file and its metadata
+   * @throws NotFoundException if the user does not have an avatar
+   */
+  async streamFile(uuid: string): Promise<{ file: Uint8Array; metadata: any }> {
     const fileId = await this.checkIfAvatarId(uuid);
 
     const metadata = (await this.getFileMetadata(fileId)).metadata;
@@ -197,7 +207,14 @@ export class UsersService {
     return firstValueFrom(fileObservable);
   }
 
-  async removeFile(uuid: string) {
+  /**
+   * Removes a user's avatar file
+   *
+   * @param uuid - The unique identifier of the user
+   * @returns Promise resolving to an object with a success message
+   * @throws NotFoundException if the user does not have an avatar
+   */
+  async removeFile(uuid: string): Promise<{ message: string }> {
     const fileId = await this.checkIfAvatarId(uuid);
 
     const avatar: UploadedFile = null!;
@@ -207,14 +224,22 @@ export class UsersService {
       this.handleFileDeletion(fileId),
     ]);
 
-    return { message: `File successfully remove` };
+    return { message: 'Avatar file successfully removed' };
   }
 
-  private async checkIfAvatarId(uuid: string) {
+  /**
+   * Checks if a user has an avatar and returns the avatar ID
+   *
+   * @param uuid - The unique identifier of the user
+   * @returns Promise resolving to the avatar ID
+   * @throws NotFoundException if the user does not have an avatar
+   * @private
+   */
+  private async checkIfAvatarId(uuid: string): Promise<string> {
     const user = await this.findOne({ uuid });
 
     if (!user?.avatar?.id)
-      throw new NotFoundException('User not have upload file');
-    return user?.avatar?.id;
+      throw new NotFoundException('User does not have an uploaded avatar');
+    return user.avatar.id;
   }
 }

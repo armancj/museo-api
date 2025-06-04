@@ -10,7 +10,10 @@ import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
 import { ApiPropertyOptions } from '@nestjs/swagger/dist/decorators/api-property.decorator';
-import { FieldMetadata, StatusObject } from '../models/field-review-status.model';
+import {
+  FieldMetadata,
+  StatusObject,
+} from '../models/field-review-status.model';
 import { ChangeHistoryDto } from './change-history.dto';
 
 type Metadata = {
@@ -24,7 +27,7 @@ export function createFieldMetadataDto<T>({
 }: Metadata): new () => FieldMetadata<T> {
   class FieldMetadataDto implements FieldMetadata<T> {
     @ApiProperty(options)
-    @applyDecorators(...decorators)
+    @applyDecorators(...(decorators ?? []))
     value: T;
 
     @ApiProperty({

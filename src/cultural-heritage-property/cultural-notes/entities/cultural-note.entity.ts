@@ -23,7 +23,7 @@ export class CulturalNoteEntity implements NotesModel {
    * @param option - Partial data based on the `NotesModel` to create a new instance.
    */
   constructor(option: Partial<NotesModel>) {
-    this.notes = FieldReviewStatusEntity.create(option.notes);
+    if (option.notes) this.notes = FieldReviewStatusEntity.create(option.notes);
   }
 
   /**

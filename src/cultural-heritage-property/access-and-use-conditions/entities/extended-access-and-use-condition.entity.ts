@@ -17,7 +17,7 @@ export class ExtendedAccessAndUseConditionEntity extends AccessAndUseCondition {
    */
   constructor(option: Partial<AccessAndUseConditionsModel & { uuid: string }>) {
     super(option);
-    this.uuid = option.uuid;
+    if (option.uuid) this.uuid = option.uuid;
   }
 
   /**

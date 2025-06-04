@@ -18,7 +18,7 @@ export class AuthMongoRepository implements AuthRepositoryModel {
     return Auth.create(userAuth);
   }
 
-  async findOneAuth(filter: Partial<AuthModel>): Promise<Auth> {
+  async findOneAuth(filter: Partial<AuthModel>): Promise<Auth | null> {
     const filterData: RootFilterQuery<AuthModel> = { ...filter };
     const userAuth = await this.authMongoModel.findOne(filterData).exec();
 
@@ -29,7 +29,7 @@ export class AuthMongoRepository implements AuthRepositoryModel {
   async updateOneAuth(
     filter: Partial<AuthModel>,
     updateOptions: Partial<AuthModel>,
-  ): Promise<AuthModel> {
+  ): Promise<AuthModel | null> {
     const filterData: RootFilterQuery<AuthModel> = { ...filter };
     const userAuth = await this.authMongoModel
       .findOneAndUpdate(filterData, updateOptions, { upsert: true })

@@ -17,7 +17,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
   constructor(
     private readonly httpAdapterHost: HttpAdapterHost,
-    @Inject(ErrorLoggerService) private readonly errorLogger: ErrorLoggerService
+    @Inject(ErrorLoggerService)
+    private readonly errorLogger: ErrorLoggerService,
   ) {}
 
   catch(exception: unknown, host: ArgumentsHost): void {
@@ -60,12 +61,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
       errorType = 'Internal Server Error';
     }
 
-    // Ensure message is always an array for consistency
+    // Ensure the message is always an array for consistency
     if (typeof message === 'string') {
       message = [message];
     }
 
-    // Get request path and method
+    // Get a request path and method
     const path = httpAdapter.getRequestUrl(request);
     const method = request.method || 'UNKNOWN';
 
@@ -75,7 +76,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       message,
       path,
       method,
-      errorType
+      errorType,
     );
 
     // Log the error with enhanced context
@@ -83,11 +84,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
       statusCode: httpStatus,
       errorType,
       timestamp: errorResponse.timestamp,
-      isHttpException: exception instanceof HttpException
+      isHttpException: exception instanceof HttpException,
     });
 
     // In production, don't expose stack traces or internal error details
-    if (process.env.NODE_ENV === 'production' && httpStatus === HttpStatus.INTERNAL_SERVER_ERROR) {
+    if (
+      process.env.NODE_ENV === 'production' &&
+      httpStatus === HttpStatus.INTERNAL_SERVER_ERROR
+    ) {
       errorResponse.message = ['An unexpected error occurred'];
     }
 

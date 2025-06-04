@@ -36,33 +36,10 @@ function canCreateRole(userRole: UserRoles, targetRole: UserRoles): boolean {
  * @param target - The target object to apply constraints to
  * @param isInstitution - Whether the target is an institution (different field names)
  */
-/**
- * Interface for objects with location fields for users
- */
-interface UserLocationFields {
-  nationality?: string;
-  province?: string;
-  municipal?: string;
-  [key: string]: any;
-}
-
-/**
- * Interface for objects with location fields for institutions
- */
-interface InstitutionLocationFields {
-  country?: string;
-  province?: string;
-  municipality?: string;
-  [key: string]: any;
-}
-
-/**
- * Applies location constraints based on a user role
- */
 function applyLocationConstraints(
   role: UserRoles,
   source: User | JwtPayload,
-  target: UserLocationFields | InstitutionLocationFields,
+  target: any,
   isInstitution = false,
 ): void {
   // Common fields for all restricted roles
@@ -99,11 +76,9 @@ function applyLocationConstraints(
  * @throws ForbiddenException if the user doesn't have permission to create the specified role
  */
 export function getFieldOfUserData(
-  user: User | undefined,
+  user: User,
   rest: Partial<UserModel>,
 ): Partial<UserModel> {
-  if (!user) return rest;
-
   // Check role creation permissions
   if (rest.roles && !canCreateRole(user?.roles as UserRoles, rest.roles)) {
     throw new ForbiddenException(
@@ -112,7 +87,7 @@ export function getFieldOfUserData(
   }
 
   // Apply location constraints based on a role
-  applyLocationConstraints(user?.roles as UserRoles, user, rest as any);
+  applyLocationConstraints(user?.roles as UserRoles, user, rest);
 
   return rest;
 }
