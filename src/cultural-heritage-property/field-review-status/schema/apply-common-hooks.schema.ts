@@ -1,18 +1,19 @@
 import { Schema } from 'mongoose';
-import {
-  FieldMetadata,
-  HistoryItem,
-  StatusObject,
-} from '../models/field-review-status.model';
+import { FieldMetadata, HistoryItem, StatusObject } from '../models/field-review-status.model';
+import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { isEqual } from 'lodash';
 
 type GenericObject = { [key: string]: any };
+
+interface UpdateDto {
+  $set: Partial<CulturalPropertyModel>;
+}
 
 function updateFieldWithHistory(
   currentField: FieldMetadata<any>,
   newField: FieldMetadata<any>,
 ): FieldMetadata<any> {
-  const history = currentField.history || [];
+  const history = Array.isArray(currentField?.history) ? currentField.history : [];
 
   if (
     !isEqual(currentField.value, newField.value) ||
@@ -36,7 +37,7 @@ function updateFieldWithHistory(
 }
 
 function applyEmbeddedChanges(updatedEmbedded: any, currentEmbedded: any) {
-  Object.keys(updatedEmbedded).forEach((fieldKey) => {
+  Object.keys(updatedEmbedded).forEach(fieldKey => {
     const currentField = currentEmbedded[fieldKey] || {
       value: null,
       history: [],
@@ -47,23 +48,17 @@ function applyEmbeddedChanges(updatedEmbedded: any, currentEmbedded: any) {
     const updatedField = updatedEmbedded[fieldKey];
 
     if (updatedField) {
-      updatedEmbedded[fieldKey] = updateFieldWithHistory(
-        currentField,
-        updatedField,
-      );
+      updatedEmbedded[fieldKey] = updateFieldWithHistory(currentField, updatedField);
     }
   });
 }
 
 export function applyCommonHooksSchema(schema: Schema): Schema {
   schema.pre('findOneAndUpdate', async function (next) {
-    const update = (this.getUpdate() as GenericObject)?.$set;
+    const update = (this.getUpdate() as UpdateDto)?.$set as any;
     if (!update) return next();
 
-    const doc = (await this.model
-      .findOne(this.getFilter())
-      .lean()
-      .exec()) as GenericObject;
+    const doc = (await this.model.findOne(this.getFilter()).lean().exec()) as any;
     if (!doc) return next();
 
     for (const key of Object.keys(update)) {

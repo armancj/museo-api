@@ -1,30 +1,27 @@
-import {EntryAndLocationRecordModel, LocationModel} from '../models/entry-and-location-record.model';
 import {
-  GenericClassification,
-  HeritageType,
-} from '../enum/entry-and-location-record.enum';
+  EntryAndLocationRecordModel,
+  LocationModel,
+} from '../models/entry-and-location-record.model';
+import { GenericClassification, HeritageType } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
-import { CreateLocationDto } from './create-location.dto';
 import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   createDto,
-  FieldMetadataDtoForBooleanWithoutHistory,
-  FieldMetadataDtoForDateWithoutHistory,
+  FieldMetadataDtoForBooleanWithoutHistory, FieldMetadataDtoForDateWithoutHistory,
   FieldMetadataDtoForStringWithoutHistory,
 } from '../../field-review-status/dto/create.dto';
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
-import {MetadataObjectLocationDto} from "./metadata-object-location.dto";
+import { MetadataObjectLocationDto } from './metadata-object-location.dto';
+import { FieldMetadataDateDto } from '../../field-review-status/dto/FieldMetadataDateDto';
 
 export const FieldMetadataDtoEnumInstitutionType = createDto(
   FieldMetadataDtoForEnum(InstitutionType),
 );
 
-export const FieldMetadataDtoEnumHeritageType = createDto(
-  FieldMetadataDtoForEnum(HeritageType),
-);
+export const FieldMetadataDtoEnumHeritageType = createDto(FieldMetadataDtoForEnum(HeritageType));
 
 export const FieldMetadataDtoEnumGenericClassification = createDto(
   FieldMetadataDtoForEnum(GenericClassification),
@@ -43,9 +40,7 @@ export const FieldMetadataDtoEnumGenericClassification = createDto(
  * The class also utilizes the `Type` decorator for defining transformation types to maintain
  * consistency within nested objects and complex data types.
  */
-export class CreateEntryAndLocationRecordDto
-  implements EntryAndLocationRecordModel
-{
+export class CreateEntryAndLocationRecordDto implements EntryAndLocationRecordModel {
   @ApiProperty({ type: () => FieldMetadataDtoForBooleanWithoutHistory })
   @Type(() => FieldMetadataDtoForBooleanWithoutHistory)
   @ValidateNested()
@@ -57,8 +52,8 @@ export class CreateEntryAndLocationRecordDto
   declarationType: FieldMetadata<string>;
 
   @ApiProperty({ type: () => FieldMetadataDtoForDateWithoutHistory })
-  @Type(() => FieldMetadataDtoForStringWithoutHistory)
   @ValidateNested()
+  @Type(() => FieldMetadataDtoForDateWithoutHistory)
   entryDate: FieldMetadata<Date>;
 
   @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
