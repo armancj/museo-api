@@ -1,7 +1,4 @@
-import {
-  GenericClassification,
-  HeritageType,
-} from '../enum/entry-and-location-record.enum';
+import { GenericClassification, HeritageType } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 
