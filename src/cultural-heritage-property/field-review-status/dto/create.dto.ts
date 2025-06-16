@@ -2,10 +2,10 @@ import { OmitType } from '@nestjs/swagger';
 import {
   FieldMetadataDtoForArrayString,
   FieldMetadataDtoForBoolean,
-  FieldMetadataDtoForDate,
   FieldMetadataDtoForNumber,
   FieldMetadataDtoForString,
 } from './field-metadata-string.dto';
+import { FieldMetadataDateDto } from './FieldMetadataDateDto';
 
 export function createDto<T extends new (...args: any[]) => any>(
   FieldMetadata: T,
@@ -13,21 +13,13 @@ export function createDto<T extends new (...args: any[]) => any>(
   return OmitType(FieldMetadata, ['history', 'modifiedBy'] as const);
 }
 
-export const FieldMetadataDtoForStringWithoutHistory = createDto(
-  FieldMetadataDtoForString,
-);
+export const FieldMetadataDtoForStringWithoutHistory = createDto(FieldMetadataDtoForString);
 
-export const FieldMetadataDtoForNumberWithoutHistory = createDto(
-  FieldMetadataDtoForNumber,
-);
+export const FieldMetadataDtoForNumberWithoutHistory = createDto(FieldMetadataDtoForNumber);
 
-export const FieldMetadataDtoForDateWithoutHistory = createDto(
-  FieldMetadataDtoForDate,
-);
+export const FieldMetadataDtoForDateWithoutHistory = OmitType(FieldMetadataDateDto, ['history', 'modifiedBy'] as const);
 
-export const FieldMetadataDtoForBooleanWithoutHistory = createDto(
-  FieldMetadataDtoForBoolean,
-);
+export const FieldMetadataDtoForBooleanWithoutHistory = createDto(FieldMetadataDtoForBoolean);
 
 export const FieldMetadataDtoForStringArrayWithoutHistory = createDto(
   FieldMetadataDtoForArrayString,

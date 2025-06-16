@@ -51,17 +51,17 @@ export class CulturalRecord implements CulturalPropertiesModel {
 
   /** Physical dimensions associated with the cultural record */
   @Prop(
-      propTypeMongo({
-        type: DimensionsSchema,
-      }),
+    propTypeMongo({
+      type: DimensionsSchema,
+    }),
   )
   dimensions: FieldMetadata<DimensionsModel>;
 
   /** Quantities of several volumes such as books or photos */
   @Prop(
-      propTypeMongo({
-        type: VolumeQuantitiesSchema,
-      }),
+    propTypeMongo({
+      type: VolumeQuantitiesSchema,
+    }),
   )
   volumesQuantities: FieldMetadata<VolumeQuantitiesModel>;
 
@@ -174,5 +174,4 @@ export class CulturalRecord implements CulturalPropertiesModel {
 /**
  * Schema definition for a Cultural Record using Mongoose.
  */
-export const CulturalRecordSchema =
-  SchemaFactory.createForClass(CulturalRecord);
+export const CulturalRecordSchema = SchemaFactory.createForClass(CulturalRecord);

@@ -39,15 +39,15 @@ export class FieldReviewStatusEntity<T> implements FieldMetadata<T> {
     this.modifiedBy = option.modifiedBy;
     this.comment = option.comment || '';
     this.status = option.status;
-    this.history = option.history.map((history) => {
-      return {
-        previousValue: history.previousValue,
-        modifiedBy: history.modifiedBy,
-        modifiedAt: history.modifiedAt,
-        comment: history.comment,
-        status: history.status,
-      };
-    });
+    this.history = Array.isArray(option.history)
+      ? option.history.map(history => ({
+          previousValue: history.previousValue,
+          modifiedBy: history.modifiedBy,
+          modifiedAt: history.modifiedAt,
+          comment: history.comment,
+          status: history.status,
+        }))
+      : [];
   }
 
   static create(options: FieldMetadata<any>): FieldReviewStatusEntity<any> {

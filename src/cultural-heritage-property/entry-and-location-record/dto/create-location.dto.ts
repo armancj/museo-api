@@ -1,5 +1,5 @@
 import { LocationModel } from '../models/entry-and-location-record.model';
-import {IsNotEmpty, IsString} from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 /**
  * Data Transfer Object (DTO) for creating a new location.

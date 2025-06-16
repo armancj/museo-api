@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CategoryMuseumService } from './category-museum.service';
 import { CreateCategoryMuseumDto } from './dto/create-category-museum.dto';
 import { UpdateCategoryMuseumDto } from './dto/update-category-museum.dto';
@@ -43,10 +34,7 @@ export class CategoryMuseumController {
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
   })
   @Patch(':uuid')
-  update(
-    @Param('uuid') uuid: string,
-    @Body() updateCategoryMuseumDto: UpdateCategoryMuseumDto,
-  ) {
+  update(@Param('uuid') uuid: string, @Body() updateCategoryMuseumDto: UpdateCategoryMuseumDto) {
     return this.categoryMuseumService.update(uuid, updateCategoryMuseumDto);
   }
 

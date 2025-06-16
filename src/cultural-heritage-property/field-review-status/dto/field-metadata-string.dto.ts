@@ -25,7 +25,7 @@ export const FieldMetadataDtoForBoolean = createFieldMetadataDto<string>({
   decorators: [IsBoolean(), IsNotEmpty()],
 });
 
-export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
+export const FieldMetadataDtoForDate = createFieldMetadataDto<Date>({
   options: { type: () => Date },
   decorators: [IsDate(), IsNotEmpty()],
 });

@@ -1,29 +1,18 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CulturalHeritagePropertyService } from './cultural-heritage-property.service';
 import { CreateCulturalPropertyDto } from './dto/create-cultural-property.dto';
+import { Auth } from '../../auth/decorator';
 
+@Auth()
 @ApiTags('CulturalProperty')
 @Controller('cultural-heritage-property')
 export class CulturalHeritagePropertyController {
-  constructor(
-    private readonly culturalHeritagePropertyService: CulturalHeritagePropertyService,
-  ) {}
+  constructor(private readonly culturalHeritagePropertyService: CulturalHeritagePropertyService) {}
 
   @Post()
   async create(@Body() createCulturalPropertyDto: CreateCulturalPropertyDto) {
-    return this.culturalHeritagePropertyService.created(
-      createCulturalPropertyDto,
-    );
+    return this.culturalHeritagePropertyService.created(createCulturalPropertyDto);
   }
 
   @Get()
@@ -40,5 +29,11 @@ export class CulturalHeritagePropertyController {
   @Delete(':uuid')
   async remove(@Param('uuid') uuid: string) {
     return this.culturalHeritagePropertyService.remove(uuid);
+  }
+
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete('permanent/:uuid')
+  async removePermanent(@Param('uuid') uuid: string) {
+    return this.culturalHeritagePropertyService.removePermanent(uuid);
   }
 }

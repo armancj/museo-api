@@ -34,8 +34,7 @@ export class CulturalHeritagePropertyService {
     const culturalProperty = await this.culturalHeritagePropertyModel
       .findOne({ uuid, deleted: false })
       .exec();
-    if (!culturalProperty)
-      throw new NotFoundException('Cultural property heritage not found');
+    if (!culturalProperty) throw new NotFoundException('Cultural property heritage not found');
     return CulturalHeritageProperty.create(culturalProperty);
   }
 
@@ -44,5 +43,9 @@ export class CulturalHeritagePropertyService {
     await this.culturalHeritagePropertyModel
       .updateOne({ uuid, deleted: false }, { deleted: true })
       .exec();
+  }
+
+  async removePermanent(uuid: string) {
+    await this.culturalHeritagePropertyModel.deleteOne({ uuid }).exec();
   }
 }

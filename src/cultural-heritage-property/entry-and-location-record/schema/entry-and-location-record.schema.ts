@@ -1,13 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import {
-  GenericClassification,
-  HeritageType,
-} from '../enum/entry-and-location-record.enum';
+import { GenericClassification, HeritageType } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
 import { LocationSchema } from './location.schema';
 import { LocationModel } from '../models/entry-and-location-record.model';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { propTypeMongo } from '../../util/prop-type-mongo.function';
+import { DimensionsSchema } from '../../cultural-record/Schema';
+import { DimensionsModel } from '../../cultural-record/models/cultural-record';
 
 /**
  * Represents the record of an entry and its location.
@@ -91,8 +90,12 @@ class EntryAndLocationRecord {
    * The location details of the item.
    * @type {LocationModel}
    */
-  @Prop({ type: LocationSchema })
-  objectLocation: LocationModel;
+  @Prop(
+    propTypeMongo({
+      type: LocationSchema,
+    }),
+  )
+  objectLocation: FieldMetadata<LocationModel>;
 
   @Prop(
     propTypeMongo({
@@ -109,6 +112,4 @@ class EntryAndLocationRecord {
  * This schema is used for mapping and validating EntryAndLocationRecord-related data
  * when interacting with the database.
  */
-export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(
-  EntryAndLocationRecord,
-);
+export const EntryAndLocationRecordSchema = SchemaFactory.createForClass(EntryAndLocationRecord);
