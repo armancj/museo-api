@@ -10,12 +10,12 @@ import { FieldMetadata } from '../../field-review-status/models/field-review-sta
 import { ApiProperty } from '@nestjs/swagger';
 import {
   createDto,
-  FieldMetadataDtoForBooleanWithoutHistory, FieldMetadataDtoForDateWithoutHistory,
+  FieldMetadataDtoForBooleanWithoutHistory,
+  FieldMetadataDtoForDateWithoutHistory,
   FieldMetadataDtoForStringWithoutHistory,
 } from '../../field-review-status/dto/create.dto';
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
 import { MetadataObjectLocationDto } from './metadata-object-location.dto';
-import { FieldMetadataDateDto } from '../../field-review-status/dto/FieldMetadataDateDto';
 
 export const FieldMetadataDtoEnumInstitutionType = createDto(
   FieldMetadataDtoForEnum(InstitutionType),
@@ -61,8 +61,8 @@ export class CreateEntryAndLocationRecordDto implements EntryAndLocationRecordMo
   @ValidateNested()
   entryMethod: FieldMetadata<string>;
 
-  @ApiProperty({ type: () => FieldMetadataDtoEnumGenericClassification })
-  @Type(() => FieldMetadataDtoEnumGenericClassification)
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
   @ValidateNested()
   genericClassification: FieldMetadata<GenericClassification>;
 
