@@ -27,14 +27,13 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
       },
     });
 
-    const uploadStream = this.mongoGridConnection
-      .getGridFSBucket()
-      .openUploadStream(filename, {
-        metadata: {
-          ...metadata,
-          mimetype: file.mimetype,
-        },
-      });
+    const uploadStream = this.mongoGridConnection.getGridFSBucket().openUploadStream(filename, {
+      metadata: {
+        ...metadata,
+        mimeType: file.mimetype,
+        mimetype: file.mimetype,
+      },
+    });
 
     readableStream.pipe(uploadStream);
 
@@ -47,7 +46,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
         });
         resolve(fileStorage);
       });
-      uploadStream.on('error', (err) => {
+      uploadStream.on('error', err => {
         uploadStream.end();
         reject(err);
       });
@@ -57,10 +56,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
   async getFileMetadataById(id: string): Promise<FileMetadataModel> {
     try {
       const fileId = new ObjectId(id);
-      return await this.mongoGridConnection
-        .getDb()
-        .collection('fs.files')
-        .findOne({ _id: fileId });
+      return await this.mongoGridConnection.getDb().collection('fs.files').findOne({ _id: fileId });
     } catch (error) {
       console.error('Error fetching file metadata:', error);
       throw new Error('Could not fetch file metadata');
@@ -74,8 +70,8 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
 
   async getFileStream(fileId: string): Promise<Readable> {
     const objectId = new ObjectId(fileId);
-    return this.mongoGridConnection
-      .getGridFSBucket()
-      .openDownloadStream(objectId);
+
+
+    return this.mongoGridConnection.getGridFSBucket().openDownloadStream(objectId);
   }
 }

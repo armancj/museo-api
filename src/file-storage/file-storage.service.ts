@@ -21,11 +21,7 @@ export class FileStorageService implements FileStorageServiceModel {
     filename: string,
     metadata?: MediaFileMetadata,
   ): Promise<FileStorageModel> => {
-    return await this.fileStorageRepository.uploadFile(
-      file,
-      filename,
-      metadata,
-    );
+    return await this.fileStorageRepository.uploadFile(file, filename, metadata);
   };
 
   getFileMetadataById = async (id: string): Promise<FileMetadataModel> => {
