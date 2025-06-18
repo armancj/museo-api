@@ -36,10 +36,7 @@ export class FileStorageController {
   })
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     try {
-      const fileStorage = await this.storageService.uploadFile(
-        file,
-        file.originalname,
-      );
+      const fileStorage = await this.storageService.uploadFile(file, file.originalname);
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
       throw new NotFoundException('File not found. ' + err);
@@ -59,16 +56,19 @@ export class FileStorageController {
   }
 
   @Get(':id')
-  async getFile(
-    @Param('id') fileId: string,
-    @Req() req: Request,
-    @Res() res: Response,
-  ) {
+  async getFile(@Param('id') fileId: string, @Req() req: Request, @Res() res: Response) {
     try {
       const file = await this.storageService.getFileMetadataById(fileId);
+
+      if (!file) {
+        throw new NotFoundException(`File with ID ${fileId} not found`);
+      }
+
       const fileStream = await this.storageService.getFileStream(fileId);
 
-      const mime = file.metadata.mimeType;
+      const mime =
+        file.metadata?.mimeType || (file.metadata as any)?.mimetype || 'application/octet-stream';
+
       const filename = file.filename;
       const range = req.headers.range;
 
@@ -99,6 +99,9 @@ export class FileStorageController {
 
       fileStream.pipe(res);
     } catch (err) {
+      if (err instanceof NotFoundException) {
+        throw err;
+      }
       throw new NotFoundException('File not found. ' + err);
     }
   }
