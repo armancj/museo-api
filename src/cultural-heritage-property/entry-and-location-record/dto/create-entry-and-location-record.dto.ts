@@ -21,12 +21,6 @@ export const FieldMetadataDtoEnumInstitutionType = createDto(
   FieldMetadataDtoForEnum(InstitutionType),
 );
 
-export const FieldMetadataDtoEnumHeritageType = createDto(FieldMetadataDtoForEnum(HeritageType));
-
-export const FieldMetadataDtoEnumGenericClassification = createDto(
-  FieldMetadataDtoForEnum(GenericClassification),
-);
-
 /**
  * Represents a data transfer object (DTO) for creating an entry and location record.
  * This class implements the `EntryAndLocationRecordModel` interface and encompasses
@@ -66,8 +60,8 @@ export class CreateEntryAndLocationRecordDto implements EntryAndLocationRecordMo
   @ValidateNested()
   genericClassification: FieldMetadata<GenericClassification>;
 
-  @ApiProperty({ type: () => FieldMetadataDtoEnumHeritageType })
-  @Type(() => FieldMetadataDtoEnumHeritageType)
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
   @ValidateNested()
   heritageType: FieldMetadata<HeritageType>;
 
