@@ -64,10 +64,7 @@ export class UsersController {
     roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
   })
   @Post()
-  async create(
-    @Body() createUserDto: CreateUserDto,
-    @CurrentUser() user: User,
-  ): Promise<User> {
+  async create(@Body() createUserDto: CreateUserDto, @CurrentUser() user: User): Promise<User> {
     return this.userService.create(createUserDto, user);
   }
 
@@ -109,10 +106,7 @@ export class UsersController {
     roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
   })
   @Get(':uuid')
-  async findOne(
-    @Param('uuid') uuid: string,
-    @CurrentUser() user: User,
-  ): Promise<User> {
+  async findOne(@Param('uuid') uuid: string, @CurrentUser() user: User): Promise<User> {
     return this.userService.findOne({ uuid, deleted: false }, user);
   }
 
