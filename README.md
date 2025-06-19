@@ -138,6 +138,13 @@ $ pnpm run command create:default-conservation-statuses
 $ pnpm run command create:default-reproduction-conditions
 ```
 
+```bash
+# Add Test Users and Institutions
+# This creates test users with different roles (admin, specialist, technician) 
+# and their associated institutions for provinces and municipalities in Cuba
+$ pnpm run command create:test-users
+```
+
 ## Useful NestJS Resources
 
 Check out a few resources that may come in handy when working with NestJS:

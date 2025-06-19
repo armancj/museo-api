@@ -25,8 +25,7 @@ export class InstitutionsService {
   async create(createInstitutionDto: CreateInstitutionDto, user: JwtPayload) {
     getFieldOfInstitutionData(user, createInstitutionDto);
     await this.validationData(createInstitutionDto);
-    const institution =
-      await this.institutionDocumentModel.create(createInstitutionDto);
+    const institution = await this.institutionDocumentModel.create(createInstitutionDto);
     return Institution.create(institution);
   }
 
@@ -45,7 +44,7 @@ export class InstitutionsService {
     return await this.findByUUID(uuid, filter);
   }
 
-  async findByUUID(uuid: string, filter: Partial<InstitutionModel>={}) {
+  async findByUUID(uuid: string, filter: Partial<InstitutionModel> = {}) {
     const institution = await this.getInstitution({
       uuid,
       deleted: false,
@@ -55,18 +54,11 @@ export class InstitutionsService {
     return Institution.create(institution);
   }
 
-  async update(
-    uuid: string,
-    updateInstitutionDto: UpdateInstitutionDto,
-    user: JwtPayload,
-  ) {
+  async update(uuid: string, updateInstitutionDto: UpdateInstitutionDto, user: JwtPayload) {
     await this.findOne(uuid, user);
     await this.validationData(updateInstitutionDto);
     await this.institutionDocumentModel
-      .updateOne(
-        { uuid },
-        { ...updateInstitutionDto, updatedAt: new Date(Date.now()) },
-      )
+      .updateOne({ uuid }, { ...updateInstitutionDto, updatedAt: new Date(Date.now()) })
       .exec();
   }
 
@@ -78,9 +70,7 @@ export class InstitutionsService {
   }
 
   private async getInstitution(filter?: RootFilterQuery<InstitutionDocument>) {
-    const institution = await this.institutionDocumentModel
-      .findOne(filter)
-      .exec();
+    const institution = await this.institutionDocumentModel.findOne(filter).exec();
     if (!institution) return null;
     return institution;
   }
@@ -89,14 +79,10 @@ export class InstitutionsService {
     const validationPromises = [];
 
     if (institutionDto.country) {
-      validationPromises.push(
-        this.eventEmitter.checkCountryExists(institutionDto.country),
-      );
+      validationPromises.push(this.eventEmitter.checkCountryExists(institutionDto.country));
     }
     if (institutionDto.province) {
-      validationPromises.push(
-        this.eventEmitter.checkProvinceExists(institutionDto.province),
-      );
+      validationPromises.push(this.eventEmitter.checkProvinceExists(institutionDto.province));
     }
     if (institutionDto.municipality) {
       validationPromises.push(
