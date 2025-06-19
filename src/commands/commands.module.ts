@@ -24,6 +24,8 @@ import { ConservationStatusModule } from '../nomenclator/conservation-status/con
 import { CreateDefaultConservationStatuses } from './commands/create-default-conservation-statuses';
 import { ReproductionConditionsModule } from '../nomenclator/reproduction-conditions/reproduction-conditions.module';
 import { CreateDefaultReproductionConditions } from './commands/create-default-reproduction-conditions';
+import { CreateTestUsers } from './commands/create-test-users';
+import { InstitutionsModule } from '../address';
 
 @Module({
   imports: [
@@ -40,6 +42,7 @@ import { CreateDefaultReproductionConditions } from './commands/create-default-r
     EntryFormModule,
     ConservationStatusModule,
     ReproductionConditionsModule,
+    InstitutionsModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -54,6 +57,7 @@ import { CreateDefaultReproductionConditions } from './commands/create-default-r
     CreateDefaultEntryForms,
     CreateDefaultConservationStatuses,
     CreateDefaultReproductionConditions,
+    CreateTestUsers,
   ],
 })
 export class CommandsModule {}

@@ -2,7 +2,6 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  IsNumberString,
   IsOptional,
   IsString,
   IsUUID,
@@ -15,9 +14,7 @@ import { UserRoles } from '../enum/user-roles.enum';
 import { ApplyTransform } from '../../common/decorator/apply-transform.decorator';
 import { toLowerCase } from '../../common/utils/to-lower-case';
 
-export class CreateUserDto
-  implements Omit<UserPropertiesModel, 'passwordHashed' | 'uuid'>
-{
+export class CreateUserDto implements Omit<UserPropertiesModel, 'passwordHashed' | 'uuid'> {
   @IsString()
   @ApplyTransform(toLowerCase)
   @IsEmail()
@@ -70,7 +67,7 @@ export class CreateUserDto
   })
   name: string;
 
-  @ValidateIf((dto) => dto?.roles !== UserRoles.superAdmin)
+  @ValidateIf(dto => dto?.roles !== UserRoles.superAdmin)
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
@@ -79,7 +76,7 @@ export class CreateUserDto
   })
   nationality: string;
 
-  @ValidateIf((dto) => dto?.roles !== UserRoles.superAdmin)
+  @ValidateIf(dto => dto?.roles !== UserRoles.superAdmin)
   @IsString()
   @ApiProperty({
     type: String,
@@ -87,10 +84,7 @@ export class CreateUserDto
   })
   province: string;
 
-  @ValidateIf(
-    (dto) =>
-      dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager,
-  )
+  @ValidateIf(dto => dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager)
   @IsString()
   @ApiProperty({
     type: String,
@@ -104,10 +98,7 @@ export class CreateUserDto
   @IsEnum(UserRoles)
   roles?: UserRoles;
 
-  @ValidateIf(
-    (dto) =>
-      dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager,
-  )
+  @ValidateIf(dto => dto?.roles === UserRoles.employee || dto?.roles === UserRoles.manager)
   @IsUUID()
   @IsString()
   @IsNotEmpty()
