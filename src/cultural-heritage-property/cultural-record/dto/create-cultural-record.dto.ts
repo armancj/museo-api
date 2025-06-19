@@ -1,4 +1,11 @@
-import { IsOptional, IsObject, ValidateNested, IsEnum, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  IsOptional,
+  IsObject,
+  ValidateNested,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+} from 'class-validator';
 import { CulturalPropertiesModel } from '../models/cultural-record';
 import { Type } from 'class-transformer';
 import { DescriptionLevel, ValueGrade } from '../enum/cultural-record.enum';
@@ -14,20 +21,17 @@ import {
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { createFieldMetadataDto } from '../../field-review-status/dto/field-metadata.dto';
 import { FieldMetadataDtoForEnum } from '../../field-review-status/dto/field-metadata-string.dto';
-import {MetadataExtremeDatesDto} from "./metadata-extreme-dates.dto";
-import {MetadataDimensionsDto} from "./metadata-dimensions.dto";
-import {DimensionsDto} from "./dimensions.dto";
-import {MetadataVolumesQuantitiesDto} from "./metadata-volumes-quantities.dto";
+import { MetadataExtremeDatesDto } from './metadata-extreme-dates.dto';
+import { MetadataDimensionsDto } from './metadata-dimensions.dto';
+import { DimensionsDto } from './dimensions.dto';
+import { MetadataVolumesQuantitiesDto } from './metadata-volumes-quantities.dto';
 
 export const FieldMetadataDtoForDate = createFieldMetadataDto<string>({
   options: { type: ExtremeDatesDto },
   decorators: [ValidateNested()],
 });
 
-
-export const FieldMetadataDtoEnumValueGrade = createDto(
-  FieldMetadataDtoForEnum(ValueGrade),
-);
+export const FieldMetadataDtoEnumValueGrade = createDto(FieldMetadataDtoForEnum(ValueGrade));
 
 const FieldMetadataDtoForEnumNumber = (enumValues: any) =>
   createFieldMetadataDto<number>({
@@ -126,8 +130,8 @@ export class CreateCulturalRecordDto implements CulturalPropertiesModel {
   /**
    * The value grade of the cultural record.
    */
-  @ApiProperty({ type: () => FieldMetadataDtoEnumValueGrade })
-  @Type(() => FieldMetadataDtoEnumValueGrade)
+  @ApiProperty({ type: () => FieldMetadataDtoForStringWithoutHistory })
+  @Type(() => FieldMetadataDtoForStringWithoutHistory)
   @ValidateNested()
   valueGrade: FieldMetadata<ValueGrade>;
 
