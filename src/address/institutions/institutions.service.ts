@@ -22,6 +22,7 @@ export class InstitutionsService {
     private institutionDocumentModel: InstitutionMongoModel,
     private readonly eventEmitter: EventEmitter2Adapter,
   ) {}
+
   async create(createInstitutionDto: CreateInstitutionDto, user: JwtPayload) {
     getFieldOfInstitutionData(user, createInstitutionDto);
     await this.validationData(createInstitutionDto);
