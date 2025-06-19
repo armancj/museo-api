@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  HttpException,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable, HttpException, InternalServerErrorException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Observable, from, firstValueFrom } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -41,23 +37,16 @@ export class EventEmitter2Adapter {
     }
   }
 
-  emitAsync<T, R = T>({
-    event,
-    exception,
-    values,
-  }: EmitAsyncParams<T>): Observable<R> {
+  emitAsync<T, R = T>({ event, exception, values }: EmitAsyncParams<T>): Observable<R> {
     return from(this.eventEmitter.emitAsync(event, values)).pipe(
       map((result: unknown) => {
         if (
           !result ||
-          (Array.isArray(result) &&
-            result.every((item) => item === null || item === undefined))
+          (Array.isArray(result) && result.every(item => item === null || item === undefined))
         ) {
           throw new exception();
         }
-        return Array.isArray(result) && result.length === 1
-          ? (result[0] as R)
-          : (result as R);
+        return Array.isArray(result) && result.length === 1 ? (result[0] as R) : (result as R);
       }),
       catchError((err: unknown): never => {
         if (err instanceof HttpException) {
@@ -92,10 +81,7 @@ export class EventEmitter2Adapter {
   }
 
   async checkMunicipalityExists(name: string) {
-    const MunicipalityObserver = this.emitAsync<
-      Partial<ProvinceModel>,
-      Province
-    >({
+    const MunicipalityObserver = this.emitAsync<Partial<ProvinceModel>, Province>({
       event: EventEmitter.municipalityFound,
       values: { name, deleted: false },
       exception: MunicipalityNotFoundException,

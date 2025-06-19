@@ -3,13 +3,7 @@ import { UserMongoModel, UserNameEntity } from '../schema/users.schema';
 import { FindAllDto } from '../../common/dto/find-all.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
-import {
-  FilterQuery,
-  ProjectionType,
-  QueryOptions,
-  RootFilterQuery,
-  UpdateQuery,
-} from 'mongoose';
+import { FilterQuery, ProjectionType, QueryOptions, RootFilterQuery, UpdateQuery } from 'mongoose';
 import { Users } from '../entities/users.entity';
 import { UserModel, UserPropertiesModel } from '../models/user.model';
 import { Paginator } from '../../common/lib/paginator.lib';
@@ -22,10 +16,7 @@ import {
 import { InstitutionModel } from '../../address/institutions/entities/institution.model';
 import { UserRoles } from '../enum/user-roles.enum';
 
-export type createUserModel = Omit<
-  UserModel,
-  'active' | 'deleted' | 'institution'
->;
+export type createUserModel = Omit<UserModel, 'active' | 'deleted' | 'institution'>;
 
 @Injectable()
 export class UserMongoRepository {
@@ -59,10 +50,7 @@ export class UserMongoRepository {
     const skip = shouldPaginate ? (page - 1) * perPage : undefined;
     const limit = shouldPaginate ? perPage : undefined;
 
-    const query = this.userMongoModel
-      .find(filterMongo, projection)
-      .populate(this.POPULATE)
-      .lean();
+    const query = this.userMongoModel.find(filterMongo, projection).populate(this.POPULATE).lean();
 
     if (shouldPaginate) {
       query.skip(skip!).limit(limit!);
@@ -70,9 +58,7 @@ export class UserMongoRepository {
 
     const usersMongo = await query.exec();
 
-    const totalElement = await this.userMongoModel
-      .countDocuments(filterMongo)
-      .exec();
+    const totalElement = await this.userMongoModel.countDocuments(filterMongo).exec();
 
     const totalPage = shouldPaginate ? Math.ceil(totalElement / perPage) : 1;
 
@@ -87,9 +73,7 @@ export class UserMongoRepository {
   ): Promise<UserModel | null> {
     const filterMongo: RootFilterQuery<UserModel> = { ...filter };
 
-    const user = await this.userMongoModel
-      .findOne(filterMongo, projection, options)
-      .exec();
+    const user = await this.userMongoModel.findOne(filterMongo, projection, options).exec();
     if (!user) return null;
 
     return user;
@@ -123,9 +107,7 @@ export class UserMongoRepository {
   private async checkInstitution(createUserDto: UpdateQuery<UserModel>) {
     if (
       !createUserDto?.institutionId ||
-      [UserRoles.administrator, UserRoles.superAdmin].includes(
-        createUserDto?.roles,
-      )
+      [UserRoles.administrator, UserRoles.superAdmin].includes(createUserDto?.roles)
     )
       return;
 
@@ -138,9 +120,7 @@ export class UserMongoRepository {
       .exec()) as InstitutionModel;
 
     if (!institution) {
-      throw new UnauthorizedException(
-        'Institution not found or has been deleted',
-      );
+      throw new UnauthorizedException('Institution not found or has been deleted');
     }
 
     if (
@@ -148,9 +128,7 @@ export class UserMongoRepository {
       institution.country !== createUserDto?.nationality ||
       institution.municipality !== createUserDto?.municipal
     )
-      throw new UnauthorizedException(
-        'Mismatch between user and institution data',
-      );
+      throw new UnauthorizedException('Mismatch between user and institution data');
 
     return institution;
   }
