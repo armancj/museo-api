@@ -29,7 +29,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
      */
     {
       provide: 'ASSOCIATED_DOCUMENTATION_SERVICE',
-      useFactory: (culturalHeritagePropertyModel) =>
+      useFactory: culturalHeritagePropertyModel =>
         new CommonRecordService(
           culturalHeritagePropertyModel,
           AssociatedDocumentationEntity,
@@ -43,5 +43,6 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
      */
     AssociatedDocumentationService,
   ],
+  exports: [AssociatedDocumentationService],
 })
 export class AssociatedDocumentationModule {}

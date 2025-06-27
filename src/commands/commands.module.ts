@@ -26,6 +26,15 @@ import { ReproductionConditionsModule } from '../nomenclator/reproduction-condit
 import { CreateDefaultReproductionConditions } from './commands/create-default-reproduction-conditions';
 import { CreateTestUsers } from './commands/create-test-users';
 import { InstitutionsModule } from '../address';
+import { CreateCulturalHeritageProperty } from './commands/create-cultural-heritage-property';
+import { CulturalHeritagePropertyModule } from '../cultural-heritage-property';
+import { EntryAndLocationRecordModule } from '../cultural-heritage-property/entry-and-location-record/entry-and-location-record.module';
+import { ProducerAuthorRecordModule } from '../cultural-heritage-property/producer-author-record/producer-author-record.module';
+import { CulturalRecordModule } from '../cultural-heritage-property/cultural-record/cultural-record.module';
+import { AccessAndUseConditionsModule } from '../cultural-heritage-property/access-and-use-conditions/access-and-use-conditions.module';
+import { AssociatedDocumentationModule } from '../cultural-heritage-property/associated-documentation/associated-documentation.module';
+import { DescriptionControlModule } from '../cultural-heritage-property/description-control/description-control.module';
+import { CulturalNotesModule } from '../cultural-heritage-property/cultural-notes/cultural-notes.module';
 
 @Module({
   imports: [
@@ -43,6 +52,14 @@ import { InstitutionsModule } from '../address';
     ConservationStatusModule,
     ReproductionConditionsModule,
     InstitutionsModule,
+    CulturalHeritagePropertyModule,
+    EntryAndLocationRecordModule,
+    ProducerAuthorRecordModule,
+    CulturalRecordModule,
+    AccessAndUseConditionsModule,
+    AssociatedDocumentationModule,
+    DescriptionControlModule,
+    CulturalNotesModule,
   ],
   providers: [
     CreateSuperAdmin,
@@ -58,6 +75,7 @@ import { InstitutionsModule } from '../address';
     CreateDefaultConservationStatuses,
     CreateDefaultReproductionConditions,
     CreateTestUsers,
+    CreateCulturalHeritageProperty,
   ],
 })
 export class CommandsModule {}

@@ -38,6 +38,6 @@ import { applyCommonHooksSchema } from '../field-review-status/schema/apply-comm
   ],
   controllers: [CulturalHeritagePropertyController],
   providers: [CulturalHeritagePropertyService],
-  exports: [MongooseModule],
+  exports: [MongooseModule, CulturalHeritagePropertyService],
 })
 export class CulturalHeritagePropertyModule {}

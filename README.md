@@ -145,6 +145,12 @@ $ pnpm run command create:default-reproduction-conditions
 $ pnpm run command create:test-users
 ```
 
+```bash
+# Add Test cultural heritage property
+# and their associated institutions for provinces and municipalities in Cuba
+$ pnpm run command create:cultural-heritage-property
+```
+
 ## Useful NestJS Resources
 
 Check out a few resources that may come in handy when working with NestJS:

@@ -19,6 +19,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
     forwardRef(() => CulturalHeritagePropertyModule), // Usar forwardRef para evitar una dependencia circular
   ],
   controllers: [CulturalRecordController],
+  exports: [CulturalRecordService],
   providers: [
     /**
      * Provider for `CommonRecordService` configured for managing cultural records.
@@ -28,7 +29,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
      */
     {
       provide: 'CULTURAL_RECORD_SERVICE',
-      useFactory: (culturalRecordModel) =>
+      useFactory: culturalRecordModel =>
         new CommonRecordService(
           culturalRecordModel,
           CulturalRecordEntity,

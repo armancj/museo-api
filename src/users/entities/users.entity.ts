@@ -6,17 +6,19 @@ export class Users {
 
   public static create(value: UserPropertiesModel[]): Users {
     if (!Array.isArray(value)) throw new TypeError('Users is not an array');
-    return new Users(
-      value.filter((data) => data).map((data) => User.create(data)),
-    );
+    return new Users(value.filter(data => data).map(data => User.create(data)));
   }
 
   getAllUsers(): Users {
     return new Users(this.value);
   }
 
+  getLongitude(): number {
+    return this.value.length;
+  }
+
   findUserByEmail(email: string): User {
-    const user = this.value.find((user) => user.email === email);
+    const user = this.value.find(user => user.email === email);
 
     if (!user) throw new Error('User not found');
 
@@ -24,6 +26,6 @@ export class Users {
   }
 
   deleteUserByEmail(email: string): void {
-    this.value = this.value.filter((user) => user.email !== email);
+    this.value = this.value.filter(user => user.email !== email);
   }
 }
