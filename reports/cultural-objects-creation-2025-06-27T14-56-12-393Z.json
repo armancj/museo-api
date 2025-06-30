@@ -1,0 +1,49 @@
+{
+  "startTime": "2025-06-27T14:56:10.262Z",
+  "totalRequested": 50,
+  "totalCreated": 20,
+  "successful": 0,
+  "failed": 20,
+  "successRate": "0.00%",
+  "errors": [
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions",
+    "Not Found data for accessAndUseConditions"
+  ],
+  "batches": [
+    {
+      "batchNumber": 1,
+      "size": 10,
+      "successful": 0,
+      "failed": 10,
+      "duration": 42
+    },
+    {
+      "batchNumber": 2,
+      "size": 10,
+      "successful": 0,
+      "failed": 10,
+      "duration": 25
+    }
+  ],
+  "endTime": "2025-06-27T14:56:12.392Z",
+  "duration": "2s",
+  "objectsPerSecond": 9
+}

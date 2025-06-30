@@ -32,6 +32,10 @@ import { ProducerAuthorRecordService } from '../../cultural-heritage-property/pr
 import { UpdateAccessAndUseConditionDto } from '../../cultural-heritage-property/access-and-use-conditions/dto/update-access-and-use-condition.dto';
 import { UpdateAssociatedDocumentationDto } from '../../cultural-heritage-property/associated-documentation/dto/update-associated-documentation.dto';
 import { AssociatedDocumentationService } from '../../cultural-heritage-property/associated-documentation/associated-documentation.service';
+import { CommonRecordService } from '../../cultural-heritage-property/shared/common-record-service.service';
+import { AccessAndUseCondition } from '../../cultural-heritage-property/access-and-use-conditions/entities/access-and-use-condition.entity';
+import { AccessAndUseConditionsEntity } from '../../cultural-heritage-property/access-and-use-conditions/entities/access-and-use-conditions.entity';
+import { StatusObject } from '../../cultural-heritage-property/field-review-status/models/field-review-status.model';
 
 interface CulturalObjectTemplate {
   type: string;
@@ -186,7 +190,12 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     private readonly usersService: UsersService,
     private readonly culturalHeritagePropertyService: CulturalHeritagePropertyService,
     @Inject('ACCESS_AND_USE_CONDITIONS_SERVICE')
-    private readonly accessAndUseConditionsService: any,
+    private readonly accessAndUseConditionsService: CommonRecordService<
+      any,
+      UpdateAccessAndUseConditionDto,
+      AccessAndUseCondition,
+      AccessAndUseConditionsEntity
+    >,
     private readonly associatedDocumentationService: AssociatedDocumentationService,
     private readonly culturalNotesService: CulturalNotesService,
     private readonly culturalRecordService: CulturalRecordService,
@@ -240,7 +249,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
 
       // Crear objetos en lotes
       await this.createObjectsInBatches(
-        culturalObjects,
+        [culturalObjects[0]],
         technicalUsers as User[],
         batchSize,
         delayBetweenBatches,
@@ -381,26 +390,26 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
       // Ejecutar todos los pasos en paralelo para mejor rendimiento
       await Promise.all([
         this.addAccessAndUseConditions(culturalProperty.uuid, user, template),
-        this.addAssociatedDocumentation(culturalProperty.uuid, user, template),
-        this.addCulturalNotes(culturalProperty.uuid, user, template),
-        this.addCulturalRecord(
-          culturalProperty.uuid,
-          user,
-          template,
-          province,
-          municipality,
-          index,
-        ),
-        this.addDescriptionControl(culturalProperty.uuid, user),
-        this.addEntryAndLocationRecord(
-          culturalProperty.uuid,
-          user,
-          template,
-          province,
-          municipality,
-          index,
-        ),
-        this.addProducerAuthorRecord(culturalProperty.uuid, user, template, province, municipality),
+        // this.addAssociatedDocumentation(culturalProperty.uuid, user, template),
+        // this.addCulturalNotes(culturalProperty.uuid, user, template),
+        // this.addCulturalRecord(
+        //   culturalProperty.uuid,
+        //   user,
+        //   template,
+        //   province,
+        //   municipality,
+        //   index,
+        // ),
+        // this.addDescriptionControl(culturalProperty.uuid, user),
+        // this.addEntryAndLocationRecord(
+        //   culturalProperty.uuid,
+        //   user,
+        //   template,
+        //   province,
+        //   municipality,
+        //   index,
+        // ),
+        // this.addProducerAuthorRecord(culturalProperty.uuid, user, template, province, municipality),
       ]);
 
       return culturalProperty;
@@ -432,7 +441,9 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     try {
       const accessConditions = this.createVariedAccessAndUseConditions(template, user);
 
-      await this.accessAndUseConditionsService.update(uuid, accessConditions);
+      console.log(accessConditions);
+
+      await this.accessAndUseConditionsService.create(uuid, accessConditions, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando condiciones de acceso a ${uuid}: ${error.message}`);
       throw error;
@@ -482,21 +493,21 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       accessConditions: {
         value: accessLevels[template.type] || ['Acceso general'],
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: `Condiciones de acceso para ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       reproductionConditions: {
         value: reproductionRules[template.type] || ['Reproducción con autorización'],
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: `Condiciones de reproducción para ${template.type}`,
         modifiedBy: '',
         history: [],
       },
       technicalRequirements: {
         value: technicalReqs[template.type] || 'Condiciones estándar de conservación',
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: `Requisitos técnicos para ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
@@ -567,28 +578,28 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       copiesExistenceAndLocation: {
         value: defaultDocs.copies,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Información sobre copias de ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       originalsExistenceAndLocation: {
         value: defaultDocs.originals,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Ubicación de originales de ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       relatedDescriptionUnits: {
         value: defaultDocs.related,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Unidades relacionadas con ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       relatedPublicationsInformation: {
         value: defaultDocs.publications,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Publicaciones sobre ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
@@ -660,7 +671,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       notes: {
         value: notesByType[template.type] || template.description,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Notas culturales para ${template.type} generadas automáticamente`,
         modifiedBy: user?.uuid,
         history: [],
@@ -741,35 +752,35 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       objectTitle: {
         value: `${template.objectTitle} de ${province} #${index}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Título del objeto ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       objectDescription: {
         value: `${template.description} Procedente de ${municipality}, ${province}. ${randomArtist ? `Relacionado con la obra de ${randomArtist}.` : ''}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Descripción detallada del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       valueGrade: {
         value: template.valueGrade,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Grado de valor para ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       descriptionLevel: {
         value: DescriptionLevel.Level2,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Nivel de descripción estándar',
         modifiedBy: user?.uuid,
         history: [],
       },
       volumesQuantities: {
         value: volumes,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Volúmenes y cantidades para ${template.type}`,
         modifiedBy: user.uuid,
         history: [],
@@ -781,91 +792,91 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
           lengthCms: template.dimensions.length + Math.floor(Math.random() * 2),
           weightKg: template.dimensions.weight + Math.random() - 0.5,
         },
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Dimensiones aproximadas del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       languages: {
         value: template.languages,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Idiomas presentes en el ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       supports: {
         value: template.materials,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Materiales y soportes del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       letters: {
         value: ['A', 'B', 'C'].slice(0, Math.floor(Math.random() * 3) + 1),
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Clasificación por letras',
         modifiedBy: user?.uuid,
         history: [],
       },
       descriptionInstrument: {
         value: ['Ficha técnica', 'Catálogo especializado', 'Base de datos'],
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Instrumentos de descripción utilizados',
         modifiedBy: user?.uuid,
         history: [],
       },
       conservationState: {
         value: randomConservation,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Estado de conservación del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       backgroundTitle: {
         value: `Patrimonio Cultural de ${province}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Contexto patrimonial regional',
         modifiedBy: user?.uuid,
         history: [],
       },
       sectionTitle: {
         value: `Colección de ${template.type.charAt(0).toUpperCase() + template.type.slice(1)}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Sección temática del museo',
         modifiedBy: user?.uuid,
         history: [],
       },
       onomasticDescriptors: {
         value: `${randomArtist}, Artistas de ${province}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Descriptores de nombres y personas',
         modifiedBy: user?.uuid,
         history: [],
       },
       geographicDescriptors: {
         value: `${municipality}, ${province}, Cuba`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Descriptores geográficos',
         modifiedBy: user?.uuid,
         history: [],
       },
       institutionalDescriptors: {
         value: `Museo Nacional, Patrimonio Cultural Cubano`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Descriptores institucionales',
         modifiedBy: user?.uuid,
         history: [],
       },
       subjectDescriptors: {
         value: `${template.type}, Arte cubano, Patrimonio cultural, ${province}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Descriptores temáticos',
         modifiedBy: user?.uuid,
         history: [],
       },
       valuation: {
         value: Math.floor(Math.random() * 50000) + 5000,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Valoración económica del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
@@ -914,28 +925,28 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       descriptionDateTime: {
         value: descriptionDate,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Fecha de catalogación del objeto',
         modifiedBy: user.uuid,
         history: [],
       },
       descriptionMadeBy: {
         value: catalogers[Math.floor(Math.random() * catalogers.length)],
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Profesional responsable de la catalogación',
         modifiedBy: user?.uuid,
         history: [],
       },
       reviewDateTime: {
         value: reviewDate,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Fecha de revisión técnica',
         modifiedBy: user?.uuid,
         history: [],
       },
       reviewedBy: {
         value: reviewers[Math.floor(Math.random() * reviewers.length)],
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Especialista que realizó la revisión',
         modifiedBy: user?.uuid,
         history: [],
@@ -1034,7 +1045,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       auxiliaryInventory: {
         value: Math.random() > 0.7,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Inventario auxiliar según necesidades',
         modifiedBy: user?.uuid,
         history: [],
@@ -1044,77 +1055,77 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
           template.valueGrade === ValueGrade.I
             ? 'Bien de Interés Cultural'
             : 'Patrimonio Cultural Mueble',
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Tipo de declaración patrimonial',
         modifiedBy: user?.uuid,
         history: [],
       },
       entryDate: {
         value: entryDate,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Fecha de ingreso a la colección',
         modifiedBy: user?.uuid,
         history: [],
       },
       entryMethod: {
         value: entryMethods[Math.floor(Math.random() * entryMethods.length)],
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Método de adquisición',
         modifiedBy: user?.uuid,
         history: [],
       },
       genericClassification: {
         value: template.classification,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Clasificación genérica para ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       heritageType: {
         value: template.heritageType,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Tipo de patrimonio cultural',
         modifiedBy: user?.uuid,
         history: [],
       },
       initialDescription: {
         value: `${template.objectTitle} procedente de ${municipality}, ${province}. ${template.description}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Descripción inicial de ingreso',
         modifiedBy: user?.uuid,
         history: [],
       },
       institutionType: {
         value: InstitutionType.MUSEUM,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Tipo de institución custodio',
         modifiedBy: user?.uuid,
         history: [],
       },
       inventoryNumber: {
         value: `${template.type.toUpperCase().substring(0, 2)}-${province.substring(0, 2).toUpperCase()}-${String(index).padStart(4, '0')}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Número de inventario único',
         modifiedBy: user?.uuid,
         history: [],
       },
       objectLocation: {
         value: location,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Ubicación física del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       objectName: {
         value: `${template.objectTitle} - ${municipality}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Denominación específica del objeto',
         modifiedBy: user?.uuid,
         history: [],
       },
       pieceInventory: {
         value: true,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: 'Inventario individual de la pieza',
         modifiedBy: user?.uuid,
         history: [],
@@ -1206,63 +1217,63 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     return {
       producerAuthorNames: {
         value: `${randomArtist}, Artistas de ${municipality}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject,
         comment: `Autores relacionados con ${template.type} de ${province}`,
         modifiedBy: user.uuid,
         history: [],
       },
       street: {
         value: randomStreet,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: `Dirección principal en ${municipality}`,
         modifiedBy: user?.uuid,
         history: [],
       },
       number: {
         value: streetNumber.toString(),
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Número de la dirección',
         modifiedBy: user?.uuid,
         history: [],
       },
       betweenStreet1: {
         value: `Entre ${streets[(streets.indexOf(randomStreet) + 1) % streets.length]}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Referencias de ubicación',
         modifiedBy: user?.uuid,
         history: [],
       },
       betweenStreet2: {
         value: `y ${streets[(streets.indexOf(randomStreet) + 2) % streets.length]}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Segunda referencia de ubicación',
         modifiedBy: user?.uuid,
         history: [],
       },
       district: {
         value: `Distrito Central de ${municipality}`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Distrito administrativo',
         modifiedBy: user?.uuid,
         history: [],
       },
       locality: {
         value: municipality,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Localidad específica',
         modifiedBy: user?.uuid,
         history: [],
       },
       municipality: {
         value: municipality,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Municipio de referencia',
         modifiedBy: user?.uuid,
         history: [],
       },
       province: {
         value: province,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: 'Provincia de Cuba',
         modifiedBy: user?.uuid,
         history: [],
@@ -1271,7 +1282,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
         value:
           institutionalHistory[template.type] ||
           `Institución cultural en ${municipality}, ${province}, importante para el desarrollo artístico regional.`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: `Historia institucional del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],
@@ -1280,7 +1291,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
         value:
           objectHistory[template.type] ||
           `Objeto ingresado al museo desde ${municipality}, ${province}, enriqueciendo la colección regional.`,
-        status: { status: 'To Review' },
+        status: 'To Review' as unknown as StatusObject as unknown as StatusObject,
         comment: `Historia de ingreso del ${template.type}`,
         modifiedBy: user?.uuid,
         history: [],

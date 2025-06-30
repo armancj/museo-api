@@ -14,12 +14,7 @@ import { FieldMetadata } from '../field-review-status/models/field-review-status
  * @template RecordsEntity - Type of the bulk records entity.
  */
 @Injectable()
-export class CommonRecordService<
-  T extends Document,
-  CreateDto,
-  RecordEntity,
-  RecordsEntity,
-> {
+export class CommonRecordService<T extends Document, CreateDto, RecordEntity, RecordsEntity> {
   /**
    * Constructor for `CommonRecordService`.
    *
@@ -30,14 +25,8 @@ export class CommonRecordService<
    */
   constructor(
     @InjectModel('') private readonly model: Model<T>,
-    private readonly singleEntityClass: WithStaticCreate<
-      RecordEntity,
-      Partial<unknown>
-    >,
-    private readonly bulkEntityClass: WithStaticCreate<
-      RecordsEntity[],
-      unknown[]
-    >,
+    private readonly singleEntityClass: WithStaticCreate<RecordEntity, Partial<unknown>>,
+    private readonly bulkEntityClass: WithStaticCreate<RecordsEntity[], unknown[]>,
     private readonly embeddedFieldName: string,
   ) {}
 
@@ -49,15 +38,8 @@ export class CommonRecordService<
    * @param user
    * @returns A promise that resolves to the created `RecordEntity`.
    */
-  async create(
-    uuid: string,
-    createDto: CreateDto,
-    user: User,
-  ): Promise<RecordEntity> {
-    this.updateFieldMetadataModifiedBy(
-      createDto as Record<string, unknown>,
-      user.uuid,
-    );
+  async create(uuid: string, createDto: CreateDto, user: User): Promise<RecordEntity> {
+    this.updateFieldMetadataModifiedBy(createDto as Record<string, unknown>, user.uuid);
     return this.updateRecord(uuid, createDto);
   }
 
@@ -79,17 +61,11 @@ export class CommonRecordService<
    * @throws {NotFoundException} If the record or embedded data is not found.
    */
   async findOne(uuid: string): Promise<RecordEntity> {
-    const record = (await this.model
-      .findOne({ uuid, deleted: false })
-      .lean()
-      .exec()) as any;
+    const record = (await this.model.findOne({ uuid, deleted: false }).lean().exec()) as any;
     if (!record) throw new NotFoundException('Not Found record');
 
     const embeddedData = record[this.embeddedFieldName];
-    if (!embeddedData)
-      throw new NotFoundException(
-        `Not Found data for ${this.embeddedFieldName}`,
-      );
+    if (!embeddedData) throw new NotFoundException(`Not Found data for ${this.embeddedFieldName}`);
 
     return this.singleEntityClass.create(embeddedData);
   }
@@ -101,10 +77,7 @@ export class CommonRecordService<
    * @param updateDto - Partial DTO for updating the record.
    * @returns A promise that resolves to the updated `RecordEntity`.
    */
-  async update(
-    uuid: string,
-    updateDto: Partial<CreateDto>,
-  ): Promise<RecordEntity> {
+  async update(uuid: string, updateDto: Partial<CreateDto>): Promise<RecordEntity> {
     await this.findOne(uuid);
     return this.updateRecord(uuid, updateDto);
   }
@@ -117,10 +90,7 @@ export class CommonRecordService<
    */
   async remove(uuid: string): Promise<void> {
     await this.findOne(uuid);
-    await this.model.updateOne(
-      { uuid },
-      { $unset: { [this.embeddedFieldName]: 1 } as any },
-    );
+    await this.model.updateOne({ uuid }, { $unset: { [this.embeddedFieldName]: 1 } as any });
   }
 
   /**
@@ -131,10 +101,7 @@ export class CommonRecordService<
    * @returns A promise that resolves to the updated `RecordEntity`.
    * @throws {NotFoundException} If the record is not found.
    */
-  private async updateRecord(
-    uuid: string,
-    updateDto: Partial<CreateDto>,
-  ): Promise<RecordEntity> {
+  private async updateRecord(uuid: string, updateDto: Partial<CreateDto>): Promise<RecordEntity> {
     const updatedRecord = (await this.model
       .findOneAndUpdate(
         { uuid, deleted: false },
@@ -146,9 +113,7 @@ export class CommonRecordService<
 
     if (!updatedRecord) throw new NotFoundException('Not Found record');
 
-    return (this.singleEntityClass as any)['create'](
-      updatedRecord[this.embeddedFieldName],
-    );
+    return (this.singleEntityClass as any)['create'](updatedRecord[this.embeddedFieldName]);
   }
 
   /**
@@ -157,11 +122,8 @@ export class CommonRecordService<
    * @param obj - El objeto en el que se buscarán los campos.
    * @param modifiedBy - El valor del `modifiedBy` que se establecerá.
    */
-  private updateFieldMetadataModifiedBy(
-    obj: Record<string, any>,
-    modifiedBy: string,
-  ): void {
-    Object.keys(obj).forEach((key) => {
+  private updateFieldMetadataModifiedBy(obj: Record<string, any>, modifiedBy: string): void {
+    Object.keys(obj).forEach(key => {
       const field = obj[key];
 
       if (
@@ -174,15 +136,8 @@ export class CommonRecordService<
         (field as FieldMetadata<unknown>).modifiedBy = modifiedBy;
       }
 
-      if (
-        typeof field === 'object' &&
-        !Array.isArray(field) &&
-        field !== null
-      ) {
-        this.updateFieldMetadataModifiedBy(
-          field as Record<string, unknown>,
-          modifiedBy,
-        );
+      if (typeof field === 'object' && !Array.isArray(field) && field !== null) {
+        this.updateFieldMetadataModifiedBy(field as Record<string, unknown>, modifiedBy);
       }
     });
   }
