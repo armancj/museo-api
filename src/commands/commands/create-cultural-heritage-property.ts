@@ -19,7 +19,6 @@ import {
   ValueGrade,
 } from '../../cultural-heritage-property/cultural-record/enum/cultural-record.enum';
 import { User } from '../../users/entities/user.entity';
-
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { CUBA_DATA, CubaProvinces } from './util/const';
@@ -30,12 +29,12 @@ import { DescriptionControlService } from '../../cultural-heritage-property/desc
 import { EntryAndLocationRecordService } from '../../cultural-heritage-property/entry-and-location-record/entry-and-location-record.service';
 import { ProducerAuthorRecordService } from '../../cultural-heritage-property/producer-author-record/producer-author-record.service';
 import { UpdateAccessAndUseConditionDto } from '../../cultural-heritage-property/access-and-use-conditions/dto/update-access-and-use-condition.dto';
-import { UpdateAssociatedDocumentationDto } from '../../cultural-heritage-property/associated-documentation/dto/update-associated-documentation.dto';
 import { AssociatedDocumentationService } from '../../cultural-heritage-property/associated-documentation/associated-documentation.service';
 import { CommonRecordService } from '../../cultural-heritage-property/shared/common-record-service.service';
 import { AccessAndUseCondition } from '../../cultural-heritage-property/access-and-use-conditions/entities/access-and-use-condition.entity';
 import { AccessAndUseConditionsEntity } from '../../cultural-heritage-property/access-and-use-conditions/entities/access-and-use-conditions.entity';
 import { StatusObject } from '../../cultural-heritage-property/field-review-status/models/field-review-status.model';
+import { CreateAssociatedDocumentationDto } from '../../cultural-heritage-property/associated-documentation/dto/create-associated-documentation.dto';
 
 interface CulturalObjectTemplate {
   type: string;
@@ -247,9 +246,10 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
       // Generar datos de objetos culturales
       const culturalObjects = this.generateCulturalObjects(totalObjects, objectType, province);
 
+      //todo
       // Crear objetos en lotes
       await this.createObjectsInBatches(
-        [culturalObjects[0]],
+        culturalObjects,
         technicalUsers as User[],
         batchSize,
         delayBetweenBatches,
@@ -390,26 +390,26 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
       // Ejecutar todos los pasos en paralelo para mejor rendimiento
       await Promise.all([
         this.addAccessAndUseConditions(culturalProperty.uuid, user, template),
-        // this.addAssociatedDocumentation(culturalProperty.uuid, user, template),
-        // this.addCulturalNotes(culturalProperty.uuid, user, template),
-        // this.addCulturalRecord(
-        //   culturalProperty.uuid,
-        //   user,
-        //   template,
-        //   province,
-        //   municipality,
-        //   index,
-        // ),
-        // this.addDescriptionControl(culturalProperty.uuid, user),
-        // this.addEntryAndLocationRecord(
-        //   culturalProperty.uuid,
-        //   user,
-        //   template,
-        //   province,
-        //   municipality,
-        //   index,
-        // ),
-        // this.addProducerAuthorRecord(culturalProperty.uuid, user, template, province, municipality),
+        this.addAssociatedDocumentation(culturalProperty.uuid, user, template),
+        this.addCulturalNotes(culturalProperty.uuid, user, template),
+        this.addCulturalRecord(
+          culturalProperty.uuid,
+          user,
+          template,
+          province,
+          municipality,
+          index,
+        ),
+        this.addDescriptionControl(culturalProperty.uuid, user),
+        this.addEntryAndLocationRecord(
+          culturalProperty.uuid,
+          user,
+          template,
+          province,
+          municipality,
+          index,
+        ),
+        this.addProducerAuthorRecord(culturalProperty.uuid, user, template, province, municipality),
       ]);
 
       return culturalProperty;
@@ -440,8 +440,6 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
   ): Promise<void> {
     try {
       const accessConditions = this.createVariedAccessAndUseConditions(template, user);
-
-      console.log(accessConditions);
 
       await this.accessAndUseConditionsService.create(uuid, accessConditions, user);
     } catch (error) {
@@ -525,7 +523,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
   ): Promise<void> {
     try {
       const documentation = this.createVariedAssociatedDocumentation(template, user);
-      await this.associatedDocumentationService.update(uuid, documentation);
+      await this.associatedDocumentationService.create(uuid, documentation, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando documentación a ${uuid}: ${error.message}`);
       throw error;
@@ -538,7 +536,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
   private createVariedAssociatedDocumentation(
     template: CulturalObjectTemplate,
     user: User,
-  ): UpdateAssociatedDocumentationDto {
+  ): CreateAssociatedDocumentationDto {
     const documentationByType: Record<
       string,
       {
@@ -618,7 +616,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     try {
       const notes = this.createVariedCulturalNotes(template, user);
 
-      await this.culturalNotesService.update(uuid, notes);
+      await this.culturalNotesService.create(uuid, notes, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando notas culturales a ${uuid}: ${error.message}`);
       throw error;
@@ -694,7 +692,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
       const record = this.createVariedCulturalRecord(template, province, municipality, index, user);
 
       // 🎯 Llamada directa al servicio
-      await this.culturalRecordService.update(uuid, record);
+      await this.culturalRecordService.create(uuid, record, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando registro cultural a ${uuid}: ${error.message}`);
       throw error;
@@ -890,7 +888,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
   private async addDescriptionControl(uuid: string, user: User): Promise<void> {
     try {
       const control = this.createVariedDescriptionControl(user);
-      await this.descriptionControlService.update(uuid, control);
+      await this.descriptionControlService.create(uuid, control, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando control de descripción a ${uuid}: ${error.message}`);
       throw error;
@@ -974,7 +972,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
         user,
       );
 
-      await this.entryAndLocationRecordService.update(uuid, record);
+      await this.entryAndLocationRecordService.create(uuid, record, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando registro de entrada a ${uuid}: ${error.message}`);
       throw error;
@@ -1146,7 +1144,7 @@ export class CreateCulturalHeritageProperty extends CommandRunner {
     try {
       const record = this.createVariedProducerAuthorRecord(template, province, municipality, user);
 
-      await this.producerAuthorRecordService.update(uuid, record);
+      await this.producerAuthorRecordService.create(uuid, record, user);
     } catch (error) {
       this.logger.debug(`⚠️ Error agregando registro de productor a ${uuid}: ${error.message}`);
       throw error;
