@@ -19,6 +19,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
     forwardRef(() => CulturalHeritagePropertyModule), // Usar forwardRef para evitar una dependencia circular
   ],
   controllers: [EntryAndLocationRecordController],
+  exports: [EntryAndLocationRecordService],
   providers: [
     /**
      * Provider for `CommonRecordService` configured for managing entry and location records.
@@ -28,7 +29,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
      */
     {
       provide: 'ENTRY_AND_LOCATION_RECORD_SERVICE',
-      useFactory: (entryAndLocationRecordModel) =>
+      useFactory: entryAndLocationRecordModel =>
         new CommonRecordService(
           entryAndLocationRecordModel,
           EntryAndLocationRecord,

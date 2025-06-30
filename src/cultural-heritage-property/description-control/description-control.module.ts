@@ -23,6 +23,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
      */
     DescriptionControlController,
   ],
+  exports: [DescriptionControlService],
   providers: [
     /**
      * Provider for `CommonRecordService` configured for managing description controls.
@@ -32,7 +33,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
      */
     {
       provide: 'DESCRIPTION_CONTROL_SERVICE',
-      useFactory: (descriptionControlModel) =>
+      useFactory: descriptionControlModel =>
         new CommonRecordService(
           descriptionControlModel,
           DescriptionControl,

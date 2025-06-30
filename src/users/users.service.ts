@@ -1,8 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import {
-  createUserModel,
-  UserMongoRepository,
-} from './repositories/user-mongo.repository';
+import { createUserModel, UserMongoRepository } from './repositories/user-mongo.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { FindAllDto } from '../common/dto/find-all.dto';
@@ -37,8 +34,7 @@ export class UsersService {
 
     const dataUser = getFieldOfUserData(user, rest);
 
-    if (rest.roles !== UserRoles.superAdmin)
-      await this.validationData(dataUser);
+    if (rest.roles !== UserRoles.superAdmin) await this.validationData(dataUser);
 
     const passwordHashed = await hashedPassword(password);
 
@@ -57,15 +53,8 @@ export class UsersService {
   }
 
   async findOne(filter: Partial<UserModel>, currentUser?: User): Promise<User> {
-    const filterData = getFieldOfUserData(
-      currentUser,
-      filter as createUserModel,
-    );
-    const user = await this.userMongoRepository.findOne(
-      filterData,
-      {},
-      { lean: true },
-    );
+    const filterData = getFieldOfUserData(currentUser, filter as createUserModel);
+    const user = await this.userMongoRepository.findOne(filterData, {}, { lean: true });
     if (!user) throw new NotFoundException('User not found');
     return User.create(user);
   }
@@ -105,19 +94,13 @@ export class UsersService {
     const validationPromises = [];
 
     if (userDto.nationality) {
-      validationPromises.push(
-        this.eventEmitter.checkCountryExists(userDto.nationality),
-      );
+      validationPromises.push(this.eventEmitter.checkCountryExists(userDto.nationality));
     }
     if (userDto.province) {
-      validationPromises.push(
-        this.eventEmitter.checkProvinceExists(userDto.province),
-      );
+      validationPromises.push(this.eventEmitter.checkProvinceExists(userDto.province));
     }
     if (userDto.municipal && userDto.roles !== UserRoles.administrator) {
-      validationPromises.push(
-        this.eventEmitter.checkMunicipalityExists(userDto.municipal),
-      );
+      validationPromises.push(this.eventEmitter.checkMunicipalityExists(userDto.municipal));
     }
 
     await Promise.all(validationPromises);
@@ -186,10 +169,7 @@ export class UsersService {
   }
 
   private async getFileMetadata(id: string): Promise<FileMetadataModel> {
-    const fileObservable = this.eventEmitter.emitAsync<
-      string,
-      FileMetadataModel
-    >({
+    const fileObservable = this.eventEmitter.emitAsync<string, FileMetadataModel>({
       event: EventEmitter.fileMetadata,
       exception: UnauthorizedAuthException,
       values: id,
@@ -219,10 +199,7 @@ export class UsersService {
 
     const avatar: UploadedFile = null!;
 
-    await Promise.all([
-      this.updateUserAvatar(uuid, avatar),
-      this.handleFileDeletion(fileId),
-    ]);
+    await Promise.all([this.updateUserAvatar(uuid, avatar), this.handleFileDeletion(fileId)]);
 
     return { message: 'Avatar file successfully removed' };
   }
@@ -238,8 +215,7 @@ export class UsersService {
   private async checkIfAvatarId(uuid: string): Promise<string> {
     const user = await this.findOne({ uuid });
 
-    if (!user?.avatar?.id)
-      throw new NotFoundException('User does not have an uploaded avatar');
+    if (!user?.avatar?.id) throw new NotFoundException('User does not have an uploaded avatar');
     return user.avatar.id;
   }
 }

@@ -1,0 +1,23 @@
+{
+  "startTime": "2025-06-30T14:09:53.392Z",
+  "totalRequested": 50,
+  "totalCreated": 1,
+  "successful": 0,
+  "failed": 1,
+  "successRate": "0.00%",
+  "errors": [
+    "Not Found data for associatedDocumentation"
+  ],
+  "batches": [
+    {
+      "batchNumber": 1,
+      "size": 1,
+      "successful": 0,
+      "failed": 1,
+      "duration": 16
+    }
+  ],
+  "endTime": "2025-06-30T14:09:53.443Z",
+  "duration": "0s",
+  "objectsPerSecond": 20
+}

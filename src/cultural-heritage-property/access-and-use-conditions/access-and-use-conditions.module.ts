@@ -24,7 +24,7 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
        * and is registered with the token `'ACCESS_AND_USE_CONDITIONS_SERVICE'`.
        */
       provide: 'ACCESS_AND_USE_CONDITIONS_SERVICE',
-      useFactory: (culturalHeritagePropertyModel) =>
+      useFactory: culturalHeritagePropertyModel =>
         new CommonRecordService(
           culturalHeritagePropertyModel,
           AccessAndUseCondition,
@@ -34,5 +34,6 @@ import { CulturalHeritagePropertyModule } from '../cultural-heritage-property/cu
       inject: [getModelToken(CulturalHeritagePropertyEntity)],
     },
   ],
+  exports: ['ACCESS_AND_USE_CONDITIONS_SERVICE'],
 })
 export class AccessAndUseConditionsModule {}

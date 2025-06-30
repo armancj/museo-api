@@ -1,0 +1,21 @@
+{
+  "startTime": "2025-06-30T12:06:42.219Z",
+  "totalRequested": 50,
+  "totalCreated": 1,
+  "successful": 1,
+  "failed": 0,
+  "successRate": "2.00%",
+  "errors": [],
+  "batches": [
+    {
+      "batchNumber": 1,
+      "size": 1,
+      "successful": 1,
+      "failed": 0,
+      "duration": 24
+    }
+  ],
+  "endTime": "2025-06-30T12:06:42.282Z",
+  "duration": "0s",
+  "objectsPerSecond": 16
+}

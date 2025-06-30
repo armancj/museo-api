@@ -1,0 +1,23 @@
+{
+  "startTime": "2025-06-27T15:08:53.218Z",
+  "totalRequested": 50,
+  "totalCreated": 1,
+  "successful": 0,
+  "failed": 1,
+  "successRate": "0.00%",
+  "errors": [
+    "Cast to string failed for value \"{ status: 'To Review' }\" (type Object) at path \"status\""
+  ],
+  "batches": [
+    {
+      "batchNumber": 1,
+      "size": 1,
+      "successful": 0,
+      "failed": 1,
+      "duration": 23
+    }
+  ],
+  "endTime": "2025-06-27T15:08:53.285Z",
+  "duration": "0s",
+  "objectsPerSecond": 15
+}

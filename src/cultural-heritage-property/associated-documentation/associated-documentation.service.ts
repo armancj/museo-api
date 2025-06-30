@@ -4,7 +4,7 @@ import { UpdateAssociatedDocumentationDto } from './dto/update-associated-docume
 import { CommonRecordService } from '../shared/common-record-service.service';
 import { AssociatedDocumentationEntity } from './entities/associated-documentation.entity';
 import { AssociatedDocumentationsEntity } from './entities/associated-documentations.entity';
-import {User} from "../../users/entities/user.entity";
+import { User } from '../../users/entities/user.entity';
 @Injectable()
 export class AssociatedDocumentationService {
   constructor(
@@ -32,14 +32,8 @@ export class AssociatedDocumentationService {
     return this.commonRecordService.findOne(uuid);
   }
 
-  update(
-    uuid: string,
-    updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto,
-  ) {
-    return this.commonRecordService.update(
-      uuid,
-      updateAssociatedDocumentationDto,
-    );
+  update(uuid: string, updateAssociatedDocumentationDto: UpdateAssociatedDocumentationDto) {
+    return this.commonRecordService.update(uuid, updateAssociatedDocumentationDto);
   }
 
   remove(uuid: string) {

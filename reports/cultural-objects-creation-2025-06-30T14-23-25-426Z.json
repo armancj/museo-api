@@ -1,0 +1,49 @@
+{
+  "startTime": "2025-06-30T14:23:20.289Z",
+  "totalRequested": 50,
+  "totalCreated": 50,
+  "successful": 50,
+  "failed": 0,
+  "successRate": "100.00%",
+  "errors": [],
+  "batches": [
+    {
+      "batchNumber": 1,
+      "size": 10,
+      "successful": 10,
+      "failed": 0,
+      "duration": 271
+    },
+    {
+      "batchNumber": 2,
+      "size": 10,
+      "successful": 10,
+      "failed": 0,
+      "duration": 196
+    },
+    {
+      "batchNumber": 3,
+      "size": 10,
+      "successful": 10,
+      "failed": 0,
+      "duration": 214
+    },
+    {
+      "batchNumber": 4,
+      "size": 10,
+      "successful": 10,
+      "failed": 0,
+      "duration": 195
+    },
+    {
+      "batchNumber": 5,
+      "size": 10,
+      "successful": 10,
+      "failed": 0,
+      "duration": 195
+    }
+  ],
+  "endTime": "2025-06-30T14:23:25.426Z",
+  "duration": "5s",
+  "objectsPerSecond": 10
+}
