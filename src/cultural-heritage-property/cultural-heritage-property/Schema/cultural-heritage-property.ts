@@ -2,10 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Model } from 'mongoose';
 import { ProducerAuthorRecordModel } from '../../producer-author-record/models/producer-author-record.models';
 import { ProducerAuthorRecordSchema } from '../../producer-author-record/schema/producer-author-record';
-import {
-  BaseSchema,
-  BaseSchemaFactory,
-} from '../../../common/schema/base.schema';
+import { BaseSchema, BaseSchemaFactory } from '../../../common/schema/base.schema';
 import { AccessAndUseConditionsSchema } from '../../access-and-use-conditions/schema';
 import { AccessAndUseConditionsModel } from '../../access-and-use-conditions/models/access-and-use-conditions';
 import { CulturalRecordSchema } from '../../cultural-record/Schema';
@@ -24,8 +21,7 @@ import { DescriptionControlModel } from '../../description-control/models/descri
 import { NotesSchema } from '../../cultural-notes/schema/notes';
 import { NotesModel } from '../../cultural-notes/models/cultural-notes-model';
 
-export type CulturalHeritagePropertyDocument =
-  HydratedDocument<CulturalHeritageProperty>;
+export type CulturalHeritagePropertyDocument = HydratedDocument<CulturalHeritageProperty>;
 
 @Schema({
   toJSON: {
@@ -62,9 +58,8 @@ export class CulturalHeritageProperty extends BaseSchema {
   institution: Institution;
 }
 
-export const CulturalHeritagePropertySchema = SchemaFactory.createForClass(
-  CulturalHeritageProperty,
-);
+export const CulturalHeritagePropertySchema =
+  SchemaFactory.createForClass(CulturalHeritageProperty);
 
 CulturalHeritagePropertySchema.virtual('institution', {
   ref: InstitutionNameEntity,
@@ -76,5 +71,4 @@ CulturalHeritagePropertySchema.virtual('institution', {
 CulturalHeritagePropertySchema.add(BaseSchemaFactory);
 
 export const CulturalHeritagePropertyEntity = 'cultural-heritage-property';
-export type CulturalHeritagePropertyModel =
-  Model<CulturalHeritagePropertyDocument>;
+export type CulturalHeritagePropertyModel = Model<CulturalHeritagePropertyDocument>;
