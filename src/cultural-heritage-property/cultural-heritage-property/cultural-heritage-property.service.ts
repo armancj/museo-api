@@ -25,7 +25,7 @@ export class CulturalHeritagePropertyService {
   async find() {
     const culturalProperties = await this.culturalHeritagePropertyModel
       .find({ deleted: false })
-      .sort({ updatedAt: 'ascending' })
+      .sort({ updatedAt: 'descending' })
       .exec();
 
     return CulturalHeritagePropertiesEntity.create(culturalProperties);
