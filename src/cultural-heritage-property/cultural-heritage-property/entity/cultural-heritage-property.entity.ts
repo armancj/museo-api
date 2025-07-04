@@ -34,7 +34,6 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
   status?: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
 
   constructor(option: CulturalPropertyModel) {
-    console.log(option)
     this.createdAt = option.createdAt;
     this.deleted = option.deleted;
     this.updatedAt = option.updatedAt;
