@@ -6,6 +6,7 @@ import { CulturalRecordEntity } from '../../cultural-record/entities/cultural-re
 import { EntryAndLocationRecord } from '../../entry-and-location-record/entities/entry-and-location-record.entity';
 import { DescriptionControl } from '../../description-control/entities/description-control.entity';
 import { CulturalNoteEntity } from '../../cultural-notes/entities/cultural-note.entity';
+import { calculateOverallStatus } from '../util/calculate-overall-status.function';
 
 export class CulturalHeritageProperty implements CulturalPropertyModel {
   createdAt: Date;
@@ -30,7 +31,10 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
   uuid: string;
 
+  status?: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
+
   constructor(option: CulturalPropertyModel) {
+    console.log(option)
     this.createdAt = option.createdAt;
     this.deleted = option.deleted;
     this.updatedAt = option.updatedAt;
@@ -40,9 +44,7 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
       this.producerAuthor = ProducerAuthorRecord.create(option.producerAuthor);
 
     if (option.accessAndUseConditions)
-      this.accessAndUseConditions = AccessAndUseCondition.create(
-        option.accessAndUseConditions,
-      );
+      this.accessAndUseConditions = AccessAndUseCondition.create(option.accessAndUseConditions);
 
     if (option.associatedDocumentation)
       this.associatedDocumentation = AssociatedDocumentationEntity.create(
@@ -53,16 +55,14 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
       this.culturalRecord = CulturalRecordEntity.create(option.culturalRecord);
 
     if (option.entryAndLocation)
-      this.entryAndLocation = EntryAndLocationRecord.create(
-        option.entryAndLocation,
-      );
+      this.entryAndLocation = EntryAndLocationRecord.create(option.entryAndLocation);
 
     if (option.descriptionControl)
-      this.descriptionControl = DescriptionControl.create(
-        option.descriptionControl,
-      );
+      this.descriptionControl = DescriptionControl.create(option.descriptionControl);
 
     if (option.notes) this.notes = CulturalNoteEntity.create(option.notes);
+
+    this.status = option?.status ?? calculateOverallStatus(option);
   }
 
   static create(option: CulturalPropertyModel): CulturalHeritageProperty {
