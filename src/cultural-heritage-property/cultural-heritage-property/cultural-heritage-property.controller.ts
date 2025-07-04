@@ -2,7 +2,8 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post } from
 import { ApiTags } from '@nestjs/swagger';
 import { CulturalHeritagePropertyService } from './cultural-heritage-property.service';
 import { CreateCulturalPropertyDto } from './dto/create-cultural-property.dto';
-import { Auth } from '../../auth/decorator';
+import { Auth, CurrentUser } from '../../auth/decorator';
+import { JwtPayload } from '../../auth/strategies/jwt.payload';
 
 @ApiTags('CulturalProperty')
 @Controller('cultural-heritage-property')
@@ -17,8 +18,8 @@ export class CulturalHeritagePropertyController {
 
   @Auth()
   @Get()
-  async find() {
-    return this.culturalHeritagePropertyService.find();
+  async find(@CurrentUser() user: JwtPayload) {
+    return this.culturalHeritagePropertyService.find(user);
   }
 
   @Auth()

@@ -92,6 +92,7 @@ export class AuthService {
       municipal: user.municipal,
       nationality: user.nationality as string,
       province: user.province as string,
+      institutionId: user?.institutionId,
     };
     const refresh_token = await this.getJwtRefreshToken(payload);
     await this.setCurrentRefreshToken(refresh_token, user.uuid, payload);
@@ -105,17 +106,11 @@ export class AuthService {
   async getJwtRefreshToken(payload: JwtPayload): Promise<string> {
     return this.jwtService.sign(payload, {
       secret: this.configService.get<string>(jwtConstants.refreshSecret),
-      expiresIn: this.configService.get<string>(
-        jwtConstants.refreshExpirationTime,
-      ),
+      expiresIn: this.configService.get<string>(jwtConstants.refreshExpirationTime),
     } as JwtSignOptions);
   }
 
-  private async setCurrentRefreshToken(
-    refresh_token: string,
-    uuid: string,
-    payload: JwtPayload,
-  ) {
+  private async setCurrentRefreshToken(refresh_token: string, uuid: string, payload: JwtPayload) {
     return this.authRepository.updateOneAuth(
       { uuid },
       { currentHashedRefreshToken: refresh_token, email: payload?.email },
@@ -128,10 +123,7 @@ export class AuthService {
     return User.create(user);
   }
 
-  async editProfile(
-    uuid: string,
-    editProfileDto: EditProfileDto,
-  ): Promise<boolean> {
+  async editProfile(uuid: string, editProfileDto: EditProfileDto): Promise<boolean> {
     const userObservable = this.eventEmitter.emitAsync<UpdatedUser, boolean>({
       event: EventEmitter.userUpdated,
       exception: UnauthorizedAuthException,
@@ -178,10 +170,7 @@ export class AuthService {
     const code = this.generateRandomFiveDigitNumber();
     const expireCodeDate = Date.now();
 
-    const sendEmailObservable = this.eventEmitter.emitAsync<
-      SendCodeBody,
-      unknown
-    >({
+    const sendEmailObservable = this.eventEmitter.emitAsync<SendCodeBody, unknown>({
       event: EventEmitter.sendEmailCode,
       exception: SendEmailAuthException,
       values: { code, email },
@@ -192,10 +181,7 @@ export class AuthService {
       { uuid: user.uuid },
       { uuid: user.uuid, code, email, expireCodeDate },
     );
-    if (!auth)
-      throw new BadRequestException(
-        'Failed to update user in authentication repository',
-      );
+    if (!auth) throw new BadRequestException('Failed to update user in authentication repository');
     return true;
   }
 
@@ -227,9 +213,7 @@ export class AuthService {
    * @returns Promise resolving to a boolean indicating success
    * @throws BadRequestException if the verification code is invalid
    */
-  async changePassword(
-    authChangePasswordDto: AuthChangePasswordDto,
-  ): Promise<boolean> {
+  async changePassword(authChangePasswordDto: AuthChangePasswordDto): Promise<boolean> {
     const { code, email, newPassword: password } = authChangePasswordDto;
 
     const userAuth = await this.authRepository.findOneAuth({ code, email });

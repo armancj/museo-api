@@ -7,10 +7,7 @@ import { Strategy, ExtractJwt } from 'passport-jwt';
 import { AuthService } from '../auth.service';
 
 @Injectable()
-export class JwtRefreshTokenStrategy extends PassportStrategy(
-  Strategy,
-  'jwt-refresh-token',
-) {
+export class JwtRefreshTokenStrategy extends PassportStrategy(Strategy, 'jwt-refresh-token') {
   constructor(
     private readonly configService: ConfigService,
     private readonly authService: AuthService,
@@ -19,8 +16,7 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
       jwtFromRequest: ExtractJwt.fromBodyField('refreshAuthToken'),
       ignoreExpiration: false,
       secretOrKey:
-        configService.get<string>(jwtConstants.refreshSecret) ||
-        'default-refresh-secret',
+        configService.get<string>(jwtConstants.refreshSecret) || 'default-refresh-secret',
       passReqToCallback: true,
     });
   }
