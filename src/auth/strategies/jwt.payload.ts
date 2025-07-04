@@ -7,4 +7,5 @@ export class JwtPayload {
   municipal: string;
   province: string;
   nationality: string;
+  institutionId?: string;
 }
