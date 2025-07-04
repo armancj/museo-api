@@ -7,6 +7,11 @@ import {
 import { CreateCulturalPropertyDto } from './dto/create-cultural-property.dto';
 import { CulturalHeritageProperty } from './entity/cultural-heritage-property.entity';
 import { CulturalHeritagePropertiesEntity } from './entity/cultural-heritage-properties.entity';
+import { User } from 'src/users/entities/user.entity';
+import { RootFilterQuery } from 'mongoose';
+import { QueryBuilder } from '../../common/schema/TypedQueryBuilder';
+import { applyTerritorialFilters } from '../../common/filters/apply-territorial.filter';
+import { JwtPayload } from '../../auth/strategies/jwt.payload';
 
 @Injectable()
 export class CulturalHeritagePropertyService {
@@ -22,9 +27,14 @@ export class CulturalHeritagePropertyService {
     return CulturalHeritageProperty.create(culturalProperty);
   }
 
-  async find() {
+  async find(user?: JwtPayload) {
+    const filter = applyTerritorialFilters(
+      new QueryBuilder<CulturalHeritageProperty>(),
+      user,
+    ).build();
+
     const culturalProperties = await this.culturalHeritagePropertyModel
-      .find({ deleted: false })
+      .find(filter)
       .sort({ updatedAt: 'descending' })
       .exec();
 
