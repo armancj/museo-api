@@ -15,4 +15,5 @@ export interface CulturalPropertyModel extends BaseModel {
   associatedDocumentation: AssociatedDocumentationModel;
   culturalRecord: CulturalRecordModel;
   notes: NotesModel;
+  readonly status?: 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
 }
