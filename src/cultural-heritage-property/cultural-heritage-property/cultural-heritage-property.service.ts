@@ -36,7 +36,7 @@ export class CulturalHeritagePropertyService {
       .sort({ updatedAt: 'descending' })
       .exec();
 
-    return CulturalHeritagePropertiesEntity.create([culturalProperties[1]]);
+    return CulturalHeritagePropertiesEntity.create(culturalProperties);
   }
 
   async findOne(uuid: string) {
