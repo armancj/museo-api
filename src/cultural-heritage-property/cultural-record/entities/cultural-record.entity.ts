@@ -103,23 +103,16 @@ export class CulturalRecordEntity implements CulturalRecordModel {
    * @param option - Partial data to initialize a cultural record.
    */
   constructor(option: Partial<CulturalRecordModel>) {
-    if (option.objectTitle)
-      this.objectTitle = FieldReviewStatusEntity.create(option.objectTitle);
+    if (option.objectTitle) this.objectTitle = FieldReviewStatusEntity.create(option.objectTitle);
 
     if (option.objectDescription)
-      this.objectDescription = FieldReviewStatusEntity.create(
-        option.objectDescription,
-      );
+      this.objectDescription = FieldReviewStatusEntity.create(option.objectDescription);
 
     if (option.onomasticDescriptors)
-      this.onomasticDescriptors = FieldReviewStatusEntity.create(
-        option.onomasticDescriptors,
-      );
+      this.onomasticDescriptors = FieldReviewStatusEntity.create(option.onomasticDescriptors);
 
     if (option.geographicDescriptors)
-      this.geographicDescriptors = FieldReviewStatusEntity.create(
-        option.geographicDescriptors,
-      );
+      this.geographicDescriptors = FieldReviewStatusEntity.create(option.geographicDescriptors);
 
     if (option.institutionalDescriptors)
       this.institutionalDescriptors = FieldReviewStatusEntity.create(
@@ -127,69 +120,47 @@ export class CulturalRecordEntity implements CulturalRecordModel {
       );
 
     if (option.subjectDescriptors)
-      this.subjectDescriptors = FieldReviewStatusEntity.create(
-        option.subjectDescriptors,
-      );
+      this.subjectDescriptors = FieldReviewStatusEntity.create(option.subjectDescriptors);
 
     if (option.extremeDates)
       this.extremeDates = FieldReviewStatusEntity.create(option.extremeDates);
 
-    if (option.valueGrade)
-      this.valueGrade = FieldReviewStatusEntity.create(option.valueGrade);
+    if (option.valueGrade) this.valueGrade = FieldReviewStatusEntity.create(option.valueGrade);
 
     if (option.descriptionLevel)
-      this.descriptionLevel = FieldReviewStatusEntity.create(
-        option.descriptionLevel,
-      );
+      this.descriptionLevel = FieldReviewStatusEntity.create(option.descriptionLevel);
 
-    if (option.valuation)
-      this.valuation = FieldReviewStatusEntity.create(option.valuation);
+    if (option.valuation) this.valuation = FieldReviewStatusEntity.create(option.valuation);
 
     if (option.volumesQuantities) {
-      this.volumesQuantities = FieldReviewStatusEntity.create(
-        option.volumesQuantities,
-      );
+      this.volumesQuantities = FieldReviewStatusEntity.create(option.volumesQuantities);
     }
     if (option.dimensions) {
       this.dimensions = FieldReviewStatusEntity.create(option.dimensions);
     }
 
-    if (option.languages)
-      this.languages = FieldReviewStatusEntity.create(option.languages);
+    if (option.languages) this.languages = FieldReviewStatusEntity.create(option.languages);
 
-    if (option.supports)
-      this.supports = FieldReviewStatusEntity.create(option.supports);
+    if (option.supports) this.supports = FieldReviewStatusEntity.create(option.supports);
 
-    if (option.letters)
-      this.letters = FieldReviewStatusEntity.create(option.letters);
+    if (option.letters) this.letters = FieldReviewStatusEntity.create(option.letters);
 
     if (option.descriptionInstrument)
-      this.descriptionInstrument = FieldReviewStatusEntity.create(
-        option.descriptionInstrument,
-      );
+      this.descriptionInstrument = FieldReviewStatusEntity.create(option.descriptionInstrument);
 
     if (option.conservationState)
-      this.conservationState = FieldReviewStatusEntity.create(
-        option.conservationState,
-      );
+      this.conservationState = FieldReviewStatusEntity.create(option.conservationState);
 
-    if (option.letters)
-      this.letters = FieldReviewStatusEntity.create(option.letters);
+    if (option.letters) this.letters = FieldReviewStatusEntity.create(option.letters);
 
     if (option.descriptionInstrument)
-      this.descriptionInstrument = FieldReviewStatusEntity.create(
-        option.descriptionInstrument,
-      );
+      this.descriptionInstrument = FieldReviewStatusEntity.create(option.descriptionInstrument);
 
     if (option.conservationState)
-      this.conservationState = FieldReviewStatusEntity.create(
-        option.conservationState,
-      );
+      this.conservationState = FieldReviewStatusEntity.create(option.conservationState);
 
     if (option.backgroundTitle)
-      this.backgroundTitle = FieldReviewStatusEntity.create(
-        option.backgroundTitle,
-      );
+      this.backgroundTitle = FieldReviewStatusEntity.create(option.backgroundTitle);
 
     if (option.sectionTitle)
       this.sectionTitle = FieldReviewStatusEntity.create(option.sectionTitle);

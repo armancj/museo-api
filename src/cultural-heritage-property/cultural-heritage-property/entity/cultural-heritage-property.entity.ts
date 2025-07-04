@@ -61,7 +61,7 @@ export class CulturalHeritageProperty implements CulturalPropertyModel {
 
     if (option.notes) this.notes = CulturalNoteEntity.create(option.notes);
 
-    this.status = option?.status ?? calculateOverallStatus(option);
+    this.status = calculateOverallStatus(option);
   }
 
   static create(option: CulturalPropertyModel): CulturalHeritageProperty {

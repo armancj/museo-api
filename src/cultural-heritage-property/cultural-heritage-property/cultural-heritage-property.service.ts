@@ -7,8 +7,6 @@ import {
 import { CreateCulturalPropertyDto } from './dto/create-cultural-property.dto';
 import { CulturalHeritageProperty } from './entity/cultural-heritage-property.entity';
 import { CulturalHeritagePropertiesEntity } from './entity/cultural-heritage-properties.entity';
-import { User } from 'src/users/entities/user.entity';
-import { RootFilterQuery } from 'mongoose';
 import { QueryBuilder } from '../../common/schema/TypedQueryBuilder';
 import { applyTerritorialFilters } from '../../common/filters/apply-territorial.filter';
 import { JwtPayload } from '../../auth/strategies/jwt.payload';
@@ -38,7 +36,7 @@ export class CulturalHeritagePropertyService {
       .sort({ updatedAt: 'descending' })
       .exec();
 
-    return CulturalHeritagePropertiesEntity.create(culturalProperties);
+    return CulturalHeritagePropertiesEntity.create([culturalProperties[1]]);
   }
 
   async findOne(uuid: string) {

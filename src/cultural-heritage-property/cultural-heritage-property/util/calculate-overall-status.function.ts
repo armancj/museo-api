@@ -1,7 +1,9 @@
 export type StatusType = 'Pending' | 'To Review' | 'Reviewed' | 'Has Issue';
 
 export function calculateOverallStatus(obj: any): StatusType {
-  const statuses = extractAllStatuses(obj);
+  const dataToProcess = obj.toObject ? obj.toObject() : obj._doc || obj;
+
+  const statuses = extractAllStatuses(dataToProcess);
 
   if (statuses.length === 0) return 'Pending';
   if (statuses.includes('Pending')) return 'Pending';
@@ -14,50 +16,39 @@ export function calculateOverallStatus(obj: any): StatusType {
 function extractAllStatuses(obj: any): StatusType[] {
   const statuses: StatusType[] = [];
   const visited = new WeakSet();
-  let depth = 0;
-  const MAX_DEPTH = 10;
 
-  function traverse(current: any): void {
-    if (depth > MAX_DEPTH) return;
-
+  function traverse(current: any, path: string = ''): void {
     if (!current || typeof current !== 'object') return;
-
     if (visited.has(current)) return;
     visited.add(current);
 
-    depth++;
-
-    try {
-      if (isFieldMetadata(current)) {
-        if (typeof current.status === 'string' && isValidStatus(current.status)) {
-          statuses.push(current.status as StatusType);
-        }
-        return;
-      }
-
-      if (Array.isArray(current)) {
-        current.forEach(item => traverse(item));
-        return;
-      }
-
-      const allowedProperties = [
-        'descriptionControl',
-        'entryAndLocation',
-        'producerAuthor',
-        'accessAndUseConditions',
-        'associatedDocumentation',
-        'culturalRecord',
-        'notes',
-      ];
-
-      Object.entries(current).forEach(([key, value]) => {
-        if (allowedProperties.includes(key) || isFieldMetadataProperty(key)) {
-          traverse(value);
-        }
-      });
-    } finally {
-      depth--;
+    // Si es un documento de Mongoose, usar toObject() o _doc
+    if (current.toObject) {
+      current = current.toObject();
+    } else if (current._doc) {
+      current = current._doc;
     }
+
+    // Verificar si es un field metadata
+    if (isFieldMetadata(current)) {
+      if (typeof current.status === 'string' && isValidStatus(current.status)) {
+        statuses.push(current.status as StatusType);
+        console.log(`Added status "${current.status}" from path: ${path}`);
+      }
+      return;
+    }
+
+    if (Array.isArray(current)) {
+      current.forEach((item, index) => traverse(item, `${path}[${index}]`));
+      return;
+    }
+
+    Object.entries(current).forEach(([key, value]) => {
+      if (key === 'history' || key.startsWith('$') || key.startsWith('_')) {
+        return;
+      }
+      traverse(value, path ? `${path}.${key}` : key);
+    });
   }
 
   traverse(obj);
@@ -70,8 +61,4 @@ function isFieldMetadata(obj: any): boolean {
 
 function isValidStatus(status: any): boolean {
   return ['Pending', 'To Review', 'Reviewed', 'Has Issue'].includes(status);
-}
-
-function isFieldMetadataProperty(key: string): boolean {
-  return /^[a-zA-Z][a-zA-Z0-9]*$/.test(key) && !key.startsWith('_');
 }
