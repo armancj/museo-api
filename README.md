@@ -27,11 +27,15 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+This project includes an integrated AI module using Ollama that runs locally without requiring external dependencies or internet access. The AI functionality is automatically started when the application runs.
+
 ## Project setup
 
 ```bash
 $ pnpm install
 ```
+
+The installation process will automatically set the correct permissions for the Ollama binary on Linux systems.
 
 ## Compile and run the project
 
@@ -150,6 +154,58 @@ $ pnpm run command create:test-users
 # and their associated institutions for provinces and municipalities in Cuba
 $ pnpm run command create:cultural-heritage-property
 ```
+
+## AI Chat Functionality
+
+This project includes an AI chat feature powered by Ollama running locally. The AI model used is `tinyllama`, which runs efficiently on most hardware.
+
+### Using the AI Chat Endpoint
+
+You can interact with the AI model through the following REST endpoint:
+
+```
+POST /ai/chat
+```
+
+**Request Body:**
+```json
+{
+  "prompt": "Your question or prompt here"
+}
+```
+
+**Response:**
+```json
+{
+  "response": "The AI-generated response will appear here"
+}
+```
+
+**Example using curl:**
+```bash
+curl -X POST http://localhost:3000/ai/chat \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Tell me about cultural heritage preservation"}'
+```
+
+**Example using JavaScript fetch:**
+```javascript
+fetch('http://localhost:3000/ai/chat', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    prompt: 'Tell me about cultural heritage preservation',
+  }),
+})
+.then(response => response.json())
+.then(data => console.log(data.response));
+```
+
+### How It Works
+
+The Ollama process is automatically started when the NestJS application launches and is properly terminated when the application shuts down. No manual setup or installation of Ollama is required as the binaries are included in the project.
 
 ## Useful NestJS Resources
 
