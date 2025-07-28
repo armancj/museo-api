@@ -2,6 +2,7 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { HttpAdapter } from './http/http-adapter.interface';
 
 import { HTTP_ADAPTER_TOKEN } from './tokens';
+import { formattedPrompt } from './util/specialized-prompt.function';
 
 /**
  * Interface for the request payload sent to Ollama API
@@ -88,9 +89,11 @@ export class AiService {
 
       this.logger.log(`Using model: ${modelToUse}`);
 
+      const specializedPrompt = formattedPrompt(prompt);
+
       const requestData: OllamaGenerateRequest = {
         model: modelToUse,
-        prompt,
+        prompt: specializedPrompt,
         stream: false,
       };
 
