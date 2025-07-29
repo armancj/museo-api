@@ -49,7 +49,7 @@ interface OllamaModelsResponse {
 export class AiService {
   private readonly logger = new Logger(AiService.name);
   private readonly ollamaBaseUrl = 'http://localhost:11434';
-  private readonly modelName = 'tinyllama';
+  private readonly modelName = 'mistral:7b';
 
   constructor(@Inject(HTTP_ADAPTER_TOKEN) private readonly httpAdapter: HttpAdapter) {}
 
