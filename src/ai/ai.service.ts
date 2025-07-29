@@ -11,6 +11,13 @@ interface OllamaGenerateRequest {
   model: string;
   prompt: string;
   stream?: boolean;
+  options?: {
+    temperature: number;
+    top_p: number;
+    top_k: number;
+    repeat_penalty: number;
+    num_predict: number;
+  };
 }
 
 /**
@@ -95,6 +102,13 @@ export class AiService {
         model: modelToUse,
         prompt: specializedPrompt,
         stream: false,
+        options: {
+          temperature: 0.3,
+          top_p: 0.7,
+          top_k: 20,
+          repeat_penalty: 1.2,
+          num_predict: 150,
+        },
       };
 
       const response = await this.httpAdapter.post<OllamaGenerateRequest, OllamaGenerateResponse>(
@@ -103,7 +117,7 @@ export class AiService {
       );
 
       this.logger.log('Response generated successfully');
-      return response.response;
+      return this.cleanTinyLlamaResponse(response.response);
     } catch (error) {
       this.logger.error(`Error generating response: ${error.message}`);
 
@@ -136,5 +150,33 @@ export class AiService {
       this.logger.error(`Error installing model: ${error.message}`);
       throw new Error(`Failed to install model: ${error.message}`);
     }
+  }
+
+  private cleanTinyLlamaResponse(rawResponse: string): string {
+    const CONVERSATION_TERMINATORS = [
+      '\n\nUsuario:',
+      '\n\nPedido:',
+      '\n\nAsistent:',
+      '\n\nPregunta:',
+    ];
+    const PREFIX_PATTERNS = /^(Respuesta|Asistente|Responde|Usuario):\s*/i;
+    const MAX_SENTENCES = 3;
+
+    return (
+      rawResponse
+        .trim()
+        .split(
+          new RegExp(
+            CONVERSATION_TERMINATORS.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join(
+              '|',
+            ),
+          ),
+        )[0]
+        .replace(PREFIX_PATTERNS, '')
+        .split('. ')
+        .slice(0, MAX_SENTENCES)
+        .join('. ')
+        .replace(/\.+$/, '') + (rawResponse.includes('.') ? '.' : '')
+    );
   }
 }
