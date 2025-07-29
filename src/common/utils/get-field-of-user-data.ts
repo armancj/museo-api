@@ -106,9 +106,7 @@ export function getFieldOfUserData(
 
   // Check role creation permissions
   if (rest.roles && !canCreateRole(user?.roles as UserRoles, rest.roles)) {
-    throw new ForbiddenException(
-      'You do not have permission to create this type of user.',
-    );
+    throw new ForbiddenException('You do not have permission to create this type of user.');
   }
 
   // Apply location constraints based on a role

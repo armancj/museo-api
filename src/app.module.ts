@@ -16,6 +16,7 @@ import { NomenclatureModule } from './nomenclator/nomenclature.module';
 import { TestDataModule } from './test-data/test-data.module';
 import { InterceptorsModule } from './common/interceptors/interceptors.module';
 import { CacheModule } from './cache/cache.module';
+import { AiModule } from './ai/ai.module';
 
 /**
  * Main application module that imports all feature modules and configures the application.
@@ -49,6 +50,7 @@ import { CacheModule } from './cache/cache.module';
     CommandsModule,
     NomenclatureModule,
     TestDataModule,
+    AiModule, // Module for AI functionality with Ollama
   ],
   controllers: [AppController],
   providers: [],

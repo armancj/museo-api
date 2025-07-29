@@ -49,10 +49,7 @@ export class AuthController {
   @Auth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @Patch('edit_profile')
-  async update(
-    @CurrentUser('uuid') uuid: string,
-    @Body() editProfileDto: EditProfileDto,
-  ) {
+  async update(@CurrentUser('uuid') uuid: string, @Body() editProfileDto: EditProfileDto) {
     await this.authService.editProfile(uuid, editProfileDto);
   }
 
