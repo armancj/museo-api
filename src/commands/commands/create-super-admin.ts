@@ -3,9 +3,8 @@ import { UsersService } from '../../users/users.service';
 import { CreateUserDto } from '../../users/dto/create-user.dto';
 import { UserRoles } from '../../users/enum/user-roles.enum';
 import { Logger } from '@nestjs/common';
-import { User } from '../../users/entities/user.entity';
 
-const defaultUserData: CreateUserDto = {
+const DEFAULT_SUPERADMIN_DATA: CreateUserDto = {
   address: 'SuperAdmin Address',
   email: 'root@gmail.com',
   lastName: 'Root',
@@ -101,9 +100,15 @@ export class CreateSuperAdmin extends CommandRunner {
     return val;
   }
 
-  async run(passedParam: string[], options?: Record<string, any>): Promise<void> {
-    const createUserDto: CreateUserDto = { ...defaultUserData, ...options };
-    await this.userService.create(createUserDto, {} as User).catch(err => {
+  async run(_: string[], options?: Record<string, any>): Promise<void> {
+    const createUserDto: CreateUserDto = { ...DEFAULT_SUPERADMIN_DATA, ...options };
+    await this.userService.create(createUserDto).catch(err => {
+      if (err instanceof Error && /duplicate|dup key|E11000/i.test(err.message)) {
+        this.logger.error(
+          `User with email ${createUserDto.email} or mobile number ${createUserDto.mobile} already exists.`,
+        );
+        return;
+      }
       this.logger.error(err);
       throw new Error(err);
     });
