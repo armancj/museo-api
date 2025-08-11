@@ -59,4 +59,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # documentation ignore
 ./documentation
 .vscode/settings.json
-/ollama-bin/linux/ollama-linux-amd64.tgz
+/ollama-bin/linux/
+/ollama-bin/win/
