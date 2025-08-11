@@ -101,15 +101,10 @@ export class CreateSuperAdmin extends CommandRunner {
     return val;
   }
 
-  async run(
-    passedParam: string[],
-    options?: Record<string, any>,
-  ): Promise<void> {
+  async run(passedParam: string[], options?: Record<string, any>): Promise<void> {
     const createUserDto: CreateUserDto = { ...defaultUserData, ...options };
-    await this.userService.create(createUserDto, {} as User).catch((err) => {
-      this.logger.error(
-        `User Already exist email: ${createUserDto.email} or mobile: ${createUserDto.mobile}`,
-      );
+    await this.userService.create(createUserDto, {} as User).catch(err => {
+      this.logger.error(err);
       throw new Error(err);
     });
     this.logger.log(
