@@ -66,7 +66,7 @@ server {
     listen 80;
     server_name $DOMAIN_OR_IP;
 
-    location /api/ {
+    location / {
         proxy_pass http://localhost:$NEST_PORT/;
         proxy_http_version 1.1;
         proxy_set_header Host \$host;
