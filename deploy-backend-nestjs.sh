@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-APP_DIR="/var/www/museo-cpanel-backend"  # Ruta del repo NestJS
+APP_DIR="/var/www/museo-api"  		 # Ruta del repo NestJS
 DOMAIN_OR_IP="10.0.0.5"                  # IP o dominio donde estará el backend
 NEST_PORT=5000                           # Puerto donde corre NestJS (configúralo en main.ts si quieres otro)
 
