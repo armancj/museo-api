@@ -47,6 +47,8 @@ async function bootstrap(): Promise<void> {
     }),
   );
 
+  app.setGlobalPrefix('api');
+
   // Initialize Swagger documentation
   await swaggerDocumentation(app);
 

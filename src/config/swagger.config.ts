@@ -13,7 +13,7 @@ export const swaggerDocumentation = async (app: INestApplication<any>) => {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('doc', app, document);
+  SwaggerModule.setup('/doc', app, document);
 
   app.getHttpAdapter().get('/swagger-json', (req: Request, res: Response) => {
     res.setHeader('Content-Disposition', 'attachment; filename=app-museum-swagger.json');
