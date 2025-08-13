@@ -53,6 +53,8 @@ else
 fi
 
 pm2 save
+# shellcheck disable=SC2046
+# shellcheck disable=SC2086
 pm2 startup systemd -u $(whoami) --hp $(eval echo ~$USER)
 
 echo "---- Configuring Nginx as proxy to backend ----"
