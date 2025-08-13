@@ -1,53 +1,61 @@
 #!/bin/bash
 set -e
 
-APP_DIR="/var/www/museo-api"  		 # Ruta del repo NestJS
-DOMAIN_OR_IP="10.0.0.5"                  # IP o dominio donde estará el backend
-NEST_PORT=5000                           # Puerto donde corre NestJS (configúralo en main.ts si quieres otro)
+APP_DIR="/var/www/museo-api"             # Path to the NestJS repo
+DOMAIN_OR_IP="10.0.0.5"                  # IP or domain where the backend will run
+NEST_PORT=5000                           # Port where NestJS runs (configure in main.ts if different)
 
-echo "---- Actualizando sistema ----"
+echo "---- Updating system ----"
 sudo apt update && sudo apt upgrade -y
 
-# Instalar Node.js si no está
+# Install Node.js if not installed
 if command -v node >/dev/null 2>&1; then
-  echo "Node.js ya está instalado, versión: $(node -v)"
+  echo "Node.js is already installed, version: $(node -v)"
 else
-  echo "Node.js no está instalado, instalando Node.js 20.x..."
+  echo "Node.js is not installed, installing Node.js 20.x..."
   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
   sudo apt-get install -y nodejs
 fi
 
-# Instalar pnpm si no está
+# Install pnpm if not installed
 if command -v pnpm >/dev/null 2>&1; then
-  echo "pnpm ya está instalado, versión: $(pnpm -v)"
+  echo "pnpm is already installed, version: $(pnpm -v)"
 else
-  echo "pnpm no está instalado, instalando pnpm globalmente..."
+  echo "pnpm is not installed, installing pnpm globally..."
   sudo npm install -g pnpm
 fi
 
-# Instalar pm2 si no está
+# Install pm2 if not installed
 if command -v pm2 >/dev/null 2>&1; then
-  echo "pm2 ya está instalado, versión: $(pm2 -v)"
+  echo "pm2 is already installed, version: $(pm2 -v)"
 else
-  echo "pm2 no está instalado, instalando pm2 globalmente..."
+  echo "pm2 is not installed, installing pm2 globally..."
   sudo npm install -g pm2
 fi
 
-echo "---- Actualizando código backend ----"
+echo "---- Updating backend code ----"
 cd "$APP_DIR"
 git pull
 
-echo "---- Instalando dependencias y construyendo backend ----"
+echo "---- Installing dependencies and building backend ----"
 pnpm install
 pnpm run build
 
-echo "---- Ejecutando backend con pm2 ----"
-# Cambia "start:prod" si usas otro script para producción
-pm2 start pnpm --name nestjs-backend -- run start:prod
+echo "---- Running backend with pm2 ----"
+# Change "start:prod" if you use another production script
+
+if pm2 list | grep -q nestjs-backend; then
+    echo "Process nestjs-backend already exists, restarting..."
+    pm2 restart nestjs-backend
+else
+    echo "Starting new process frontend-next..."
+    pm2 start pnpm --name nestjs-backend -- run start:prod
+fi
+
 pm2 save
 pm2 startup systemd -u $(whoami) --hp $(eval echo ~$USER)
 
-echo "---- Configurando Nginx para proxy al backend ----"
+echo "---- Configuring Nginx as proxy to backend ----"
 NGINX_CONF="/etc/nginx/sites-available/museo-cpanel-backend"
 
 sudo tee $NGINX_CONF > /dev/null <<EOL
@@ -68,11 +76,11 @@ EOL
 
 sudo ln -sf $NGINX_CONF /etc/nginx/sites-enabled/museo-cpanel-backend
 
-echo "---- Verificando configuración Nginx ----"
+echo "---- Checking Nginx configuration ----"
 sudo nginx -t
 
-echo "---- Reiniciando Nginx ----"
+echo "---- Restarting Nginx ----"
 sudo systemctl reload nginx
 
-echo "---- Despliegue backend NestJS completado! ----"
-echo "Backend corriendo en http://$DOMAIN_OR_IP/api/"
+echo "---- NestJS backend deployment completed! ----"
+echo "Backend running at http://$DOMAIN_OR_IP/api/"
