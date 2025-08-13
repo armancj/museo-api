@@ -46,7 +46,8 @@ echo "---- Running backend with pm2 ----"
 
 if pm2 list | grep -q nestjs-backend; then
     echo "Process nestjs-backend already exists, restarting..."
-    pm2 restart nestjs-backend
+    pm2 delete nestjs-backend
+    pm2 start pnpm --name nestjs-backend -- run start:prod
 else
     echo "Starting new process frontend-next..."
     pm2 start pnpm --name nestjs-backend -- run start:prod
