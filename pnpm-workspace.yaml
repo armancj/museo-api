@@ -1,2 +1,7 @@
 onlyBuiltDependencies:
+  - '@compodoc/compodoc'
+  - '@nestjs/core'
+  - '@scarf/scarf'
   - bcrypt
+  - nestjs-pino
+  - sharp

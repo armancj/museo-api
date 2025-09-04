@@ -37,7 +37,8 @@ export class OllamaService implements OnModuleInit, OnModuleDestroy {
       // Verify that the binary exists
       if (!fs.existsSync(this.ollamaPath)) {
         this.logger.error(`Ollama binary not found at ${this.ollamaPath}`);
-        throw new Error(`Ollama binary not found at ${this.ollamaPath}`);
+        this.logger.error('Starting Ollama process failed');
+        return;
       }
 
       this.logger.log('Starting Ollama process...');
