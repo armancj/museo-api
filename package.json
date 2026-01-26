@@ -26,6 +26,7 @@
     "sonar": "sonar-scanner"
   },
   "dependencies": {
+    "@huggingface/inference": "^4.13.10",
     "@nestjs/axios": "^4.0.0",
     "@nestjs/cache-manager": "^3.0.1",
     "@nestjs/common": "^11.0.12",
