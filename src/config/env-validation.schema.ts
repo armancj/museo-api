@@ -9,9 +9,7 @@ export const validationSchema = Joi.object({
   DB_URI: Joi.string().required().description('MongoDB connection string'),
 
   // Application
-  APP_PORT: Joi.number()
-    .default(3000)
-    .description('Port on which the application will run'),
+  APP_PORT: Joi.number().default(3000).description('Port on which the application will run'),
   NODE_ENV: Joi.string()
     .valid('development', 'production', 'test')
     .default('development')
@@ -32,18 +30,10 @@ export const validationSchema = Joi.object({
     .description('Expiration time for refresh tokens (e.g., 1000d, 30d)'),
 
   // Email
-  EMAIL_HOST: Joi.string()
-    .required()
-    .description('Hostname or IP address of the SMTP server'),
-  EMAIL_PORT: Joi.number()
-    .required()
-    .description('Port number for the SMTP server'),
-  EMAIL_USER: Joi.string()
-    .required()
-    .description('Username for email authentication'),
-  EMAIL_PASS: Joi.string()
-    .required()
-    .description('Password for email authentication'),
+  EMAIL_HOST: Joi.string().required().description('Hostname or IP address of the SMTP server'),
+  EMAIL_PORT: Joi.number().required().description('Port number for the SMTP server'),
+  EMAIL_USER: Joi.string().required().description('Username for email authentication'),
+  EMAIL_PASS: Joi.string().required().description('Password for email authentication'),
   EMAIL_FROM: Joi.string()
     .required()
     .email()
@@ -51,4 +41,7 @@ export const validationSchema = Joi.object({
   EMAIL_SECURE: Joi.boolean()
     .default(true)
     .description('Whether to use TLS when connecting to the SMTP server'),
+
+  // AI Service
+  HF_API_KEY: Joi.string().optional().description('API key for Hugging Face Inference API'),
 });
