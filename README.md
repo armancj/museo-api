@@ -1,240 +1,142 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# museo-api
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+REST API for cataloguing and managing cultural heritage collections, built with **NestJS 11**,
+**TypeScript** and **MongoDB**.
 
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+It implements the full record of a heritage object — description, provenance, conservation state,
+access and reproduction conditions, associated documentation and cultural notes — for a network of
+institutions spread across the provinces and municipalities of Cuba, where each user must only ever
+see the part of the catalogue their role and territory entitle them to.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**519** TypeScript source files · **34** test suites · 15 feature modules.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Why this is not a CRUD
 
-This project includes an integrated AI module using Ollama that runs locally without requiring external dependencies or internet access. The AI functionality is automatically started when the application runs.
+### Territorial data scoping
 
-## Project setup
+Access is not a boolean. A user's role decides *how much of the country* they can query, and the
+scope is applied at the query layer rather than filtered after the fact:
 
-```bash
-$ pnpm install
-```
+| Role | Scope |
+|---|---|
+| `super Administrador` | The whole catalogue |
+| `Administrador` | Their province |
+| `Especialista` | Their province and municipality |
+| `Técnico` | Their province, municipality **and** institution |
 
-The installation process will automatically set the correct permissions for the Ollama binary on Linux systems.
+`applyTerritorialFilters()` composes these constraints onto a typed query builder from the JWT
+payload, so every read inherits the caller's territory without each controller re-implementing it.
 
-## Compile and run the project
+### A deep, normalised heritage domain
 
-```bash
-# development
-$ pnpm run start
+The `cultural-heritage-property` module models a record as a set of related sub-documents — access
+and use conditions, associated documentation, cultural notes, producer/author, entry form,
+conservation status, value grade — each with its own DTOs, schemas and entities. Reference data
+(categories, heritage types, description instruments, fund titles, sections, reproduction
+conditions) lives in a `nomenclator` module instead of being hardcoded.
 
-# watch mode
-$ pnpm run start:dev
+### Authentication with a real lifecycle
 
-# production mode
-$ pnpm run start:prod
-```
+JWT with separate access and refresh guards, a local strategy for login, an activation guard for
+accounts that are not yet enabled, a `@Roles()` decorator with its guard, and a constraint decorator
+to forbid specific roles per route.
 
-## Run tests
+### AI-assisted description
 
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Setup Default Resources
-
-These commands populate the database with initial default data required for the application to function correctly (e.g.,
-super admin user, standard nomenclatures). Run these after setting up your database connection.
-
-    ### Add All Default Resources (Recommended)
-
-    This command runs all the individual default resource creation scripts sequentially. It's the easiest way to set up the initial data.
-
-```bash
-# Add all default data (User, Categories, Instruments, Conditions, etc.)
-$ pnpm run create:all-defaults
-```
-
-### Add Individual Default Resources (Optional)
-
-If you need to add specific resources individually (e.g., after clearing a collection or for specific testing), you can
-use the following commands:
-
-```bash
-# Add Super Admin User
-$ pnpm run command create:default-user
-```
-
-```bash
-# Add Museum Categories
-$ pnpm run command create:default-categories
-```
-
-```bash
-# Add Description Instruments
-$ pnpm run command create:default-description-instruments
-```
-
-```bash
-# Add Access Conditions/Reproduction
-$ pnpm run command create:default-access-conditions
-```
-
-```bash
-# Add Museum Sections
-$ pnpm run command create:default-sections
-```
-
-```bash
-# Add Museum Value Grades
-$ pnpm run command create:default-value-grades
-```
-
-```bash
-# Add Heritage Types
-$ pnpm run command create:default-heritage-types
-```
-
-```bash
-# Add Generic Classifications
-$ pnpm run command create:default-generic-classifications
-``` 
-
-```bash
-# Add Fund Titles
-$ pnpm run command create:default-fund-titles
-``` 
-
-```bash
-# Add Entry Forms
-$ pnpm run command create:default-entry-forms
-```
-
-```bash
-# Add Conservation Statuses
-$ pnpm run command create:default-conservation-statuses
-```
-
-```bash
-# Add Reproduction Conditions
-$ pnpm run command create:default-reproduction-conditions
-```
-
-```bash
-# Add Test Users and Institutions
-# This creates test users with different roles (admin, specialist, technician) 
-# and their associated institutions for provinces and municipalities in Cuba
-$ pnpm run command create:test-users
-```
-
-```bash
-# Add Test cultural heritage property
-# and their associated institutions for provinces and municipalities in Cuba
-$ pnpm run command create:cultural-heritage-property
-```
-
-## AI Chat Functionality
-
-This project includes an AI chat feature powered by Ollama running locally. The AI model used is `tinyllama`, which runs efficiently on most hardware.
-
-### Using the AI Chat Endpoint
-
-You can interact with the AI model through the following REST endpoint:
+The `ai` module calls the **Hugging Face Inference API** (`HuggingFaceH4/zephyr-7b-beta`) behind an
+HTTP adapter interface, with specialised prompt builders, to help draft descriptive text for a
+record. The adapter is an interface, so the provider can be swapped without touching the callers.
 
 ```
 POST /ai/chat
+{ "prompt": "Tell me about cultural heritage preservation" }
 ```
 
-**Request Body:**
-```json
-{
-  "prompt": "Your question or prompt here"
-}
+---
+
+## Stack
+
+| Area | Technology |
+|---|---|
+| Framework | NestJS 11, TypeScript |
+| Database | MongoDB, Mongoose |
+| Auth | Passport (local + JWT), bcrypt, role guards |
+| Validation | class-validator, class-transformer, Joi (env schema) |
+| Caching | `@nestjs/cache-manager` |
+| Events | `@nestjs/event-emitter` |
+| Logging | Pino (`nestjs-pino`, `pino-http`) + logging interceptor |
+| Files | Multer, Sharp (image processing) |
+| Mail | Nodemailer + Handlebars templates |
+| API docs | Swagger (`@nestjs/swagger`), Compodoc |
+| CLI | `nest-commander` |
+| Testing | Jest, Supertest |
+| Quality | ESLint, Prettier, Husky, SonarQube |
+
+## Architecture
+
+```
+src/
+  auth/                        JWT + refresh + activation, roles, guards
+  users/                       Users and the role enum
+  cultural-heritage-property/  The heritage record and its sub-documents
+  nomenclator/                 Reference data (categories, types, grades...)
+  address/                     Country, province, municipality, institutions, contact info
+  file-storage/                Uploads and image processing
+  ai/                          Hugging Face inference behind an HTTP adapter
+  cache/  logger/  config/     Cross-cutting concerns
+  commands/                    nest-commander: seeding and administration
+  common/                      Filters, interceptors, pipes, decorators, typed query builder
 ```
 
-**Response:**
-```json
-{
-  "response": "The AI-generated response will appear here"
-}
-```
+Cross-cutting behaviour is centralised — a global exception filter, an error interceptor and a
+logging interceptor — so controllers stay thin.
 
-**Example using curl:**
+## Getting started
+
 ```bash
-curl -X POST http://localhost:3000/ai/chat \
-  -H "Content-Type: application/json" \
-  -d '{"prompt": "Tell me about cultural heritage preservation"}'
+pnpm install
+cp sample.env .env        # then fill in the values
+pnpm run start:dev
 ```
 
-**Example using JavaScript fetch:**
-```javascript
-fetch('http://localhost:3000/ai/chat', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    prompt: 'Tell me about cultural heritage preservation',
-  }),
-})
-.then(response => response.json())
-.then(data => console.log(data.response));
+Configuration is validated at boot with a Joi schema, so a missing or malformed variable fails fast
+instead of at first use. Swagger UI is served once the app is running.
+
+## Seeding
+
+The database needs its nomenclators and a super admin before the app is usable. One command does
+all of it:
+
+```bash
+pnpm run create:all-defaults
 ```
 
-### How It Works
+Or individually, through `nest-commander`:
 
-The Ollama process is automatically started when the NestJS application launches and is properly terminated when the application shuts down. No manual setup or installation of Ollama is required as the binaries are included in the project.
+```bash
+pnpm run command create:default-user            # super admin
+pnpm run command create:default-categories
+pnpm run command create:default-heritage-types
+pnpm run command create:default-value-grades
+pnpm run command create:default-conservation-statuses
+pnpm run command create:test-users              # users and institutions across provinces
+pnpm run command create:cultural-heritage-property
+```
 
-## Useful NestJS Resources
+## Testing
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+pnpm run test         # unit
+pnpm run test:e2e     # end to end
+pnpm run test:cov     # coverage report
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time
-  using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our
-  official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework)
-  and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Documentation
 
-## Support
+```bash
+pnpm run serve-doc    # Compodoc, served locally
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If
-you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-````
-Now you have the `create:all-defaults` script in your `package.json` and an updated `README.md` that explains how to use it and lists the individual commands correctly according to your project's setup.
+Design notes live in `docs/`. Deployment is covered in `DEPLOYMENT_GUIDE.md`.
