@@ -78,4 +78,7 @@ async function bootstrap(): Promise<void> {
 }
 
 // Execute the bootstrap function
-bootstrap().then(() => console.log('Executed server'));
+bootstrap().catch((error) => {
+  new Logger('Bootstrap').error(error);
+  process.exit(1);
+});
