@@ -238,10 +238,22 @@ export class AuthService {
       throw new BadRequestException('Invalid verification code or email.');
     }
 
-    this.eventEmitter.emit<UpdatedUser>({
+    if (userAuth.isCodeExpired()) {
+      throw new BadRequestException('The verification code has expired.');
+    }
+
+    const updatedObservable = this.eventEmitter.emitAsync<UpdatedUser, boolean>({
       event: EventEmitter.userUpdated,
+      exception: UnauthorizedAuthException,
       values: { filter: { email }, updateUserDto: { password } },
     });
+    await firstValueFrom(updatedObservable);
+
+    // Expire the code so a single reset cannot be replayed.
+    await this.authRepository.updateOneAuth(
+      { uuid: userAuth.uuid },
+      { expireCodeDate: 0 },
+    );
 
     return true;
   }
