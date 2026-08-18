@@ -16,6 +16,11 @@ export const validationSchema = Joi.object({
     .valid('development', 'production', 'test')
     .default('development')
     .description('Application environment'),
+  CORS_ORIGINS: Joi.string()
+    .optional()
+    .description(
+      'Comma separated list of origins allowed by CORS. Every origin is allowed when unset',
+    ),
 
   // JWT Authentication
   JWT_SECRET: Joi.string()
