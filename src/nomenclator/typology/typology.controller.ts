@@ -16,12 +16,17 @@ import { PaginationDto } from '../../common/dto/pagination.dto';
 import { CreateTypologyDto } from './dto/create-typology.dto';
 import { UpdateTypologyDto } from './dto/update-typology.dto';
 import { FilterTypologyDto } from './dto/filter-typology.dto';
+import { Auth } from '../../auth/decorator';
+import { UserRoles } from '../../users/enum/user-roles.enum';
 
 @ApiTags('Typology')
 @Controller('typology')
 export class TypologyController {
   constructor(private readonly typologyService: TypologyService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post()
   @ApiOperation({ summary: 'Create typology' })
   create(@Body() createTypologyDto: CreateTypologyDto): Promise<TypologyModel> {
@@ -42,6 +47,9 @@ export class TypologyController {
     return this.typologyService.findOne(uuid);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':uuid')
   @ApiOperation({ summary: 'Update typology' })
   update(
@@ -51,6 +59,9 @@ export class TypologyController {
     return this.typologyService.update(uuid, updateTypologyDto);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':uuid')
   @ApiOperation({ summary: 'Delete typology' })
   remove(@Param('uuid') uuid: string): Promise<void> {
