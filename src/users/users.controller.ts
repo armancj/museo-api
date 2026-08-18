@@ -149,6 +149,9 @@ export class UsersController {
    * @returns Promise resolving to a boolean indicating success
    * @throws NotFoundException if the user is not found
    */
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Patch(':uuid/change-activate')
   async updateChangeActivate(
     @Param('uuid') uuid: string,
@@ -169,6 +172,9 @@ export class UsersController {
    * @returns Promise resolving to the result of the file upload operation
    * @throws NotFoundException if the user is not found
    */
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Post(':uuid/avatar')
   @UseInterceptors(FileInterceptor('file') as any)
   @ApiConsumes('multipart/form-data')
@@ -187,6 +193,9 @@ export class UsersController {
    * @returns Promise resolving to a StreamableFile containing the avatar image
    * @throws NotFoundException if the user or avatar is not found
    */
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Get(':uuid/avatar')
   async getFile(@Param('uuid') uuid: string): Promise<StreamableFile> {
     const { file, metadata } = await this.userService.streamFile(uuid);
@@ -204,6 +213,9 @@ export class UsersController {
    * @returns Promise resolving to the result of the file removal operation
    * @throws NotFoundException if the user or avatar is not found
    */
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Delete(':uuid/avatar')
   removeFile(@Param('uuid') uuid: string) {
     return this.userService.removeFile(uuid);
@@ -216,6 +228,9 @@ export class UsersController {
    * @returns Promise resolving to a boolean indicating success
    * @throws NotFoundException if the user is not found
    */
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.superAdmin, UserRoles.manager],
+  })
   @Delete(':uuid')
   async remove(@Param('uuid') uuid: string): Promise<boolean> {
     return this.userService.softDelete({ uuid });

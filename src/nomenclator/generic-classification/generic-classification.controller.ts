@@ -13,6 +13,8 @@ import { CreateGenericClassificationDto } from './dto/create-generic-classificat
 import { UpdateGenericClassificationDto } from './dto/update-generic-classification.dto';
 import { FilterGenericClassificationDto } from './dto/filter-generic-classification.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Auth } from '../../auth/decorator';
+import { UserRoles } from '../../users/enum/user-roles.enum';
 
 @ApiTags('generic-classification')
 @Controller('generic-classification')
@@ -21,6 +23,9 @@ export class GenericClassificationController {
     private readonly genericClassificationService: GenericClassificationService,
   ) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post()
   create(
     @Body() createGenericClassificationDto: CreateGenericClassificationDto,
@@ -40,6 +45,9 @@ export class GenericClassificationController {
     return this.genericClassificationService.findOne(uuid);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':uuid')
   update(
     @Param('uuid') uuid: string,
@@ -51,6 +59,9 @@ export class GenericClassificationController {
     );
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':uuid')
   remove(@Param('uuid') uuid: string) {
     return this.genericClassificationService.remove(uuid);

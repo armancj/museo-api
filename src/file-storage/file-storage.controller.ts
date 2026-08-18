@@ -19,6 +19,8 @@ import { FileUploadDto } from './dto/media-file-metadata';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 import { Request, Response } from 'express';
+import { Auth } from '../auth/decorator';
+import { UserRoles } from '../users/enum/user-roles.enum';
 
 @ApiTags('FileStorage')
 @Controller('file-storage')
@@ -27,6 +29,9 @@ export class FileStorageController {
     @Inject(FILE_STORAGE_SERVICE_TOKEN)
     private readonly storageService: FileStorageServiceModel,
   ) {}
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
@@ -43,6 +48,9 @@ export class FileStorageController {
     }
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @OnEvent(EventEmitter.fileDelete)
   @Delete(':id')
   async deleteFile(@Param('id') fileId: string) {
@@ -55,6 +63,9 @@ export class FileStorageController {
     }
   }
 
+  // Left unauthenticated on purpose: the panel renders these ids straight into
+  // <img src>, and the browser cannot attach an Authorization header there.
+  // Locking it down requires signed URLs (see audit item API-01).
   @Get(':id')
   async getFile(@Param('id') fileId: string, @Req() req: Request, @Res() res: Response) {
     try {

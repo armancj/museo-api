@@ -11,12 +11,17 @@ import { TestDataService } from './test-data.service';
 import { CreateTestDatumDto } from './dto/create-test-datum.dto';
 import { UpdateTestDatumDto } from './dto/update-test-datum.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Auth } from '../auth/decorator';
+import { UserRoles } from '../users/enum/user-roles.enum';
 
 @ApiTags('Test Data')
 @Controller('test-data')
 export class TestDataController {
   constructor(private readonly testDataService: TestDataService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post()
   create(@Body() createTestDatumDto: CreateTestDatumDto) {
     createTestDatumDto.name.modifiedBy = 'test1';
@@ -33,6 +38,9 @@ export class TestDataController {
     return this.testDataService.findOne(id);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -43,6 +51,9 @@ export class TestDataController {
     return this.testDataService.update(id, updateTestDatumDto);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.testDataService.remove(id);
