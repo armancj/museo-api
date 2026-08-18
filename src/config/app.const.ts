@@ -5,6 +5,7 @@ export const apiEnv = {
   app: {
     hostname: 'APP_HOST',
     port: 'APP_PORT',
+    corsOrigins: 'CORS_ORIGINS',
   },
   email: {
     from: 'EMAIL_FROM',

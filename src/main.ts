@@ -50,8 +50,19 @@ async function bootstrap(): Promise<void> {
   // Initialize Swagger documentation
   await swaggerDocumentation(app);
 
-  // Enable CORS for cross-origin requests
-  app.enableCors();
+  // Restrict CORS to the origins listed in CORS_ORIGINS (comma separated).
+  // Left open when unset so existing deployments keep working, but that is
+  // not a safe production setting.
+  const allowedOrigins = config.get<string>(apiEnv.app.corsOrigins);
+  if (allowedOrigins) {
+    app.enableCors({
+      origin: allowedOrigins.split(',').map((origin) => origin.trim()),
+      credentials: true,
+    });
+  } else {
+    logger.warn('CORS_ORIGINS is not set: allowing every origin');
+    app.enableCors();
+  }
 
   // Start listening on the configured port
   await app.listen(Number(config.get<number>(apiEnv.app.port) || 3000));
@@ -67,4 +78,7 @@ async function bootstrap(): Promise<void> {
 }
 
 // Execute the bootstrap function
-bootstrap().then(() => console.log('Executed server'));
+bootstrap().catch((error) => {
+  new Logger('Bootstrap').error(error);
+  process.exit(1);
+});
