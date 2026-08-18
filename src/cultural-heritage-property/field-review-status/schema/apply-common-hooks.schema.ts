@@ -3,8 +3,6 @@ import { FieldMetadata, HistoryItem, StatusObject } from '../models/field-review
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { isEqual } from 'lodash';
 
-type GenericObject = { [key: string]: any };
-
 interface UpdateDto {
   $set: Partial<CulturalPropertyModel>;
 }

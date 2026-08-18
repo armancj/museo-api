@@ -1,5 +1,4 @@
 import { BaseEntity } from '../../../common/entity/base.entity';
-import { HeritageType } from '../enum/heritage-type.enum';
 import { Expose, plainToClass } from 'class-transformer';
 
 export class HeritageTypeEntity extends BaseEntity {

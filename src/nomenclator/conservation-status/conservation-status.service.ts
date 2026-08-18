@@ -9,7 +9,6 @@ import {
   ConservationStatusDocument,
   ConservationStatusMongoModel,
 } from './schema/conservation-status.schema';
-import { x } from 'joi';
 
 @Injectable()
 export class ConservationStatusService {

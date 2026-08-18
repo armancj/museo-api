@@ -2,7 +2,6 @@ import {
   Controller,
   Get,
   Post,
-  Put,
   Patch,
   Delete,
   Body,
@@ -12,7 +11,6 @@ import {
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { TypologyService } from './typology.service';
 import { TypologyModel } from './model/typology.model';
-import { PaginationDto } from '../../common/dto/pagination.dto';
 import { CreateTypologyDto } from './dto/create-typology.dto';
 import { UpdateTypologyDto } from './dto/update-typology.dto';
 import { FilterTypologyDto } from './dto/filter-typology.dto';

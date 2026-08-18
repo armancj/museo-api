@@ -4,7 +4,7 @@ import { UpdateSocialMediaDto } from './dto/update-social-media.dto';
 
 @Injectable()
 export class SocialMediaService {
-  create(createSocialMediaDto: CreateSocialMediaDto) {
+  create(_createSocialMediaDto: CreateSocialMediaDto) {
     return 'This action adds a new socialMedia';
   }
 
@@ -16,7 +16,7 @@ export class SocialMediaService {
     return `This action returns a #${id} socialMedia`;
   }
 
-  update(id: number, updateSocialMediaDto: UpdateSocialMediaDto) {
+  update(id: number, _updateSocialMediaDto: UpdateSocialMediaDto) {
     return `This action updates a #${id} socialMedia`;
   }
 

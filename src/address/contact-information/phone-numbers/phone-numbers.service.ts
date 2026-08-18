@@ -4,7 +4,7 @@ import { UpdatePhoneNumberDto } from './dto/update-phone-number.dto';
 
 @Injectable()
 export class PhoneNumbersService {
-  create(createPhoneNumberDto: CreatePhoneNumberDto) {
+  create(_createPhoneNumberDto: CreatePhoneNumberDto) {
     return 'This action adds a new phoneNumber';
   }
 
@@ -16,7 +16,7 @@ export class PhoneNumbersService {
     return `This action returns a #${id} phoneNumber`;
   }
 
-  update(id: number, updatePhoneNumberDto: UpdatePhoneNumberDto) {
+  update(id: number, _updatePhoneNumberDto: UpdatePhoneNumberDto) {
     return `This action updates a #${id} phoneNumber`;
   }
 

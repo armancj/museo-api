@@ -2,7 +2,7 @@ import {ArgumentMetadata, BadRequestException, Injectable, PipeTransform} from '
 
 @Injectable()
 export class LowerCasePipe implements PipeTransform {
-  transform(value: string, metadata: ArgumentMetadata): string {
+  transform(value: string, _metadata: ArgumentMetadata): string {
     if (typeof value !== 'string') { throw new BadRequestException('Validation failed');}
     return value.toUpperCase();
   }

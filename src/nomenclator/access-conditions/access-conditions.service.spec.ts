@@ -1,13 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { AccessConditionsService } from './access-conditions.service';
-import { AccessConditionEntity, AccessConditionDocument } from './entities/access-condition.entity';
+import { AccessConditionNameEntity } from './schema/access-condition.schema';
 import { AccessCondition } from '../common/enums/access-condition.enum';
 
 describe('AccessConditionsService', () => {
   let service: AccessConditionsService;
-  let model: Model<AccessConditionDocument>;
 
   const mockAccessCondition = {
     name: 'Test Condition',
@@ -20,7 +18,7 @@ describe('AccessConditionsService', () => {
       providers: [
         AccessConditionsService,
         {
-          provide: getModelToken(AccessConditionEntity.name),
+          provide: getModelToken(AccessConditionNameEntity),
           useValue: {
             new: jest.fn().mockResolvedValue(mockAccessCondition),
             constructor: jest.fn().mockResolvedValue(mockAccessCondition),
@@ -35,9 +33,6 @@ describe('AccessConditionsService', () => {
     }).compile();
 
     service = module.get<AccessConditionsService>(AccessConditionsService);
-    model = module.get<Model<AccessConditionDocument>>(
-      getModelToken(AccessConditionEntity.name),
-    );
   });
 
   it('should be defined', () => {

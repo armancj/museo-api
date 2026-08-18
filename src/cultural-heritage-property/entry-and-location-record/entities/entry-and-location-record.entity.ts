@@ -7,7 +7,6 @@ import {
   HeritageType,
 } from '../enum/entry-and-location-record.enum';
 import { InstitutionType } from '../../../address/institutions/enum/institutions.enum';
-import { LocationEntity } from './location.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   FieldMetadataDtoForBoolean,

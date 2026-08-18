@@ -6,7 +6,6 @@ import { User } from '../entities/user.entity';
 import { FilterQuery, ProjectionType, QueryOptions, RootFilterQuery, UpdateQuery } from 'mongoose';
 import { Users } from '../entities/users.entity';
 import { UserModel, UserPropertiesModel } from '../models/user.model';
-import { Paginator } from '../../common/lib/paginator.lib';
 import { OnEvent } from '@nestjs/event-emitter';
 import { EventEmitter } from '../../shared/event-emitter/event-emitter.const';
 import {
