@@ -11,7 +11,6 @@ import { MongooseConfigService } from './mongoose-config.service';
       validationSchema,
     }),
     MongooseModule.forRootAsync({
-      imports: [ConfigModule],
       useClass: MongooseConfigService,
     }),
   ],
