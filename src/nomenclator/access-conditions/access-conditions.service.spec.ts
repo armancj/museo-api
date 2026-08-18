@@ -2,12 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AccessConditionsService } from './access-conditions.service';
-import { AccessConditionEntity, AccessConditionDocument } from './entities/access-condition.entity';
+import { AccessConditionEntity } from './entities/access-condition.entity';
 import { AccessCondition } from '../common/enums/access-condition.enum';
 
 describe('AccessConditionsService', () => {
   let service: AccessConditionsService;
-  let model: Model<AccessConditionDocument>;
+  let model: Model<AccessConditionEntity>;
 
   const mockAccessCondition = {
     name: 'Test Condition',
@@ -35,7 +35,7 @@ describe('AccessConditionsService', () => {
     }).compile();
 
     service = module.get<AccessConditionsService>(AccessConditionsService);
-    model = module.get<Model<AccessConditionDocument>>(
+    model = module.get<Model<AccessConditionEntity>>(
       getModelToken(AccessConditionEntity.name),
     );
   });
