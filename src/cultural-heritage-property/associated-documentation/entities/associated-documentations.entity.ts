@@ -1,7 +1,6 @@
 import { CulturalPropertyModel } from '../../cultural-heritage-property/models/cultural-property.model';
 import { ExtendedAssociatedDocumentationEntity } from './extended-associated-documentation.entity';
 import { AssociatedDocumentationEntity } from './associated-documentation.entity';
-import { AssociatedDocumentationModel } from '../models/associated-documentation-model';
 
 /**
  * Entity class for managing a collection of associated documentations.

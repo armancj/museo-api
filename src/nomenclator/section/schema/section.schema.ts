@@ -4,7 +4,6 @@ import {
   BaseSchema,
   BaseSchemaFactory,
 } from '../../../common/schema/base.schema';
-import { Section } from '../enum/section.enum';
 
 export type SectionDocument = SectionEntity & Document;
 export type SectionMongoModel = Model<SectionDocument>;

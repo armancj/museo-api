@@ -4,7 +4,6 @@ import {
   BaseSchema,
   BaseSchemaFactory,
 } from '../../../common/schema/base.schema';
-import { ValueGrade } from '../enum/value-grade.enum';
 
 export type ValueGradeDocument = ValueGradeEntity & Document;
 export type ValueGradeMongoModel = Model<ValueGradeDocument>;

@@ -3,7 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AccessConditionsService } from './access-conditions.service';
 import { AccessConditionsController } from './access-conditions.controller';
 import {
-  AccessConditionEntity,
   AccessConditionSchemaFactory,
   AccessConditionNameEntity,
 } from './schema/access-condition.schema';
