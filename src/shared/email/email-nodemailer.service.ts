@@ -46,7 +46,7 @@ export class EmailNodemailerService implements EmailServiceModel {
   @OnEvent(EventEmitter.sendEmailCode)
   async sendCodeEmail({ email, code }: SendCodeBody) {
     const subject = 'Recuperación de Contraseña';
-    const html = `<a>Introdusca el siguente numero en código para cambiar contraseña: ${code}<a>`;
+    const html = `<p>Introduzca el siguiente código para cambiar su contraseña: ${code}</p>`;
     await this.sendEmail({
       to: email,
       html,
