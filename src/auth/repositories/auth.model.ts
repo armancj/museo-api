@@ -6,6 +6,7 @@ export interface AuthModel {
   email?: string;
   code?: number;
   expireCodeDate?: number;
+  codeAttempts?: number;
 }
 
 export type AuthPropertiesModel = NonFunctionProperties<AuthModel>;

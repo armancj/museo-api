@@ -15,12 +15,13 @@ describe('AuthService - password recovery flow', () => {
   let authRepository: jest.Mocked<Pick<AuthMongoRepository, 'findOneAuth' | 'updateOneAuth'>>;
   let eventEmitter: jest.Mocked<Pick<EventEmitter2Adapter, 'emit' | 'emitAsync'>>;
 
-  const buildAuth = (expireCodeDate: number): Auth =>
+  const buildAuth = (expireCodeDate: number, codeAttempts = 0): Auth =>
     Auth.create({
       uuid: 'user-uuid',
       email: 'user@example.com',
       code: 12345,
       expireCodeDate,
+      codeAttempts,
     });
 
   beforeEach(async () => {
@@ -121,6 +122,76 @@ describe('AuthService - password recovery flow', () => {
 
       await expect(service.changePassword(payload)).rejects.toThrow('update failed');
       expect(authRepository.updateOneAuth).not.toHaveBeenCalled();
+    });
+  });
+
+  // API-25: the code space is small, so guessing has to cost something.
+  describe('recovery code brute force', () => {
+    const wrongCode = { code: 99999, email: 'user@example.com' };
+
+    it('charges an attempt for a wrong code', async () => {
+      authRepository.findOneAuth.mockResolvedValue(buildAuth(Date.now(), 0));
+
+      await expect(service.verifyCode(wrongCode)).rejects.toThrow('Invalid verification code.');
+      expect(authRepository.updateOneAuth).toHaveBeenCalledWith(
+        { uuid: 'user-uuid' },
+        { codeAttempts: 1 },
+      );
+    });
+
+    it('burns the code once the attempts run out', async () => {
+      authRepository.findOneAuth.mockResolvedValue(buildAuth(Date.now(), 4));
+
+      await expect(service.verifyCode(wrongCode)).rejects.toThrow('Invalid verification code.');
+      expect(authRepository.updateOneAuth).toHaveBeenCalledWith(
+        { uuid: 'user-uuid' },
+        { codeAttempts: 5, expireCodeDate: 0 },
+      );
+    });
+
+    it('charges an attempt on changePassword too', async () => {
+      authRepository.findOneAuth.mockResolvedValue(buildAuth(Date.now(), 0));
+
+      await expect(
+        service.changePassword({ ...wrongCode, newPassword: 'new-password' }),
+      ).rejects.toThrow('Invalid verification code.');
+      expect(eventEmitter.emitAsync).not.toHaveBeenCalled();
+    });
+
+    it('does not charge an attempt for a correct code', async () => {
+      authRepository.findOneAuth.mockResolvedValue(buildAuth(Date.now(), 3));
+
+      await expect(
+        service.verifyCode({ code: 12345, email: 'user@example.com' }),
+      ).resolves.toBe(true);
+      expect(authRepository.updateOneAuth).not.toHaveBeenCalled();
+    });
+  });
+
+  // API-31: a 404 on an unknown address leaked which emails are registered.
+  describe('forgotPassword', () => {
+    it('answers the same for a registered and an unknown address', async () => {
+      eventEmitter.emitAsync.mockReturnValue(throwError(() => new Error('user not found')));
+
+      await expect(service.forgotPassword({ email: 'nobody@example.com' })).resolves.toBe(true);
+      expect(authRepository.updateOneAuth).not.toHaveBeenCalled();
+    });
+
+    // API-32: the email used to go out before the code was stored.
+    it('stores the code before sending the email', async () => {
+      const order: string[] = [];
+      eventEmitter.emitAsync.mockImplementation(({ event }) => {
+        order.push(`emit:${String(event)}`);
+        return of({ uuid: 'user-uuid', email: 'user@example.com' });
+      });
+      authRepository.updateOneAuth.mockImplementation(async () => {
+        order.push('store');
+        return { uuid: 'user-uuid' };
+      });
+
+      await service.forgotPassword({ email: 'user@example.com' });
+
+      expect(order.indexOf('store')).toBeLessThan(order.lastIndexOf('emit:send.email.code'));
     });
   });
 });

@@ -20,6 +20,9 @@ class Auth implements AuthPropertiesModel {
 
   @Prop()
   expireCodeDate?: number;
+
+  @Prop({ default: 0 })
+  codeAttempts?: number;
 }
 
 export const AuthSchema = SchemaFactory.createForClass(Auth);

@@ -17,6 +17,9 @@ export class Auth implements AuthModel {
   @Expose()
   expireCodeDate: number;
 
+  @Expose()
+  codeAttempts?: number;
+
   constructor(options: AuthPropertiesModel) {
     Object.assign(this as AuthModel, options);
   }
