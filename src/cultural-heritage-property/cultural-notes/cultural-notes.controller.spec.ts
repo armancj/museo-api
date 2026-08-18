@@ -8,7 +8,18 @@ describe('CulturalNotesController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CulturalNotesController],
-      providers: [CulturalNotesService],
+      providers: [
+        {
+          provide: CulturalNotesService,
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            findOne: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<CulturalNotesController>(CulturalNotesController);

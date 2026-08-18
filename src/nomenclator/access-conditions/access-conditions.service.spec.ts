@@ -3,6 +3,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AccessConditionsService } from './access-conditions.service';
 import { AccessConditionEntity } from './entities/access-condition.entity';
+import { AccessConditionNameEntity } from './schema/access-condition.schema';
 import { AccessCondition } from '../common/enums/access-condition.enum';
 
 describe('AccessConditionsService', () => {
@@ -20,7 +21,7 @@ describe('AccessConditionsService', () => {
       providers: [
         AccessConditionsService,
         {
-          provide: getModelToken(AccessConditionEntity.name),
+          provide: getModelToken(AccessConditionNameEntity),
           useValue: {
             new: jest.fn().mockResolvedValue(mockAccessCondition),
             constructor: jest.fn().mockResolvedValue(mockAccessCondition),
@@ -36,7 +37,7 @@ describe('AccessConditionsService', () => {
 
     service = module.get<AccessConditionsService>(AccessConditionsService);
     model = module.get<Model<AccessConditionEntity>>(
-      getModelToken(AccessConditionEntity.name),
+      getModelToken(AccessConditionNameEntity),
     );
   });
 

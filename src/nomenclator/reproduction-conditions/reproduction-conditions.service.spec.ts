@@ -3,6 +3,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ReproductionConditionsService } from './reproduction-conditions.service';
 import { ReproductionConditionEntity } from './entities/reproduction-condition.entity';
+import { ReproductionConditionNameEntity } from './schema/reproduction-condition.schema';
 
 describe('ReproductionConditionsService', () => {
   let service: ReproductionConditionsService;
@@ -18,7 +19,7 @@ describe('ReproductionConditionsService', () => {
       providers: [
         ReproductionConditionsService,
         {
-          provide: getModelToken(ReproductionConditionEntity.name),
+          provide: getModelToken(ReproductionConditionNameEntity),
           useValue: {
             new: jest.fn().mockResolvedValue(mockReproductionCondition),
             constructor: jest.fn().mockResolvedValue(mockReproductionCondition),
@@ -34,7 +35,7 @@ describe('ReproductionConditionsService', () => {
 
     service = module.get<ReproductionConditionsService>(ReproductionConditionsService);
     model = module.get<Model<ReproductionConditionEntity>>(
-      getModelToken(ReproductionConditionEntity.name),
+      getModelToken(ReproductionConditionNameEntity),
     );
   });
 

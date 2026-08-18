@@ -6,7 +6,19 @@ describe('CulturalRecordService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CulturalRecordService],
+      providers: [
+        CulturalRecordService,
+        {
+          provide: 'CULTURAL_RECORD_SERVICE',
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            findOne: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<CulturalRecordService>(CulturalRecordService);
