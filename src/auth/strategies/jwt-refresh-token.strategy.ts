@@ -5,6 +5,7 @@ import { JwtPayload } from './jwt.payload';
 import { jwtConstants } from '../config/auth.config';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { AuthService } from '../auth.service';
+import { refreshTokenMatches } from '../../common/utils/refresh-token-hash';
 
 @Injectable()
 export class JwtRefreshTokenStrategy extends PassportStrategy(
@@ -33,7 +34,7 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
 
     if (!auth) throw new UnauthorizedException('Token invalid');
 
-    if (refreshAuthToken != auth.currentHashedRefreshToken) {
+    if (!refreshTokenMatches(refreshAuthToken, auth.currentHashedRefreshToken)) {
       throw new UnauthorizedException('Token invalid');
     }
 
