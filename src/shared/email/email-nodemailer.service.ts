@@ -1,4 +1,4 @@
-import { BadGatewayException, Injectable } from '@nestjs/common';
+import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { EmailServiceModel, SendOptions } from './model/email.service.model';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
@@ -11,6 +11,7 @@ export type SendCodeBody = { email: string; code: number };
 
 @Injectable()
 export class EmailNodemailerService implements EmailServiceModel {
+  private readonly logger = new Logger(EmailNodemailerService.name);
   private transporter: nodemailer.Transporter;
 
   constructor(private readonly configService: ConfigService) {
@@ -53,10 +54,10 @@ export class EmailNodemailerService implements EmailServiceModel {
       subject,
       context: {},
     }).catch((err) => {
-      console.log({
-        messageError: (err as Error)?.message,
-        nameError: (err as Error)?.name,
-      });
+      this.logger.error(
+        `Failed to send the recovery code email: ${(err as Error)?.name}`,
+        (err as Error)?.stack,
+      );
       throw new BadGatewayException(
         'Failed send email',
         (err as Error)?.message,
