@@ -17,7 +17,7 @@ export class EmailNodemailerService implements EmailServiceModel {
     this.transporter = nodemailer.createTransport({
       host: this.configService.get<string>(apiEnv.email.host),
       port: +(this.configService.get<number>(apiEnv.email.port) ?? 0),
-      secure: true, // true for 465, false for other ports
+      secure: this.configService.get<boolean>(apiEnv.email.secure) ?? true,
       auth: {
         user: this.configService.get<string>(apiEnv.email.user),
         pass: this.configService.get<string>(apiEnv.email.pass),
