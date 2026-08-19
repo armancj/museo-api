@@ -27,6 +27,8 @@ import { SendEmailAuthException } from './exceptions/send-email-auth.exception';
 import { AuthVerifyCodeDto } from './dto/auth-verify-code.dto';
 import { AuthChangePasswordDto } from './dto/auth-change-password.dto';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
+import { randomInt } from 'crypto';
+import { Auth } from './entities/auth.entity';
 import { hashRefreshToken } from '../common/utils/refresh-token-hash';
 
 /**
@@ -156,10 +158,57 @@ export class AuthService {
     return null;
   }
 
-  private generateRandomFiveDigitNumber(): number {
-    const array = new Uint32Array(1);
-    crypto.getRandomValues(array);
-    return array[0] % 100000;
+  /**
+   * A recovery code survives at most this many wrong guesses before it is
+   * burned. Without it the code space is small enough to walk exhaustively.
+   */
+  private static readonly MAX_CODE_ATTEMPTS = 5;
+
+  /**
+   * Generates a uniformly distributed six-digit recovery code.
+   *
+   * The previous version took `random % 100000`, which is both biased and free
+   * to return short codes (a value of 42 was a valid "five digit" code).
+   */
+  private generateRecoveryCode(): number {
+    return randomInt(100000, 1000000);
+  }
+
+  /**
+   * Loads the auth record for `email` and checks `code` against it, charging a
+   * failed attempt when it does not match.
+   *
+   * The lookup is by email rather than by {email, code}: a wrong code has to
+   * resolve to a record, otherwise there is nowhere to record the attempt and
+   * guessing stays free.
+   */
+  private async consumeCodeAttempt(email: string, code: number): Promise<Auth> {
+    const userAuth = await this.authRepository.findOneAuth({ email });
+
+    if (!userAuth?.code) {
+      throw new BadRequestException('Invalid verification code.');
+    }
+
+    if (userAuth.isCodeExpired()) {
+      throw new BadRequestException('The verification code has expired.');
+    }
+
+    if (userAuth.code !== code) {
+      const attempts = (userAuth.codeAttempts ?? 0) + 1;
+      const exhausted = attempts >= AuthService.MAX_CODE_ATTEMPTS;
+
+      await this.authRepository.updateOneAuth(
+        { uuid: userAuth.uuid },
+        // Burning the code costs the attacker a fresh email round-trip.
+        exhausted
+          ? { codeAttempts: attempts, expireCodeDate: 0 }
+          : { codeAttempts: attempts },
+      );
+
+      throw new BadRequestException('Invalid verification code.');
+    }
+
+    return userAuth;
   }
 
   /**
@@ -177,10 +226,25 @@ export class AuthService {
       active: true,
       deleted: false,
     }).catch(() => null);
-    if (!user) throw new NotFoundException('User with this email not found');
 
-    const code = this.generateRandomFiveDigitNumber();
+    // Answer the same way whether or not the address exists: a 404 here told
+    // anyone which emails are registered.
+    if (!user) return true;
+
+    const code = this.generateRecoveryCode();
     const expireCodeDate = Date.now();
+
+    // Persist before sending. The other order handed the user a code that the
+    // API had not stored yet, so a failed write produced a code that could
+    // never validate.
+    const auth = await this.authRepository.updateOneAuth(
+      { uuid: user.uuid },
+      { uuid: user.uuid, code, email, expireCodeDate, codeAttempts: 0 },
+    );
+    if (!auth)
+      throw new BadRequestException(
+        'Failed to update user in authentication repository',
+      );
 
     const sendEmailObservable = this.eventEmitter.emitAsync<
       SendCodeBody,
@@ -192,14 +256,6 @@ export class AuthService {
     });
     await firstValueFrom(sendEmailObservable);
 
-    const auth = await this.authRepository.updateOneAuth(
-      { uuid: user.uuid },
-      { uuid: user.uuid, code, email, expireCodeDate },
-    );
-    if (!auth)
-      throw new BadRequestException(
-        'Failed to update user in authentication repository',
-      );
     return true;
   }
 
@@ -211,15 +267,7 @@ export class AuthService {
    * @throws BadRequestException if the code is invalid or expired
    */
   async verifyCode({ code, email }: AuthVerifyCodeDto): Promise<boolean> {
-    const userAuth = await this.authRepository.findOneAuth({ code, email });
-
-    if (!userAuth) {
-      throw new BadRequestException('Invalid verification code.');
-    }
-
-    if (userAuth.isCodeExpired()) {
-      throw new BadRequestException('The verification code has expired.');
-    }
+    await this.consumeCodeAttempt(email, code);
 
     return true;
   }
@@ -236,15 +284,7 @@ export class AuthService {
   ): Promise<boolean> {
     const { code, email, newPassword: password } = authChangePasswordDto;
 
-    const userAuth = await this.authRepository.findOneAuth({ code, email });
-
-    if (!userAuth) {
-      throw new BadRequestException('Invalid verification code or email.');
-    }
-
-    if (userAuth.isCodeExpired()) {
-      throw new BadRequestException('The verification code has expired.');
-    }
+    const userAuth = await this.consumeCodeAttempt(email, code);
 
     const updatedObservable = this.eventEmitter.emitAsync<UpdatedUser, boolean>({
       event: EventEmitter.userUpdated,
@@ -256,7 +296,7 @@ export class AuthService {
     // Expire the code so a single reset cannot be replayed.
     await this.authRepository.updateOneAuth(
       { uuid: userAuth.uuid },
-      { expireCodeDate: 0 },
+      { expireCodeDate: 0, codeAttempts: 0 },
     );
 
     return true;
