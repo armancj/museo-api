@@ -25,12 +25,28 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+REST API for the Museo cultural heritage system, built with [NestJS](https://github.com/nestjs/nest)
+and MongoDB. It covers authentication, user management, cultural heritage property records,
+nomenclators and file storage. The admin front-end that consumes it lives in `museo-cpanel`.
+
+## Prerequisites
+
+- Node.js 20+
+- pnpm
+- A reachable MongoDB instance
 
 ## Project setup
 
 ```bash
 $ pnpm install
+```
+
+Copy `sample.env` to `.env` and fill it in before starting the app. Every variable in
+`src/config/env-validation.schema.ts` is validated at boot, so a missing or malformed
+value fails fast with an explicit error instead of starting a half-configured server.
+
+```bash
+$ cp sample.env .env
 ```
 
 ## Compile and run the project

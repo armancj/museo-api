@@ -3,7 +3,6 @@ export const apiEnv = {
     uri: 'DB_URI',
   },
   app: {
-    hostname: 'APP_HOST',
     port: 'APP_PORT',
     corsOrigins: 'CORS_ORIGINS',
   },
