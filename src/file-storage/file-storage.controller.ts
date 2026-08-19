@@ -1,8 +1,12 @@
 import {
+  BadRequestException,
   Controller,
   Delete,
   Get,
+  HttpException,
   Inject,
+  InternalServerErrorException,
+  Logger,
   NotFoundException,
   Param,
   Post,
@@ -21,10 +25,18 @@ import { EventEmitter } from '../shared/event-emitter/event-emitter.const';
 import { Request, Response } from 'express';
 import { Auth } from '../auth/decorator';
 import { UserRoles } from '../users/enum/user-roles.enum';
+import {
+  MAX_UPLOAD_BYTES,
+  contentDispositionInline,
+  parseByteRange,
+  uploadFileFilter,
+} from './file-storage.upload';
 
 @ApiTags('FileStorage')
 @Controller('file-storage')
 export class FileStorageController {
+  private readonly logger = new Logger(FileStorageController.name);
+
   constructor(
     @Inject(FILE_STORAGE_SERVICE_TOKEN)
     private readonly storageService: FileStorageServiceModel,
@@ -33,18 +45,29 @@ export class FileStorageController {
     roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
   })
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(
+    FileInterceptor('file', {
+      limits: { fileSize: MAX_UPLOAD_BYTES },
+      fileFilter: uploadFileFilter,
+    }),
+  )
   @ApiConsumes('multipart/form-data')
   @ApiBody({
-    description: 'List of cats',
+    description: 'File to store',
     type: FileUploadDto,
   })
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new BadRequestException('File is required');
+    }
+
     try {
       const fileStorage = await this.storageService.uploadFile(file, file.originalname);
       return { message: `File successfully uploaded id: ${fileStorage.id}` };
     } catch (err) {
-      throw new NotFoundException('File not found. ' + err);
+      // The cause belongs in the log, not in the response body.
+      this.logger.error(`Upload of "${file.originalname}" failed`, err as Error);
+      throw new InternalServerErrorException('The file could not be stored.');
     }
   }
 
@@ -58,7 +81,7 @@ export class FileStorageController {
       await this.storageService.deleteFile(fileId);
       return { message: 'File successfully deleted.' };
     } catch (err) {
-      console.log(err);
+      this.logger.error(`Delete of file ${fileId} failed`, err as Error);
       throw new NotFoundException('File not found.');
     }
   }
@@ -87,33 +110,39 @@ export class FileStorageController {
         res.writeHead(200, {
           'Content-Length': file.length,
           'Content-Type': mime,
+          'Content-Disposition': contentDispositionInline(filename),
+          'X-Content-Type-Options': 'nosniff',
         });
 
         return fileStream.pipe(res);
       }
 
-      const parts = range.replace(/bytes=/, '').split('-');
-      const partialStart = parts[0];
-      const partialEnd = parts[1];
+      const parsed = parseByteRange(range, file.length);
 
-      const start = parseInt(partialStart, 10);
-      const end = partialEnd ? parseInt(partialEnd, 10) : file.length - 1;
-      const chunkSize = end - start + 1;
+      if (!parsed) {
+        // RFC 7233: an unsatisfiable range gets 416 plus the real size.
+        res.writeHead(416, { 'Content-Range': `bytes */${file.length}` });
+        return res.end();
+      }
+
+      const { start, end } = parsed;
 
       res.writeHead(206, {
         'Accept-Ranges': 'bytes',
-        'Content-Length': chunkSize,
-        'Content-Disposition': `inline;filename=${filename}`,
+        'Content-Length': end - start + 1,
+        'Content-Disposition': contentDispositionInline(filename),
+        'X-Content-Type-Options': 'nosniff',
         'Content-Range': `bytes ${start}-${end}/${file.length}`,
         'Content-Type': mime,
       });
 
       fileStream.pipe(res);
     } catch (err) {
-      if (err instanceof NotFoundException) {
+      if (err instanceof HttpException) {
         throw err;
       }
-      throw new NotFoundException('File not found. ' + err);
+      this.logger.error(`Serving file ${fileId} failed`, err as Error);
+      throw new NotFoundException('File not found.');
     }
   }
 }
