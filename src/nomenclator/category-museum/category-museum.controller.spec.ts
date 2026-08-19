@@ -8,7 +8,19 @@ describe('CategoryMuseumController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CategoryMuseumController],
-      providers: [CategoryMuseumService],
+      providers: [
+        {
+          provide: CategoryMuseumService,
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            findOne: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+            getCategoryByInstitutionType: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<CategoryMuseumController>(CategoryMuseumController);

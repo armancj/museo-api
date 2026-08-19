@@ -4,7 +4,7 @@ import { UpdateEmailDto } from './dto/update-email.dto';
 
 @Injectable()
 export class EmailsService {
-  create(createEmailDto: CreateEmailDto) {
+  create(_createEmailDto: CreateEmailDto) {
     return 'This action adds a new email';
   }
 
@@ -16,7 +16,7 @@ export class EmailsService {
     return `This action returns a #${id} email`;
   }
 
-  update(id: number, updateEmailDto: UpdateEmailDto) {
+  update(id: number, _updateEmailDto: UpdateEmailDto) {
     return `This action updates a #${id} email`;
   }
 

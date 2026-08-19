@@ -1,8 +1,4 @@
 import { LocationModel } from '../models/entry-and-location-record.model';
-import { FieldMetadataDtoForString } from '../../field-review-status/dto/field-metadata-string.dto';
-import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
-import { ApiProperty } from '@nestjs/swagger';
-import { FieldReviewStatusEntity } from '../../field-review-status/entities/field-review-status.entity';
 
 /**
  * Entity representing a Location.

@@ -27,6 +27,7 @@ import { SendEmailAuthException } from './exceptions/send-email-auth.exception';
 import { AuthVerifyCodeDto } from './dto/auth-verify-code.dto';
 import { AuthChangePasswordDto } from './dto/auth-change-password.dto';
 import { JwtSignOptions } from '@nestjs/jwt/dist/interfaces';
+import { hashRefreshToken } from '../common/utils/refresh-token-hash';
 
 /**
  * Service responsible for authentication-related functionality
@@ -118,7 +119,10 @@ export class AuthService {
   ) {
     return this.authRepository.updateOneAuth(
       { uuid },
-      { currentHashedRefreshToken: refresh_token, email: payload?.email },
+      {
+        currentHashedRefreshToken: hashRefreshToken(refresh_token),
+        email: payload?.email,
+      },
     );
   }
 
@@ -238,10 +242,22 @@ export class AuthService {
       throw new BadRequestException('Invalid verification code or email.');
     }
 
-    this.eventEmitter.emit<UpdatedUser>({
+    if (userAuth.isCodeExpired()) {
+      throw new BadRequestException('The verification code has expired.');
+    }
+
+    const updatedObservable = this.eventEmitter.emitAsync<UpdatedUser, boolean>({
       event: EventEmitter.userUpdated,
+      exception: UnauthorizedAuthException,
       values: { filter: { email }, updateUserDto: { password } },
     });
+    await firstValueFrom(updatedObservable);
+
+    // Expire the code so a single reset cannot be replayed.
+    await this.authRepository.updateOneAuth(
+      { uuid: userAuth.uuid },
+      { expireCodeDate: 0 },
+    );
 
     return true;
   }

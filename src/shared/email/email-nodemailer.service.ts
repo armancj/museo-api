@@ -1,4 +1,4 @@
-import { BadGatewayException, Injectable } from '@nestjs/common';
+import { BadGatewayException, Injectable, Logger } from '@nestjs/common';
 import { EmailServiceModel, SendOptions } from './model/email.service.model';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
@@ -11,13 +11,14 @@ export type SendCodeBody = { email: string; code: number };
 
 @Injectable()
 export class EmailNodemailerService implements EmailServiceModel {
+  private readonly logger = new Logger(EmailNodemailerService.name);
   private transporter: nodemailer.Transporter;
 
   constructor(private readonly configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
       host: this.configService.get<string>(apiEnv.email.host),
       port: +(this.configService.get<number>(apiEnv.email.port) ?? 0),
-      secure: true, // true for 465, false for other ports
+      secure: this.configService.get<boolean>(apiEnv.email.secure) ?? true,
       auth: {
         user: this.configService.get<string>(apiEnv.email.user),
         pass: this.configService.get<string>(apiEnv.email.pass),
@@ -46,17 +47,17 @@ export class EmailNodemailerService implements EmailServiceModel {
   @OnEvent(EventEmitter.sendEmailCode)
   async sendCodeEmail({ email, code }: SendCodeBody) {
     const subject = 'Recuperación de Contraseña';
-    const html = `<a>Introdusca el siguente numero en código para cambiar contraseña: ${code}<a>`;
+    const html = `<p>Introduzca el siguiente código para cambiar su contraseña: ${code}</p>`;
     await this.sendEmail({
       to: email,
       html,
       subject,
       context: {},
     }).catch((err) => {
-      console.log({
-        messageError: (err as Error)?.message,
-        nameError: (err as Error)?.name,
-      });
+      this.logger.error(
+        `Failed to send the recovery code email: ${(err as Error)?.name}`,
+        (err as Error)?.stack,
+      );
       throw new BadGatewayException(
         'Failed send email',
         (err as Error)?.message,

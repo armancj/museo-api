@@ -1,7 +1,4 @@
-import {
-  MunicipalityModel,
-  MunicipalityPropertiesModel,
-} from './municipality.model';
+import { MunicipalityPropertiesModel } from './municipality.model';
 import { Municipality } from './municipality.entity';
 
 export class Municipalities {

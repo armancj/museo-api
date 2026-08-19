@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Readable } from 'stream';
 import { ObjectId } from 'mongodb';
 import { MongoGridConnection } from '../mongo-grid/mongo.gridfs';
@@ -10,6 +10,8 @@ import { FileStorage } from '../entities/file-storage';
 
 @Injectable()
 export class FileStorageMongoRepository implements FileStorageRepositoryModel {
+  private readonly logger = new Logger(FileStorageMongoRepository.name);
+
   constructor(
     @Inject(MongoGridConnection)
     private readonly mongoGridConnection: MongoGridConnection,
@@ -58,7 +60,7 @@ export class FileStorageMongoRepository implements FileStorageRepositoryModel {
       const fileId = new ObjectId(id);
       return await this.mongoGridConnection.getDb().collection('fs.files').findOne({ _id: fileId });
     } catch (error) {
-      console.error('Error fetching file metadata:', error);
+      this.logger.error(`Error fetching metadata for file ${id}`, error);
       throw new Error('Could not fetch file metadata');
     }
   }

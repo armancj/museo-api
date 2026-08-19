@@ -13,12 +13,17 @@ import { CreateSectionDto } from './dto/create-section.dto';
 import { UpdateSectionDto } from './dto/update-section.dto';
 import { FilterSectionDto } from './dto/filter-section.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Auth } from '../../auth/decorator';
+import { UserRoles } from '../../users/enum/user-roles.enum';
 
 @ApiTags('section')
 @Controller('section')
 export class SectionController {
   constructor(private readonly sectionService: SectionService) {}
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Post()
   create(@Body() createSectionDto: CreateSectionDto) {
     return this.sectionService.create(createSectionDto);
@@ -34,6 +39,9 @@ export class SectionController {
     return this.sectionService.findOne(uuid);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Patch(':uuid')
   update(
     @Param('uuid') uuid: string,
@@ -42,6 +50,9 @@ export class SectionController {
     return this.sectionService.update(uuid, updateSectionDto);
   }
 
+  @Auth({
+    roles: [UserRoles.administrator, UserRoles.manager, UserRoles.superAdmin],
+  })
   @Delete(':uuid')
   remove(@Param('uuid') uuid: string) {
     return this.sectionService.remove(uuid);

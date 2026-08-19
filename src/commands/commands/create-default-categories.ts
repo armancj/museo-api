@@ -40,7 +40,7 @@ export class CreateDefaultCategories extends CommandRunner {
 
   async run(
     passedParams: string[],
-    options?: Record<string, any>,
+    _options?: Record<string, any>,
   ): Promise<void> {
     this.logger.log('CreateDefaultCategories', passedParams);
     await Promise.allSettled(

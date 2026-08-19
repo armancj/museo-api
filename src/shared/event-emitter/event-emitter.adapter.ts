@@ -1,4 +1,9 @@
-import { Injectable, HttpException, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  HttpException,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Observable, from, firstValueFrom } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -26,13 +31,15 @@ interface EmitAsyncParams<T> {
 
 @Injectable()
 export class EventEmitter2Adapter {
+  private readonly logger = new Logger(EventEmitter2Adapter.name);
+
   constructor(private readonly eventEmitter: EventEmitter2) {}
 
   emit<T>({ event, values }: EmitParams<T>): boolean {
     try {
       return this.eventEmitter.emit(event, values);
     } catch (error) {
-      console.error('Error al emitir el evento:', error);
+      this.logger.error(`Failed to emit event ${String(event)}`, error);
       return false;
     }
   }

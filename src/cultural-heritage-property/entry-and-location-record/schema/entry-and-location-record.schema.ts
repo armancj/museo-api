@@ -5,8 +5,6 @@ import { LocationSchema } from './location.schema';
 import { LocationModel } from '../models/entry-and-location-record.model';
 import { FieldMetadata } from '../../field-review-status/models/field-review-status.model';
 import { propTypeMongo } from '../../util/prop-type-mongo.function';
-import { DimensionsSchema } from '../../cultural-record/Schema';
-import { DimensionsModel } from '../../cultural-record/models/cultural-record';
 
 /**
  * Represents the record of an entry and its location.

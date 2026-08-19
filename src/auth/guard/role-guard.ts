@@ -16,6 +16,8 @@ export class RolesGuard implements CanActivate {
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
-    return requiredRoles.some((role) => user.roles?.includes(role));
+    // Exact match: substring matching used to grant 'super Administrador'
+    // access to anything requiring 'Administrador'.
+    return requiredRoles.some((role) => user?.roles === role);
   }
 }

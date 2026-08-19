@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import {
-  AccessConditionDocument,
   AccessConditionMongoModel,
   AccessConditionNameEntity,
 } from './schema/access-condition.schema';

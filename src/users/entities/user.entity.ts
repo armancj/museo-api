@@ -3,7 +3,7 @@ import {
     UserModel,
     UserPropertiesModel,
 } from '../models/user.model';
-import {Exclude, Expose} from 'class-transformer';
+import {Exclude} from 'class-transformer';
 import {UserRoles} from '../enum/user-roles.enum';
 import {Institution} from "../../address/institutions/entities/institution.entity";
 

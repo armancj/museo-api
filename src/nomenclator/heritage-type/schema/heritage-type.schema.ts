@@ -4,7 +4,6 @@ import {
   BaseSchema,
   BaseSchemaFactory,
 } from '../../../common/schema/base.schema';
-import { HeritageType } from '../enum/heritage-type.enum';
 
 export type HeritageTypeDocument = HeritageTypeEntity & Document;
 export type HeritageTypeMongoModel = Model<HeritageTypeDocument>;
